@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling>=1.26,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "poster-framework"
+version = "0.1.0"
+description = "Typed agent interfaces and format adapters for poster workflows"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "langgraph>=1.0,<2",
+    "pydantic>=2,<3",
+    "pillow>=10,<13",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<9"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/poster_framework"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
