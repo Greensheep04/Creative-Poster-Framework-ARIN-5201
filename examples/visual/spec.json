@@ -1,0 +1,137 @@
+{
+  "schema_version": "0.1.0",
+  "run_id": "run_demo_001",
+  "spec_version": 1,
+  "based_on": {
+    "brief_version": 1
+  },
+  "canvas": {
+    "width": 720,
+    "height": 1280,
+    "color_mode": "RGB"
+  },
+  "template_id": "framed_hero_v1",
+  "background": {
+    "color": "#F6FAFB"
+  },
+  "design_tokens": {
+    "palette": [
+      "#F6FAFB",
+      "#123C55",
+      "#3D7893"
+    ],
+    "font_family_key": "noto_sans_sc",
+    "safe_margin_px": 36
+  },
+  "asset_plan": [
+    {
+      "asset_id": "hero_image",
+      "kind": "generated_image",
+      "prompt": "平静蓝色海面与开阔天空，连续自然的海平线，简洁摄影感，柔和光线，无人物，无文字，无标志。",
+      "negative_prompt": "暴风雨，密集人群，文字，标志，重影海平线",
+      "target_size": {
+        "width": 648,
+        "height": 850
+      },
+      "subject_safe_region_norm": [
+        0.05,
+        0.1,
+        0.9,
+        0.8
+      ],
+      "required_keyword_ids": [
+        "k1",
+        "k2",
+        "k3"
+      ]
+    }
+  ],
+  "elements": [
+    {
+      "id": "hero",
+      "type": "image",
+      "z": 1,
+      "box": {
+        "x": 36,
+        "y": 260,
+        "width": 648,
+        "height": 850
+      },
+      "asset_id": "hero_image",
+      "fit": "cover",
+      "focus_point_norm": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "title",
+      "type": "text",
+      "z": 2,
+      "box": {
+        "x": 36,
+        "y": 64,
+        "width": 648,
+        "height": 152
+      },
+      "copy_ref": "title",
+      "text": "静海之蓝",
+      "font_family_key": "noto_sans_sc",
+      "font_weight": 700,
+      "font_size_px": 72,
+      "line_height_px": 90,
+      "max_lines": 1,
+      "align": "center",
+      "color": "#123C55"
+    },
+    {
+      "id": "subtitle",
+      "type": "text",
+      "z": 3,
+      "box": {
+        "x": 36,
+        "y": 1160,
+        "width": 648,
+        "height": 56
+      },
+      "copy_ref": "subtitle",
+      "text": "留一点宁静给自己",
+      "font_family_key": "noto_sans_sc",
+      "font_weight": 400,
+      "font_size_px": 28,
+      "line_height_px": 38,
+      "max_lines": 1,
+      "align": "center",
+      "color": "#123C55"
+    }
+  ],
+  "keyword_element_bindings": [
+    {
+      "keyword_id": "k1",
+      "element_ids": [
+        "hero"
+      ]
+    },
+    {
+      "keyword_id": "k2",
+      "element_ids": [
+        "hero"
+      ],
+      "layout_evidence": "低密度布局与充分留白"
+    },
+    {
+      "keyword_id": "k3",
+      "element_ids": [
+        "hero",
+        "title"
+      ],
+      "layout_evidence": "蓝色系配色"
+    }
+  ],
+  "allowed_overlaps": [],
+  "render_policy": {
+    "text_overflow": "error",
+    "missing_font": "error",
+    "output_format": "PNG"
+  }
+}
