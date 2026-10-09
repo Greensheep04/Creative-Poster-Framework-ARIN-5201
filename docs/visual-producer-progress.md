@@ -10,3 +10,4 @@ Stage 1 initial baseline: 135 passed, 1 failed due Windows symlink privilege (Wi
 Task 1: complete — baseline 135 passed, 1 capability skip; Python 3.11.17 and locked dependencies installed in D-drive Conda environment.
 Task 2: complete — 10 new RED→GREEN contract tests; full suite 145 passed, 1 capability skip. Schemas exported; copy is a serialized alias for copy_blocks to avoid Pydantic method shadowing.
 Task 3: complete — 9 new renderer RED→GREEN tests; full suite 154 passed, 1 capability skip. Offline 720x1280 Chinese poster and real ink/font/crop evidence written to runs/offline-render. Fixture artwork is procedural, not AI-generated.
+Task 4: complete — 6 new generator adapter RED→GREEN tests; full suite 160 passed, 1 capability skip. SDK callback and explicitly offline fixture adapters implemented; independent negative prompt adaptation and unsupported seed rejection verified.
