@@ -61,3 +61,10 @@ SDXL Base 固定提交为 `462165984030d82259a11f4367a4eed129e94a7b`。下载官
 本地推理 API 调用费用记为 0，不代表电力、下载、设备成本为 0。固定 seed 只在相同软件/硬件条件下帮助复现，不承诺跨 GPU 逐像素一致。
 
 实际执行证据和未完成项见 local-gpu-progress.md。
+
+
+## 本机实测产物
+
+入口 `runs/local-gpu-preview/contact-sheet.png`；逐组海报在 ocean/forest/city/poster.png。acceptance-report.json 保存运行和返工结果，verification-summary.json 保存尺寸、正式文案、真实模型来源和哈希核验。PyTorch 在独立 Conda 环境完成 CUDA 运算验证。
+
+首张约73秒（含加载），预热后两组约11秒，30步、seed42。样张实际仍存在素材瑕疵：海洋边框和城市额外招牌文字/人物；负面提示不是硬性保证。可调整人工 Spec 素材需求或走合法素材返工，最终由真实 A4 或人工审阅。

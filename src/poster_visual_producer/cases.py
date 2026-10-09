@@ -145,9 +145,9 @@ async def run_case(case, generator, fonts, root, *, seed=None):
             json.dumps(candidate, ensure_ascii=False, indent=2), encoding="utf-8"
         )
         for a in candidate["assets"]:
-            (root / (a["asset_id"] + "-source.png")).write_bytes(
-                artifact_path(root, a["source_ref"]).read_bytes()
-            )
+            (
+                root / (a["asset_id"] + "-source" + Path(a["source_ref"]["uri"]).suffix)
+            ).write_bytes(artifact_path(root, a["source_ref"]).read_bytes())
         summary = {
             "case": case.name,
             "keywords": case.keywords,

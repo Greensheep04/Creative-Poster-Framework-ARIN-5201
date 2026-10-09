@@ -79,3 +79,20 @@ def test_preset_case_real_framework_exports_and_png(tmp_path, brief_data, spec_d
         json.loads((tmp_path / "candidate.json").read_text(encoding="utf-8"))["status"]
         == "rendered"
     )
+
+
+def test_case_preview_preserves_jpeg_source_format(tmp_path, brief_data, spec_data):
+    import io
+
+    m = module()
+    c = m.PresetCase.model_validate(case(brief_data, spec_data))
+    data = io.BytesIO()
+    Image.new("RGB", (800, 1000), "green").save(data, "JPEG")
+    asyncio.run(
+        m.run_case(
+            c, FixtureImageGenerator(lambda request: data.getvalue()), fonts(), tmp_path
+        )
+    )
+    assert (tmp_path / "hero_image-source.jpg").is_file()
+    assert not (tmp_path / "hero_image-source.png").exists()
+    assert Image.open(tmp_path / "hero_image-source.jpg").format == "JPEG"
