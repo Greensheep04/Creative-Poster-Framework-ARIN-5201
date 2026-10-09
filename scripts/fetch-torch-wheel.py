@@ -9,7 +9,10 @@ SHA = "34c55443aafd31046a7963b63d30bc3b628ee4a704f826796c865fdfd05bb596"
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--directory", type=Path, required=True)
 parser.add_argument("--direct", action="store_true")
+parser.add_argument("--workers", type=int, choices=range(1, 17), default=4)
+parser.add_argument("--mirror", default="https://download.pytorch.org/whl")
 args = parser.parse_args()
+URL = args.mirror.rstrip("/") + "/cu128/torch-2.8.0%2Bcu128-cp311-cp311-win_amd64.whl"
 transport = (
     urllib.request.build_opener(urllib.request.ProxyHandler({}))
     if args.direct
@@ -28,6 +31,6 @@ name, digest = module.download_component(
     args.directory,
     url=URL,
     opener=transport.open,
-    parallel_workers=4,
+    parallel_workers=args.workers,
 )
 print(json.dumps({"wheel": str(args.directory / name), "sha256": digest}), flush=True)

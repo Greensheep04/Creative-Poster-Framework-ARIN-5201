@@ -123,3 +123,62 @@ def test_backend_sampling_parameters_change_cache_key(tmp_path, spec_data):
             ).key
         )
     assert fingerprints[0] != fingerprints[1]
+
+
+def test_guidance_without_cfg_is_rejected(tmp_path):
+    with pytest.raises(ValueError):
+        config(tmp_path, guidance_scale=1.0)
+
+
+def test_model_manifest_requires_all_pipeline_components(tmp_path):
+    import hashlib
+
+    m = module()
+    c = config(tmp_path)
+    files = {}
+    for name in (
+        "model_index.json",
+        "unet/diffusion_pytorch_model.fp16.safetensors",
+        "vae/diffusion_pytorch_model.fp16.safetensors",
+        "text_encoder/model.fp16.safetensors",
+        "text_encoder_2/model.fp16.safetensors",
+    ):
+        p = tmp_path / name
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_bytes(b"fake")
+        files[name] = hashlib.sha256(b"fake").hexdigest()
+    (tmp_path / "poster-model-manifest.json").write_text(
+        json.dumps({"model_id": c.model_id, "revision": c.revision, "files": files}),
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="Incomplete"):
+        m.verify_weights(c)
+
+
+def test_actual_agent_invalidates_cache_when_sampling_settings_change(
+    tmp_path, spec_data, brief_data
+):
+    import copy
+    from dataclasses import replace
+    from poster_framework import AgentRole
+    from .test_agent import setup, run
+
+    a, session, spec, brief, producer = setup(tmp_path, spec_data, brief_data)
+    first = run(a, producer, session, spec, "initial-settings")
+    generator = a["FixtureImageGenerator"](lambda req: a["png"]("green"))
+    generator.capabilities = replace(
+        generator.capabilities, generation_parameters=(("steps", 30),)
+    )
+    producer.generator = generator
+    spec = copy.deepcopy(spec)
+    spec["spec_version"] = 2
+    spec["elements"][1]["box"]["y"] = 84
+    a["publish"](
+        session, "layout", spec, AgentRole.layout_planner, "updated-settings-layout"
+    )
+    second = run(a, producer, session, spec, "updated-settings")
+    assert session.usage.image_operations == 2
+    assert (
+        first.content["assets"][0]["source_ref"]["sha256"]
+        != second.content["assets"][0]["source_ref"]["sha256"]
+    )

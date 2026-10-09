@@ -3,6 +3,7 @@ README.md
 docs/api.md
 docs/contributor-guide.md
 docs/local-gpu-progress.md
+docs/local-gpu-review.md
 docs/local-gpu.md
 docs/schemas/CreativeBrief.json
 docs/schemas/PosterSpec.json
@@ -84,6 +85,7 @@ tests/visual/test_cases.py
 tests/visual/test_cli_tools.py
 tests/visual/test_contracts.py
 tests/visual/test_generation.py
+tests/visual/test_gpu_setup.py
 tests/visual/test_integration.py
 tests/visual/test_local_backend.py
 tests/visual/test_local_repair_probe.py

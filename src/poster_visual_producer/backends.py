@@ -19,7 +19,7 @@ class SDXLConfig(BaseModel):
     )
     revision: str = Field(pattern=r"^[0-9a-f]{40}$")
     steps: int = Field(default=30, strict=True, ge=1, le=100)
-    guidance_scale: float = Field(default=6.0, ge=0, le=20, allow_inf_nan=False)
+    guidance_scale: float = Field(default=6.0, gt=1, le=20, allow_inf_nan=False)
     cpu_offload: bool = Field(default=False, strict=True)
 
 
@@ -42,10 +42,25 @@ def verify_weights(config):
     files = manifest.get("files", {})
     required = {
         "model_index.json",
+        "LICENSE.md",
+        "README.md",
+        "scheduler/scheduler_config.json",
+        "unet/config.json",
         "unet/diffusion_pytorch_model.fp16.safetensors",
+        "vae/config.json",
         "vae/diffusion_pytorch_model.fp16.safetensors",
+        "text_encoder/config.json",
         "text_encoder/model.fp16.safetensors",
+        "text_encoder_2/config.json",
         "text_encoder_2/model.fp16.safetensors",
+        "tokenizer/merges.txt",
+        "tokenizer/vocab.json",
+        "tokenizer/tokenizer_config.json",
+        "tokenizer/special_tokens_map.json",
+        "tokenizer_2/merges.txt",
+        "tokenizer_2/vocab.json",
+        "tokenizer_2/tokenizer_config.json",
+        "tokenizer_2/special_tokens_map.json",
     }
     if not required.issubset(files):
         raise StageError("MISSING_MODEL", "Incomplete FP16 model manifest")

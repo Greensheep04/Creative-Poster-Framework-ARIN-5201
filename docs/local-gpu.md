@@ -14,7 +14,7 @@ $env:POSTER_SDXL_MODEL_DIR='D:\Models\sdxl-base-1.0'
 
 SDXL Base 固定提交为 `462165984030d82259a11f4367a4eed129e94a7b`。下载官方 FP16 组件、许可与配置，保存 SHA256 清单。生成阶段只读本地权重、禁止隐式网络下载；缺文件、哈希不符和 CUDA 不可用都明确失败，不替换成离线图。
 
-网络不稳定时可分别恢复下载，下载完再运行 setup-local-gpu：
+网络不稳定时可分别恢复下载，下载完再运行 setup-local-gpu，脚本会核对并安装缓存 wheel：
 
 ```powershell
 & 'D:\Dev\conda-envs\creative-poster\python.exe' scripts/fetch-torch-wheel.py --directory 'D:\Dev\uv-cache\local-wheels' --direct
@@ -40,7 +40,7 @@ SDXL Base 固定提交为 `462165984030d82259a11f4367a4eed129e94a7b`。下载官
 
 每组保存 poster.png、hero_image-source.png、candidate.json、render_manifest.json、summary.json，以及 A1/A2/A3 运行记录。不同实验建议使用不同 --root，防止预览文件被新运行覆盖。失败案例保存 summary.json 和已经产生的框架记录。
 
-`backend-sdxl.json` 可以修改 steps、guidance_scale、cpu_offload。生成尺寸从 768x1024/1024x1024/1024x768 选择，再按 Spec 等比裁切。模型版本、步数、引导强度、dtype 和 offload 设置都进入缓存指纹。需要时设 cpu_offload=true 降低显存压力；速度与输出质量需实测。
+`backend-sdxl.json` 可以修改 steps、guidance_scale（必须大于 1，以启用独立负面提示）、cpu_offload。生成尺寸从 768x1024/1024x1024/1024x768 选择，再按 Spec 等比裁切。模型版本、步数、引导强度、dtype 和 offload 设置都进入缓存指纹。需要时设 cpu_offload=true 降低显存压力；速度与输出质量需实测。
 
 ## 外部 API 替换接口
 

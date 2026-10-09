@@ -12,6 +12,26 @@ def sha(path):
         return hashlib.file_digest(f, "sha256").hexdigest()
 
 
+def official_file_matches(path, row):
+    if not path.is_file():
+        return False
+    expected_size = row.get("size") or row.get("lfs", {}).get("size")
+    if expected_size is not None and path.stat().st_size != expected_size:
+        return False
+    expected_sha = row.get("lfs", {}).get("sha256")
+    if expected_sha:
+        return sha(path) == expected_sha
+    blob = row.get("blobId")
+    if not blob:
+        return False
+    digest = hashlib.sha1()
+    digest.update(f"blob {path.stat().st_size}\0".encode())
+    with path.open("rb") as f:
+        while chunk := f.read(1024 * 1024):
+            digest.update(chunk)
+    return digest.hexdigest() == blob
+
+
 def download_parallel(
     url, partial, total, opener, *, workers=4, chunk_size=32 * 1024 * 1024
 ):
@@ -80,7 +100,7 @@ def download_component(
         raise ValueError("Invalid component path")
     expected = row.get("lfs", {}).get("sha256")
     total = row.get("size") or row.get("lfs", {}).get("size")
-    if target.is_file() and (not expected or sha(target) == expected):
+    if official_file_matches(target, row):
         return n, sha(target)
     target.parent.mkdir(parents=True, exist_ok=True)
     partial = target.with_name(target.name + ".part")
@@ -89,7 +109,7 @@ def download_component(
     if parallel_workers > 1 and total and total > 32 * 1024 * 1024:
         download_parallel(url, partial, total, opener, workers=parallel_workers)
         digest = sha(partial)
-        if expected and digest != expected:
+        if not official_file_matches(partial, row):
             raise ValueError("Remote checksum mismatch: " + n)
         os.replace(partial, target)
         print("Verified " + n, flush=True)
@@ -138,7 +158,7 @@ def download_component(
     if total and partial.stat().st_size != total:
         raise ValueError("Incomplete model component: " + n)
     digest = sha(partial)
-    if expected and digest != expected:
+    if not official_file_matches(partial, row):
         raise ValueError("Remote checksum mismatch: " + n)
     os.replace(partial, target)
     print("Verified " + n, flush=True)
@@ -158,11 +178,17 @@ def main():
         default="https://huggingface.co",
         help="Public payload mirror; identities/checksums still come from official pinned metadata",
     )
+    parser.add_argument("--workers", type=int, choices=range(1, 17), default=4)
     args = parser.parse_args()
+    transport = (
+        urllib.request.build_opener(urllib.request.ProxyHandler({}))
+        if args.direct
+        else urllib.request.build_opener()
+    )
     root = args.model_dir.resolve()
     root.mkdir(parents=True, exist_ok=True)
     info = json.load(
-        urllib.request.urlopen(
+        transport.open(
             f"https://huggingface.co/api/models/{MODEL}/revision/{REVISION}?blobs=true",
             timeout=60,
         )
@@ -187,11 +213,6 @@ def main():
         flush=True,
     )
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
-        transport = (
-            urllib.request.build_opener(urllib.request.ProxyHandler({}))
-            if args.direct
-            else urllib.request.build_opener()
-        )
         files = dict(
             pool.map(
                 lambda row: download_component(
@@ -199,7 +220,7 @@ def main():
                     root,
                     opener=transport.open,
                     url=f"{args.mirror.rstrip('/')}/{MODEL}/resolve/{REVISION}/{row['rfilename']}?download=true",
-                    parallel_workers=4,
+                    parallel_workers=args.workers,
                 ),
                 rows,
             )

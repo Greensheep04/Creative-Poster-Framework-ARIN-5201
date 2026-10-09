@@ -11,3 +11,7 @@ Ruling: read usage from persisted post-run session, not SingleAgentResult input 
 Network: proxy connection refused during initial torch download, then connectivity restored. Partial model files were rejected; implement bounded HTTP resume with full SHA256 checks.
 
 Engineering regression: 207 passed, 1 Windows symlink skip (31.12s). Preset CLI: ocean/forest/city rendered with explicitly offline fixtures. Real GPU samples pending weight/runtime download; no real-quality conclusion yet.
+
+Independent review: 5 Important, no Critical; all fixed in one pass. Six regressions observed RED then GREEN. Extra real-A3 cache parameter check added. GPU samples still pending actual downloads.
+
+Final engineering regression after review: 214 passed, 1 skip (31.88s). Source archive: 95 members, every member hash matches. Wheel build succeeded. Real CUDA and image verification queued after verified downloads; no GPU success claim yet.
