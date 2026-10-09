@@ -102,7 +102,7 @@ visual_registration = registration(generator, fonts)
 
 ## 当前边界
 
-生图供应商尚未选定，因此没有真实云端/本地模型生图实测。SDK 回调接口与工程链路已实现，接入后仍需验证供应商能力、语义、美学、延迟和成本。本次不实现像素级 inpainting、自动抠图、在线编辑器或其他三个 Agent 的真实模型版本。
+新增本地 SDXL GPU 后端及人工 Brief/Spec 案例入口；实际实测状态见 [本地 GPU 进度](local-gpu-progress.md)，运行说明见 [本地 GPU 指南](local-gpu.md)。外部 API 供应商仍未选定，SDK 回调接口保留。真实质量、延迟和成本只能依据对应运行记录报告。本次不实现像素级 inpainting、自动抠图、在线编辑器或其他三个 Agent 的真实模型版本。
 
 支持固定 RGB PNG、image/text 元素及三个模板 ID；每个素材槽位大小必须匹配 asset_plan.target_size。归一化主体区域是生成意图，不能当作检测到的主体证据。A4 应结合实际图像和 RenderManifest 审核裁切、文字可读性与风格。
 

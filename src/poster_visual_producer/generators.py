@@ -17,6 +17,7 @@ class GeneratorCapabilities:
     supports_edit: bool = False
     offline_fixture: bool = False
     weights_version: str | None = None
+    generation_parameters: tuple[tuple[str, str | int | float | bool], ...] = ()
 
     def __post_init__(self):
         if (

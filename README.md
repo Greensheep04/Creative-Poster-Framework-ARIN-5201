@@ -132,3 +132,5 @@ uv run python examples/format_upgrade.py --root .scratch/format-upgrade
 
 A3 的素材生成、准确文字渲染、缓存与指定素材返工已实现于 src/poster_visual_producer。D 盘 Conda 环境安装、离线验收样张、SDK 适配和组员接入说明见 [Visual Producer 使用与交接](docs/visual-producer.md)。
 
+
+本地 GPU 生图和人工 Brief/Spec 案例：[运行指南](docs/local-gpu.md)。

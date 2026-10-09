@@ -1,0 +1,235 @@
+{
+  "name": "ocean",
+  "keywords": [
+    "海洋",
+    "宁静",
+    "蓝色"
+  ],
+  "brief": {
+    "schema_version": "0.1.0",
+    "run_id": "run_demo_001",
+    "brief_version": 1,
+    "request_ref": "request.json",
+    "intent": {
+      "poster_type": "concept_poster",
+      "core_message": "平静海面和开阔天空",
+      "concept": "用平静海面和开阔天空表达海洋、宁静、蓝色",
+      "mood": [
+        "宁静",
+        "开阔"
+      ],
+      "visual_style": "简洁摄影感",
+      "palette_direction": [
+        "#F6FAFB",
+        "#123C55",
+        "#3D7893"
+      ]
+    },
+    "keyword_bindings": [
+      {
+        "keyword_id": "k1",
+        "interpretation": "海洋",
+        "visual_evidence": [
+          "海洋"
+        ],
+        "text_alone_sufficient": false
+      },
+      {
+        "keyword_id": "k2",
+        "interpretation": "宁静",
+        "visual_evidence": [
+          "宁静"
+        ],
+        "text_alone_sufficient": false
+      },
+      {
+        "keyword_id": "k3",
+        "interpretation": "蓝色",
+        "visual_evidence": [
+          "蓝色"
+        ],
+        "text_alone_sufficient": false
+      }
+    ],
+    "copy": {
+      "title": {
+        "text": "静海之蓝",
+        "origin": "generated_creative_copy",
+        "must_preserve": true
+      },
+      "subtitle": {
+        "text": "留一点宁静给自己",
+        "origin": "generated_creative_copy",
+        "must_preserve": true
+      }
+    },
+    "visual_requirements": {
+      "main_subject": "平静海面和开阔天空",
+      "required_relations": [
+        "平静海面和开阔天空清晰可识别"
+      ],
+      "avoid": [
+        "文字",
+        "标志",
+        "主体变形"
+      ]
+    },
+    "layout_intent": {
+      "visual_priority": [
+        "hero_image",
+        "title",
+        "subtitle"
+      ],
+      "density": "low"
+    },
+    "assumptions": [
+      {
+        "field": "intent.poster_type",
+        "value": "concept_poster",
+        "reason": "用户未指定商业活动或产品。"
+      },
+      {
+        "field": "copy",
+        "value": "允许生成创意标题与副标题",
+        "reason": "未提供固定文案；不添加事实性活动信息。"
+      }
+    ],
+    "reference_notes": [],
+    "open_issues": []
+  },
+  "spec": {
+    "schema_version": "0.1.0",
+    "run_id": "run_demo_001",
+    "spec_version": 1,
+    "based_on": {
+      "brief_version": 1
+    },
+    "canvas": {
+      "width": 720,
+      "height": 1280,
+      "color_mode": "RGB"
+    },
+    "template_id": "framed_hero_v1",
+    "background": {
+      "color": "#F6FAFB"
+    },
+    "design_tokens": {
+      "palette": [
+        "#F6FAFB",
+        "#123C55",
+        "#3D7893"
+      ],
+      "font_family_key": "noto_sans_sc",
+      "safe_margin_px": 36
+    },
+    "asset_plan": [
+      {
+        "asset_id": "hero_image",
+        "kind": "generated_image",
+        "prompt": "Photorealistic tranquil blue ocean under a pale open sky, one straight continuous natural horizon, soft morning light, gentle small ripples, minimalist fine art photography, peaceful atmosphere, blue and ivory palette, no people, no text, no logos.",
+        "negative_prompt": "text, letters, logo, watermark, blurry, distorted objects, duplicate structures",
+        "target_size": {
+          "width": 648,
+          "height": 850
+        },
+        "subject_safe_region_norm": [
+          0.05,
+          0.1,
+          0.9,
+          0.8
+        ],
+        "required_keyword_ids": [
+          "k1",
+          "k2",
+          "k3"
+        ]
+      }
+    ],
+    "elements": [
+      {
+        "id": "hero",
+        "type": "image",
+        "z": 1,
+        "box": {
+          "x": 36,
+          "y": 260,
+          "width": 648,
+          "height": 850
+        },
+        "asset_id": "hero_image",
+        "fit": "cover",
+        "focus_point_norm": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "z": 2,
+        "box": {
+          "x": 36,
+          "y": 64,
+          "width": 648,
+          "height": 152
+        },
+        "copy_ref": "title",
+        "text": "静海之蓝",
+        "font_family_key": "noto_sans_sc",
+        "font_weight": 700,
+        "font_size_px": 72,
+        "line_height_px": 90,
+        "max_lines": 1,
+        "align": "center",
+        "color": "#123C55"
+      },
+      {
+        "id": "subtitle",
+        "type": "text",
+        "z": 3,
+        "box": {
+          "x": 36,
+          "y": 1160,
+          "width": 648,
+          "height": 56
+        },
+        "copy_ref": "subtitle",
+        "text": "留一点宁静给自己",
+        "font_family_key": "noto_sans_sc",
+        "font_weight": 400,
+        "font_size_px": 28,
+        "line_height_px": 38,
+        "max_lines": 1,
+        "align": "center",
+        "color": "#123C55"
+      }
+    ],
+    "keyword_element_bindings": [
+      {
+        "keyword_id": "k1",
+        "element_ids": [
+          "hero"
+        ]
+      },
+      {
+        "keyword_id": "k2",
+        "element_ids": [
+          "hero"
+        ]
+      },
+      {
+        "keyword_id": "k3",
+        "element_ids": [
+          "hero",
+          "title"
+        ]
+      }
+    ],
+    "allowed_overlaps": [],
+    "render_policy": {
+      "text_overflow": "error",
+      "missing_font": "error",
+      "output_format": "PNG"
+    }
+  }
+}

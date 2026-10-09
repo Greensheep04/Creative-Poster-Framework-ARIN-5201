@@ -172,6 +172,7 @@ class VisualProducerAgent:
                     "size": list(request.size),
                     "negative_prompt": request.negative_prompt,
                     "seed": request.seed,
+                    "backend": dict(caps.generation_parameters),
                 },
                 reference_materials=(),
                 processing_config={"source_pipeline": "validated-source-v1"},
@@ -188,6 +189,7 @@ class VisualProducerAgent:
                     "size": list(base_request.size),
                     "negative_prompt": base_request.negative_prompt,
                     "seed": base_request.seed,
+                    "backend": dict(caps.generation_parameters),
                 },
                 reference_materials=(),
                 processing_config={"source_pipeline": "validated-source-v1"},
@@ -279,6 +281,7 @@ class VisualProducerAgent:
                                 parameters={
                                     "size": list(request.size),
                                     "seed": request.seed,
+                                    "backend": dict(caps.generation_parameters),
                                     "negative_prompt": request.negative_prompt,
                                 },
                                 kind="image_operation",
