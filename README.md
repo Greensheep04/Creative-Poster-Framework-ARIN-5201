@@ -127,3 +127,8 @@ uv run python examples/format_upgrade.py --root .scratch/format-upgrade
 - `examples/`：单角色、工具目录、格式升级、定向返工，以及配套请求输入和单角色输出参考。
 - `docs/api.md`：公共数据结构与调用入口。
 - `docs/contributor-guide.md`：Agent、工具、模型 SDK 和校验器接入说明。
+
+## Visual Producer 实现
+
+A3 的素材生成、准确文字渲染、缓存与指定素材返工已实现于 src/poster_visual_producer。D 盘 Conda 环境安装、离线验收样张、SDK 适配和组员接入说明见 [Visual Producer 使用与交接](docs/visual-producer.md)。
+
