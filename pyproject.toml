@@ -18,7 +18,7 @@ dependencies = [
 dev = ["pytest>=8,<9"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/poster_framework"]
+packages = ["src/poster_framework", "src/poster_visual_producer"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
