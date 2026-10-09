@@ -1,0 +1,554 @@
+{
+  "$defs": {
+    "AssetPlan": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "kind": {
+          "const": "generated_image",
+          "title": "Kind",
+          "type": "string"
+        },
+        "prompt": {
+          "maxLength": 12000,
+          "minLength": 1,
+          "title": "Prompt",
+          "type": "string"
+        },
+        "negative_prompt": {
+          "default": "",
+          "title": "Negative Prompt",
+          "type": "string"
+        },
+        "target_size": {
+          "$ref": "#/$defs/Size"
+        },
+        "subject_safe_region_norm": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Subject Safe Region Norm",
+          "type": "array"
+        },
+        "required_keyword_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Keyword Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "asset_id",
+        "kind",
+        "prompt",
+        "target_size",
+        "subject_safe_region_norm",
+        "required_keyword_ids"
+      ],
+      "title": "AssetPlan",
+      "type": "object"
+    },
+    "Background": {
+      "additionalProperties": false,
+      "properties": {
+        "color": {
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "title": "Color",
+          "type": "string"
+        }
+      },
+      "required": [
+        "color"
+      ],
+      "title": "Background",
+      "type": "object"
+    },
+    "BasedOn": {
+      "additionalProperties": false,
+      "properties": {
+        "brief_version": {
+          "exclusiveMinimum": 0,
+          "title": "Brief Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "brief_version"
+      ],
+      "title": "BasedOn",
+      "type": "object"
+    },
+    "Box": {
+      "additionalProperties": false,
+      "properties": {
+        "width": {
+          "exclusiveMinimum": 0,
+          "maximum": 8192,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "maximum": 8192,
+          "title": "Height",
+          "type": "integer"
+        },
+        "x": {
+          "minimum": 0,
+          "title": "X",
+          "type": "integer"
+        },
+        "y": {
+          "minimum": 0,
+          "title": "Y",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "width",
+        "height",
+        "x",
+        "y"
+      ],
+      "title": "Box",
+      "type": "object"
+    },
+    "Canvas": {
+      "additionalProperties": false,
+      "properties": {
+        "width": {
+          "const": 720,
+          "default": 720,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "const": 1280,
+          "default": 1280,
+          "title": "Height",
+          "type": "integer"
+        },
+        "color_mode": {
+          "const": "RGB",
+          "default": "RGB",
+          "title": "Color Mode",
+          "type": "string"
+        }
+      },
+      "title": "Canvas",
+      "type": "object"
+    },
+    "ImageElement": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "image",
+          "title": "Type",
+          "type": "string"
+        },
+        "z": {
+          "minimum": 0,
+          "title": "Z",
+          "type": "integer"
+        },
+        "box": {
+          "$ref": "#/$defs/Box"
+        },
+        "asset_id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "fit": {
+          "enum": [
+            "cover",
+            "contain"
+          ],
+          "title": "Fit",
+          "type": "string"
+        },
+        "focus_point_norm": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Focus Point Norm",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "z",
+        "box",
+        "asset_id",
+        "fit",
+        "focus_point_norm"
+      ],
+      "title": "ImageElement",
+      "type": "object"
+    },
+    "KeywordElements": {
+      "additionalProperties": false,
+      "properties": {
+        "keyword_id": {
+          "title": "Keyword Id",
+          "type": "string"
+        },
+        "element_ids": {
+          "items": {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+            "type": "string"
+          },
+          "title": "Element Ids",
+          "type": "array"
+        },
+        "layout_evidence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Layout Evidence"
+        }
+      },
+      "required": [
+        "keyword_id",
+        "element_ids"
+      ],
+      "title": "KeywordElements",
+      "type": "object"
+    },
+    "RenderPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "text_overflow": {
+          "const": "error",
+          "title": "Text Overflow",
+          "type": "string"
+        },
+        "missing_font": {
+          "const": "error",
+          "title": "Missing Font",
+          "type": "string"
+        },
+        "output_format": {
+          "const": "PNG",
+          "title": "Output Format",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text_overflow",
+        "missing_font",
+        "output_format"
+      ],
+      "title": "RenderPolicy",
+      "type": "object"
+    },
+    "Size": {
+      "additionalProperties": false,
+      "properties": {
+        "width": {
+          "exclusiveMinimum": 0,
+          "maximum": 8192,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "maximum": 8192,
+          "title": "Height",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "width",
+        "height"
+      ],
+      "title": "Size",
+      "type": "object"
+    },
+    "TextElement": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "const": "text",
+          "title": "Type",
+          "type": "string"
+        },
+        "z": {
+          "minimum": 0,
+          "title": "Z",
+          "type": "integer"
+        },
+        "box": {
+          "$ref": "#/$defs/Box"
+        },
+        "copy_ref": {
+          "title": "Copy Ref",
+          "type": "string"
+        },
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "font_family_key": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+          "title": "Font Family Key",
+          "type": "string"
+        },
+        "font_weight": {
+          "enum": [
+            100,
+            200,
+            300,
+            400,
+            500,
+            600,
+            700,
+            800,
+            900
+          ],
+          "title": "Font Weight",
+          "type": "integer"
+        },
+        "font_size_px": {
+          "maximum": 512,
+          "minimum": 1,
+          "title": "Font Size Px",
+          "type": "integer"
+        },
+        "line_height_px": {
+          "exclusiveMinimum": 0,
+          "maximum": 8192,
+          "title": "Line Height Px",
+          "type": "integer"
+        },
+        "max_lines": {
+          "exclusiveMinimum": 0,
+          "maximum": 64,
+          "title": "Max Lines",
+          "type": "integer"
+        },
+        "align": {
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ],
+          "title": "Align",
+          "type": "string"
+        },
+        "color": {
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "title": "Color",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "z",
+        "box",
+        "copy_ref",
+        "text",
+        "font_family_key",
+        "font_weight",
+        "font_size_px",
+        "line_height_px",
+        "max_lines",
+        "align",
+        "color"
+      ],
+      "title": "TextElement",
+      "type": "object"
+    },
+    "Tokens": {
+      "additionalProperties": false,
+      "properties": {
+        "palette": {
+          "items": {
+            "pattern": "^#[0-9a-fA-F]{6}$",
+            "type": "string"
+          },
+          "title": "Palette",
+          "type": "array"
+        },
+        "font_family_key": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+          "title": "Font Family Key",
+          "type": "string"
+        },
+        "safe_margin_px": {
+          "minimum": 0,
+          "title": "Safe Margin Px",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "palette",
+        "font_family_key",
+        "safe_margin_px"
+      ],
+      "title": "Tokens",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "spec_version": {
+      "exclusiveMinimum": 0,
+      "title": "Spec Version",
+      "type": "integer"
+    },
+    "based_on": {
+      "$ref": "#/$defs/BasedOn"
+    },
+    "canvas": {
+      "$ref": "#/$defs/Canvas"
+    },
+    "template_id": {
+      "enum": [
+        "framed_hero_v1",
+        "full_bleed_v1",
+        "split_stack_v1"
+      ],
+      "title": "Template Id",
+      "type": "string"
+    },
+    "background": {
+      "$ref": "#/$defs/Background"
+    },
+    "design_tokens": {
+      "$ref": "#/$defs/Tokens"
+    },
+    "asset_plan": {
+      "items": {
+        "$ref": "#/$defs/AssetPlan"
+      },
+      "maxItems": 8,
+      "minItems": 1,
+      "title": "Asset Plan",
+      "type": "array"
+    },
+    "elements": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "image": "#/$defs/ImageElement",
+            "text": "#/$defs/TextElement"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/ImageElement"
+          },
+          {
+            "$ref": "#/$defs/TextElement"
+          }
+        ]
+      },
+      "maxItems": 32,
+      "minItems": 1,
+      "title": "Elements",
+      "type": "array"
+    },
+    "keyword_element_bindings": {
+      "items": {
+        "$ref": "#/$defs/KeywordElements"
+      },
+      "title": "Keyword Element Bindings",
+      "type": "array"
+    },
+    "allowed_overlaps": {
+      "items": {
+        "maxItems": 2,
+        "minItems": 2,
+        "prefixItems": [
+          {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+            "type": "string"
+          },
+          {
+            "pattern": "^[A-Za-z][A-Za-z0-9_-]{0,63}$",
+            "type": "string"
+          }
+        ],
+        "type": "array"
+      },
+      "title": "Allowed Overlaps",
+      "type": "array"
+    },
+    "render_policy": {
+      "$ref": "#/$defs/RenderPolicy"
+    }
+  },
+  "required": [
+    "schema_version",
+    "run_id",
+    "spec_version",
+    "based_on",
+    "canvas",
+    "template_id",
+    "background",
+    "design_tokens",
+    "asset_plan",
+    "elements",
+    "keyword_element_bindings",
+    "allowed_overlaps",
+    "render_policy"
+  ],
+  "title": "PosterSpec",
+  "type": "object"
+}
