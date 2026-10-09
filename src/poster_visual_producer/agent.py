@@ -133,8 +133,17 @@ class VisualProducerAgent:
                     raise StageError(
                         "STALE_VERSION", "Business repair versions do not match"
                     )
-                constraints = tuple(repair.get("constraints", []))
-                if any(not isinstance(c, str) for c in constraints):
+                raw_constraints = repair.get("constraints", [])
+                if not isinstance(raw_constraints, list) or len(raw_constraints) > 16:
+                    raise StageError(
+                        "SCHEMA_INVALID",
+                        "Repair constraints must be a bounded list of strings",
+                    )
+                constraints = tuple(raw_constraints)
+                if any(
+                    not isinstance(c, str) or not c.strip() or len(c) > 1000
+                    for c in constraints
+                ):
                     raise StageError(
                         "SCHEMA_INVALID", "Repair constraints must be text"
                     )
@@ -204,17 +213,58 @@ class VisualProducerAgent:
                 data = context.files.read(ref)
                 version = old["asset_version"]
                 cache_hit = True
+                # Compatibility uses the base request; provenance retains the
+                # actual request which may include approved repair constraints.
+                fingerprint = GenerationFingerprint.model_validate(old["fingerprint"])
                 context.files.register_generation(ref, fingerprint)
                 provenance = old["provenance"]
             else:
                 hit = None if force else context.cache.get(fingerprint)
                 if hit:
-                    ref = hit.artifacts[0]
-                    data = context.files.read(ref)
-                    version = old["asset_version"] if old else 1
-                    provenance = hit.value
+                    cached_ref = hit.artifacts[0]
+                    data = context.files.read(cached_ref)
+                    old_ref = (
+                        ArtifactReference.model_validate(old["source_ref"])
+                        if old
+                        else None
+                    )
+                    version = (
+                        old["asset_version"] + 1
+                        if old and old_ref != cached_ref
+                        else (old["asset_version"] if old else 1)
+                    )
+                    provenance = copy.deepcopy(hit.value)
                     cache_hit = True
-                    context.files.register_generation(ref, fingerprint)
+                    if (
+                        old_ref is not None
+                        and old_ref != cached_ref
+                        and action == RevisionAction.revise_layout
+                    ):
+                        # Cached bytes replace the currently selected source,
+                        # without another image request. Publish explicit lineage.
+                        with Image.open(io.BytesIO(data)) as header:
+                            fmt = header.format
+                        suffix, mime = {
+                            "PNG": ("png", "image/png"),
+                            "JPEG": ("jpg", "image/jpeg"),
+                            "WEBP": ("webp", "image/webp"),
+                        }[fmt]
+                        ref = context.files.write_bytes(
+                            context.files.invocation_path(
+                                "assets/" + plan.asset_id + "-source." + suffix
+                            ),
+                            data,
+                            purpose=ArtifactPurpose.asset,
+                            media_type=mime,
+                            generation_fingerprint=fingerprint,
+                            replaces=old_ref,
+                        )
+                        provenance["cache_reused_from"] = cached_ref.model_dump(
+                            mode="json"
+                        )
+                    else:
+                        ref = cached_ref
+                        context.files.register_generation(ref, fingerprint)
                 else:
 
                     async def invoke(_provider, _model, _request, _parameters):

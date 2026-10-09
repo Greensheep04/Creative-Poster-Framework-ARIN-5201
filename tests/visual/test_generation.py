@@ -84,3 +84,41 @@ def test_fixture_is_explicit_and_decodable(spec_data):
         100,
         100,
     )
+
+
+def test_common_sdk_secret_shapes_are_redacted(spec_data):
+    g = api()
+
+    async def callback(req):
+        return g.GeneratedImage(
+            data(),
+            provenance={
+                "headers": [{"name": "Authorization", "value": "Bearer header-secret"}],
+                "url": "https://provider.test/image?api_key=query-secret&width=720",
+                "signed": "https://provider.test/image?X-Amz-Signature=signature-secret&X-Amz-Credential=credential-secret",
+                "authorization": "Bearer direct-secret",
+            },
+        )
+
+    adapter = g.CallableImageGenerator(
+        g.GeneratorCapabilities("sdk", "v1", ((1024, 1536),)), callback
+    )
+    result = asyncio.run(
+        adapter.generate(
+            g.compile_request(spec_data["asset_plan"][0], adapter.capabilities)
+        )
+    )
+    import json
+
+    serialized = json.dumps(result.provenance)
+    assert all(
+        secret not in serialized
+        for secret in (
+            "header-secret",
+            "query-secret",
+            "signature-secret",
+            "credential-secret",
+            "direct-secret",
+        )
+    )
+    assert "width=720" in result.provenance["url"]

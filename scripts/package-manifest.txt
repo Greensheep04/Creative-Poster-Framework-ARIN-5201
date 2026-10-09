@@ -4,6 +4,7 @@ docs/api.md
 docs/contributor-guide.md
 docs/schemas/CreativeBrief.json
 docs/schemas/PosterSpec.json
+docs/visual-producer-review.md
 docs/visual-producer.md
 environment.yml
 examples/format_upgrade.py
@@ -69,4 +70,5 @@ tests/visual/test_contracts.py
 tests/visual/test_generation.py
 tests/visual/test_integration.py
 tests/visual/test_rendering.py
+tests/visual/test_revision_sequences.py
 uv.lock

@@ -323,3 +323,29 @@ def test_provider_metadata_credentials_not_written_to_artifacts(
         and "auth-secret" not in text
     )
     assert output.content["assets"][0]["provenance"]["provider_usage"]["images"] == 1
+
+
+@pytest.mark.parametrize("constraints", ["repair now", {"repair": "now"}])
+def test_malformed_repair_constraints_rejected_before_paid_call(
+    tmp_path, spec_data, brief_data, constraints
+):
+    a, s, sp, b, p = setup(tmp_path, spec_data, brief_data)
+    first = run(a, p, s, sp, "first")
+    raw = first.content["assets"][0]["source_ref"]
+    s.memory.add_revision(
+        role=None,
+        revision_id="malformed",
+        changes={
+            "details": {
+                "repair_plan": {
+                    "expected_versions": {"brief_version": 1, "spec_version": 1},
+                    "constraints": constraints,
+                }
+            }
+        },
+        unresolved_issues=[],
+    )
+    target = VersionDependency(artifact_id=raw["artifact_id"], revision=raw["revision"])
+    with pytest.raises(ValueError):
+        run(a, p, s, sp, "repair", RevisionAction.regenerate_asset, target)
+    assert s.usage.image_operations == 1

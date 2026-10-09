@@ -67,3 +67,15 @@ def test_pair_rejects_semantic_drift(spec_data, brief_data, change, code):
             ["k1", "k2", "k3"],
         )
     assert caught.value.code == code
+
+
+def test_required_copy_cannot_disappear(spec_data, brief_data):
+    c = api()
+    spec_data["elements"] = [e for e in spec_data["elements"] if e["id"] != "subtitle"]
+    with pytest.raises(c.StageError) as caught:
+        c.validate_pair(
+            c.PosterSpec.model_validate(spec_data),
+            c.CreativeBrief.model_validate(brief_data),
+            ["k1", "k2", "k3"],
+        )
+    assert caught.value.code == "CONSTRAINT_CONFLICT"

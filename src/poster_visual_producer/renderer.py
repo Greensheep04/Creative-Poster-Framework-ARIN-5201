@@ -33,7 +33,10 @@ def measure_text_block(element: TextElement, fonts: FontRegistry) -> TextLayout:
         return max(box[2] - box[0], draw.textlength(text, font=font))
 
     lines = []
-    for paragraph in element.text.split("\n"):
+    # CRLF and CR are line separators, never drawable glyphs. Preserve the
+    # original official string in the manifest while normalizing layout only.
+    layout_text = element.text.replace("\r\n", "\n").replace("\r", "\n")
+    for paragraph in layout_text.split("\n"):
         current = ""
         for char in paragraph:
             if width(current + char) > element.box.width:

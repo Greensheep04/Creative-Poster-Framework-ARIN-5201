@@ -244,6 +244,14 @@ def validate_pair(
         raise StageError("SCHEMA_INVALID", "Unknown asset keyword")
     if brief.open_issues:
         raise StageError("CONSTRAINT_CONFLICT", "Brief has unresolved issues")
+    represented_copy = {e.copy_ref for e in spec.elements if isinstance(e, TextElement)}
+    required_copy = {
+        key for key, block in brief.copy_blocks.items() if block.must_preserve
+    }
+    if not required_copy <= represented_copy:
+        raise StageError(
+            "CONSTRAINT_CONFLICT", "Mandatory official copy is missing from the layout"
+        )
     for e in spec.elements:
         if isinstance(e, TextElement):
             if (

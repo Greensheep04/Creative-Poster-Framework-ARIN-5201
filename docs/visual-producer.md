@@ -105,3 +105,5 @@ visual_registration = registration(generator, fonts)
 生图供应商尚未选定，因此没有真实云端/本地模型生图实测。SDK 回调接口与工程链路已实现，接入后仍需验证供应商能力、语义、美学、延迟和成本。本次不实现像素级 inpainting、自动抠图、在线编辑器或其他三个 Agent 的真实模型版本。
 
 支持固定 RGB PNG、image/text 元素及三个模板 ID；每个素材槽位大小必须匹配 asset_plan.target_size。归一化主体区域是生成意图，不能当作检测到的主体证据。A4 应结合实际图像和 RenderManifest 审核裁切、文字可读性与风格。
+
+独立代码审查与连续返工回归结果见 [审查与修复记录](visual-producer-review.md)。Windows CRLF/CR 仅在排版中规范化，正式文案原文保留；必需文案不能遗漏。SDK 元数据中的 header/value 及签名 URL 查询凭据会隐藏。

@@ -111,3 +111,15 @@ def test_real_weight_file_is_required(spec_data):
     with pytest.raises(Error) as caught:
         render(Spec.model_validate(spec_data), {"hero_image": source()}, fonts)
     assert caught.value.code == "MISSING_FONT"
+
+
+@pytest.mark.parametrize("newline", ["\r\n", "\r"])
+def test_windows_line_breaks_do_not_render_control_glyphs(spec_data, newline):
+    render, fonts, Spec, _, _, _ = render_api()
+    spec_data["elements"][1].update(
+        text="Ocean" + newline + "Blue", font_size_px=28, line_height_px=38, max_lines=2
+    )
+    result = render(Spec.model_validate(spec_data), {"hero_image": source()}, fonts)
+    row = result.manifest["elements"][1]
+    assert row["lines"] == ["Ocean", "Blue"]
+    assert row["text"] == "Ocean" + newline + "Blue"
