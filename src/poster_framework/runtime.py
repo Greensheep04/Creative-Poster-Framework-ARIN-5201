@@ -79,6 +79,14 @@ def _event_value(value: object, key: str | None = None) -> object:
         normalized_key = "".join(
             character for character in key.casefold() if character.isalnum()
         )
+        # Design tokens are a business object, not a credential string.
+        # Recurse through EVERY member using the same credential redactor.
+        # Non-object values under this key still follow the sensitive-key rule.
+        if normalized_key == "designtokens" and isinstance(value, Mapping):
+            return {
+                str(name): _event_value(item, str(name))
+                for name, item in value.items()
+            }
         sensitive = (
             "apikey",
             "authorization",
