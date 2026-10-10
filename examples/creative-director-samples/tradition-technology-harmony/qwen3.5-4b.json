@@ -1,0 +1,40 @@
+{
+  "concept": "Integrating heritage and innovation in a single visual form.",
+  "headline": "Heritage Meets Innovation",
+  "supporting_copy": "",
+  "keyword_mapping": [
+    {
+      "keyword": "tradition",
+      "representation": "Intricate textile pattern woven in charcoal ink."
+    },
+    {
+      "keyword": "technology",
+      "representation": "Digital circuit lines rendered in neon blue."
+    },
+    {
+      "keyword": "harmony",
+      "representation": "Smooth gradient blending where lines dissolve into the background."
+    }
+  ],
+  "visual_direction": "Portrait composition featuring a singular abstract vehicle shaped like a traditional scroll winding into a modern fiber-optic strand, unified without borders.",
+  "style": {
+    "mood": "Serene and Futuristic",
+    "medium": "Digital Vector Illustration",
+    "palette": [
+      "Charcoal Ink",
+      "Neon Blue"
+    ]
+  },
+  "must_include": [
+    "Max 6 word headline",
+    "Exactly two palette colors",
+    "One main visual metaphor",
+    "No split-screen"
+  ],
+  "must_avoid": [
+    "Copy for headline only",
+    "Split composition",
+    "Foreign text",
+    "More than two colors"
+  ]
+}
