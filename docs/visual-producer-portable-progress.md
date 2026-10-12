@@ -12,3 +12,5 @@ Task 1 full suite: 218 passed, 1 capability skip. Task 2: RED 18 missing-module 
 
 Task 2 full suite: 236 passed, 1 capability skip. Task 3: 6 initial RED cases; GREEN external authorization and unchanged A1/A2 paths. Additional RED→GREEN: equal-condition assets now share cached bytes but have distinct repair identities; repeated QC problems use semantic issue signatures excluding sample/hash/version churn. 7 QC collaboration tests pass; 62 authorization/production/legacy-workflow tests passed before additional repeat guard. No A1/A2 source changes or fabricated Agent.run calls.
 Ruling: QC coordination is an external trusted callback and feedback artifact, not a new A1 method — user explicitly required A1/A2 unchanged; integration owners supply confirmed authorization. Without it workflow stops needs_review.
+
+Task 3 full suite: 244 passed, 1 capability skip. Task 4: RED 7 unrecognized backend cases; GREEN 7 actual local HTTP tests. Cloud downloads do not forward API Authorization, submitted-download failures never resubmit, inline keys rejected, endpoint participates in cache identity. No external paid calls performed.

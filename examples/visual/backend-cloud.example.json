@@ -1,0 +1,10 @@
+{
+  "kind": "cloud_api",
+  "provider": "your-images-provider",
+  "model": "configure-your-model",
+  "endpoint": "https://api.openai.com/v1/images/generations",
+  "api_key_env": "POSTER_IMAGE_API_KEY",
+  "sizes": [[1024,1536],[1024,1024],[1536,1024]],
+  "timeout_seconds": 120,
+  "parameters": {}
+}

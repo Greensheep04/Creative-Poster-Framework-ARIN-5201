@@ -191,6 +191,9 @@ def create_generator(config: dict):
     """Config comes from the application/user, never from model output."""
     config = dict(config)
     kind = config.pop("kind", None)
+    if kind == "cloud_api":
+        from .cloud_backend import CloudAPIConfig, CloudImageGenerator
+        return CloudImageGenerator(CloudAPIConfig.model_validate(config))
     if kind == "sdxl":
         raw = str(config.get("model_dir", ""))
         expanded = os.path.expandvars(raw)
@@ -210,4 +213,4 @@ def create_generator(config: dict):
         ):
             raise TypeError("External factory must return an ImageGenerator")
         return generator
-    raise ValueError("Backend kind must be sdxl or factory")
+    raise ValueError("Backend kind must be sdxl, qwen_image, cloud_api or factory")
