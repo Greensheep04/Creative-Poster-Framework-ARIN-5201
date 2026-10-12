@@ -85,3 +85,32 @@ def test_cloud_endpoint_change_invalidates_a3_cache(tmp_path,spec_data,brief_dat
             inputs,ctx=call_context(session,spec,name)
             asyncio.run(VisualProducerAgent(generator(url),fonts()).run(inputs,ctx))
         assert session.usage.image_operations==2 and records_a and records_b
+
+
+def test_actual_cloud_a3_runs_without_gpu_imports(tmp_path,spec_data,brief_data,monkeypatch):
+    import subprocess,sys,os
+    monkeypatch.setenv('POSTER_TEST_KEY','test-only')
+    (tmp_path/'inputs.json').write_text(json.dumps([spec_data,brief_data]),encoding='utf-8')
+    script = """
+import sys,importlib.abc,json,asyncio
+from pathlib import Path
+class Guard(importlib.abc.MetaPathFinder):
+    def find_spec(self,fullname,path=None,target=None):
+        if fullname.split('.')[0] in {'torch','diffusers','transformers','accelerate'}:
+            raise RuntimeError('GPU import forbidden: '+fullname)
+sys.meta_path.insert(0,Guard())
+from tests.visual.helpers import make_session,call_context,fonts
+from poster_visual_producer.backends import create_generator
+from poster_visual_producer.agent import VisualProducerAgent
+root=Path(sys.argv[1]);sp,br=json.loads((root/'inputs.json').read_text(encoding='utf-8'))
+session,spec,_=make_session(root/'runtime',sp,br)
+inputs,ctx=call_context(session,spec,'no-gpu')
+gen=create_generator({'kind':'cloud_api','provider':'test','model':'chosen-model','endpoint':sys.argv[2],'api_key_env':'POSTER_TEST_KEY','sizes':[[1024,1536]]})
+out=asyncio.run(VisualProducerAgent(gen,fonts()).run(inputs,ctx))
+assert out.content['status']=='rendered' and out.content['usage_delta']['image_ops']==1
+print('cloud-a3-no-gpu-ok')
+"""
+    with server() as (endpoint,records):
+        result=subprocess.run([sys.executable,'-c',script,str(tmp_path),endpoint],text=True,capture_output=True,timeout=40)
+    assert result.returncode==0,result.stderr
+    assert 'cloud-a3-no-gpu-ok' in result.stdout and len(records)==1

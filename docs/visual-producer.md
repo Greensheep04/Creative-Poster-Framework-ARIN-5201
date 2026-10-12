@@ -107,3 +107,12 @@ visual_registration = registration(generator, fonts)
 支持固定 RGB PNG、image/text 元素及三个模板 ID；每个素材槽位大小必须匹配 asset_plan.target_size。归一化主体区域是生成意图，不能当作检测到的主体证据。A4 应结合实际图像和 RenderManifest 审核裁切、文字可读性与风格。
 
 独立代码审查与连续返工回归结果见 [审查与修复记录](visual-producer-review.md)。Windows CRLF/CR 仅在排版中规范化，正式文案原文保留；必需文案不能遗漏。SDK 元数据中的 header/value 及签名 URL 查询凭据会隐藏。
+
+
+## 可移植后端与新版 QC（2026-10-12）
+
+新增 `cloud_api`、`qwen_image` 与原有 `sdxl_local` 并列，统一经过同一个 A3 生产链路。配置、能力预检、可选 GPU 依赖及模型下载见 [backend-setup](backend-setup.md)。运行 CLI 与 A1/A2 旧输出保持兼容。
+
+PosterCandidate 增加 `execution_decisions`（generate/regenerate/reuse_current/cache 的实际决定）、issued `index_ref`、素材 `element_ids/source_size/processed_bindings` 和 text_manifest `copy_ref`。同一素材可关联多个元素，processed_bindings 保存各自裁切/处理结果；旧 processed_ref/asset_to_canvas 明确定义为首个元素，保持单元素消费者兼容。
+
+新版 QC bridge 导出严格 LocalManifest v1 与独立身份链接，校验完整 AuditReport v3，审核前后验证当前候选与依赖。外部 RepairAuthorization 控制返工范围，A4 hint 不直接执行，unknown 不隐式生图。细节和接入代码见 [qc-handoff](qc-handoff.md)，验收账本见 [portable progress](visual-producer-portable-progress.md)。A1/A2 实现、registration、正式格式和提示词不修改。

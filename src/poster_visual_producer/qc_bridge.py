@@ -149,7 +149,13 @@ class QCBridgeAgent:
         bundle=export_review_bundle(context,candidate,destination=self.bundle_root/context.original_request.run_id/context.identity.invocation_id)
         try:
             report=await self.audit(bundle.manifest_path,context)
-            _current_inputs(context,candidate)
+            items,brief,spec=_current_inputs(context,candidate)
+            current_deps=[{'artifact_id':items[n]['reference']['artifact_id'],'revision':items[n]['reference']['revision']} for n in ('brief','layout')]
+            if current_deps!=bundle.candidate_link['framework_dependencies']:
+                raise StageError('STALE_VERSION','QC dependencies changed during audit')
+            validate_pair(spec,brief,[k.keyword_id for k in context.original_request.keywords])
+            if candidate['based_on']!={'brief_version':brief.brief_version,'spec_version':spec.spec_version}:
+                raise StageError('STALE_VERSION','QC business versions changed during audit')
             result=validate_audit_report(report,bundle,candidate)
         except Exception as error:
             context.files.write_bytes(context.files.invocation_path('qc-error.json'),json.dumps({'error_type':type(error).__name__,'sample_id':bundle.manifest.sample_id}).encode(),purpose=ArtifactPurpose.evidence,media_type='application/json')

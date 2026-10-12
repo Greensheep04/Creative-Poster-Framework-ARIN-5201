@@ -21,6 +21,20 @@ flowchart LR
 
 默认允许最多 4 轮返工；首次候选审核不计入返工轮数，因此最多审核 5 个候选。默认图像操作和 Critic 视觉调用额度各为 5 次，覆盖初始候选及最多 4 轮返工。调用方可以通过 `RunBudget` 调整这些额度。
 
+## A3 可选后端与新版 QC
+
+A3 支持用户自行选择 SDXL 本地、Qwen-Image 本地和云端 Images JSON API。共同链路包含素材复用、Spec 精确渲染、可审核候选、状态证据和授权局部返工。A1/A2 代码与接口保持原样；新版 QC 的 repair_hint 经过外部确认后才执行，未获授权的 fail/unknown 停在 needs_review。
+
+首次配置见 [安装与后端指南](docs/backend-setup.md)，A4 成员接入见 [QC 交接与返工指南](docs/qc-handoff.md)。云端基础安装无需 GPU 依赖；本地模型按需安装，不自动下载全部权重。
+
+```bash
+python -m poster_visual_producer setup --output .scratch/backend.json
+python -m poster_visual_producer doctor --backend-config .scratch/backend.json --fonts examples/visual/fonts.json --font-base . --output-root runs/my-poster
+python examples/visual/qc_collaboration.py --root runs/qca --scenario all
+```
+
+最后一条是工程协作演示，输出真实海报与证据，Fake A4 不会获得生产通过。原审核路由仍兼容；新版 LocalManifest v1/AuditReport v3 路由以 RepairAuthorization 为执行依据。
+
 ## 安装
 
 项目要求 Python 3.11 和 uv。安装运行依赖与开发测试依赖：

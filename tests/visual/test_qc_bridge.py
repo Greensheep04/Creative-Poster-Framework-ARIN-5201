@@ -114,3 +114,22 @@ def test_complete_report_releases_but_core_excerpt_is_rejected(tmp_path,spec_dat
     bundle=export_review_bundle(ctx,c,destination=tmp_path/'bundle')
     assert validate_audit_report(report_for(bundle),bundle,c).production_pass
     with pytest.raises(ValueError): validate_audit_report({'schema_version':3,'decision':'pass'},bundle,c)
+
+
+@pytest.mark.parametrize('field',['brief','layout'])
+def test_upstream_change_during_audit_rejects_report(tmp_path,spec_data,brief_data,field):
+    from poster_visual_producer.qc_bridge import QCBridgeAgent,ReviewBundle
+    from poster_visual_producer.qc_contracts import LocalManifestV1
+    from tests.visual.helpers import publish
+    from types import SimpleNamespace
+    session,c,sp,br,ctx=produced(tmp_path/'store',spec_data,brief_data)
+    async def audit(path,context):
+        path=Path(path)
+        m=LocalManifestV1.model_validate_json(path.read_text(encoding='utf-8'))
+        link=json.loads((path.parent/'candidate_link.json').read_text(encoding='utf-8'))
+        data=copy.deepcopy(br if field=='brief' else sp)
+        # A new framework dependency is stale even when its business version/content is unchanged.
+        publish(session,field,data,AgentRole.creative_director if field=='brief' else AgentRole.layout_planner,'changed')
+        return report_for(SimpleNamespace(manifest=m,candidate_link=link))
+    with pytest.raises(ValueError,match='[Ss]tale|[Dd]ependen'):
+        asyncio.run(QCBridgeAgent(audit,tmp_path/'bundles').run(SimpleNamespace(content=c),ctx))
