@@ -152,6 +152,7 @@ class VisualProducerAgent:
         source_data = {}
         refs = []
         assets = []
+        decisions = []
         warnings = []
         caps = self.generator.capabilities
         for plan in spec.asset_plan:
@@ -344,12 +345,21 @@ class VisualProducerAgent:
                 "fingerprint": fingerprint.model_dump(mode="json"),
                 "provenance": provenance,
             }
+            decisions.append({
+                "asset_id": plan.asset_id,
+                "action": "reuse_current" if reusable else ("cache" if cache_hit else ("regenerate" if force else "generate")),
+                "reason": "compatible current source" if reusable else ("verified fingerprint cache" if cache_hit else ("authorized target repair" if force else "no compatible source")),
+                "fingerprint_key": fingerprint.key,
+                "target": target.model_dump(mode="json") if force else None,
+            })
             refs.append(ref)
             warnings.extend(request.adaptations)
             assets.append(
                 {
                     "asset_id": plan.asset_id,
                     "asset_version": version,
+                    "element_ids": [e.id for e in spec.elements if isinstance(e, ImageElement) and e.asset_id == plan.asset_id],
+                    "processed_bindings": [],
                     "source_ref": ref.model_dump(mode="json"),
                     "file_ref": self._relative(ref, context),
                     "processed_size": plan.target_size.model_dump(),
@@ -382,6 +392,7 @@ class VisualProducerAgent:
                 for item in upstream.values()
             ],
             warnings=warnings,
+            execution_decisions=decisions,
             source_mode="offline_fixture" if caps.offline_fixture else "provider",
         )
         for row in rendered.manifest["elements"]:
@@ -390,8 +401,15 @@ class VisualProducerAgent:
                     mode="json"
                 )
                 asset = next(a for a in assets if a["asset_id"] == row["asset_id"])
-                asset["asset_to_canvas"] = row["asset_to_canvas"]
-                asset["processed_ref"] = row["processed_ref"]
+                asset["source_size"] = dict(zip(("width", "height"), row["processing"]["original_size"]))
+                asset["processed_bindings"].append({
+                    "element_id": row["element_id"], "processed_ref": row["processed_ref"],
+                    "processed_size": dict(zip(("width", "height"), row["processing"]["processed_size"])),
+                    "asset_to_canvas": row["asset_to_canvas"],
+                })
+                if len(asset["processed_bindings"]) == 1:
+                    asset["asset_to_canvas"] = row["asset_to_canvas"]
+                    asset["processed_ref"] = row["processed_ref"]
         poster = context.files.write_bytes(
             context.files.invocation_path("poster.png"),
             rendered.png,
@@ -427,11 +445,13 @@ class VisualProducerAgent:
             "artifact_index_ref": self._relative(index, context),
             "canvas": {"width": 720, "height": 1280},
             "assets": assets,
+            "execution_decisions": decisions,
             "text_manifest": [
                 {
                     k: row[k]
                     for k in (
                         "element_id",
+                        "copy_ref",
                         "text",
                         "font_family_key",
                         "font_weight",

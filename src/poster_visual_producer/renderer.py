@@ -171,6 +171,7 @@ def render_poster(
                 )
             row.update(
                 text=e.text,
+                copy_ref=e.copy_ref,
                 lines=layout.lines,
                 placements=layout.placements,
                 actual_bounds=layout.ink_bounds,
