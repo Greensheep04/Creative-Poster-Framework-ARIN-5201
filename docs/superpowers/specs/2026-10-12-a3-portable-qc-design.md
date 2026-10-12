@@ -123,8 +123,9 @@ QC 接入层导出完整反馈供 A1 核实；接入程序可配置受信外部�
 7. setup/doctor 真正执行并检查文件/退出码；诊断不泄漏凭据、不发图像请求。
 8. 由 A1/A2/A3 真实共享记录组装严格 QC 输入，文案 ID、约束 ID、坐标和路径正确。
 9. 不匹配 sample/hash/版本、Fake pass、覆盖不足均不放行。
-10. fail/unknown 确实进入 A1；未经授权不发起 A3 返工；授权后用新候选重新审核。
+10. fail/unknown 导出完整反馈供 A1 核实；未经外部确认授权不发起 A3 返工；授权后用新候选重新审核，不要求修改 A1/A2。
 11. 全套 pytest、CLI smoke、wheel/source archive 安装与资源检查。
 
 不在本次实现：额外 Agent、自动模型推荐系统、通用任意云端协议解析器、Web UI、像素 inpainting、A1/A2/A4 的真实模型业务重写。
+
 

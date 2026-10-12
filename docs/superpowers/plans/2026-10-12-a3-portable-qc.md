@@ -96,9 +96,9 @@ Expected: exit 0，所有用例通过；仅已有 WinError 1314 symlink capabili
 - [ ] Step 1: 新增 test_qc_unknown_without_authorization_never_generates_again：初始 image_ops=1，保存完整 uncertainty 与反馈，结果 needs_review；A1/A2 初始各运行一次。
 - [ ] Step 2: 新增 test_external_authorization_regenerates_only_target，双素材中仅 hero 替换；检查另外素材哈希、文案/布局不变；新候选再进入 A4；不额外运行 A1/A2。
 - [ ] Step 3: 新增 test_unknown_authorization_preserves_original_report 和 test_stale_authorization_rejected_before_image_call，真实未知报告保留、当前依赖和 target 全部校验。
-- [ ] Step 4: 新增 test_qc_hint_does_not_authorize，以及重渲染授权零额外生图；repair_hint 的 asset/layout/render 字样均不能自动改变路线。
+- [ ] Step 4: 新增 test_qc_hint_does_not_authorize、test_fake_qc_pass_stops_before_release，以及重渲染授权零额外生图；repair_hint 的 asset/layout/render 字样均不能自动改变路线，raw decision=pass 但 production_pass=False 也不得放行。
 - [ ] Step 5: Run `python -m pytest tests/visual/test_qc_collaboration.py -q`，Expected: 缺外部授权入口和正确 QC routing FAIL。
-- [ ] Step 6: 在新 QC marker 路径接入反馈/授权阶段；利用已有 _validate_revision_target/_begin_revision/预算与防重复问题机制。新的阶段数量计入 graph recursion limit，旧分支不变。
+- [ ] Step 6: 在新 QC marker 路径先校验 production_pass 放行条件，再接入反馈/授权阶段；利用已有 _validate_revision_target/_begin_revision/预算与防重复问题机制。新的阶段数量计入 graph recursion limit，旧分支不变。
 - [ ] Step 7: 校验并持久化授权身份/expected_versions/constraints/preserve；拒绝 stale/非法目标/字段类型，不把未知反馈直接传入 generate。将已验证修复约束放入现有 repair_plan 通道。
 - [ ] Step 8: 实施联调示例：明确标记的工程 A1/A2 发布器、真实 A3 renderer、Fake A4 合同和受信授权回调；最终输出工程协作证据，不宣称生产视觉通过。
 - [ ] Step 9: Run 新协作测试、tests/test_f3_workflow.py、既有视觉回归，再全套；Expected: PASS 且旧 agent 接口未变；Commit `feat: gate QC repairs on external authorization`，更新账本。
@@ -182,3 +182,4 @@ Expected: exit 0，所有用例通过；仅已有 WinError 1314 symlink capabili
 仅隔离外部 HTTP 或大型本地推理层；保留真实 Runtime/Renderer/QC 组装/授权路由。不以源码字符串匹配作为功能测试，不为人类说明文档添加镜像测试。不把 Fake 审核或测试推理 double 当真实模型质量证据。
 
 本计划等待用户书面审阅与执行方式选择。推荐 Native，本会话依序实施并最终进行独立只读审查；不默认分派多个实现 Agent。
+
