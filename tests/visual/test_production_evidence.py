@@ -62,3 +62,19 @@ def test_authorized_asset_repair_records_target_and_preserves_copy(tmp_path, spe
     assert second['execution_decisions'][0]['action'] == 'regenerate'
     assert second['execution_decisions'][0]['target'] == target.model_dump(mode='json')
     assert second['usage_delta']['image_ops'] == 1
+
+
+def test_equal_generation_conditions_still_have_distinct_repair_targets(tmp_path, spec_data, brief_data):
+    plan=copy.deepcopy(spec_data['asset_plan'][0]);plan['asset_id']='other_image'
+    spec_data['asset_plan'].append(plan)
+    e=copy.deepcopy(spec_data['elements'][0]);e.update(id='other',asset_id='other_image',z=5)
+    spec_data['elements'].append(e);spec_data['allowed_overlaps'].append(['hero','other'])
+    session,spec,_=make_session(tmp_path,spec_data,brief_data)
+    producer=VisualProducerAgent(FixtureImageGenerator(lambda r:png()),fonts())
+    first=run(session,spec,producer,'first')
+    a,b=first['assets']
+    assert first['usage_delta']['image_ops']==1
+    assert a['source_ref']['artifact_id']!=b['source_ref']['artifact_id']
+    target=VersionDependency(artifact_id=a['source_ref']['artifact_id'],revision=a['source_ref']['revision'])
+    second=run(session,spec,producer,'repair',RevisionAction.regenerate_asset,target)
+    assert second['assets'][1]['source_ref']==b['source_ref']

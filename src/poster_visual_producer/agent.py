@@ -239,9 +239,8 @@ class VisualProducerAgent:
                     provenance = copy.deepcopy(hit.value)
                     cache_hit = True
                     if (
-                        old_ref is not None
-                        and old_ref != cached_ref
-                        and action == RevisionAction.revise_layout
+                        (old_ref is not None and old_ref != cached_ref and action == RevisionAction.revise_layout)
+                        or any(row["source_ref"]["artifact_id"] == cached_ref.artifact_id for row in bindings.values())
                     ):
                         # Cached bytes replace the currently selected source,
                         # without another image request. Publish explicit lineage.
