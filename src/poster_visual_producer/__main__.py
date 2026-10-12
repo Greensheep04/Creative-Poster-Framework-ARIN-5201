@@ -1,5 +1,5 @@
 from __future__ import annotations
-import argparse, asyncio, importlib, json
+import argparse, asyncio, importlib, json, sys
 from pathlib import Path
 from poster_framework import run_single_agent_from_upstream
 from .fonts import FontRegistry
@@ -8,7 +8,7 @@ from .registration import registration
 
 
 async def execute(args):
-    config = json.loads(args.fonts.read_text(encoding="utf-8"))
+    config = json.loads(args.fonts.read_text(encoding="utf-8-sig"))
     fonts = FontRegistry.from_config(config, args.font_base)
     if args.fixture:
         # Only trusted application/user CLI configuration may provide this path.
@@ -18,7 +18,7 @@ async def execute(args):
         from .backends import create_generator
 
         generator = create_generator(
-            json.loads(args.backend_config.read_text(encoding="utf-8"))
+            json.loads(args.backend_config.read_text(encoding="utf-8-sig"))
         )
     else:
         module, name = args.generator_factory.split(":", 1)
@@ -41,8 +41,11 @@ async def execute(args):
 
 
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] in {"setup", "doctor"}:
+        from .setup_cli import main as setup_main
+        raise SystemExit(setup_main(sys.argv[1:]))
     parser = argparse.ArgumentParser(
-        description="Run Visual Producer from the Layout Planner's exported single-role record."
+        description="Run Visual Producer from the Layout Planner export; use setup/doctor subcommands for backend configuration."
     )
     parser.add_argument("--upstream-record", type=Path, required=True)
     parser.add_argument(
