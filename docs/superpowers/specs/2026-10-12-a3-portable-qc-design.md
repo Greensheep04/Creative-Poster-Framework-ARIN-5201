@@ -1,6 +1,6 @@
 # Agent 3 可选生成后端与新版 QC 协作设计
 
-日期：2026-10-12。状态：待书面设计审阅；尚未实施。
+日期：2026-10-12。状态：用户已确认书面设计；尚未实施。用户追加约束：A1/A2 实现及现有输入输出接口不修改。
 
 ## 1. 用户目标与验收主线
 
@@ -101,11 +101,11 @@ A3 成功仅返回 status=rendered。阻塞错误保存错误与已发生调用�
 
 新版 QC pass → 核验报告/身份 → 输出当前候选与审核记录；fail/unknown → A1 协调入口 → 授权任务或 needs_review。A4 repair_hint 仅是建议，不直接派给 A2/A3。
 
-增加显式 A1 review coordination 扩展入口，使用 creative_director 的调用身份、预算和记录；不是第五个 Agent。将原完整报告、问题证据、uncertainties、preserve、当前依赖与候选身份送给 A1。A1 可核实后选择 revise_brief/revise_layout/regenerate_asset/rerender，或暂不授权并结束 needs_review。unknown 不自动生图。
+QC 接入层导出完整反馈供 A1 核实；接入程序可配置受信外部返工授权回调。该回调不要求 A1 新增方法，不修改其类、registration、输入输出格式或提示词，也不是第五个 Agent。传递原完整报告、问题证据、uncertainties、preserve、当前依赖与候选身份。取得外部确认授权后方可选择 revise_brief/revise_layout/regenerate_asset/rerender；没有授权时结束 needs_review。unknown 不自动生图。实际记录区分外部授权事件与 Agent.run，不伪造 A1 调用。
 
 授权记录包含授权 ID、依据候选版本、目标 framework dependency、业务 brief/spec 版本、修复约束与保留要求。进入已有框架目标校验/预算后再执行。不能把所有反馈都改成 revise_brief，因为这会使无关布局/素材重新执行。
 
-A1 协调过程不自动重写已批准 Brief；只有确实授权 revise_brief 才发布新的 Brief。A2/A3 仍沿原格式接口接收后续任务。新 QC 桥没有 A1 协调实现时保存可核对反馈并返回 needs_review，不绕过 A1 直接修复。
+外部授权接入不自动重写已批准 Brief；只有确实授权 revise_brief 才通过既有流程发布新的 Brief。A1/A2 保持现有实现和格式接口。新 QC 桥没有可用授权时保存可核对反馈并返回 needs_review，不绕过 A1 直接修复。
 
 ## 8. 实施组件与验证
 
@@ -127,3 +127,4 @@ A1 协调过程不自动重写已批准 Brief；只有确实授权 revise_brief 
 11. 全套 pytest、CLI smoke、wheel/source archive 安装与资源检查。
 
 不在本次实现：额外 Agent、自动模型推荐系统、通用任意云端协议解析器、Web UI、像素 inpainting、A1/A2/A4 的真实模型业务重写。
+
