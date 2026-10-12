@@ -194,6 +194,14 @@ def create_generator(config: dict):
     if kind == "cloud_api":
         from .cloud_backend import CloudAPIConfig, CloudImageGenerator
         return CloudImageGenerator(CloudAPIConfig.model_validate(config))
+    if kind == "qwen_image":
+        from .qwen_backend import QwenImageConfig, LocalQwenImageGenerator
+        raw = str(config.get("model_dir", ""))
+        expanded = os.path.expandvars(raw)
+        if "$" in expanded or not expanded:
+            raise ValueError("Model directory environment variable is missing")
+        config["model_dir"] = expanded
+        return LocalQwenImageGenerator(QwenImageConfig.model_validate(config))
     if kind == "sdxl":
         raw = str(config.get("model_dir", ""))
         expanded = os.path.expandvars(raw)
