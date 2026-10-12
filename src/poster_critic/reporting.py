@@ -34,6 +34,21 @@ def write_json(path: Path, value: object, *, replace: bool = False) -> None:
     write_text(path, text, replace=replace)
 
 
+def write_bytes(path: Path, data: bytes) -> None:
+    """Publish the exact audited image atomically without replacing another run."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, name = tempfile.mkstemp(prefix='.a4-image-', dir=path.parent)
+    temporary = Path(name)
+    try:
+        with os.fdopen(fd, 'wb') as output:
+            output.write(data)
+            output.flush()
+            os.fsync(output.fileno())
+        os.link(temporary, path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
 @contextmanager
 def file_lock(path: Path):
     """Local POSIX advisory lock. Persistent inode; kernel releases it after a crash."""

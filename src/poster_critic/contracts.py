@@ -255,6 +255,8 @@ class AuditReportV1(Contract):
     schema_version: Literal[1] = 1
     sample_id: Text
     image_sha256: Text
+    # Older saved reports remain readable; automatic dispatch requires a binding.
+    input_fingerprint: Annotated[str, StringConstraints(pattern=r"^[0-9a-f]{64}$")] | None = None
     decision: Status
     keyword_checks: Annotated[tuple[KeywordCheck, ...], Field(min_length=2, max_length=5)]
     constraint_checks: tuple[ConstraintCheck, ...]

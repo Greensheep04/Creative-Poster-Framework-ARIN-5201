@@ -7,6 +7,8 @@ from .contracts import (
     ALL_CHECKS, AuditInputV1, AuditReportV3, CallRecordV2, ConstraintCheck, Coverage,
     Finding, KeywordCheck, ModelObservation, RepairHint, Status, TextCheck,
 )
+from .diagnostics import explain_unknowns
+from .identity import input_fingerprint
 
 
 def combine(statuses: list[Status]) -> Status:
@@ -21,9 +23,6 @@ def make_report(
     calls: tuple[CallRecordV2, ...], prompt_version: str, failure: str | None = None,
 ) -> AuditReportV3:
     issues = list(program_findings)
-    uncertainties = list(observation.uncertainties) if observation else []
-    if failure:
-        uncertainties.append(failure)
     if observation is None:
         keywords = tuple(KeywordCheck(keyword_id=k.keyword_id, status="unknown",
                                      evidence="No valid model observation.") for k in audit.keywords)
@@ -85,7 +84,6 @@ def make_report(
     )
     if missing_required_text:
         text_status = "unknown"
-        uncertainties.append("Required literal text is missing from approved_copy.")
     statuses = {
         "keyword_alignment": combine([c.status for c in keywords]),
         "user_constraints": combine([c.status for c in constraints]),
@@ -94,7 +92,7 @@ def make_report(
         "text_accuracy": text_status,
         "layout_geometry": "fail" if program_findings else "pass",
     }
-    coverage = []
+    coverage_items = []
     for check_id in ALL_CHECKS:
         required = check_id in audit.required_checks
         absent = (check_id == "text_accuracy" and audit.approved_copy is None) or (
@@ -108,8 +106,12 @@ def make_report(
             status = statuses[check_id]
             state = "unknown" if status == "unknown" else "assessed"
             reason = "Evidence is insufficient." if state == "unknown" else "Based on the recorded checks."
-        coverage.append(Coverage(check_id=check_id, required=required, state=state,
-                                 status=status, reason=reason))
+        coverage_items.append(Coverage(check_id=check_id, required=required, state=state,
+                                       status=status, reason=reason))
+
+    coverage, uncertainties = explain_unknowns(
+        audit, observation, keywords, constraints, texts, tuple(coverage_items), failure=failure,
+    )
 
     incomplete = bool(uncertainties) or any(c.required and c.status == "unknown" for c in coverage)
     if any(c.required and c.status == "fail" for c in coverage) or any(
@@ -124,12 +126,14 @@ def make_report(
     # A visual symptom alone does not establish an asset/rendering/brief root cause.
     hint = None
     if (decision == "fail" and not incomplete and program_findings
+            and not any(c.state == "unknown" for c in coverage)
             and not any(i.severity == "blocking" for i in issues)):
         issue = program_findings[0]
         hint = RepairHint(stage="layout", element_id=issue.element_id, reason=issue.evidence,
                           preserve="Preserve the original requirements, copy and existing assets.")
     return AuditReportV3(
         sample_id=audit.sample_id, image_sha256=audit.image.sha256, decision=decision,
+        input_fingerprint=input_fingerprint(audit),
         keyword_checks=keywords, constraint_checks=constraints, text_checks=texts,
         coverage=tuple(coverage), issues=tuple(issues), uncertainties=tuple(uncertainties),
         repair_hint=hint, model=model, prompt_version=prompt_version,

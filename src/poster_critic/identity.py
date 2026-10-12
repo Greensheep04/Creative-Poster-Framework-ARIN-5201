@@ -22,7 +22,7 @@ def input_fingerprint(audit: AuditInputV1) -> str:
 
 
 def software_fingerprint() -> str:
-    names = ('contracts.py', 'checks.py', 'policy.py', 'engine.py', 'runtime.py', 'ports.py',
+    names = ('contracts.py', 'checks.py', 'policy.py', 'diagnostics.py', 'engine.py', 'runtime.py', 'ports.py',
              'providers/chat.py', 'providers/fake.py', 'evaluate.py', 'evaluation_io.py',
              'identity.py', 'reporting.py', 'adapters/local_input.py',
              'prompts/critic_v2.txt', 'prompts/critic_v3.txt', 'prompts/critic_v4.txt')

@@ -10,9 +10,10 @@ import sys
 
 from .adapters.local_input import load_input
 from .engine import AuditEngine
+from .dispatch import DispatchResult, audit_and_dispatch
 from .errors import BudgetExceededError, InputError, ProviderError
 from .providers.fake import FakeProvider
-from .reporting import reserve_outputs, usage_summary, write_json
+from .reporting import reserve_outputs, usage_summary, write_bytes, write_json
 from .runtime import StandaloneExecutor
 
 
@@ -35,8 +36,16 @@ def main(argv: list[str] | None = None) -> int:
     stack = ExitStack()
     accounting = args.out.with_name(args.out.name + '.usage.json')
     failure = args.out.with_name(args.out.name + '.error.json')
+    receipt = args.out.with_name(args.out.name + '.dispatch.json')
+    feedback_path = args.out.with_name(args.out.name + '.a1.json')
+    image_paths = {
+        (kind, media): args.out.with_name(args.out.name + f'.{kind}.{extension}')
+        for kind in ('poster', 'candidate')
+        for media, extension in (('image/png', 'png'), ('image/jpeg', 'jpg'))
+    }
     try:
-        stack.enter_context(reserve_outputs(args.out, accounting, failure))
+        stack.enter_context(reserve_outputs(args.out, accounting, failure, receipt,
+                                            feedback_path, *image_paths.values()))
         usage_summary((), input_price=args.input_price, output_price=args.output_price, currency=args.currency)
         audit = load_input(args.input)
         if args.provider == 'fake':
@@ -50,11 +59,50 @@ def main(argv: list[str] | None = None) -> int:
             provider = ChatProvider(load_config(args.config, args.model))
         executor = StandaloneExecutor(args.attempts, allow_live=provider.live,
                                       request_timeout=args.timeout, total_timeout=args.total_timeout)
-        report = asyncio.run(AuditEngine(provider, executor, max_retries=args.attempts - 1).audit(audit))
-        write_json(args.out, report.model_dump(mode='json'))
-        write_json(accounting, usage_summary(executor.records, input_price=args.input_price,
-                                             output_price=args.output_price, currency=args.currency))
-        print(f'{report.decision}: {args.out.resolve()} ({report.execution_mode}; {report.vision_calls} live model calls)')
+        publication: dict[str, object] = {}
+
+        def save_audit(result: DispatchResult) -> None:
+            write_json(accounting, usage_summary(executor.records, input_price=args.input_price,
+                                                 output_price=args.output_price, currency=args.currency))
+            write_json(args.out, result.report.model_dump(mode='json'))
+
+        async def on_release(result: DispatchResult) -> None:
+            save_audit(result)
+            image_path = image_paths[('poster', result.audit.image.media_type)]
+            write_bytes(image_path, result.audit.image.data)
+            publication.update(status='released', image_path=str(image_path.resolve()), feedback_path=None)
+
+        async def on_feedback(result: DispatchResult) -> None:
+            save_audit(result)
+            image_path = image_paths[('candidate', result.audit.image.media_type)]
+            write_bytes(image_path, result.audit.image.data)
+            write_json(feedback_path, {
+                'schema_version': 1, 'recipient': 'creative_director', 'status': 'awaiting_a1',
+                'candidate_path': str(image_path.resolve()),
+                'input_fingerprint': result.input_fingerprint,
+                'audit': result.audit.model_dump(mode='json'),
+                'report': result.report.model_dump(mode='json'),
+            })
+            publication.update(status='awaiting_a1', image_path=str(image_path.resolve()),
+                               feedback_path=str(feedback_path.resolve()))
+
+        result = asyncio.run(audit_and_dispatch(
+            audit, AuditEngine(provider, executor, max_retries=args.attempts - 1),
+            on_release=on_release, on_feedback=on_feedback,
+        ))
+        if result.route == 'test_only':
+            save_audit(result)
+            publication.update(status='test_only', image_path=None, feedback_path=None)
+        write_json(receipt, {
+            'schema_version': 1, 'route': result.route, 'action': result.action,
+            'recipient': result.recipient, 'handler_status': result.handler_status,
+            'sample_id': result.report.sample_id, 'image_sha256': result.report.image_sha256,
+            'input_fingerprint': result.input_fingerprint, 'report_path': str(args.out.resolve()),
+            'execution_mode': result.report.execution_mode, **publication,
+        })
+        report = result.report
+        print(f'{report.decision}: {args.out.resolve()} ({report.execution_mode}; '
+              f'{report.vision_calls} live model calls; {publication["status"]}; {receipt.resolve()})')
         return 0
     except (InputError, ProviderError, BudgetExceededError, OSError, ValueError, KeyboardInterrupt) as exc:
         # Preserve consumed attempts on operational errors, without making a quality judgment.
