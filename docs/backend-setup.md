@@ -6,7 +6,7 @@ A3 的共同生产链路是：校验 PosterSpec/CreativeBrief → 按素材指�
 
 | 后端 kind | 需要安装 | 用户配置 | 首版范围 |
 |---|---|---|---|
-| `sdxl_local` | 基础环境 + local-gpu | 固定 SDXL 权重目录 | NVIDIA CUDA；本地生成，支持 seed 和独立负面提示 |
+| `sdxl` | 基础环境 + local-gpu | 固定 SDXL 权重目录 | NVIDIA CUDA；本地生成，支持 seed 和独立负面提示 |
 | `qwen_image` | 基础环境 + local-gpu | 原版 Qwen-Image 固定权重目录 | NVIDIA CUDA；float16/bfloat16，支持 true_cfg_scale、seed 和负面提示 |
 | `cloud_api` | 基础环境 | provider、model、完整 endpoint、Key 环境变量名、支持尺寸 | Images JSON 同步生成协议；不需要 Torch、GPU 或模型权重 |
 
@@ -52,7 +52,7 @@ python scripts/fetch-visual-fonts.py
 python -m poster_visual_producer setup --output .scratch/backend.json
 ```
 
-交互选择后端，或显式指定 `--backend sdxl_local`、`--backend qwen_image`、`--backend cloud_api`。模板不包含凭据、机器路径或自动生图。已有文件需显式 `--overwrite` 才能覆盖。`examples/visual/backend-qwen.example.json`、`backend-cloud.example.json` 和 `backend-sdxl.json` 可作为格式参考。
+交互选择后端，或显式指定 `--backend sdxl`、`--backend qwen_image`、`--backend cloud_api`。模板不包含凭据、机器路径或自动生图。已有文件需显式 `--overwrite` 才能覆盖。`examples/visual/backend-qwen.example.json`、`backend-cloud.example.json` 和 `backend-sdxl.json` 可作为格式参考。
 
 ```bash
 python -m poster_visual_producer doctor --backend-config .scratch/backend.json --fonts examples/visual/fonts.json --font-base . --output-root runs/my-poster
@@ -77,7 +77,7 @@ SDXL 权重：
 ```powershell
 $env:POSTER_SDXL_MODEL_DIR='D:\Models\sdxl-base-1.0'
 & $taskPython scripts/fetch-sdxl.py --model-dir $env:POSTER_SDXL_MODEL_DIR
-& $taskPython -m poster_visual_producer setup --backend sdxl_local --output .scratch/sdxl.json
+& $taskPython -m poster_visual_producer setup --backend sdxl --output .scratch/sdxl.json
 ```
 
 Qwen-Image 权重：

@@ -7,13 +7,19 @@ from poster_visual_producer.generators import compile_request
 from tests.visual.helpers import make_session,call_context,fonts,png
 
 @contextmanager
-def server(*,url=False,download_fails=False,malformed=False,oversized=False):
+def server(*,url=False,download_fails=False,malformed=False,oversized=False,post_statuses=(),drop_connection=False):
     records=[]
     class Handler(BaseHTTPRequestHandler):
         def log_message(self,*args):pass
         def do_POST(self):
             body=json.loads(self.rfile.read(int(self.headers['Content-Length'])))
             records.append(('post',dict(self.headers),body))
+            if drop_connection:
+                self.connection.close();return
+            number=len([r for r in records if r[0]=='post'])-1
+            status=post_statuses[number] if number<len(post_statuses) else 200
+            if status!=200:
+                self.send_response(status);self.end_headers();return
             self.send_response(200);self.send_header('x-request-id','req-test');self.end_headers()
             if oversized: self.wfile.write(b'x'*200);return
             value={'url':f'http://127.0.0.1:{self.server.server_port}/asset'} if url else {'b64_json':'bad' if malformed else base64.b64encode(png()).decode()}
@@ -114,3 +120,35 @@ print('cloud-a3-no-gpu-ok')
         result=subprocess.run([sys.executable,'-c',script,str(tmp_path),endpoint],text=True,capture_output=True,timeout=40)
     assert result.returncode==0,result.stderr
     assert 'cloud-a3-no-gpu-ok' in result.stdout and len(records)==1
+
+
+@pytest.mark.parametrize('status',[401,503])
+def test_api_rejection_or_unknown_failure_does_not_retry(tmp_path,spec_data,brief_data,monkeypatch,status):
+    from poster_visual_producer.generators import ProviderError
+    monkeypatch.setenv('POSTER_TEST_KEY','test-only')
+    with server(post_statuses=(status,)) as (endpoint,records):
+        session,spec,_=make_session(tmp_path,spec_data,brief_data);inputs,ctx=call_context(session,spec,'api-error')
+        with pytest.raises(ProviderError) as error:
+            asyncio.run(VisualProducerAgent(generator(endpoint),fonts()).run(inputs,ctx))
+    assert len(records)==1 and session.usage.image_operations==1
+    assert error.value.submission_status==('rejected' if status==401 else 'unknown')
+    assert not error.value.retry_safe
+
+
+def test_explicit_rate_limit_retries_once_with_budget(tmp_path,spec_data,brief_data,monkeypatch):
+    monkeypatch.setenv('POSTER_TEST_KEY','test-only')
+    with server(post_statuses=(429,200)) as (endpoint,records):
+        session,spec,_=make_session(tmp_path,spec_data,brief_data);inputs,ctx=call_context(session,spec,'rate-limit')
+        out=asyncio.run(VisualProducerAgent(generator(endpoint),fonts()).run(inputs,ctx))
+    assert out.content['status']=='rendered' and len(records)==2
+    assert session.usage.image_operations==2
+
+
+def test_transport_disconnect_never_resubmits(tmp_path,spec_data,brief_data,monkeypatch):
+    from poster_visual_producer.generators import ProviderError
+    monkeypatch.setenv('POSTER_TEST_KEY','test-only')
+    with server(drop_connection=True) as (endpoint,records):
+        session,spec,_=make_session(tmp_path,spec_data,brief_data);inputs,ctx=call_context(session,spec,'transport')
+        with pytest.raises(ProviderError) as error:
+            asyncio.run(VisualProducerAgent(generator(endpoint),fonts()).run(inputs,ctx))
+    assert error.value.submission_status=='unknown' and len(records)==1

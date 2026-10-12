@@ -15,6 +15,7 @@ docs/superpowers/plans/2026-10-09-local-gpu.md
 docs/superpowers/plans/2026-10-12-a3-portable-qc.md
 docs/superpowers/specs/2026-10-12-a3-portable-qc-design.md
 docs/visual-producer-portable-progress.md
+docs/visual-producer-portable-review.md
 docs/visual-producer-review.md
 docs/visual-producer.md
 environment.yml

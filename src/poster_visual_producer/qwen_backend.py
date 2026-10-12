@@ -11,7 +11,7 @@ from .imaging import encode_png
 QWEN_REVISION='75e0b4be04f60ec59a75f475837eced720f823b6'
 
 class QwenImageConfig(BaseModel):
-    model_config=ConfigDict(extra='forbid',frozen=True)
+    model_config=ConfigDict(extra='forbid',frozen=True,hide_input_in_errors=True)
     model_dir:Path
     model_id:Literal['Qwen/Qwen-Image']='Qwen/Qwen-Image'
     revision:str=Field(pattern=r'^[a-f0-9]{40}$')

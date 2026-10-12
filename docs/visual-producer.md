@@ -111,7 +111,7 @@ visual_registration = registration(generator, fonts)
 
 ## 可移植后端与新版 QC（2026-10-12）
 
-新增 `cloud_api`、`qwen_image` 与原有 `sdxl_local` 并列，统一经过同一个 A3 生产链路。配置、能力预检、可选 GPU 依赖及模型下载见 [backend-setup](backend-setup.md)。运行 CLI 与 A1/A2 旧输出保持兼容。
+新增 `cloud_api`、`qwen_image` 与原有 `sdxl` 并列，统一经过同一个 A3 生产链路。配置、能力预检、可选 GPU 依赖及模型下载见 [backend-setup](backend-setup.md)。运行 CLI 与 A1/A2 旧输出保持兼容。
 
 PosterCandidate 增加 `execution_decisions`（generate/regenerate/reuse_current/cache 的实际决定）、issued `index_ref`、素材 `element_ids/source_size/processed_bindings` 和 text_manifest `copy_ref`。同一素材可关联多个元素，processed_bindings 保存各自裁切/处理结果；旧 processed_ref/asset_to_canvas 明确定义为首个元素，保持单元素消费者兼容。
 

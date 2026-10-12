@@ -11,6 +11,7 @@ async def judge_qc_review(workflow,state,review):
     from .workflow import WorkflowStatus
     details=review.details
     if review.decision==ReviewDecision.pass_ and details.get('production_pass') is True:
+        state['session'].memory.set_unresolved_issues(())
         return {'review':review,'status':WorkflowStatus.passed,'stop_reason':'','stop':True}
     session=state['session']
     identity=ExecutionIdentity(run_id=state['run_id'],role=AgentRole.creative_director,

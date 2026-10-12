@@ -10,7 +10,7 @@ from tests.visual.test_qc_bridge import report_for
 from examples.visual.workflow_demo import DemoCreativeDirector,map_keywords
 
 
-def workflow(tmp_path,spec_data,*,authorizer=None,decision='unknown',mode='fake',two_assets=False,repeat=False):
+def workflow(tmp_path,spec_data,*,authorizer=None,decision='unknown',mode='fake',two_assets=False,repeat=False,final_decision='unknown'):
     from poster_visual_producer.qc_bridge import qc_registration
     from poster_visual_producer.qc_contracts import LocalManifestV1
     sp=copy.deepcopy(spec_data)
@@ -28,10 +28,10 @@ def workflow(tmp_path,spec_data,*,authorizer=None,decision='unknown',mode='fake'
         link=json.loads((path.parent/'candidate_link.json').read_text(encoding='utf-8'))
         c=json.loads((path.parent/'evidence/candidate.json').read_text(encoding='utf-8'))
         candidates.append(c)
-        r=report_for(SimpleNamespace(manifest=m,candidate_link=link),decision=decision if not observations or repeat else 'unknown',mode=mode)
+        r=report_for(SimpleNamespace(manifest=m,candidate_link=link),decision=decision if not observations or repeat else final_decision,mode=mode)
         if not observations or repeat:
             r['repair_hint']={'stage':'asset','element_id':'hero','asset_key':'hero_image','reason':'fixed test defect','preserve':['title','accent']}
-        else: r['uncertainties']=['final engineering observation awaits real A4']
+        elif final_decision!='pass': r['uncertainties']=['final engineering observation awaits real A4']
         observations.append(r)
         return r
     count=[0]
@@ -113,3 +113,16 @@ def test_same_qc_issue_stops_after_one_authorized_attempt(tmp_path,spec_data):
     result,candidates,_=workflow(tmp_path,spec_data,authorizer=authorize,decision='fail',repeat=True)
     assert len(candidates)==2
     assert 'same review issue' in result.reason
+
+
+def test_real_pass_after_authorized_repair_clears_unresolved_issues(tmp_path,spec_data):
+    from poster_framework import RepairAuthorization
+    async def authorize(feedback,context):
+        c=feedback['current_candidate'];ref=c['candidate_ref']
+        return RepairAuthorization(authorization_id='confirmed-render',based_on_candidate=VersionDependency(artifact_id=ref['artifact_id'],revision=ref['revision']),action=RevisionAction.rerender,target=VersionDependency(artifact_id=ref['artifact_id'],revision=ref['revision']),expected_versions=c['based_on'])
+    result,candidates,reports=workflow(tmp_path,spec_data,authorizer=authorize,decision='fail',mode='real',final_decision='pass')
+    assert result.status.value=='passed' and len(candidates)==2
+    record=json.loads(Path(result.record_path).read_text(encoding='utf-8'))
+    assert record['memory']['unresolved_issues']==[]
+    # Retain the old failure in history while resolving the current state.
+    assert record['memory']['revisions'][0]['changes']['details']['report']['decision']=='fail'

@@ -12,7 +12,7 @@ from .imaging import encode_png
 
 
 class SDXLConfig(BaseModel):
-    model_config = ConfigDict(extra="forbid", frozen=True)
+    model_config = ConfigDict(extra="forbid", frozen=True, hide_input_in_errors=True)
     model_dir: Path
     model_id: Literal["stabilityai/stable-diffusion-xl-base-1.0"] = (
         "stabilityai/stable-diffusion-xl-base-1.0"

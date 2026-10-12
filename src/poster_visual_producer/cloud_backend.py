@@ -21,7 +21,7 @@ def validate_url(value,*,endpoint=False):
     return value
 
 class CloudAPIConfig(BaseModel):
-    model_config=ConfigDict(extra='forbid',frozen=True)
+    model_config=ConfigDict(extra='forbid',frozen=True,hide_input_in_errors=True)
     provider: str=Field(min_length=1)
     model: str=Field(min_length=1)
     endpoint: str
