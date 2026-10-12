@@ -443,6 +443,7 @@ class VisualProducerAgent:
             "render_manifest_ref": self._relative(manifest, context),
             "manifest_ref": manifest.model_dump(mode="json"),
             "artifact_index_ref": self._relative(index, context),
+            "index_ref": index.model_dump(mode="json"),
             "canvas": {"width": 720, "height": 1280},
             "assets": assets,
             "execution_decisions": decisions,

@@ -7,3 +7,5 @@ Baseline already verified: 215 passed, 1 Windows symlink capability skip.
 Task order: production evidence → QC bridge → external authorization → cloud → Qwen → setup/doctor → acceptance/docs/package/review.
 
 Task 1: RED 3 missing-field failures; GREEN 22 production/repair regressions. Added per-element processed bindings, copy_ref, source_size, actual execution decisions. Legacy source file_ref and first-element compatibility references retained.
+
+Task 1 full suite: 218 passed, 1 capability skip. Task 2: RED 18 missing-module cases; GREEN 18 QC contract/bundle/report identity tests. Added issued index_ref to Candidate so QC reads index through ArtifactStore rather than trusting a relative path. Legacy producers need an explicit index adapter; no arbitrary file reads.
