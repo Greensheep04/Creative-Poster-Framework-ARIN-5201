@@ -1,0 +1,176 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Creative Director (CD) in a poster-generation pipeline.
+    *   **Input:** Keywords only (repair, community, tomorrow).
+    *   **Task:** Develop one coherent poster concept.
+    *   **Constraints:**
+        *   Make reasonable creative choices without asking questions.
+        *   Develop a specific message beyond simply repeating keywords.
+        *   Connect keywords through one central idea (no collage of unrelated symbols).
+        *   Choose intended audience and communication objective.
+        *   Describe a concrete, depictable visual concept.
+        *   Typography, color, composition must support the message.
+        *   Distinguish literal copy from visual descriptions.
+        *   Prioritize one dominant visual and one primary headline.
+        *   Avoid generic directions ("make it impactful") unless explained.
+        *   Do not invent factual claims/stats/endorsements.
+        *   Treat keywords as creative input.
+        *   Return exactly one valid JSON object matching the provided structure.
+        *   Include every key. No extra keys. No Markdown fences. No commentary.
+        *   Use empty string where needed (subtitle/CTA).
+        *   Use arrays for keywords, supporting_elements, colors, avoid.
+        *   All other values must be strings.
+
+2.  **Deconstruct Keywords:**
+    *   **Repair:** Fixing, mending, restoration, tools, hands, cracks, stitches, continuity.
+    *   **Community:** People, together, support, shared space, connection, collective effort.
+    *   **Tomorrow:** Future, hope, new day, planning, rebuilding for the next generation, light, dawn.
+    *   **Connection:** How to link them? Repairing doesn't just mean fixing an object; it means supporting each other. Community is what we come together to do the repairing. Tomorrow is what the repair leads to.
+    *   **Metaphor Idea:** A repaired shoe or boot with multiple feet or people stepping on it? A cracked brick wall being mended by many hands, glowing brighter under a sunrise? A time-lapse visual?
+    *   **Selected Metaphor:** "Community Repair" as a visible mending process that creates a foundation for the next day. Let's focus on the *act* of repairing something that leads people forward.
+    *   **Strong Visual Metaphor:** A large, rising sun that is cracked, but illuminated. The cracks are being filled with stars or community faces/joints? No, let's make it more tangible. A pathway or road that is being mended by a group of silhouettes. The road leads to a bright horizon.
+    *   **Refined Metaphor:** A worn, familiar object (like a globe or a bridge or a house) that is being held together by community hands, transforming it into a path toward light (tomorrow).
+    *   **Best Option:** A single, cracked foundation stone. Instead of gravel or water filling the crack, it is filled with light or faces. Or, better yet: A broken thread being woven back together, but the thread forms a bridge to a sunrise.
+    *   **Let's go with:** A broken compass or gear box mended by hands?
+    *   **Wait, let's try:** A horizon line. The horizon line is cracked (representing repair), and the community members are the plaster or the shape of the repair act. No, that's too abstract.
+    *   **Visual Concept:** A large human hand holding a bolt (repair) and screwing it into the earth?
+    *   **Let's go with visual metaphor:** **The Future is Built, Not Expected.**
+    *   **Concept:** A community garden bridge.
+    *   **Simpler:** A broken shoe being reconstructed, but the soles form a horizon.
+    *   **Best Concrete Metaphor:** A large, physical **familiar object (like a door)** is broken and open, holding a single lightbulb or streak of sun. People's hands form the lintel holding it up.
+    *   **Let's refine:** A cracked path on a hill. People are kneeling filling the cracks with light. The destination is bright.
+    *   **Winner:** "Hand Mending the Horizon." The horizon line is the ground. A subtle crack in the landscape gets stitched by hands. The healed part gets brighter/stays aligned for tomorrow.
+    *   **Slightly more iconic:** A large, rusty gear stuck in place. The community pulls it out to turn direction toward a sunrise.
+    *   **Let's choose a strong, cohesive image:** A **window**. It's broken. People are holding a new pane up. The light shining through is the "Tomorrow." The frame represents "Community."
+    *   **Wait, simpler:** A **shoe**. A worn shoe with a tear in the sole. A group of people is build-ing the sole together, creating a path. The toes of the group point toward a sun.
+    *   **Okay, final decision:** A **landscape**. A ridge line (dawn). There is a break in the ridge (the "wear and tear"). Hands are mending the ridge with plaster or bricks. The mended section lights up the way forward.
+    *   **Actually, let's try:** The concept of **stitching the sky**. Clouds are torn but being fixed by thread of hands.
+    *   **Let's go with:** A **brick wall**. One section is crumbling but is being renovated. It's not a grand wall, it's a hearth or a town square wall. The light shines *through* the mended gaps.
+
+    *   **Re-evaluating for "Repair" + "Community" + "Tomorrow":**
+    *   **Metaphor:** A collective act of fixing a shared view.
+    *   **Visual:** A spotlighted hand holding a small, glowing lantern. In the background, a community wall of faces holding the lantern up. The wall is themselves the repair, illuminating the future.
+    *   **Better Visual:** A large workshop object (like a clockwork machine) being repaired. Time moves forward.
+    *   **Okay, I'll settle on:** A view of a building or structure that shows a mix of old bricks and new, fresh mortar. The people holding the mortar are represented as a silhouette. The sky above is fresh dawn.
+    *   **Let's try one strong image:** A **large pair of gloves** (repair) reaching towards the **horizon** (tomorrow), the lines of the gloves forming **connections** (community).
+    *   **Decided Concept:** The "Web of Repair". A single loose thread ( Tomorrow) being knitted into a fabric held by hands (Community). The fabric forms a shield/shell.
+    *   **Wait, most obvious:** A road sign? "Road Repair."
+    *   **Okay, I will go with:** A **broken horizon line**. The view of a sunrise is split by a jagged line. Along that line, hands are working, cementing the continuity.
+    *   **Actually, I'll go with a "Bridge" between today and tomorrow, built by community.** The metaphor is that the bridge is mended the act of stepping together. The bridge itself is made of hands.
+
+    *   **Final Lock:** **Metaphor: The Foundation.** A large foundation stone, cracked, being sticker with gold (Tomorrow) by multiple hands (Community).
+    *   **Let's keep it simple:** A **ship anchor** being raised. The rope is the community?
+    *   **Wait, I need one highlighted concept.**
+    *   **Concept:** **Hand-Mended Horizon.** The horizon line is drawn in the image. There is a "crack" in the line. It is filled with multiple thin lines resembling connection threads/hands. The area behind the repaired horizon is bright blue/gold (Tomorrow).
+    *   **Let's try:** A **mismatched layer cake** or **stitched quilt**. The patchwork of tools?
+    *   **Okay, let's settle on this:** A **large compass** face. The needle is pointing to a sunrise (Tomorrow). The casing is held by gears (Community) being repaired (Repair).
+    *   **No, that's clunky.**
+    *   **Let's try:** A **shoe track**. The tracks are worn. A new track is being laid in between.
+    *   **Okay, I'll write:** A **large physical joint** (like the knee of a human or the joint of a wooden door) that is open and being held shut together by two large hands. The gap between the fingers creates a tunnel of light.
+
+    *   **Wait, I need to ensure I satisfy "repair" + "community" + "tomorrow".**
+    *   **Metaphor:** A single thread used to stitch a larger injury.
+    *   **Visual:** A tattered cloth (homestead/community symbol) showing a tear. A ball of thread (repair/tomorrow) is being wound into the tear so that the cloth becomes whole again.
+    *   **Okay, simplest:** A **broken clock**. Community hands holding the hands to set it correctly for tomorrow.
+    *   **Let's go with:** **Mending the Sky.** A teardrop in the sky (a cloud formation or a crack) being stitched. The thread becomes a sunrise.
+    *   **Okay, I'll just choose a strong, clear image:** **A group of workers stabilizing a leaning structure (like a ladder) as a beam of light passes through.**
+    *   **No, I will go with:** A **brick**. A close up of a single brick. The cracks are filled with a glowing substance representing the future. Hands holding the brick.
+    *   **Okay, I'll finalize the visual concept:** A large, textured wooden rafter (representing structure/community) held by hands (Community). A crack is visible. That crack is filled with a glowing, metallic line (Tomorrow/Lead). The text implies that this "lead" will last.
+    *   **No, that's too specific.**
+    *   **Let's try:** The **Back of a Shoe**. Multiple mouths? No.
+    *   **Let's try:** **A rift in the earth being bridged by a single beam of light.** No.
+    *   **Okay, I'll go with:** **"The Stitched Horizon"**.
+    *   **Visual:** A horizon line across the post. A jagged crack runs through the middle. Hands (silhouetted) are holding a strip of fabric or thread that runs across the crack. Beyond the repair is a warm sunrise.
+    *   **Wait, let's make the headline reflect the metaphor.** "Hold the Ground."
+    *   **Concept:** "Community holds the earth," the "repair" is "fixing the gap," "tomorrow" is "sunrise."
+    *   **Okay, let's make it about a toolbox or factory?** No, "healing".
+    *   **Okay, let's go with:** A **flower**. The petals (community) are mending (repair) the center for the next bloom (tomorrow).
+    *   **Okay, I'm overthinking.**
+    *   **Selected Visual:** A **large, classic architecture beam** held by humans hands. The beam is cracked. The hands are filling the crack with a glowing gold mortar. The mortar makes it strong again.
+    *   **Let's write the JSON.**
+
+    *   **Structure Check:**
+        *   `keywords` (array)
+        *   `interpretation` (string)
+        *   `audience` (string)
+        *   `objective` (string)
+        *   `core_message` (string)
+        *   `concept` (object: title, central_idea, connection_to_keywords)
+        *   `copy` (object: headline, subtitle, call_to_action)
+        *   `visual_direction` (object: main_subject, setting, visual_relationship, supporting_elements, style, mood)
+        *   `layout` (object: focal_point, composition, reading_order, typography)
+        *   `palette` (object: colors, rationale)
+        *   `avoid` (array)
+
+    *   **Content Check:**
+        *   Keywords: ["repair", "community", "tomorrow"]
+        *   Metaphor: "The Foundation of Tomorrow is Mended by Community." A visible crack in a landscape/horizon. Hands fixing it.
+        *   Audience: People who feel the need to build/support local infrastructure or social bonds.
+        *   Objective: Inspire collective action for future stability.
+        *   Visual: Silhouette of a group of hands repairing a large, arched bridge structure (representing community connection). The cracks are glowing gold (tomorrow).
+        *   Wait, is it drawable? Yes.
+        *   Is it safe? Yes.
+        *   JSON formatting: Pure JSON, no markdown.
+
+    *   **Refining the Concept:**
+        *   Let's focus on the "stitch". A tear in a large fabric surface representing a city. The thread is golden.
+        *   No, let's keep it tactile. "A Stained, Cracked Window Maintenance".
+        *   Let's go with **"Mending the Wall"**. A town wall. Cracked. Squeezed by a collective hand shape.
+        *   Okay, I'll settle on: **"Collective Repairing"**.
+        *   **Visual:** A panoramic view of a city skyline in dusk. A prominent bridge or wall in distance is cracked. A massive, vibrant, golden light source is emerging from the crack, indicating progress.
+        *   **Better:** A single, large human foot walking on a path that is broken (cracked asphalt) where small hands are building a new layer.
+        *   **Decision:** I will use a **"Large Openness/Skull Frame"**.
+        *   No. **"A Clock"**. A broken clock gear being fixed by a multiple person assembly. Time = Tomorrow.
+        *   Okay, I'll stick to: **"Broken Horizon Fix"**.
+        *   **Visual:** A silhouette of people holding a steamer pipe or a ladder up to the sun.
+        *   **Okay, I will choose: A "Mosaic of Paths"**.
+        *   Actually, let's keep it very simple to avoid "collage of symbols".
+        *   **Metaphor:** A **Broken Clock Hand** that is being welded together.
+        *   **Okay, Final Choice:**
+            *   **Subject:** A large, textured wall or structure.
+            *   **Action:** A hand holding a glowing sprout or light where there is a crack.
+            *   **Wait, "Community" needs to be there.**
+            *   **Revised:** Three large silhouetted hands stacking together to form a solid arch over a sunrise.
+            *   **Metaphor:** The hands *are* the community. The arch is the structure (repair/maintenance). The sunrise is tomorrow.
+            *   **Okay, let's write that.**
+            *   **Keywords:** repair, community, tomorrow
+            *   **Interpretation:** The act of collective support (community) mending gaps in the present (repair) allows the light of the future (tomorrow) to emerge unbroken.
+            *   **Main Subject:** Silhouetted hands holding a glowing, glowing filament or beam across a darkened background.
+            *   **Wait, I need to make the visual distinct.**
+            *   **Visual:** A large, cracked gear wheel. Inside the crack, a small sun is shining through.
+            *   **Let's go with:** A **"Lasso"**. The rope is tissue of hands.
+            *   **No.** A **"Stretched Sky"**. The sky has a tear. Community hands are pulling a golden balm to stitch it.
+            *   **Okay, let's go with the "Stitched Horizon".** It's cleaner.
+            *   **Visual:** A horizon line at the center. Below is dark water/ground. Above is sky. There is a large tear in the horizon water. It is being stitched by silhouettes of hands. The thread is golden. The repaired part shows dawn.
+            *   **Text:** "JOIN THE FUTURE."
+
+    *   **Final Polish:**
+        *   **Audience:** Community organizers, local leaders.
+        *   **Objective:** Inspire local repair and investment in future generations.
+        *   **Visual:** A large, partially broken circular stone. Hands are holding pieces together, casting a glow in the center.
+        *   **Actually, let's try:** A **single shoe**. The design of the shoe shows a patch of repair (messy) but glows.
+        *   **Okay, I'm going to go with:** **"The Unified Foundation"**.
+        *   **Image:** A simple, low visual angle. A group of people (silhouettes) pushing a large beam into the ground. The beam glows.
+        *   **Okay, I will use the "Broken Horizon Stitched" metaphor.**
+        *   **Main Subject:** Silhouetted hands holding a golden thread across a cracked horizon.
+        *   **Supporting:** A horizon crack dividing dark and light.
+        *   **Style:** Graphic minimalism.
+        *   **Colors:** Dark blue/grey for "now", glowing gold/amber for "future".
+
+    *   **Wait, I need to ensure I follow the JSON structure exactly.**
+    *   **One JSON object.**
+    *   **Keywords:** ["repair", "community", "tomorrow"]
+    *   **Supporting Elements:** ["silk thread", "silhouetted hands", "cracked horizon line "]
+    *   **Style:** "Illustrative minimalist graphic"
+    *   **Mood:** "Hopeful, grounded, determined"
+    *   **Headline:** "Repair Together. Tomorrow Begins."
+    *   **Core:** "Collective action to fix the bridge to the future."
+
+    *   **Wait, I need to check "avoid" keys.**
+    *   I know what to avoid.
+    *   No "soon" or "now".
+    *   No quotes on keywords unless I map to text.
+    *   Check keys: keywords, interpretation, audience, objective, core_message, concept (title, central_idea, connection_to_keywords), copy (headline, subtitle, cta), visual_direction (main_subject, setting, visual_relationship, supporting_elements, style, mood), layout (focal_point, composition, reading_order, typography), palette (colors, rationale), avoid.
+
+    *   **Wait, "subtitle" should be empty string if not needed.** I'll include one for

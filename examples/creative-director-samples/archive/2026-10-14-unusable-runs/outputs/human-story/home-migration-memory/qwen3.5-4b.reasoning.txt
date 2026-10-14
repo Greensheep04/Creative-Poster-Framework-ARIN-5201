@@ -1,0 +1,42 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Creative Director (CD) in a poster-generation pipeline.
+    *   **Input:** Keywords only ("home", "migration", "memory").
+    *   **Task:** Develop one coherent poster concept.
+    *   **Constraints:**
+        *   Make reasonable creative choices without asking questions.
+        *   Develop a specific message beyond simply repeating keywords.
+        *   Connect keywords through one central idea (avoid collage).
+        *   Choose intended audience and communication objective.
+        *   Describe a concrete, depictable visual concept.
+        *   Make typography, color, composition support the message.
+        *   Distinguish literal poster copy from visual descriptions.
+        *   Prioritize one dominant visual and one primary headline.
+        *   Avoid generic directions like "make it impactful".
+        *   Do not invent factual claims, statistics, endorsements, event details, or brand affiliations.
+        *   Treat keywords as creative input.
+        *   Output format: Exactly one valid JSON object matching the specified structure.
+        *   Keys: "keywords", "interpretation", "audience", "objective", "core_message", "concept" (title, central_idea, connection_to_keywords), "copy" (headline, subtitle, call_to_action), "visual_direction" (main_subject, setting, visual_relationship, supporting_elements, style, mood), "layout" (focal_point, composition, reading_order, typography), "palette" (colors, rationale), "avoid".
+        *   Specific Instruction: Develop a poster around one emotionally meaningful moment. Infer a human situation. Show one decisive moment. Avoid sentimental copy or facial expressions alone. Use framing/light/negative space. Headline introduces a second layer of meaning.
+
+2.  **Deconstruct Keywords:**
+    *   *home:* A place of belonging, safety, roots, physical structures, or emotional anchors.
+    *   *migration:* Movement, displacement, crossing thresholds, journey, departure, arrival, often implied hardship or necessity.
+    *   *memory:* Past, nostalgia, recollection, fading, anchoring, shadow, ghost.
+
+    *Connection:* A migrant carrying a piece of their past (memory) seeking their future (home), or an object representing home left behind at a border. Let's go with the idea of bringing a fragment of home with you, transforming the journey into an act of remembering.
+
+    *Decisive Moment:* Not the journey itself, but a specific interaction between the moving subject and the memory. Maybe a traveler packing a specific container, or looking back at a light left on. Let's choose the act of packing a small, non-functional item that triggers memory, used as an anchor, or a view from a moving space looking at a familiar location being left behind.
+    Better idea: A refugee or evacuee standing at a threshold (threshold of a house or a border) touching an old object through a reflection or barrier, bridging the past home with the present displacement. Or, someone packing a suitcase in a attic-light-filled room, but the light is fading.
+    Let's refine for "emotionally meaningful moment": A person looking at a photo inside a box or suitcase, realizing home is no longer just a place, but carried.
+    Actually, the prompt asks for *one* emotionally meaningful moment. Let's try: A hand reaching out to open a door in a threshold, but the door is empty/unlocked, showing the tension between needing to go and needing to stay.
+    Or: A shadow of a house on a train window.
+    Let's go with: A closed suitcase sitting on a threshold. One handle is slightly open. Light shifts.
+    Let's go with a more human element: A child looking out a train window at a city they have left, holding an object that symbolizes "home" (e.g., a stone, a house model).
+    Wait, the prompt says "Show one decisive moment through a subject, action, setting, and a small number of purposeful details."
+    Let's try: A person packing a photo frame upside down into a shoebox.
+    No, let's focus on the *destination* vs *memory*. A figure at the boat dock or train platform.
+    Let's create the visual: A silhouetted figure standing at the edge of a vanishing road or horizon, looking at a small framed memory that reflects the view behind them.
+    Actually, "memory" often implies loss. "Migration" implies loss. "Home" implies return or quest.
+    Visual Idea: A silhouette of a backpacker standing at a!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

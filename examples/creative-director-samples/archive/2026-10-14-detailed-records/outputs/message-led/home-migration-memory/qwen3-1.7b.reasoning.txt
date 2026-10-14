@@ -1,0 +1,13 @@
+Okay, let's tackle this poster concept. The user provided the keywords: home, migration, memory. I need to create a coherent message that connects these three. The main idea should be something that ties them together.
+
+First, I need to find a central theme. Home is a place of comfort, migration is movement, and memory is the past. Maybe the connection is about returning to home after migration, with memory as the key element. So the poster could show a person leaving a place, carrying memories, and then returning home.
+
+The audience is likely people who are thinking about their own journeys or the experiences of others. The objective is to evoke emotion and reflection. The core message would be about the emotional journey of returning home after migration, tied to memory.
+
+For the visual concept, a dominant subject could be a person holding a suitcase and a photo album. The setting is a train station, which symbolizes migration. The visual relationship would be the suitcase moving towards the home, with the photo album showing memories. Supporting elements could be stars (memory) and a map (migration).
+
+The headline needs to be meaningful. Maybe "The Road Home" to suggest the journey. Subtitle could be "Where Memories Guide Us." The color palette should be warm for home (gold, red) and cool for migration (blue, green). Mood is reflective and hopeful.
+
+Layout: focal point is the person with the suitcase and album. Composition is a vertical layout with the person in the center, suitcase and album on the left, and the train station in the background. Typography uses bold, serif fonts for the headline and subtitle, with a sans-serif for the copy. Avoid generic directions, so specific visual choices are made.
+
+Check if all requirements are met: specific message, connection through central idea, audience and objective, visual elements supporting the message. No inventing facts, just creative choices. The JSON structure needs to be accurate with all keys filled.

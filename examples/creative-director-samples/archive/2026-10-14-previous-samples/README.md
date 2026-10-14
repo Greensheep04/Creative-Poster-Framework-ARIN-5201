@@ -52,6 +52,8 @@ Both cases also used the shared instruction to create one coherent brief for a 7
 
 ## Interpretation and validation
 
+For new tests, use the [revised CD prompt](prompt-v2.md). It explicitly defines required fields and nested types, empty supporting copy, inclusion/exclusion instructions, and consistency of the central visual idea across text and imagery. The existing outputs below were collected with the original prompt, not this revision.
+
 All six extracted files parse as JSON. Valid JSON alone does not establish semantic quality or compliance with a final schema.
 
 - In the ocean/plastic/hope case, Qwen3.5-4B returns arrays for `style.mood` and `style.medium`, whereas the other five responses use strings. The prompt specifies an object with those fields but does not explicitly specify their types; the team should finalize these nested types before treating this difference as a schema failure.

@@ -1,0 +1,14 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "provider": "Featherless AI",
+  "source_url": "https://huggingface.co/Qwen/Qwen3.5-4B",
+  "variant": "human-story",
+  "keyword_id": "ai-creativity-identity",
+  "status": "provider_error",
+  "error": "network error",
+  "attempts": 2,
+  "finish_reason": null,
+  "collected_at": "2026-10-14T09:01:17.404Z",
+  "input_method": "Original system and user messages joined with blank line; each newline replaced with one space.",
+  "note": "Both submissions failed in the UI; no API response or final content was available. No raw or parsed model output has been invented."
+}

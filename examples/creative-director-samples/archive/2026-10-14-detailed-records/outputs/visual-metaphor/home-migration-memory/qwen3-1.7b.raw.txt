@@ -1,0 +1,36 @@
+{
+  "keywords": ["home", "migration", "memory"],
+  "interpretation": "A journey through time and space where home is the origin, migration is the movement, and memory is the destination, all unified by the theme of transformation.",
+  "audience": "General public interested in storytelling, identity, and human experience.",
+  "objective": "To evoke emotional resonance by illustrating the interplay between physical travel and internal reflection.",
+  "core_message": "Home is not a fixed place but a dynamic journey of memory and belonging.",
+  "concept": {
+    "title": "The Path of Remembered Home",
+    "central_idea": "A traveler's journey through a surreal landscape where each element represents the keywords: home (cozy cabin), migration (a winding road), and memory (a constellation of stars).",
+    "connection_to_keywords": "The cabin (home) is the starting point, the road (migration) is the journey, and the stars (memory) are the echoes of past experiences."
+  },
+  "copy": {
+    "headline": "The Path of Remembered Home",
+    "subtitle": "Where Every Step is a Chapter",
+    "call_to_action": "Explore Your Own Journey"
+  },
+  "visual_direction": {
+    "main_subject": "A person walking through a surreal landscape with a cabin at the edge of a forest, a winding road ahead, and a constellation of stars above.",
+    "setting": "A twilight forest with a glowing cabin, a road that morphs into a river, and stars that pulse like lanterns.",
+    "visual_relationship": "The cabin (home) is the anchor, the road (migration) is the path, and the stars (memory) are the guiding light.",
+    "supporting_elements": ["a compass pointing to the cabin", "a journal with faded pages", "a map of migratory routes"],
+    "style": "Surreal and ethereal with soft, warm lighting and a dreamlike atmosphere.",
+    "mood": "Nostalgic yet hopeful, emphasizing the connection between past, present, and future."
+  },
+  "layout": {
+    "focal_point": "The person's silhouette at the edge of the forest, with the cabin and stars in the background.",
+    "composition": "Symmetrical layout with the person centered, the cabin on the left, the road in the middle, and the stars on the right.",
+    "reading_order": "Headline at the top, subtitle below, call to action at the bottom.",
+    "typography": "Bold, hand-lettered font for the headline, serif for the subtitle, with a warm, vintage color palette."
+  },
+  "palette": {
+    "colors": ["warm earth tones (beige, olive)", "cool blues and greens (sky, stars)", "neutral gray for the road"],
+    "rationale": "Warm tones evoke home and memory, cool tones represent the journey and the unknown, and neutral tones ground the scene."
+  },
+  "avoid": ["generic directions", "factual claims", "brand affiliations"]
+}

@@ -1,0 +1,21 @@
+{
+  "model": "Qwen/Qwen3-1.7B",
+  "variant": "message-led",
+  "keyword_slug": "repair-community-tomorrow",
+  "provider": "Featherless AI",
+  "source_url": "https://huggingface.co/Qwen/Qwen3-1.7B",
+  "method": "Hugging Face model-page inference widget",
+  "started_at": "2026-10-14T07:53:27.625Z",
+  "captured_at": "2026-10-14T07:54:16.162Z",
+  "status": "completed",
+  "finish_reason": "stop",
+  "response_id": "3a8cfa26-b0c6-4b80-bbea-e3c91f22d0dc",
+  "generation_settings": "Not exposed; defaults unknown",
+  "request_adaptations": [
+    "Combined system and user into single user message",
+    "Each newline replaced with one space"
+  ],
+  "json_valid": true,
+  "json_error": null,
+  "schema_valid": true
+}

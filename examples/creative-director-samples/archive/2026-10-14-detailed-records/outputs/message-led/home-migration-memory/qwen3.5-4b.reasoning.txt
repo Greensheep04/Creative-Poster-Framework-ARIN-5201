@@ -1,0 +1,161 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Creative Director (CD) in a poster-generation pipeline.
+    *   **Input:** Keywords only (`home, migration, memory`).
+    *   **Task:** Develop one coherent poster concept.
+    *   **Requirements:**
+        *   Specific message beyond repeating keywords.
+        *   Connect keywords through one central idea.
+        *   Target audience and communication objective.
+        *   Concrete, depictable visual concept.
+        *   Typography, color, composition support message.
+        *   Distinguish literal copy from visual descriptions.
+        *   Prioritize one dominant visual and one primary headline.
+        *   Avoid generic directions ("make it impactful").
+        *   Do not invent facts/statistics/endorsements.
+        *   Treat keywords as creative input.
+        *   **Output Format:** Exactly one valid JSON object with specific keys and structure. No Markdown fences, no commentary.
+        *   Arrays: `keywords`, `supporting_elements`, `colors`, `avoid`. Strings for everything else. Empty strings where needed.
+
+2.  **Deconstruct Keywords:** `home`, `migration`, `memory`.
+    *   *Association:* People leave, move, take pieces of themselves with them, search for belonging, nostalgia vs. new reality.
+    *   *Potential Concepts:*
+        *   Child moving with a stuffed animal (too literal/cute).
+        *   Map with hearts marking old homes (too cliché).
+        *   A house that is halfway out a window (metaphorical).
+        *   Layers of photos peeling like an onion (visualizing memory).
+        *   A suitcase half-packed containing a miniature landscape (strong visual metaphor).
+        *   *Selected Angle:* The concept of "memory as a suitcase." Home is not the place but the feeling carried. Migration is the act of leaving but also transforming the container of self. Memory is the tangible object in the box.
+
+3.  **Develop the Concept:**
+    *   *Idea:* An open briefcase or suitcase oriented diagonally, floating in a space that splits between a recognizable past landscape on one side and an abstract, blurry new city on the other.
+    *   *Wait, keep it simpler for readability.* A window looking out. Inside the window glass, there's a reflection of the view change (past vs future).
+    *   *Better:* A single door that is both an exit and an entrance. Inside: fading warm light. Outside: cool fog.
+    *   *Strongest Visual:* A suitcase left open upright. Inside, the bottom is faded/golden (past memory/home). The top is filled with precise, cold lines (migration/present).
+    *   *Wait, let's aim for "Memory is the Anchor."* Visual: A ship traveling on calm water, but the ship is made of old furniture or architectural bricolage.
+    *   *Let's try:* A single wardrobe door slightly ajar. Through the gap, we see the inside of the wardrobe: warm wood, familiar faces (framed/faded) vs. the room outside: cool blue, modern.
+    *   *Decision:* An open suitcase sitting on a new floor. The lining is printed with a photograph of a childhood home. The clothes being placed inside are generic, modern.
+    *   *Refined Decision:* A large, translucent house made of glass, but only half of it is solid. The other half dissolves into a trail of paper cutouts that spell out "travel". No, too text-heavy.
+    *   *Final Decision:* A vintage suitcase standing upright, positioned slightly off-center. Inside the open top, instead of clothes, there is a photograph of an empty living room. The suitcase sits on a new concrete path that leads away from a warm, golden doorway.
+    *   *Actually, let's go with:* A child's backpack vs. a grown man's briefcase. Too specific.
+    *   *Let's go with:* **The Tapestry of Departure.** A map of a city that is fading into memory (blue/purple/ghostly), with a suitcase pinned to it, but the suitcase contains a smaller map of a home (yellow/warm).
+    *   *Wait, needs to be one dominant visual.* A window.
+    *   *Visual:* A large window pane. Inside the room, the light is warm/evening. Outside, the light is cold/dawn but blurring. The window frame acts as a bookbinding spine, and the paper labels are placing new destinations next to old ones.
+    *   *Okay, let's simplify for clarity.* **The Suitcase of Anchors.** An antique suitcase, half open, standing on a modern sidewalk. One side is polished leather (hardness of reality). The other side (visible through the open flap) glows with a photograph of a childhood room.
+    *   *Connection:* Home is fixed (the photo). Migration is the outside world. Memory is the connection inside the bag.
+
+4.  **Define Audience/Objective:**
+    *   *Audience:* People of immigrant heritage, young families moving, anyone observing displacement.
+    *   *Objective:* Validate the emotional burden of migration and celebrate memory as the constant self.
+
+5.  **Draft Content:**
+    *   *Headline:* Carry Your Home.
+    *   *Subtitle:* Migration is not leaving, it is moving coordinates.
+    *   *Core Message:* Identity persists through movement.
+    *   *Visual:* A closed vintage suitcase made of wood. Inside, the interior lining is a photograph of a family home.
+    *   *Palette:* Warm wood brown, twilight blue, faded paper beige.
+    *   *Avoid:* Cliché flags, maps, generic travel photos.
+
+6.  **Refine for JSON Constraints:**
+    *   Ensure all keys are present.
+    *   Ensure `keywords` is an array.
+    *   Ensure `avoid` is an array.
+    *   Ensure `supporting_elements` is an array.
+    *   Ensure `colors` is an array.
+    *   Ensure `copy`, `concept`, `visual_direction`, `layout` are populated correctly.
+    *   Ensure `subtitle` and `call_to_action` are empty strings if not needed (subtitle I will keep).
+
+7.  **Final Polish of Concept:**
+    *   *Title:* The Unpacked Suitcase.
+    *   *Visual:* An open vintage suitcase, viewed from an elevated perspective. The lining is a high-resolution memory (home interior). The path leading to it is a dark road turning into a starry night.
+    *   *Actually, the Window Idea works better for "home" vs "outside".* Let's use the Window.
+    *   *Revised Visual:* A large window frame set against a stark white background. Inside is a cozy living room (warm light). Outside, the window pane is etched with the shapes of a migration route. The balance point is in the center pane.
+    *   *Wait, need to distinguish literal copy from visual.*
+    *   *Let's stick to the Suitcase.* It's more symbolic of "taking home with you."
+    *   *Key:* `Home` is the photo in the lining. `Migration` is the path surrounding the suitcase. `Memory` is the texture of the suitcase.
+
+    *   *Wait, "Do not invent factual claims".* Keep it artistic.
+    *   *Drafting Copy:* Headline: "We Bring More Than Luggage." Subtitle: "Because Home is internal, not physical."
+
+    *   *Let's finalize the JSON structure.*
+
+8.  **Constructing the JSON:**
+    *   Check constraints: No markdown fences. Valid JSON.
+    *   Ensure arrays are strings or arrays.
+
+    *(Self-Correction during drafting)*: Ensure `feelings` vs `logic`. `interpretation` needs to be plain english. `core_message` needs to be a clear statement.
+    `visual_direction` needs concrete terms.
+    `layout` needs specific reading order.
+
+    *Let's finalize the visual:*
+    An antique suitcase standing upright on a neutral marble floor. The open trunk reveals a photograph of a sunlit kitchen interior. The suitcase is surrounded by a collage of blurred flight paths on the floor, fading into the corners.
+    This connects Home (kitchen), Migration (flight paths), Memory (photo quality).
+
+    *Let's refine:* The flight paths should be the *texture* of the floor or the air, not objects. The suitcase should be the anchor.
+    Okay: A suitcase sitting on the ground. It is two-toned. One side is rough concrete (new life), the other side is soft fabric with gradient fading to a warm home (old life).
+
+    *Actually, the best connection is a doorframe.*
+    *Headline:* "Beyond the Doorframe."
+    *Visual:* A simple, rounded door frame in profile. To the left of the frame: Warm, cozy details (rug, lamp, book). To the right: Emerging, blurred city lights. The door itself is slightly ajar.
+    *This strongly communicates Home vs Migration (leaving vs entering new).*
+
+    *Let's go with the Suitcase.* It feels more personal for "memory".
+    *Visual:* An open vintage leather suitcase. Inside, instead of clothes, is a folded photograph.
+    *Setting:* A vast gray void.
+    *Message:* You carry the history inside the container.
+
+    *Wait, one dominant visual.* A suitcase.
+    *Headline:* "All The Memories Inside."
+    *Objective:* Comfort the displaced.
+    *Audience:* Migrants, travelers.
+
+    *Let's write the JSON.*
+
+    *Check Requirements:*
+    - `keywords`: array of strings
+    - `interpretation`: string
+    - `audience`: string
+    - `objective`: string
+    - `core_message`: string
+    - `concept`: { title, central_idea, connection_to_keywords }
+    - `copy`: { headline, subtitle, call_to_action } (CTA empty if not needed)
+    - `visual_direction`: { main_subject, setting, visual_relationship, supporting_elements (array), style, mood }
+    - `layout`: { focal_point, composition, reading_order, typography }
+    - `palette`: { colors (array), rationale }
+    - `avoid`: array
+
+    *Final check on JSON validity:* No trailing commas. Quotes escaped correctly.
+
+    *Decision on Copy:*
+    Headline: "You Carry Your Home"
+    Subtitle: "Memory makes the distance possible."
+
+    *Visual Details:*
+    Main Subject: Open vintage suitcase.
+    Setting: Vast, gradient background from concrete to void.
+    Supporting Elements: Tapestry details, vintage tags.
+    Style: Photography, shallow depth of field.
+
+    *Wait, I need to make sure supporting_elements isn't too abstract.*
+    "Faded window pane, leather stitching."
+    Okay, let's finalize.
+
+    *Wait, constraint check:* "Do not add keys, Markdown fences, or commentary."
+    *Constraint check:* "Use arrays of strings for keywords, supporting_elements, colors, and avoid."
+    *Constraint check:* "All other values must be strings."
+
+    Ready to generate JSON.
+
+    *One more check on the "avoid" field:* I will add things to avoid here to be safe. "Generic luggage graphics, smiling stock travelers, text-heavy informational maps, 3D modeling of行李."
+
+    *One more check on "palette":* "ratio..." no, just colors array and rationale string.
+
+    *Wait, constraint:* "Return exactly one valid JSON object matching the structure below."
+    *Must ensure valid JSON syntax.*
+
+    *Final thought on visual:*
+    Main Subject: An open vintage suitcase lying on its side.
+    Connection: Home (interior lining is family photo), Migration (rounded bag handles), Memory (faded texture).
+
+    *Okay, let's write.*

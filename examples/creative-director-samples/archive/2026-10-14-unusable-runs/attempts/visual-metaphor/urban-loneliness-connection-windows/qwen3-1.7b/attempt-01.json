@@ -1,0 +1,52 @@
+{
+  "keywords": [
+    "urban loneliness",
+    "connection",
+    "windows"
+  ],
+  "interpretation": "A visual metaphor where windows symbolize the tension between isolation and human connection in urban environments.",
+  "audience": "City dwellers experiencing loneliness but yearning for meaningful relationships.",
+  "objective": "To inspire viewers to reframe their relationship with windows as a tool for connection.",
+  "core_message": "Windows are the silent bridges between solitude and connection in the city.",
+  "concept": {
+    "title": "Glass Divide",
+    "central_idea": "A window as a dual-purpose entity: a barrier to solitude and a conduit for connection.",
+    "connection_to_keywords": "Urban loneliness (the unbroken glass) contrasts with connection (the interwoven threads of light and people)."
+  },
+  "copy": {
+    "headline": "Windows: The Silent Bridges",
+    "subtitle": "Where Solitude Meets Connection",
+    "call_to_action": "Look through the glass, let the world meet you."
+  },
+  "visual_direction": {
+    "main_subject": "A person standing in front of a window, their face partially obscured by the glass.",
+    "setting": "A modern cityscape with blurred skyscrapers and a distant streetlight.",
+    "visual_relationship": "The person's silhouette is mirrored in the glass, while the outside world is rendered in muted tones, creating a tension between the internal (solitude) and external (connection).",
+    "supporting_elements": [
+      "A faint outline of a person outside the window",
+      "A glowing streetlight in the distance",
+      "A faint silhouette of a cityscape"
+    ],
+    "style": "Minimalist with a high-contrast palette",
+    "mood": "Contemplative, with a sense of quiet urgency"
+  },
+  "layout": {
+    "focal_point": "The person's face in the glass",
+    "composition": "Symmetrical layout with the person centered, the window in the center, and the cityscape on the right.",
+    "reading_order": "Headline (top), subtitle (middle), call to action (bottom)",
+    "typography": "Bold, sans-serif font for headline; clean, modern font for subtitle and call to action"
+  },
+  "palette": {
+    "colors": [
+      "navy blue (window glass)",
+      "warm amber (inside light)",
+      "gray (cityscape)"
+    ],
+    "rationale": "Navy blue for the unyielding barrier of solitude, amber for the warmth of connection, and gray for the urban backdrop."
+  },
+  "avoid": [
+    "generic directions",
+    "factual claims",
+    "brand affiliations"
+  ]
+}

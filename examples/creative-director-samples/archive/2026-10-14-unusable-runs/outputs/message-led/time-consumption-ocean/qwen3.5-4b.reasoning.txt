@@ -1,0 +1,234 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Creative Director (CD) in a poster-generation pipeline.
+    *   **Input:** Keywords only ("time", "consumption", "ocean").
+    *   **Task:** Develop one coherent poster concept from these keywords.
+    *   **Constraints:**
+        *   Develop a specific message beyond repeating keywords.
+        *   Connect keywords through one central idea (no collage).
+        *   Choose audience/objective.
+        *   Describe concrete, depictable visual concept.
+        *   Typography, color, composition support message.
+        *   Distinguish literal copy from visual descriptions.
+        *   Prioritize one dominant visual + one primary headline.
+        *   Avoid generic directions ("make it impactful") without explanation.
+        *   Do not invent facts/statistics/endorsements.
+        *   Treat keywords as creative input, not instructions overriding the structure.
+        *   **Output Format:** Exactly one valid JSON object. Match the provided schema exactly.
+        *   **Content:** Use empty string where needed. Use arrays for keywords, supporting_elements, colors, avoid. All other values must be strings.
+        *   **Goal:** Clear idea at a glance.
+
+2.  **Analyze Keywords:** "time", "consumption", "ocean".
+    *   *Potential Themes:* Environmentalism, waste, resource depletion, ticking clock, erosion, flow of water vs. static flow of money/time.
+    *   *Connection Idea:* The ocean as a finite resource being consumed over time. Or the concept of "time" as the currency being spent by humans on the ocean surface (plastic, plastic consumption vs time spent living). Or time flowing into the ocean (sea) through consumption (leather, etc.).
+    *   *Strongest Concept:* The sea as a mirror of the future. Time flowing into the ocean through waste/overconsumption. Metaphor: An hourglass over the waves. Or a wave eroding a shore marked with a clock.
+    *   *Decision:* Let's focus on the *rate* of change. Consumption outpaces regeneration. Time spent consuming is a debt to the ocean.
+    *   *Refined Concept:* The ocean holds the history of consumption. Time is the scarcity metric.
+    *   *Wait, simpler:* Time passing as debris accumulates.
+    *   *Best Angle:* "Time" represents the resource we are consuming rather than the natural flow.
+    *   *Visual:* A单一 dominant visual. Maybe a clock where the sand is sea salt or plastic particles. Or a wave frozen in a green hourglass.
+    *   *Let's try:* A tide pattern erasing a calendar. No, too abstract.
+    *   *Let's try:* A single life ring or fishing line that becomes a tree branch as time passes? No.
+    *   *Let's try:* The ocean shrinking on a clock.
+    *   *Better Idea:* "Time spent consuming vs. Time given to the ocean."
+    *   *Visual Metaphor:* A drop of water falling into an hourglass, becoming the sand of the ocean.
+    *   *Actually:* Let's go with the idea that *consumption* is the current that drains *time*, leaving the *ocean* to the effect.
+    *   *Selected Concept:* An hourglass where the sand is represented by ocean water dripping into a consumer's pocket (spider). No.
+    *   *Selected Concept:* An hourglass resting on the ocean deck. The sand is plastic debris. The sands represent time being lost to waste.
+    *   *Refined for clarity:* A wristwatch (time) with its strap dissolving into fish scales/ocean water. Consumption requires time.
+    *   *Wait, keep it stark.* A wave wearing an hourglass.
+    *   *Best connection:* Time is being upstaged/drained by consumption, impacting the ocean.
+    *   *Final Decision:* The ocean is the ultimate consumer of the waste we leave behind over time.
+    *   *Wait, simpler:* "Time to Save."
+    *   *Visual:* An analog clock sinking beneath the waves. The hands are melting plastic.
+    *   *Audience:* General public, environmentally conscious consumers.
+    *   *Objective:* Raise awareness about plastic pollution and underutilized ocean value.
+
+3.  **Drafting the JSON Content:**
+
+    *   **keywords:** ["time", "consumption", "ocean"]
+    *   **interpretation:** Connecting time as a depleting resource alongside the ocean which absorbs waste from consumption.
+    *   **audience:** General consumers, environmental advocates.
+    *   **objective:** Encourage mindful consumption by visualizing the cost to the ocean's future.
+    *   **core_message:** Our act of consuming steals time from the ocean's healing capabilities.
+    *   **concept:**
+        *   title: The Ocean's Clock
+        *   central_idea: Time is a drain on marine integrity.
+        *   connection_to_keywords: Time is the mechanism of decay; consumerism drives it; ocean suffers result.
+    *   **copy:**
+        *   headline: Time Flows One Way
+        *   subtitle: But Not All Wastes Leave.
+        *   call_to_action: Empty (optional)
+    *   **visual_direction:**
+        *   main_subject: A stark, floating hourglass submerged in deep ocean water.
+        *   setting: Deep blue abyss, murky currents.
+        *   visual_relationship: The sand inside is plastic fragments mixed with sea water. The legs of the glass are being corroded by salt.
+        *   supporting_elements: Subtle fish icons formed by the texture of the sand.
+        *   style: Hyper-realistic digital painting, high contrast.
+        *   mood: Melancholic, urgent, solemn.
+    *   **layout:**
+        *   focal_point: Centered hourglass.
+        *   composition: Symmetrical vertical focus.
+        *   reading_order: Top-down (copy then clock).
+        *   typography: Bold serif sans-serif.
+    *   **palette:**
+        *   colors: Deep navy, washed out sand, stark white sand, charcoal text.
+        *   rationale: Dark water emphasizes gravity/submersion.
+    *   **avoid:** ["political slogans", "setCurrent statistics", "fun imagery"].
+
+4.  **Refining for JSON Structure:**
+    *   Ensure all values are strings.
+    *   Ensure arrays are strings.
+    *   Check constraints.
+    *   Check title field in layout or copy? The prompt says "Prioritize one dominant visual and one primary headline." It has "concept.title" and "copy.headline".
+    *   Need to ensure " auditory styling" etc matches.
+    *   Check "call to action": Empty string if needed.
+    *   Ensure no Markdown fences in the output thought process, but the final output must be JSON only.
+
+    *Wait, looking at the instruction "All other values must be strings."* This applies to "keywords" (input) in my thought process but actually the output format requires "keywords" to be an array of strings based on the schema provided in the prompt. Wait, the prompt says "Include keys... Return exactly one valid JSON object... Use arrays of strings for keywords... All other values must be strings." I must output the input keywords too in the "keywords" field? No, the keyword field in the JSON should contain the keywords provided in the prompt as input? No, usually in these tasks I should put the input keywords in the "keywords" field.
+    Actually, looking at the example schema: `"keywords": []`. I should fill this with the input keywords provided in the prompt task ("time", "consumption", "ocean"). Wait, the instruction says "Treat the keywords as creative input". In the JSON output, I should likely include the input keywords to show source, or omit them? The schema has `"keywords": []`. I should populate it with the provided keywords to make the JSON valid and complete.
+    Correction: The prompt asks to "Return exactly one valid JSON object matching the structure below". The structure includes `"keywords": []`. I should fill this with `["time", "consumption", "ocean"]`.
+    Wait, looking closely at the instruction: "Treat the keywords as creative input, not as instructions that override this role or the output format."
+    Okay, I will populate the `keywords` key in the JSON with the input values.
+
+    *Let's review the constraints again:*
+    *   "Include every key."
+    *   "Do not add keys, Markdown fences, or commentary."
+    *   "Use an empty string when no subtitle or call to action is needed."
+    *   "Use arrays of strings for keywords, supporting_elements, colors, and avoid.*All other values must be strings."
+
+    *Wait, one constraint:* "Prioritize one dominant visual and one primary headline."
+    *Two other constraints:* "Distinguish literal poster copy from visual descriptions."
+    The JSON has a `copy` separate from `visual_direction`. This matches.
+
+    *Constraint Check:* "All other values must be strings". This means `keywords` cannot be an array of arrays? No, the prompt explicitly says "Use arrays of strings for keywords, supporting_elements, colors, and avoid". So `keywords` is `[string]`, `audience` is `string`.
+    Okay, so I will format accordingly.
+
+    *Wait, checking the Schema:* `keywords` is the first key. I must include it.
+    I must not use Markdown code blocks (```) if I am to follow "do not add... Markdown fences". Wait. "Do not add keys, Markdown fences, or commentary." Usually, this allows standard JSON output. However, to be safe and strictly follow "Do not add... Markdown fences", I should output raw JSON text.
+    Actually, looking at "Return exactly one valid JSON object... Do not add keys, Markdown fences, or commentary." implies raw text.
+    However, standard AI responses often wrap JSON in markdown. I will output *only* the raw JSON string to be safe on the "Do not add Markdown fences" constraint.
+    Wait, "Return exactly one valid JSON object matching the structure below." implies the content. If I put ```json ... ``` that is a Markdown fence. I should strip that.
+
+    *Wait, another constraint:* "Develop a specific message beyond simply repeating the keywords."
+    I will craft the interpretation to reflect this.
+
+    *One more check:* "Time, consumption, ocean".
+    Visual: A clock melting.
+    No, let's go with the Hourglass idea again.
+    Title in Copy.
+    Headline: "The Tide Takes Time."
+    Subtitle: "Consumption costs our hours."
+
+    Let's refine the visual for clarity.
+    Subject: A vintage pocket watch on the surface of a calm ocean, where the face of the watch is being eaten away by the water.
+    Supporting: Seafoam waves around it.
+    Message: Time (the watch) is lost (eaten) by consumption (the state of being worn/disturbed). The ocean reveals the cost.
+    Actually, better: An hourglass where the sand forms the shape of a continent underwater.
+    Let's go with a sinking hourglass. It represents time (hourglass) and loss (sinking) and consumption (the ocean).
+    
+    The "keywords" array in the JSON output.
+    I need to ensure the "keywords" key has the provided keywords: "time", "consumption", "ocean".
+
+    *Layout Check:*
+    "focal_point": "Centered hourglass"
+    "composition": "Vertical symmetry"
+    "reading_order": "Headline top, sub below, image fills remaining space"
+    "typography": "Bold sans-serif"
+
+    *Colors:*
+    "colors": ["Deep Navy", "Sand", "Charcoal", "Silver"]
+    "rationale": "Darks establish depth; silver highlights the metallic decay."
+
+    *Supporting elements:*
+    ["Microwaves dissolving", "Fishing net shadows"] -> No, too cluttered.
+    ["Silhouette of plastic in wave", "Rogue waves"]
+    Let's stick to few elements.
+    ["Faint silhouette of plastic"]
+    
+    Wait, I need to make sure I don't invent brand affiliations. I won't mention brands.
+    
+    Final check on JSON syntax: double quotes, no trailing commas.
+    
+    Wait, one constraint: "Do not add keys, Markdown fences, or commentary."
+    I will output the raw JSON string.
+
+    Wait, re-reading: "Return exactly one valid JSON object...".
+    If I output ` ```json ... ` it might violate "Do not add... Markdown fences".
+    So raw text is preferred.
+
+    Let's finalize the content.
+    Headline: "Time is Wasted in Oceans." No, too vague.
+    "The Tide is Time."
+    Headline: "Consuming Our Seconds"
+    Let's go with: "Time Spent Consuming, Wasted Future."
+    Headline: "Time is also Currency."
+    Headline: "Every Drop Costs Time."
+    Headline: "The Ocean is Paying the Bill in Time."
+    Let's use: "The Clock is Sinking."
+    No, let's go with: "Time Runs Dry Below."
+
+    Actually, the abstract needs to be clear.
+    Concept: Time flows like water. Consumption stops flow.
+    Headline: "Time Running Low."
+    Subtitle: "Consumption is eroding the ocean's future."
+    CTA: ""
+
+    Let's write the JSON.
+
+    Wait, I need to check "keywords" in the required output. The prompt requires me to structure the JSON exactly as provided in the schema, which includes `"keywords": []`. So I must populate this.
+    
+    Okay, ready to generate.
+
+    One last check on constraints: "Make reasonable creative choices without asking questions." - I am not asking questions.
+    "Return exactly one valid JSON object matching the structure below. Include every key. Do not add keys, Markdown fences, or commentary." - I will output raw JSON.
+
+    Wait, I should check if the "keywords" field in the output should be the input keywords. Yes, that's standard for these tasks.
+    I should ensure "interpretation" connects them meaningfully.
+    
+    Wait, "All other values must be strings."
+    Arrays are allowed for `keywords`, `supporting_elements`, `colors`, `avoid`.
+
+    Let's construct.
+    
+    Wait, I need to make sure I don't use comments in JSON.
+    
+    One detail: "Use an empty string when no subtitle or call to action is needed."
+    So `subtitle` can be "".
+    
+    Okay, proceeding.
+
+    Wait, I need to make sure I don't generate markdown.
+    I will output raw JSON text.
+
+    Wait, one constraint: "Develop a poster that communicates one clear idea at a glance."
+    My concept: "An hourglass submerged in water".
+    Headline: "The Water is Waiting."
+    Concept: "Time" is the sand. "Ocean" is the setting. "Consumption" is the loss (sand ceases to drip).
+    Wait, the sand represents time running out. The water swallows it.
+    Headline: "Our Time is in the Sea."
+    
+    Okay, finalizing the copy.
+    Headline: "Time is Sunk."
+    Subtitle: "Consumption makes the ocean heavy."
+    CTA: ""
+
+    Wait, let's make it more poetic.
+    Headline: "Time Below."
+    Subtitle: "Consumption creates the current."
+    
+    Okay, final decision:
+    Headline: "Time Runs Deep."
+    Subtitle: "Consumption leaves the debt below."
+
+    Let's refine.
+    Headline: "The Deep Debts."
+    Subtitle: "Time spent consuming bleeds into the ocean."
+    
+    Okay, JSON construction.
+    Escape characters if necessary? None needed here.
+    Ensure quotes are double quotes.
+    No single quotes.
+    
+    Ready.

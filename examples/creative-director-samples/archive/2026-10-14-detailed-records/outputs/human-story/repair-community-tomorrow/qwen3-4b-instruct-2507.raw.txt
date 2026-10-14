@@ -1,0 +1,56 @@
+{
+  "keywords": [
+    "repair",
+    "community",
+    "tomorrow"
+  ],
+  "interpretation": "A quiet, decisive moment in which a neighborhood collectively repairs a broken community wall, not out of obligation, but as an act of shared hope for a better future.",
+  "audience": "Residents of urban neighborhoods facing disconnection or decline",
+  "objective": "To inspire a sense of agency and belonging by showing how small, collective actions can build resilience and hope for the future",
+  "core_message": "Tomorrow begins not with grand gestures, but with the hands of neighbors repairing what was broken — together.",
+  "concept": {
+    "title": "The Wall We Built",
+    "central_idea": "A single, weathered wall in a neighborhood is repaired not by a single person, but by a group of residents using tools, shared memories, and quiet determination.",
+    "connection_to_keywords": "Repair is the physical act; community is the collective presence; tomorrow is the implied future shaped by this shared effort."
+  },
+  "copy": {
+    "headline": "The Wall We Built",
+    "subtitle": "A broken wall, repaired with hands, tools, and trust — a single act that became a promise for tomorrow.",
+    "call_to_action": ""
+  },
+  "visual_direction": {
+    "main_subject": "A cracked, weathered brick wall half-restored with fresh mortar and carefully placed bricks",
+    "setting": "A quiet corner of a residential neighborhood at golden hour, with soft shadows and a faint sense of history in the surrounding trees and overgrown garden beds",
+    "visual_relationship": "The wall is slightly tilted, with one side showing visible cracks, while the other side is gently restored — bricks placed in a staggered pattern, tools laid beside it in a small pile, with no one clearly visible but the presence of hands and feet in the foreground suggesting action",
+    "supporting_elements": [
+      "A rusted hammer resting on a wooden plank",
+      "A child’s red shoe partially buried in the soil near the base",
+      "A single, unopened letter taped to a brick with tape",
+      "A small, hand-drawn map on a scrap of paper near the base"
+    ],
+    "style": "Realistic, documentary-inspired photography with subtle painterly texture in the shadows",
+    "mood": "Tender, grounded, hopeful — a quiet strength in simplicity"
+  },
+  "layout": {
+    "focal_point": "The central wall, with the repaired section slightly emphasized by light and texture",
+    "composition": "Diagonal framing from upper left to lower right, drawing the eye toward the wall and the tools at its base",
+    "reading_order": "Starts at the wall, moves to the tools, then to the small details in the foreground and background",
+    "typography": "Headline in clean, bold serif font; subtitle in a lighter, slightly faded serif to suggest memory and time"
+  },
+  "palette": {
+    "colors": [
+      "Warm terracotta",
+      "Soft gray",
+      "Dusty blue",
+      "Sunlit gold"
+    ],
+    "rationale": "The terracotta and gray represent the aged, worn wall and neighborhood; dusty blue and gold evoke the natural light and a hopeful future, balancing decay with renewal"
+  },
+  "avoid": [
+    "Facial expressions",
+    "Crowds or large groups",
+    "Sentimental slogans",
+    "Utopian imagery",
+    "Symbolic animals or abstract shapes"
+  ]
+}

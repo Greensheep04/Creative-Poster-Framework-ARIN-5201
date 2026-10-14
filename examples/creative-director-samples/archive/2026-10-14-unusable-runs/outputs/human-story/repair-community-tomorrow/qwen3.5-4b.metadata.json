@@ -1,0 +1,15 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "provider": "Featherless AI",
+  "source_url": "https://huggingface.co/Qwen/Qwen3.5-4B",
+  "variant": "human-story",
+  "keyword_id": "repair-community-tomorrow",
+  "collected_at": "2026-10-14T09:00:41.227Z",
+  "status": "completed",
+  "finish_reason": "length",
+  "json_valid": false,
+  "settings": "Widget/provider defaults; numeric parameters not exposed",
+  "input_method": "Original system and user messages joined with blank line; each newline replaced with one space for a single user-message widget.",
+  "resumed_after_user_authorization": true,
+  "response_id": "7f60786d-4286-431b-9c9f-92eeb3906bd8"
+}

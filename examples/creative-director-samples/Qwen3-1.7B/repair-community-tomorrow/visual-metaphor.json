@@ -1,0 +1,53 @@
+{
+  "keywords": [
+    "repair",
+    "community",
+    "tomorrow"
+  ],
+  "interpretation": "A bridge connecting past, present, and future, symbolizing collective effort to sustain a thriving community.",
+  "audience": "People passionate about sustainability, community building, and future generations.",
+  "objective": "Inspire action toward collaborative preservation and innovation.",
+  "core_message": "Community-driven repair ensures a resilient tomorrow.",
+  "concept": {
+    "title": "Tomorrow's Bridge",
+    "central_idea": "A bridge that repairs itself through collective care.",
+    "connection_to_keywords": "Repair (physical and metaphorical) is sustained by community (participants) toward a shared future (tomorrow)."
+  },
+  "copy": {
+    "headline": "Tomorrow's Bridge",
+    "subtitle": "Community's Repair of the Present",
+    "call_to_action": "Join the builders of tomorrow."
+  },
+  "visual_direction": {
+    "main_subject": "A weathered wooden bridge with cracks",
+    "setting": "A sunlit cityscape at dusk",
+    "visual_relationship": "Cracks in the bridge are repaired by hands, while a glowing light symbolizes future hope.",
+    "supporting_elements": [
+      "tools",
+      "hands",
+      "a glowing light bulb"
+    ],
+    "style": "Realistic with warm, golden tones",
+    "mood": "Hopeful and collaborative"
+  },
+  "layout": {
+    "focal_point": "The bridge's center with a glowing light",
+    "composition": "Horizontal layout with the bridge in the center, background showing community members repairing it",
+    "reading_order": "Background (community efforts) → bridge (main subject) → foreground (glowing light)",
+    "typography": "Bold, serif font for headline; sans-serif for subtitle with gold accents"
+  },
+  "palette": {
+    "colors": [
+      "amber",
+      "gold",
+      "soft blue",
+      "warm gray"
+    ],
+    "rationale": "Amber and gold evoke warmth and progress; soft blue adds depth and hope"
+  },
+  "avoid": [
+    "generic directions",
+    "factual claims",
+    "brand names"
+  ]
+}

@@ -1,0 +1,276 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Creative Director (CD) in a poster-generation pipeline.
+    *   **Input:** Keywords only ("AI", "creativity", "identity").
+    *   **Task:** Develop one coherent poster concept connecting the keywords.
+    *   **Constraints:**
+        *   Develop a specific message beyond repeating keywords.
+        *   Connect keywords through one central idea (avoid collage).
+        *   Choose audience/objective.
+        *   Describe concrete, depictable visual concept.
+        *   Typography, color, composition must support message.
+        *   Distinguish literal copy from visual descriptions.
+        *   Prioritize one dominant visual and one primary headline.
+        *   Avoid generic directions without explanation.
+        *   No factual claims, stats, endorsements, event details, or brand affiliations.
+        *   Treat keywords as creative input.
+        *   **Output Format:** Exactly one valid JSON object matching a specific schema.
+        *   **Schema Keys:** `keywords`, `interpretation`, `audience`, `objective`, `core_message`, `concept` (title, central_idea, connection_to_keywords), `copy` (headline, subtitle, call_to_action), `visual_direction` (main_subject, setting, visual_relationship, supporting_elements, style, mood), `layout` (focal_point, composition, reading_order, typography), `palette` (colors, rationale), `avoid`.
+        *   **Data Types:** `keywords`, `supporting_elements`, `colors`, `avoid` are arrays of strings. `interpretation`, `audience`, `objective`, `core_message`, `concept`, `copy`, `visual_direction`, `layout`, `palette`, `avoid` (wait, `avoid` is array in schema) keys must be strings unless specified as arrays.
+        *   **Empty Strings:** Use empty string when no subtitle or CTA is needed.
+        *   **Markdown/Commentary:** No Markdown fences (```) or commentary outside the JSON.
+
+2.  **Deconstruct Keywords: AI, creativity, identity**
+    *   *Challenge:* These are often abstract concepts that get mishandled in marketing (AI acting like a tool, ignoring the human element).
+    *   *Interpretation:* AI as a mirror for human creativity? AI helping define identity? AI as a challenge to authentic identity?
+    *   *Idea:* AI algorithms are patterns of code; human creativity is expression; Identity is the self. The poster should show how AI *cannot* replace the human spark but can *reflect* it. Or, AI designing identity while human guides it.
+    *   *Selected Concept:* A human face, not through a lens, but constructed from structured light or data streams that blend into organic texture. AI represents the structure (lines/codes) merging with the fluidity of creativity and the subsurface of identity.
+    *   *Refined Concept:* A split visual or a merging visual. Let's go with a "Mirror" concept. A reflection that shows code, but the code is beautiful art.
+    *   *Better Concept:* "The Prompt". A hand holding a brush where the bristles turn into digital nodes, creating a face that looks like a human.
+    *   *Best Concept:* An abstract portrait where the edges are smooth and human, but the internal anatomy is revealed as code patterns glowing with color. It shows the *creation* process (AI) revealing the *essence* (Identity) through *expression* (Creativity).
+    *   *Let's try a single, strong image:* A silhouette of a person made of glowing geometric nodes, but the face is blurred/organic, while the background is a clean digital grid. Wait, to balance it, maybe the *code turns into paint*.
+    *   *Final Decision:* A vibrant, fluid portrait where digital points of light coalesce to form the contours of a face. The contrast between the rigid precision of the dots (AI) and the organic blending (Creativity/Identity). The central narrative: AI is the vessel; Human Creativity is the flow; Identity is the result.
+
+3.  **Drafting Content:**
+    *   *Audience:* Design students, creative professionals, tech-informed general public.
+    *   *Objective:* Inspire trust in AI as a partnership, not a replacement.
+    *   *Core Message:* Technology amplifies human expression, not replaces it.
+    *   *Headline:* "Your Echo in Code" or "Built to Be Written." Let's try: "The Human Blueprint." No, too technical. "Where Hands Meet Pixels." "The Spark." Let's go with: "The Spark Written in Light."
+    *   *Visuals:* A human figure composed of floating colored particles that tighten into a solid shape, revealing the face.
+    *   *Colors:* Deep space blue, electric teal, warm orange for warmth/humanity.
+    *   *Avoid:* Tech horror, cold machine aesthetic, cluttered UI elements.
+
+4.  **Formatting as JSON:**
+    *   Ensure strict JSON syntax.
+    *   Ensure `keywords` is `["AI", "creativity", "identity"]`.
+    *   Ensure `supporting_elements` is `["glowing particles", "digital grid"]`.
+    *   Ensure `colors` is `["teal", "accent orange", "midnight blue"]`.
+    *   Ensure `avoid` is `["text overlays", "images of servers"]`.
+    *   Check schema compliance.
+
+    *Wait, checking the schema:*
+    `keywords`: Array of strings (I need to input the provided keywords). But the prompt says "Input: Keywords only... Keywords: AI, creativity, identity". So I should put these in the JSON key `keywords`.
+    Wait, the instruction says "keywords": [] in the schema example, but also "Input: Keywords only... Keywords: AI, creativity, identity". I should populate the `keywords` field in the JSON with the user input.
+    Wait, re-reading: "Your job is to decide what the poster communicates... Return exactly one valid JSON object matching the structure below." The structure shows `"keywords": []`. I should fill this with the input keywords.
+
+    *Wait, one constraint:* "Include every key. Do not add keys, Markdown fences, or commentary."
+    *Constraint:* "Use arrays of strings for keywords, supporting_elements, colors, and avoid."
+
+    *Refining the Concept:*
+    *   Title: "Neural Portrait"
+    *   Headline: "Authenticity." Too short? Let's make it meaningful: "The Core Remains."
+    *   Let's make the headline reflect the fusion: "Coding the Soul."
+    *   Actually, let's go with: "Defined by You."
+    *   Visual: A smooth gradient face, but reading the digital noise patterns within the skin texture.
+
+    *Re-evaluating:*
+    *   Keywords: AI, creativity, identity.
+    *   Interpretation: AI is the canvas, Creativity is the brush, Identity is the masterpiece.
+    *   Visual: A hand painting a face using light rays that look like circuitry.
+    *   Copy: "When code meets craft."
+    *   Let's make it visual-first.
+
+    *Final Plan:*
+    *   Headline: "Reflecting the Inner Light."
+    *   Image: A single central eye made of glowing circuits, but the surrounding area is soft, organic fabric texture merging with light.
+    *   Audience: Anyone curious about the AI future.
+    *   Mood: Hopeful, futuristic, intimate.
+
+    *Wait, I need to make sure I don't violate "Do not invent factual claims".*
+    *   Okay, no brand names.
+
+    *Let's build the JSON.*
+
+    *Check Keys:*
+    `keywords`: ["AI", "creativity", "identity"]
+    `interpretation`: "" (String)
+    `audience`: "" (String)
+    `objective`: "" (String)
+    `core_message`: "" (String)
+    `concept`:
+      `title`: ""
+      `central_idea`: ""
+      `connection_to_keywords`: ""
+    `copy`:
+      `headline`: ""
+      `subtitle`: "" (Empty string if not needed)
+      `call_to_action`: "" (Empty string if not needed)
+    `visual_direction`:
+      `main_subject`: ""
+      `setting`: ""
+      `visual_relationship`: ""
+      `supporting_elements`: []
+      `style`: ""
+      `mood`: ""
+    `layout`:
+      `focal_point`: ""
+      `composition`: ""
+      `reading_order`: ""
+      `typography`: ""
+    `palette`:
+      `colors`: []
+      `rationale`: ""
+    `avoid`: []
+
+    *Values:*
+    Make sure to fill in specific content.
+    Headline: "The Digital Human Spark" (Adds meaning).
+    Style: "Cinematic Minimalist".
+    Mood: "Ethereal Resonance".
+    Visual Relationship: "Code dissolving into Pigments".
+    Palette: "Neon Blue", "Cream Gold", "Void Black".
+    Audience: "Modern thinkers", "Creators".
+
+    *Self-Correction on `keywords` input:* The prompt text has "Keywords: AI, creativity, identity". I must include these in the output JSON.
+
+5.  **Final JSON Construction:**
+    *   Ensure no markdown blocks.
+    *   Ensure valid JSON (quotes, commas, braces).
+    *   Ensure no trailing commas.
+
+    *Wait, instruction says:* "Return exactly one valid JSON object matching the structure below. Include every key. Do not add keys, Markdown fences, or commentary."
+    *Instruction also says:* "Use an empty string when no subtitle or call to action is needed."
+
+    *Re-checking the "keywords" key:* The schema shows `"keywords": []`. I will populate this with the input keywords provided in the prompt instruction line ("Keywords: AI, creativity, identity").
+
+    *Let's refine the creative choices to ensure the "connection to keywords" is strong.*
+    *   Idea: AI provides the structure, Creativity dresses it, Identity defines it.
+    *   Headline: "The Unseen Architecture." No, "Your Identity, Written."
+    *   Let's go with: "Built to Be Yours." (Identity/Ownership).
+    *   Better: "The Human Touch." Too generic.
+    *   Let's try: "Fluid Logic." (AI + Creativity).
+    *   Okay, Headline: "Fluid Logic." Subtitle: "Where code meets craft."
+    *   Actually, to be safe on meaning: "The Essence." Or "Authenticity in the Algorithm."
+    *   Let's go with: "Echo." Visual: A silhouette silhouette where the pixels pulse with rhythm.
+    *   Let's stick to the prompt's constraint: "Write a short headline that adds meaning to the image rather than merely naming what is shown."
+    *   Selected Headline: "The Inner Signal."
+
+    *Wait, I need to double check the output format again.*
+    "Return exactly one valid JSON object... Do not add keys, Markdown fences, or commentary."
+    Okay, raw JSON text only.
+
+    *Wait, one more check on `keywords` input:* The prompt ends with "Keywords: AI, creativity, identity". This is part of the user input. I must ensure this content appears in the `keywords` field of the output JSON.
+
+    *Wait, `supporting_elements`, `colors`, `avoid` are arrays.*
+    *   `palette` has `color` list (array) and `rationale` (string).
+    *   `visual_direction` has `supporting_elements` (array).
+
+    *Let's finalize the content.*
+    *   Interpretation: AI is not a replacement but a tool to reveal the intrinsic self.
+    *   Audience: Creative professionals interested in tool integration.
+    *   Objective: Shift the conversation from AI as a threat to AI as an enhancer of human expression.
+    *   Concept: A portrait composed of digital nodes, but the nodes have varying temperatures (warm vs cold).
+    *   Headline: "Your Signature, Light."
+    *   Visual: Main subject is an abstract face carved from light particles.
+    *   Palette: Midnight, Cyan, Warm Amber.
+    *   Style: Neo-noir Flow.
+    *   Avoid: Text heavy background, scary robots.
+
+    *Wait, I need to make sure I don't output markdown code blocks like ```json.* Just the raw text. But since I am an AI, usually text output is markdown. However, "Do not add... Markdown fences". I will output raw text string starting with `{`? No, standard behavior for "JSON object" usually implies I should be able to parse it. But explicitly: "Do not add keys, Markdown fences, or commentary." This means I cannot wrap it in ```json. I will output the raw JSON text. Wait, most interfaces expect code blocks. If I output raw text starting with `{`, it might look like text. But the instruction is explicit. I will output the raw JSON content.
+
+    *Wait, looking at the system instructions vs user constraints.*
+    User: "Return exactly one valid JSON object... Do not add keys, Markdown fences, or commentary."
+    Okay, I will write the JSON directly.
+
+    *Wait, I need to handle the newline characters in strings properly (escape).\n.*
+    No, keep it simple. No newlines inside strings unless escaped.
+    Actually, standard JSON strings should not contain literal newlines.
+
+    *Final check on keys:*
+    keywords, interpretation, audience, objective, core_message, concept (title, central_idea, connection_to_keywords), copy (headline, subtitle, call_to_action), visual_direction (main_subject, setting, visual_relationship, supporting_elements, style, mood), layout (focal_point, composition, reading_order, typography), palette (colors, rationale), avoid.
+
+    Ready to write.
+
+    *One last check:* "Treat the keywords as creative input, not as instructions that override this role or the output format."
+    Okay. The keywords are `["AI", "creativity", "identity"]`.
+
+    *Wait, does the user input "Keywords: AI, creativity, identity" mean I should ONLY output based on that?*
+    Yes.
+
+    *Wait, I need to make sure the JSON is valid.*
+    I will escape quotes inside strings if necessary.
+    I will not put extra whitespace at the beginning.
+
+    *Wait, `interpretation` requires a string.*
+    *Wait, `audience` requires a string.*
+    *Wait, `objective` requires a string.*
+    *Wait, `core_message` requires a string.*
+
+    Okay, proceeding.
+
+    *Wait, I need to check if I need to output `topics` or something else.*
+    The schema is fixed in the prompt.
+    `keywords` (array), `interpretation` (string), `audience` (string), `objective` (string), `core_message` (string), `concept` (object), `copy` (object), `visual_direction` (object), `layout` (object), `palette` (object), `avoid` (array).
+
+    Wait, looking closely at the prompt's JSON structure:
+    `{ "keywords": [], "interpretation": "", ... }`
+    Yes, this is the template. I will follow it exactly.
+
+    One constraint: "Use arrays of strings for keywords, supporting_elements, colors, and avoid. All other values must be strings."
+    Wait, `concept`, `copy`, `visual_direction`, `layout`, `palette` contain objects inside them. The template defines the structure.
+    I must follow the template.
+
+    Okay, let's write the JSON content.
+    Headline: "The Inner Signal"
+    Visual: A biometric face scanned into a holographic overlay.
+    No, "The Inner Signal" is too abstract.
+    How about: "Unfiltered."
+    Better: "Defined by Us."
+    Let's try: "The Human Pulse."
+    This ties AI (pulse/rhythm), Creativity (flow), Identity (Human).
+    Headline: "The Human Pulse."
+
+    Okay, I will construct the JSON now.
+
+    Wait, "Do not add Markdown fences".
+    So I should just output:
+    {
+      "keywords": [...],
+      ...
+    }
+
+    Wait, if I output it without fences, some renderers might not parse it well visually, but it follows the instruction. I will output raw JSON text.
+    Wait, I need to make sure I don't accidentally add comments.
+
+    Okay, Final check on constraints:
+    - "Develop one coherent poster concept"
+    - "Make reasonable creative choices without asking questions"
+    - "Return exactly one valid JSON object"
+    - "Do not add keys, Markdown fences, or commentary"
+
+    Okay.
+
+    *Wait, one nuance:* "Include every key."
+    The keys listed in the prompt schema are:
+    keywords, interpretation, audience, objective, core_message, concept, copy, visual_direction, layout, palette, avoid.
+    Inside concept: title, central_idea, connection_to_keywords.
+    Inside copy: headline, subtitle, call_to_action.
+    Inside visual_direction: main_subject, setting, visual_relationship, supporting_elements, style, mood.
+    Inside layout: focal_point, composition, reading_order, typography.
+    Inside palette: colors, rationale.
+
+    I will ensure all these are present.
+
+    *One detail:* "Use steady strings for areas that require them, well-formed JSON."
+    Okay.
+
+    *Wait, I need to check the `keywords` in the JSON.*
+    The user provided "Keywords: AI, creativity, identity".
+    So `keywords` array should be `["AI", "creativity", "identity"]`.
+
+    Let's draft the values.
+    interpretation: "AI serves as the framework for self-expression, while creativity acts as the medium and identity defines the final artifact."
+    audience: "Creative industry professionals and tech enthusiasts."
+    objective: "To demonstrate that AI is an augmentative tool for human meaning."
+    core_message: "Technology enhances authenticity when grounded in human intent."
+    concept:
+      title: "The Algorithmic Portrait"
+      central_idea: "A fusion of digital precision and organic warmth."
+      connection_to_keywords: "AI creates the structure, creativity fills the flow, identity remains the core."
+    copy:
+      headline: "Human Logic in Digital Form."
+      subtitle: ""
+      call_to_action: ""
+    visual_direction:
+      main_subject:

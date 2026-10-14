@@ -1,0 +1,54 @@
+{
+  "keywords": [
+    "time",
+    "consumption",
+    "ocean"
+  ],
+  "interpretation": "Time and consumption are not separate forces but intertwined processes—like the ocean, they flow, erode, and reshape over vast durations. Consumption, when unchecked, becomes a slow, relentless tide that erodes the planet's health over time.",
+  "audience": "Environmentally conscious youth and urban professionals concerned with sustainability",
+  "objective": "To provoke awareness of how individual consumption habits accumulate over time, ultimately harming the planet—mirroring the slow, inevitable erosion of the ocean floor.",
+  "core_message": "Our daily consumption is a tide that, over time, erodes the ocean's health—just as time erodes land, so too does consumption erode the planet’s future.",
+  "concept": {
+    "title": "Tide of Time",
+    "central_idea": "Consumption is a slow, relentless tide that flows over time, gradually eroding the ocean’s health—just as time erodes landforms.",
+    "connection_to_keywords": "The ocean serves as both a literal and metaphorical setting. Time is visualized as a slow-moving tide, and consumption is represented as the volume of water that builds and recedes, symbolizing accumulation and waste. The visual transformation shows how the ocean's surface changes over time due to the tide’s persistent flow."
+  },
+  "copy": {
+    "headline": "Time is a tide. Consumption is the current.",
+    "subtitle": "Every item we buy flows into the ocean of time—eroding its health over decades.",
+    "call_to_action": ""
+  },
+  "visual_direction": {
+    "main_subject": "A vast, horizontal ocean surface with a slow, rhythmic tide moving from left to right, forming waves that gradually deepen and darken as they progress.",
+    "setting": "A wide, flat horizon with a distant, abstract shoreline that appears to be slowly dissolving into the water.",
+    "visual_relationship": "The tide is not just water—it is a flowing mass of consumption, with each wave representing a year of consumption. As the tide moves, the ocean’s surface becomes visibly darker and more turbulent, symbolizing environmental degradation.",
+    "supporting_elements": [
+      "Faint, translucent icons of shopping bags, plastic bottles, and electronic devices embedded in the waves",
+      "A single, slowly rising sun at the horizon, subtly dimming as the tide advances"
+    ],
+    "style": "Minimalist realism with soft gradients and subtle textures to suggest depth and time",
+    "mood": "Serene at first, then increasingly tense and foreboding as the tide progresses"
+  },
+  "layout": {
+    "focal_point": "The central wave of the tide, stretching across the lower half of the poster, with the ocean surface darkening progressively toward the right.",
+    "composition": "Horizontal split—left side shows calm ocean and early tide; right side shows turbulent, darkened water and eroding shoreline.",
+    "reading_order": "From left to right, top to bottom: viewer first sees the calm tide, then the transformation into environmental harm.",
+    "typography": "Clean, modern sans-serif font with slight weight variation in the headline and subtitle to reflect the shift in tone"
+  },
+  "palette": {
+    "colors": [
+      "#87CEEB",
+      "#66B2FF",
+      "#003366",
+      "#2E2E2E",
+      "#3A3A3A"
+    ],
+    "rationale": "The palette begins with cool, clear blues to represent the initial calm of the ocean and time. As the tide progresses, the colors deepen into richer, darker blues and grays, symbolizing the accumulation of consumption and environmental degradation. The darkened tones reflect the erosion and loss over time."
+  },
+  "avoid": [
+    "Icons of individual products or brands",
+    "Factual data or statistics",
+    "Generic slogans like 'Save the Ocean'",
+    "Overly abstract or surreal imagery"
+  ]
+}

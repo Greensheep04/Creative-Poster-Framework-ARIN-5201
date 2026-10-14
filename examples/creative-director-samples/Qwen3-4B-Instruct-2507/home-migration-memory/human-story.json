@@ -1,0 +1,56 @@
+{
+  "keywords": [
+    "home",
+    "migration",
+    "memory"
+  ],
+  "interpretation": "A single, quiet moment of return—when a migrant child touches the worn wooden door of a childhood home, now foreign and unfamiliar, symbolizing the tension between loss and the enduring power of memory.",
+  "audience": "Families of migrants and diasporic communities seeking emotional resonance and cultural validation",
+  "objective": "To evoke a visceral sense of longing and belonging through a single, emotionally charged moment that transcends geography",
+  "core_message": "Memory does not disappear with migration—it transforms, stays within us, and quietly reclaims what we once knew",
+  "concept": {
+    "title": "The Door Still Opens",
+    "central_idea": "A migrant child stands at a weathered wooden door in a small village, hand resting on the handle. The door is slightly ajar, revealing a dim interior with a single photograph on the wall—of a child playing in a garden, long gone.",
+    "connection_to_keywords": "The door represents 'home' as a physical and emotional anchor. 'Migration' is implied by the child’s presence in a foreign place, not of origin. 'Memory' is embodied in the photograph and the child’s quiet touch—suggesting that memory persists even when the place changes."
+  },
+  "copy": {
+    "headline": "The door still opens. Not because it’s there. But because we remember how it felt to be inside.",
+    "subtitle": "",
+    "call_to_action": ""
+  },
+  "visual_direction": {
+    "main_subject": "A child’s hand resting on the handle of a weathered wooden door",
+    "setting": "A small, sun-bleached village home in a rural landscape, with distant mountains and a thin line of sunlight filtering through the trees",
+    "visual_relationship": "The child is slightly off-center, facing the door, with the interior of the home partially visible behind the door. The photograph on the wall is slightly blurred, as if viewed through memory",
+    "supporting_elements": [
+      "A single photograph on the wall showing a child playing in a garden",
+      "A small patch of moss growing on the door frame",
+      "A faint footprint in the dirt just outside the door"
+    ],
+    "style": "Photorealistic with soft, muted lighting and slight grain to evoke nostalgia",
+    "mood": "Quiet, reflective, tender, with a subtle undercurrent of melancholy"
+  },
+  "layout": {
+    "focal_point": "The child’s hand on the door handle",
+    "composition": "Diagonal framing from the child’s eye level to the door, with the photograph in the background slightly off-center to suggest memory not fully present",
+    "reading_order": "Eye moves from the child’s hand to the door, then to the photograph on the wall, and finally to the headline which introduces the deeper emotional layer",
+    "typography": "Clean, serif font for the headline; minimal text, centered above the image with slight negative space"
+  },
+  "palette": {
+    "colors": [
+      "warm beige",
+      "dusty ochre",
+      "soft gray",
+      "faded blue",
+      "muted green"
+    ],
+    "rationale": "The color palette reflects aging wood, natural decay, and faded memories. Warm tones anchor the emotional warmth of memory, while muted, earthy tones suggest the passage of time and displacement."
+  },
+  "avoid": [
+    "facial expressions",
+    "crowds",
+    "celebrations",
+    "explicit dates or locations",
+    "overly sentimental language"
+  ]
+}

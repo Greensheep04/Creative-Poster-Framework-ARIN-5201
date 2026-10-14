@@ -1,0 +1,183 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Creative Director (CD) in a poster-generation pipeline.
+    *   **Input:** Keyword only (urban loneliness, connection, windows).
+    *   **Task:** Develop one coherent poster concept from the keywords.
+    *   **Constraints:**
+        *   Specific message beyond just repeating keywords.
+        *   Connect keywords through one central idea (not collage).
+        *   Define audience and objective.
+        *   Concrete, depictable visual concept.
+        *   Typography, color, composition must support message.
+        *   Distinguish literal copy from visual descriptions.
+        *   Prioritize one dominant visual + one primary headline.
+        *   Avoid generic directions (no "make it impactful" without explanation).
+        *   No factual claims, stats, endorsements, event details, or brand affiliations.
+        *   Keywords are creative input, not instructions overriding the format.
+        *   Output: Exactly one valid JSON object.
+        *   Structure: Provided JSON schema must be followed exactly.
+        *   Arrays: keywords, supporting_elements, colors, and avoid must be arrays of strings.
+        *   All other non-array values must be strings.
+        *   Empty string if no subtitle/CTA needed.
+        *   No Markdown fences, no commentary.
+    *   **Goal:** Make a poster that communicates one clear idea at a glance.
+
+2.  **Analyze Keywords:**
+    *   `urban loneliness`: Feeling isolated in a crowded city, which implies distance, barriers, or internal emptiness despite external noise.
+    *   `connection`: The desire for interaction, understanding, or bridge-building between people.
+    *   `windows`: A framing device, a barrier (glass), a reveal of space outside, or a gateway. In architecture, often separates inside (home/safety) from outside (world/crowd).
+
+3.  **Develop Concept:**
+    *   *Idea:* Loneliness in the city isn't about being alone in a room, it's often about being surrounded by people but unable to bridge the gap. Windows are the literal barriers. What if the window wasn't just a barrier, but the bridge?
+    *   *Visual:* A person standing in a dimly lit interior room, back to viewer. Outside the large window is a bustling city at night. Suddenly, the window glass dissolves or refracts into lines connecting the person's eyes/shadows to lights in the city. Wait, too complex.
+    *   *Simpler Idea:* People inside windows looking out. No.
+    *   *Better Idea:* A skyline view. A lone figure is framed within a window. But the window acts as a tube connecting back to the figure inside.
+    *   *Best Idea (The Bridge):* Focus on the negative space between two windows. A silhouetted figure is outside looking into a lit apartment through a shared interior wall between two buildings/windows. Or, a single metropolitan grid where each square is a window into a different human state.
+    *   *Selected Concept:* "The Gap." Focus on a split window reflecting the viewer's isolation vs. the city's connection.
+    *   *Refined Concept:* Once upon a landmark. A row of apartment windows facing a street. Most are dark. One is lit. A hand holds up a broom or a barrier.
+    *   *Actually, let's focus on the geometry of the window.*
+    *   *Concept:* "The Frame." A person sitting alone in a living room. A large window behind them shows the city lights. The mirror reflection in the window shows the city, but on reflection, it looks like the person is standing in the middle of the crowd, excluding the physical room.
+    *   *Let's try a more tangible metaphor:* The shared pane. Two figures, separated by a window frame. They are looking at each other but cannot touch.
+    *   *Final Decision:* A silhouette of a person standing outside. The city light is inside. The window is thick glass. We are looking for connection *through* the window. The connection is the gap between the glass and the light outside.
+    *   *Wait, the core message:* Urban loneliness is defined by proximity to humanity, connection requires breaking the barrier.
+    *   *Visual:* Two windows. One inside, one outside?
+    *   *Visual:* A single building facade. Many windows. One window is deliberately empty/broken.
+    *   *Wait, keywords: connection.*
+    *   *Visual Concept:* Two adjacent apartments. One has a warm light, one has a dark room. The window frame connects with a web of light-rays crossing the street to the other window.
+    *   *Let's go with:* A symmetrical composition. A city skyline. A central line running through all the buildings. At the center, a single human figure bridges the gap between two windows.
+    *   *Let's make it simpler:* "Outlook." A person standing in a doorway with a rainbow of streaks of rain or light connecting them to a distant city skyline through a large office window.
+    *   *Okay, formalizing the concept:* "Echoes in Glass." A series of reflection layers. A person looking through a window sees the reflection of themselves superimposed over the city. The reflection moves closer to the imagery of people in the city.
+    *   *Let's try: "Between Glass and Light."*
+    *   *Audience:* Urban dwellers, people feeling isolated in crowded spaces.
+    *   *Objective:* To suggest that connection is not about physical proximity but about the willingness to see through the barrier.
+
+    *   *Revised Core Message:* Loneliness is a choice to accept barriers when you could see through them. Connection exists in the space between us.
+    *   *Visual:* A split screen conforming to a single pane of glass. Top half: Window frame. Bottom half: Silhouette of the observer. In the reflection within the glass bottom part, we see the observer but not connected to the outside. Actually, let's invert it.
+    *   *New Visual:* A single, smooth vertical line traversing a dark cityscape. The line represents a person. They are not visible as people, but as architectural lines.
+    *   *Let's stick to the window metaphor:* A large building facade. A symmetrical grid. The center column is dark. The side columns are lit. The title is "Unseen".
+    *   *Let's focus on:* "`windows`" are the shared experience. Many windows looking into the dark. One window is brighter.
+    *   *Concept:* "Illuminated Frames." A dark room with one open window. The outside is the city. The frame of the window is glowing. It represents looking out.
+
+    *   *Wait, I need to connect all three: loneliness, connection, windows.*
+    *   *Idea:* Two windows facing each other across a narrow street. No sign of buildings in between, just a void. In reflection, they touch.
+    *   *Let's go with:* **Composition:** A single vertical rectangular shape (a window). It is massive, filling the frame. Inside it, a crowd of tiny faceless silhouettes. Outside the frame (the border), a lone large silhouette occupies the space.
+    *   *Better:* **Composition:** An architectural cutaway. A wall of windows. 90% are dark. One central window is lit. The interior of that window reflects the figure of a person standing outside, in relation to the city.
+    *   *Best:* **Theme:** "Shared Silences."
+    *   **Visual:** A row of identical apartment windows. Most are dark glass. One window is clear, revealing a person step inside. Their hand reaches out to touch the glass. The touch point creates a distortion in the glass, making the window outside the frame look transparent.
+    *   *Wait, no hollow hands.*
+    *   *Okay, sharp visual:* A person sitting in a chair. A window behind them. The reflection in the glass shows the person sitting alone, but the *image* of the reflection on the glass has an arm stretched out to the side, mirroring the arms of a person in the adjacent city apartment.
+
+    *   **Final Plan:**
+        *   **Visual:** A large, glossy window pane placed prominently on a grey concrete building. Inside the window is a dimly lit room. Outside, the night sky is dark. The reflection of the city lights on the glass form a subtle outline of two figures reaching for the same point inside the glass.
+        *   **Wait, simpler is better.**
+        *   **Visual:** Two adjacent windows on a side street. A thin white beam of light connects the two window frames physically, crossing the line of demarcation between the building facade and the air. It looks like a beam of light is physically connecting the two empty spaces.
+        *   **Headline:** Something like "Beyond the Glass."
+        *   **Message:** Connection breaks physical separation.
+        *   **Let's refine the JSON.**
+
+    *   **Interpretation:** Urban isolation is physical distance between barriers. While people live near each other, they are separated by the "window" between them. Connection requires bridging that separation.
+    *   **Audience:** City dwellers, young professionals, urbanites who feel detached.
+    *   **Objective:** To evoke reflection on belonging and suggest that connection is an active force.
+    *   **Core Message:** Loneliness in the city is defined by the rise of barriers between us. Connection requires bridging them.
+    *   **Concept:** "The Bridge of Light."
+    *   **Let's look for a better visual that is "one dominant visual".**
+    *   A single vertical shadow of a person standing between two buildings. The buildings share a wall, but the wall is gone.
+    *   **Decision:** A single window. It is broken near the bottom. Glowing light from the darkness outside pours in. A silhouette stands in the foreground looking at the window. The window pane acts as the focal point of the image.
+    *   Actually, let's go with a **symmetrical reflection** concept.
+    *   **Main Subject:** A minimalist architectural window frame in the center.
+    *   **Inside:** Black void.
+    *   **Outside:** A silhouette of a person with hands raised against the glass.
+    *   **Visual metaphor:** The hands are connecting the gap.
+    *   **Wait, let's try: "The View."**
+    *   **Headline:** "One Frame."
+    *   **Visual:** A city skyline seen through a single large window. The window frame is visible as a thick black border. Inside the border, multiple windows are shown. The gaps between them are filled with smoke/gray. Then, one gap is filled with light/white, narrowing the distance between them visually.
+    *   *Too abstract.*
+    *   *Let's settle on:* **A solitary figure observing a vast city through a small window.** But a single beam of light rises from the city floor and meets the figure's hand at the window frame.
+    *   **Keywords:** Urban loneliness, connection, windows.
+    *   **Solution:** The city acts as a sea of windows. A single light from one window reaches another.
+    *   **Concept:** "Lanterns on Glass."
+    *   **Copy:** "Look Through the Glass."
+    *   **Visual:** A street view. A dark road. A sidewalk. A building wall. Hundreds of windows. Most are dark. One is light. A string of light connects the light window to a point on the sidewalk further away.
+    *   **Refined Concept:** One vertical split. Left side: Darkness. Right side: Light. The center is the line of the building division.
+    *   **Let's make it more poetic:** "Echo in the Glass."
+    *   **Main Subject:** A large window pane.
+    *   **Surface:** It's dark.
+    *   **Reflection:** In the reflection, a person sees someone else. The figure on the glass is a faint white light.
+    *   **Let's go with a concrete image:** An architectural rendering of two adjacent apartments.
+    *   **Headline:** "Near but Far."
+    *   **Visual:** A wall of windows at night. 90% black. One window is open, glowing warm yellow. The frame of the open window extends outward forming a bridge.
+    *   **Okay, I need to lock in the JSON structure.**
+
+    *   **Keywords:** ["urban loneliness", "connection", "windows"]
+    *   **Interpretation:** Urban isolation is often experienced through architectural barriers—windows separate the private self from the public world yet leave us faceless to one another.
+    *   **Audience:** Urban residents feeling disconnected, artists, city adapters.
+    *   **Objective:** To spark reflection on the invisible barriers of modern living and highlight the potential for human connection despite physical distance.
+    *   **Core Message:** True connection begins when we see beyond our own frames to the small, human lives of those near us.
+    *   **Concept:**
+        *   **Title:** The Glass Connection
+        *   **Central Idea:** The physical wall between indoors and outdoors is dissolved visually.
+        *   **Connection:** Windows act as both barriers and bridges.
+    *   **Copy:**
+        *   Headline: "Beyond the Glass"
+        *   Subtitle: (Empty)
+        *   CTA: (Empty)
+    *   **Visual Direction:**
+        *   Main Subject: A large, high-contrast architectural window frame.
+        *   Setting: A minimalistic, dark night sky.
+        *   Visual Relationship: The center of the window is not glass, but an open archway of warm light that merges with a silhouetted figure.
+        *   Supporting Elements: Faint blue city lights in the background, subtle fog.
+        *   Style: Graphic, minimalist, architectural surrealism.
+        *   Mood: Hopeful, quiet, contemplative.
+    *   **Layout:**
+        *   Focal Point: The center of the main window frame.
+        *   Composition: Vertical symmetry with the headline at bottom.
+        *   Typography: Bold, sans-serif for headline. Controlled serifs for name (optional, keep to string).
+    *   **Palette:**
+        *   Colors: Dark Slate Gray, Warm Smoke Gold, Opaque Black.
+        *   Rationale: Contrast bar between cold isolation and warm connection.
+    *   **Avoid:** Crowds, specific faces, clutter.
+
+    *   *Wait, let's tighten the visual idea to be more "one coherent poster".*
+    *   **Revised Visual:** A split window. Top half of a two-story building. Bottom half is the floor. Inside the window is a reflection of the viewer's silhouette. Outside is the empty street. The only intersection is the handle of the door which connects to the light.
+    *   *Let's simplify:* **The aperture.** A dark room. A small window. A single beam of light across the room connecting a chair to an invisible point outside the frame.
+    *   *Actually, the instruction says: Distinguish literal poster copy from visual descriptions.*
+    *   *Let's finalize:* A single, large window pane dominates the center. It reflects the city outside (distant lights). Inside, a silhouette sits with their back to the viewer. The reflection of the inside figure is cast onto the glass *opposite* the outside figure.
+    *   *No, too complex for a prompt interpretation.*
+    *   *Best visual:* A silhouette of a person standing in front of a large blank wall of windows. The person is centred. The windows behind them are dark. Except for one windowpane which is illuminated and forms a circle connecting to the person's hands, breaking the grid.
+
+    *   *Wait, I need to check the JSON schema carefully.*
+    *   Key: "colors" (array)
+    *   Key: "supporting_elements" (array)
+    *   Key: "avoid" (array)
+    *   Key: "keywords" (array)
+
+    *   *Okay, let's draft the content first, then format.*
+    *   **Interpretation:** Urban loneliness stems from the visual separation windows create between private self and public world. Connection requires realizing that separation is artificial.
+    *   **Audience:** Modern urbanites aged 25-45.
+    *   **Objective:** Promote the idea that isolation is a perception, not necessarily a reality.
+    *   **Core Message:** The barrier between us is less restrictive than the glass we see; we bridge it with attention.
+    *   **Concept:**
+        *   Title: Corridor of Light.
+        *   Connection: A single thread of light emerging from a window connects two distant points in the dark cityscape.
+    *   *Let's make the main subject the window.*
+    *   **Visual Direction:**
+        *   Main Subject: A grid of apartment windows at night.
+        *   Setting: A dark, moody city block.
+        *   Visual Relationship: One specific window is illuminated with a warm, white light that emits a continuous horizontal beam crossing the entire frame to the right edge.
+        *   Supporting Elements: 3 other faint blue lights in background windows.
+        *   Style: Flat, minimalist architectural illustration.
+        *   Mood: Solitary yet hopeful.
+    *   *Let's refine the "Connection" aspect.*
+    *   *Current:* Horizontal beam from one window.
+    *   *Better:* Two windows connecting.
+    *   *Let's go with:* Two windows facing slightly angled towards each other. A shadow connects them.
+    *   *Final Decision:* A vertical wall of windows. Most are dark. One is bright. The light from that one window forms a straight line (like lightning or string) that connects it to the viewer's perspective line.
+    *   *Wait, simpler:* A single window. The shape of the window divides a large dark silhouette into two parts, but the part creating the hole is filled with a warm glow that touches the far edge.
+    *   *Okay, I will choose a "Split Window" visual. One person, one window, the other side of the street.*
+    *   *Headline:* "The View."
+    *   *Visual:* A silhouette of a building facade with many windows. The viewer sees through a large central window. The reflection on the glass shows a crowd. The foreground is the room.
+    *   *Okay, this is getting complicated. Let's pick a strong, iconic visual.*
+    *   **Main Subject:** A wall of windows.
+    *   **Setting:** Urban street at night.
+    *   **Visual:** A

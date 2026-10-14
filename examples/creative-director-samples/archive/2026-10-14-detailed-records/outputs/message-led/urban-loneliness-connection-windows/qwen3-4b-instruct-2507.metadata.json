@@ -1,0 +1,13 @@
+{
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "provider": "Featherless AI",
+  "source_url": "https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507",
+  "variant": "message-led",
+  "keyword_id": "urban-loneliness-connection-windows",
+  "collected_at": "2026-10-14T07:48:15.509Z",
+  "status": "completed",
+  "json_valid": true,
+  "request_format": "Single user message; original system instructions and user keywords joined with blank line, then each newline replaced with a space for single-line widget.",
+  "sampling_settings": "Not exposed by widget; provider defaults",
+  "finish_reason": "stop"
+}

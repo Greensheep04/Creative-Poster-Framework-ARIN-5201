@@ -1,0 +1,359 @@
+{
+  "planned_runs": 45,
+  "order": "variant barrier: message-led, then visual-metaphor, then human-story; models may run concurrently, each processing keywords in listed order",
+  "runs": [
+    {
+      "sequence": 1,
+      "variant": "message-led",
+      "keyword_id": "urban-loneliness-connection-windows",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "input": "inputs/message-led/urban-loneliness-connection-windows.json"
+    },
+    {
+      "sequence": 2,
+      "variant": "message-led",
+      "keyword_id": "urban-loneliness-connection-windows",
+      "model": "Qwen/Qwen3-1.7B",
+      "input": "inputs/message-led/urban-loneliness-connection-windows.json"
+    },
+    {
+      "sequence": 3,
+      "variant": "message-led",
+      "keyword_id": "urban-loneliness-connection-windows",
+      "model": "Qwen/Qwen3.5-4B",
+      "input": "inputs/message-led/urban-loneliness-connection-windows.json",
+      "archived_reason": "truncated",
+      "archive_path": "archive/2026-10-14-unusable-runs/outputs/message-led/urban-loneliness-connection-windows/qwen3.5-4b"
+    },
+    {
+      "sequence": 4,
+      "variant": "message-led",
+      "keyword_id": "time-consumption-ocean",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "input": "inputs/message-led/time-consumption-ocean.json"
+    },
+    {
+      "sequence": 5,
+      "variant": "message-led",
+      "keyword_id": "time-consumption-ocean",
+      "model": "Qwen/Qwen3-1.7B",
+      "input": "inputs/message-led/time-consumption-ocean.json"
+    },
+    {
+      "sequence": 6,
+      "variant": "message-led",
+      "keyword_id": "time-consumption-ocean",
+      "model": "Qwen/Qwen3.5-4B",
+      "input": "inputs/message-led/time-consumption-ocean.json",
+      "archived_reason": "truncated",
+      "archive_path": "archive/2026-10-14-unusable-runs/outputs/message-led/time-consumption-ocean/qwen3.5-4b"
+    },
+    {
+      "sequence": 7,
+      "variant": "message-led",
+      "keyword_id": "home-migration-memory",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "input": "inputs/message-led/home-migration-memory.json"
+    },
+    {
+      "sequence": 8,
+      "variant": "message-led",
+      "keyword_id": "home-migration-memory",
+      "model": "Qwen/Qwen3-1.7B",
+      "input": "inputs/message-led/home-migration-memory.json"
+    },
+    {
+      "sequence": 9,
+      "variant": "message-led",
+      "keyword_id": "home-migration-memory",
+      "model": "Qwen/Qwen3.5-4B",
+      "input": "inputs/message-led/home-migration-memory.json"
+    },
+    {
+      "sequence": 10,
+      "variant": "message-led",
+      "keyword_id": "ai-creativity-identity",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "input": "inputs/message-led/ai-creativity-identity.json"
+    },
+    {
+      "sequence": 11,
+      "variant": "message-led",
+      "keyword_id": "ai-creativity-identity",
+      "model": "Qwen/Qwen3-1.7B",
+      "input": "inputs/message-led/ai-creativity-identity.json"
+    },
+    {
+      "sequence": 12,
+      "variant": "message-led",
+      "keyword_id": "ai-creativity-identity",
+      "model": "Qwen/Qwen3.5-4B",
+      "input": "inputs/message-led/ai-creativity-identity.json",
+      "archived_reason": "truncated",
+      "archive_path": "archive/2026-10-14-unusable-runs/outputs/message-led/ai-creativity-identity/qwen3.5-4b"
+    },
+    {
+      "sequence": 13,
+      "variant": "message-led",
+      "keyword_id": "repair-community-tomorrow",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "input": "inputs/message-led/repair-community-tomorrow.json"
+    },
+    {
+      "sequence": 14,
+      "variant": "message-led",
+      "keyword_id": "repair-community-tomorrow",
+      "model": "Qwen/Qwen3-1.7B",
+      "input": "inputs/message-led/repair-community-tomorrow.json"
+    },
+    {
+      "sequence": 15,
+      "variant": "message-led",
+      "keyword_id": "repair-community-tomorrow",
+      "model": "Qwen/Qwen3.5-4B",
+      "input": "inputs/message-led/repair-community-tomorrow.json",
+      "archived_reason": "truncated",
+      "archive_path": "archive/2026-10-14-unusable-runs/outputs/message-led/repair-community-tomorrow/qwen3.5-4b"
+    },
+    {
+      "sequence": 16,
+      "variant": "visual-metaphor",
+      "keyword_id": "urban-loneliness-connection-windows",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "input": "inputs/visual-metaphor/urban-loneliness-connection-windows.json"
+    },
+    {
+      "sequence": 17,
+      "variant": "visual-metaphor",
+      "keyword_id": "urban-loneliness-connection-windows",
+      "model": "Qwen/Qwen3-1.7B",
+      "input": "inputs/visual-metaphor/urban-loneliness-connection-windows.json"
+    },
+    {
+      "sequence": 18,
+      "variant": "visual-metaphor",
+      "keyword_id": "urban-loneliness-connection-windows",
+      "model": "Qwen/Qwen3.5-4B",
+      "input": "inputs/visual-metaphor/urban-loneliness-connection-windows.json",
+      "archived_reason": "truncated",
+      "archive_path": "archive/2026-10-14-unusable-runs/outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3.5-4b"
+    },
+    {
+      "sequence": 19,
+      "variant": "visual-metaphor",
+      "keyword_id": "time-consumption-ocean",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "input": "inputs/visual-metaphor/time-consumption-ocean.json"
+    },
+    {
+      "sequence": 20,
+      "variant": "visual-metaphor",
+      "keyword_id": "time-consumption-ocean",
+      "model": "Qwen/Qwen3-1.7B",
+      "input": "inputs/visual-metaphor/time-consumption-ocean.json"
+    },
+    {
+      "sequence": 21,
+      "variant": "visual-metaphor",
+      "keyword_id": "time-consumption-ocean",
+      "model": "Qwen/Qwen3.5-4B",
+      "input": "inputs/visual-metaphor/time-consumption-ocean.json",
+      "archived_reason": "truncated",
+      "archive_path": "archive/2026-10-14-unusable-runs/outputs/visual-metaphor/time-consumption-ocean/qwen3.5-4b"
+    },
+    {
+      "sequence": 22,
+      "variant": "visual-metaphor",
+      "keyword_id": "home-migration-memory",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "input": "inputs/visual-metaphor/home-migration-memory.json"
+    },
+    {
+      "sequence": 23,
+      "variant": "visual-metaphor",
+      "keyword_id": "home-migration-memory",
+      "model": "Qwen/Qwen3-1.7B",
+      "input": "inputs/visual-metaphor/home-migration-memory.json"
+    },
+    {
+      "sequence": 24,
+      "variant": "visual-metaphor",
+      "keyword_id": "home-migration-memory",
+      "model": "Qwen/Qwen3.5-4B",
+      "input": "inputs/visual-metaphor/home-migration-memory.json",
+      "archived_reason": "truncated",
+      "archive_path": "archive/2026-10-14-unusable-runs/outputs/visual-metaphor/home-migration-memory/qwen3.5-4b"
+    },
+    {
+      "sequence": 25,
+      "variant": "visual-metaphor",
+      "keyword_id": "ai-creativity-identity",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "input": "inputs/visual-metaphor/ai-creativity-identity.json"
+    },
+    {
+      "sequence": 26,
+      "variant": "visual-metaphor",
+      "keyword_id": "ai-creativity-identity",
+      "model": "Qwen/Qwen3-1.7B",
+      "input": "inputs/visual-metaphor/ai-creativity-identity.json"
+    },
+    {
+      "sequence": 27,
+      "variant": "visual-metaphor",
+      "keyword_id": "ai-creativity-identity",
+      "model": "Qwen/Qwen3.5-4B",
+      "input": "inputs/visual-metaphor/ai-creativity-identity.json",
+      "archived_reason": "truncated",
+      "archive_path": "archive/2026-10-14-unusable-runs/outputs/visual-metaphor/ai-creativity-identity/qwen3.5-4b"
+    },
+    {
+      "sequence": 28,
+      "variant": "visual-metaphor",
+      "keyword_id": "repair-community-tomorrow",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "input": "inputs/visual-metaphor/repair-community-tomorrow.json"
+    },
+    {
+      "sequence": 29,
+      "variant": "visual-metaphor",
+      "keyword_id": "repair-community-tomorrow",
+      "model": "Qwen/Qwen3-1.7B",
+      "input": "inputs/visual-metaphor/repair-community-tomorrow.json"
+    },
+    {
+      "sequence": 30,
+      "variant": "visual-metaphor",
+      "keyword_id": "repair-community-tomorrow",
+      "model": "Qwen/Qwen3.5-4B",
+      "input": "inputs/visual-metaphor/repair-community-tomorrow.json",
+      "archived_reason": "truncated",
+      "archive_path": "archive/2026-10-14-unusable-runs/outputs/visual-metaphor/repair-community-tomorrow/qwen3.5-4b"
+    },
+    {
+      "sequence": 31,
+      "variant": "human-story",
+      "keyword_id": "urban-loneliness-connection-windows",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "input": "inputs/human-story/urban-loneliness-connection-windows.json"
+    },
+    {
+      "sequence": 32,
+      "variant": "human-story",
+      "keyword_id": "urban-loneliness-connection-windows",
+      "model": "Qwen/Qwen3-1.7B",
+      "input": "inputs/human-story/urban-loneliness-connection-windows.json"
+    },
+    {
+      "sequence": 33,
+      "variant": "human-story",
+      "keyword_id": "urban-loneliness-connection-windows",
+      "model": "Qwen/Qwen3.5-4B",
+      "input": "inputs/human-story/urban-loneliness-connection-windows.json",
+      "archived_reason": "truncated",
+      "archive_path": "archive/2026-10-14-unusable-runs/outputs/human-story/urban-loneliness-connection-windows/qwen3.5-4b"
+    },
+    {
+      "sequence": 34,
+      "variant": "human-story",
+      "keyword_id": "time-consumption-ocean",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "input": "inputs/human-story/time-consumption-ocean.json"
+    },
+    {
+      "sequence": 35,
+      "variant": "human-story",
+      "keyword_id": "time-consumption-ocean",
+      "model": "Qwen/Qwen3-1.7B",
+      "input": "inputs/human-story/time-consumption-ocean.json"
+    },
+    {
+      "sequence": 36,
+      "variant": "human-story",
+      "keyword_id": "time-consumption-ocean",
+      "model": "Qwen/Qwen3.5-4B",
+      "input": "inputs/human-story/time-consumption-ocean.json",
+      "archived_reason": "truncated",
+      "archive_path": "archive/2026-10-14-unusable-runs/outputs/human-story/time-consumption-ocean/qwen3.5-4b"
+    },
+    {
+      "sequence": 37,
+      "variant": "human-story",
+      "keyword_id": "home-migration-memory",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "input": "inputs/human-story/home-migration-memory.json"
+    },
+    {
+      "sequence": 38,
+      "variant": "human-story",
+      "keyword_id": "home-migration-memory",
+      "model": "Qwen/Qwen3-1.7B",
+      "input": "inputs/human-story/home-migration-memory.json"
+    },
+    {
+      "sequence": 39,
+      "variant": "human-story",
+      "keyword_id": "home-migration-memory",
+      "model": "Qwen/Qwen3.5-4B",
+      "input": "inputs/human-story/home-migration-memory.json",
+      "archived_reason": "truncated",
+      "archive_path": "archive/2026-10-14-unusable-runs/outputs/human-story/home-migration-memory/qwen3.5-4b"
+    },
+    {
+      "sequence": 40,
+      "variant": "human-story",
+      "keyword_id": "ai-creativity-identity",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "input": "inputs/human-story/ai-creativity-identity.json"
+    },
+    {
+      "sequence": 41,
+      "variant": "human-story",
+      "keyword_id": "ai-creativity-identity",
+      "model": "Qwen/Qwen3-1.7B",
+      "input": "inputs/human-story/ai-creativity-identity.json"
+    },
+    {
+      "sequence": 42,
+      "variant": "human-story",
+      "keyword_id": "ai-creativity-identity",
+      "model": "Qwen/Qwen3.5-4B",
+      "input": "inputs/human-story/ai-creativity-identity.json",
+      "archived_reason": "provider_error",
+      "archive_path": "archive/2026-10-14-unusable-runs/outputs/human-story/ai-creativity-identity/qwen3.5-4b"
+    },
+    {
+      "sequence": 43,
+      "variant": "human-story",
+      "keyword_id": "repair-community-tomorrow",
+      "model": "Qwen/Qwen3-4B-Instruct-2507",
+      "input": "inputs/human-story/repair-community-tomorrow.json"
+    },
+    {
+      "sequence": 44,
+      "variant": "human-story",
+      "keyword_id": "repair-community-tomorrow",
+      "model": "Qwen/Qwen3-1.7B",
+      "input": "inputs/human-story/repair-community-tomorrow.json"
+    },
+    {
+      "sequence": 45,
+      "variant": "human-story",
+      "keyword_id": "repair-community-tomorrow",
+      "model": "Qwen/Qwen3.5-4B",
+      "input": "inputs/human-story/repair-community-tomorrow.json",
+      "archived_reason": "truncated",
+      "archive_path": "archive/2026-10-14-unusable-runs/outputs/human-story/repair-community-tomorrow/qwen3.5-4b"
+    }
+  ],
+  "sequence_note": "sequence is a stable run identifier, not a required global execution order",
+  "original_planned_runs": 45,
+  "active_target_runs": 31,
+  "model_statuses": {
+    "Qwen/Qwen3-4B-Instruct-2507": "complete",
+    "Qwen/Qwen3-1.7B": "complete",
+    "Qwen/Qwen3.5-4B": "one_valid_sample_remaining_failures_archived"
+  },
+  "scope_note": "User paused Qwen3.5-4B; finish 30 runs for the other two models. Preserve all already captured Qwen3.5 outcomes. Original 45-run inventory retained.",
+  "archived_runs": 14
+}

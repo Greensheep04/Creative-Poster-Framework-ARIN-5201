@@ -1,0 +1,15 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "provider": "Featherless AI",
+  "source_url": "https://huggingface.co/Qwen/Qwen3.5-4B",
+  "variant": "visual-metaphor",
+  "keyword_id": "time-consumption-ocean",
+  "collected_at": "2026-10-14T08:47:34.229Z",
+  "status": "completed",
+  "finish_reason": "length",
+  "json_valid": false,
+  "settings": "Widget/provider defaults; numeric parameters not exposed",
+  "input_method": "Original system and user messages joined with blank line; each newline replaced with one space for a single user-message widget.",
+  "resumed_after_user_authorization": true,
+  "response_id": "1a5b1b92-6b7c-415d-956f-3c9483b62a79"
+}

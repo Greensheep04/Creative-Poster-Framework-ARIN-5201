@@ -1,0 +1,15 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "provider": "Featherless AI",
+  "source_url": "https://huggingface.co/Qwen/Qwen3.5-4B",
+  "variant": "human-story",
+  "keyword_id": "urban-loneliness-connection-windows",
+  "collected_at": "2026-10-14T08:54:53.675Z",
+  "status": "completed",
+  "finish_reason": "length",
+  "json_valid": false,
+  "settings": "Widget/provider defaults; numeric parameters not exposed",
+  "input_method": "Original system and user messages joined with blank line; each newline replaced with one space for a single user-message widget.",
+  "resumed_after_user_authorization": true,
+  "response_id": "3fd28afa-72f5-476f-840a-6ded29e9d932"
+}

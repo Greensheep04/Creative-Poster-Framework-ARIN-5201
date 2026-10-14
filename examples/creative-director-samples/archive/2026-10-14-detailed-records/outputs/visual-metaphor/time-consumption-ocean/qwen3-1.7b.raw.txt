@@ -1,0 +1,36 @@
+{
+  "keywords": ["time", "consumption", "ocean"],
+  "interpretation": "A metaphorical interplay between the relentless flow of time and the cyclical nature of consumption, visualized through an oceanic lens.",
+  "audience": "General public",
+  "objective": "To provoke reflection on the relationship between time, consumption, and the natural world.",
+  "core_message": "Time is an ocean—endless, ever-moving, and consuming. The metaphor of the ocean as time highlights the unsustainable pace of consumption.",
+  "concept": {
+    "title": "Time's Tides",
+    "central_idea": "The ocean's tides represent time's passage, while waves symbolize consumption, creating a visual dialogue between the two.",
+    "connection_to_keywords": "Time (tides) and consumption (waves) are both cyclical, yet the ocean (as a metaphor) unites them in a single, cohesive visual."
+  },
+  "copy": {
+    "headline": "Time's Tides",
+    "subtitle": "Consumption as the Ocean's Currents",
+    "call_to_action": "Reflect on how your choices shape the tides of time."
+  },
+  "visual_direction": {
+    "main_subject": "A wave crest surging against a vast ocean backdrop",
+    "setting": "A deep blue ocean with a pale blue wave crest",
+    "visual_relationship": "The wave crest (consumption) clashes with the ocean (time), with the wave's motion mirroring the passage of time.",
+    "supporting_elements": ["a clock in the wave's crest", "a starfield in the ocean's depths", "a small, glowing object in the wave's core"],
+    "style": "Realistic, with a focus on dynamic motion and texture",
+    "mood": "Mysterious and urgent"
+  },
+  "layout": {
+    "focal_point": "The wave crest at the center of the composition",
+    "composition": "A vertical composition with the wave crest at the top, the ocean below, and a small, glowing object in the wave's core",
+    "reading_order": "Headline at the top, subtitle below, call to action at the bottom",
+    "typography": "Bold, sans-serif font for the headline, with a serif font for the subtitle and call to action"
+  },
+  "palette": {
+    "colors": ["deep blue", "pale blue", "white", "glowing amber"],
+    "rationale": "Deep blue for the ocean, pale blue for the wave crest, white for contrast, and glowing amber for the consuming element to emphasize urgency."
+  },
+  "avoid": []
+}

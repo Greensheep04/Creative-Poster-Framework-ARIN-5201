@@ -1,0 +1,20 @@
+{
+  "model": "Qwen/Qwen3-1.7B",
+  "variant": "visual-metaphor",
+  "keyword_slug": "time-consumption-ocean",
+  "provider": "Featherless AI",
+  "source_url": "https://huggingface.co/Qwen/Qwen3-1.7B",
+  "method": "Hugging Face model-page inference widget",
+  "started_at": "2026-10-14T08:08:22.086Z",
+  "captured_at": "2026-10-14T08:10:18.519Z",
+  "status": "superseded_input_whitespace",
+  "finish_reason": "stop",
+  "response_id": "c12d6ff3-01af-4968-a297-4cadce52f693",
+  "generation_settings": "Not exposed by widget; defaults unknown",
+  "request_adaptations": [
+    "System and user messages combined as one user message",
+    "Each newline replaced with one space; joining newlines removed by single-line widget"
+  ],
+  "json_valid": true,
+  "note": "Joining newline removed by widget; rerun uses canonical full-message normalization."
+}

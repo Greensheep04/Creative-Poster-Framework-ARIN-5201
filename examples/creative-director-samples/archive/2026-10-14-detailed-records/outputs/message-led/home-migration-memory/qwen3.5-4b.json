@@ -1,0 +1,54 @@
+{
+  "keywords": [
+    "home",
+    "migration",
+    "memory"
+  ],
+  "interpretation": "Migration is the physical act of displacement, but the emotional act of relocation requires carrying the essence of where you came from. The poster focuses on the container (the bag) as the vessel where identity is carried, not the destination.",
+  "audience": "Individuals navigating relocation, expatriates, families leaving established communities, and those reflective on loss and continuity.",
+  "objective": "To normalize the feeling of loss while affirming that personal identity persists across distance through personal history.",
+  "core_message": "Your home is not a place, it is a past you bring with you.",
+  "concept": {
+    "title": "The Container of Self",
+    "central_idea": "The suitcase represents the internal landscape of a migrating person, where physical objects are secondary to photographic memory.",
+    "connection_to_keywords": "Home is depicted through the visual warmth inside the open container. Migration is suggested by the path it rests upon. Memory is the fading quality of the image within the leather."
+  },
+  "copy": {
+    "headline": "All The Memories Inside",
+    "subtitle": "Carry the weight of your past to ensure your future has roots.",
+    "call_to_action": ""
+  },
+  "visual_direction": {
+    "main_subject": "An open vintage leather suitcase positioned slightly off-center, viewed from a high, direct angle.",
+    "setting": "A floor made of two distinct textures: rough concrete beneath and smooth, warm gold sand across the interior of the suitcase.",
+    "visual_relationship": "The suitcase acts as a bridge between the cold ground and the warm interior; the open flap is looking upward into a soft-focus, twilight sky.",
+    "supporting_elements": [
+      "Thin strap hanging down on the left",
+      "Faded cigarette lighter seal on the inside flap",
+      "Single vintage family photograph tucked into the lining"
+    ],
+    "style": "Cinematic still life with shallow depth of field",
+    "mood": "Contemplative, nostalgic, grounded."
+  },
+  "layout": {
+    "focal_point": "The open flap of the suitcase where the family photo is visible.",
+    "composition": "Thrsten focus with diagonal lines creating a stable anchor in the bottom right.",
+    "reading_order": "Eye is drawn to the photo inside the suitcase first, then follows the suitcase handle to the top, reading headline text.",
+    "typography": "Heavy serif font for headline to signify history; clean sans-serif for subtitle for modern clarity."
+  },
+  "palette": {
+    "colors": [
+      "Rusty Brown",
+      "Muted Gold",
+      "Cold Sky Blue",
+      "Soft Stone Grey"
+    ],
+    "rationale": "Rust and gold suggest the enduring nature of memory and the items within. The blue and grey ground represent the uncertainty of the migration context."
+  },
+  "avoid": [
+    "Generic luggage graphics",
+    "Smiling stock backgrounds",
+    "Complex 3D rendering",
+    "Horizontal maps with coordinates"
+  ]
+}
