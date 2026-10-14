@@ -1,5 +1,7 @@
 # CD → prompt → SDXL 主视觉预览
 
+如需包含 CD 标题、标语与排版的完整海报，使用 [CD 完整海报入口](cd-poster-preview.md)。本页入口只负责生成供后续合成使用的主视觉素材。
+
 这条独立测试链路读取 `examples/creative-director-samples` 中两个主题、三个 Qwen 模型的六份原始输出。它不依赖 A2，也不执行海报排版或 A4 审核。
 
 `examples/visual/cd-preview-prompts.json` 保存逐样例人工精简的英文 prompt、negative prompt、CD 来源 SHA-256 和转换说明。入口不会自动改写任意新 CD 输出；新增 CD 样例时需要为它编写对应 prompt 并记录转换依据。原始 CD 中缺失的 supporting_copy、数组型 style 字段，以及不同描述间的语义冲突都会保留在报告中。
