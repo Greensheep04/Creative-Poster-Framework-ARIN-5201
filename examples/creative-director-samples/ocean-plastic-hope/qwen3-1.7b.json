@@ -1,0 +1,39 @@
+{
+  "concept": "Hope in the Ocean",
+  "headline": "Hope in the Ocean",
+  "supporting_copy": "Every piece of plastic removed brings us closer to a cleaner future.",
+  "keyword_mapping": [
+    {
+      "keyword": "ocean",
+      "representation": "A shimmering, wave-filled canvas with a sun rising over it"
+    },
+    {
+      "keyword": "plastic",
+      "representation": "A swirling vortex of translucent plastic bottles"
+    },
+    {
+      "keyword": "hope",
+      "representation": "A glowing, heart-shaped light illuminating the ocean"
+    }
+  ],
+  "visual_direction": "A dynamic composition where the ocean's surface is transformed from a polluted state to a hopeful one, with plastic bottles swirling into a radiant, sunlit horizon.",
+  "style": {
+    "mood": "optimistic",
+    "medium": "digital",
+    "palette": [
+      "deep blue",
+      "emerald green",
+      "golden light"
+    ]
+  },
+  "must_include": [
+    "ocean",
+    "plastic",
+    "hope"
+  ],
+  "must_avoid": [
+    "statistics",
+    "brands",
+    "organizations"
+  ]
+}

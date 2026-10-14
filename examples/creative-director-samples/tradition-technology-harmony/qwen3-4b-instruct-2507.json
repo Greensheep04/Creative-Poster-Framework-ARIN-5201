@@ -1,0 +1,42 @@
+{
+  "concept": "An ancient clay pot fused with a digital interface, its surface glowing with flowing data streams that ripple like water, symbolizing harmony between tradition and technology.",
+  "headline": "Clay Meets Code, Together",
+  "supporting_copy": "",
+  "keyword_mapping": [
+    {
+      "keyword": "tradition",
+      "representation": "Hand-crafted clay pot with organic, hand-shaped details"
+    },
+    {
+      "keyword": "technology",
+      "representation": "Glowing, flowing data streams emanating from the pot’s surface"
+    },
+    {
+      "keyword": "harmony",
+      "representation": "The data streams gently follow the pot's curves, merging without conflict"
+    }
+  ],
+  "visual_direction": "Symmetrical focus on a central object where tradition and technology seamlessly blend",
+  "style": {
+    "mood": "calm and balanced",
+    "medium": "digital illustration with hand-drawn texture",
+    "palette": [
+      "terracotta",
+      "soft silver"
+    ]
+  },
+  "must_include": [
+    "tradition",
+    "technology",
+    "harmony"
+  ],
+  "must_avoid": [
+    "split-screen",
+    "conflict",
+    "machinery",
+    "chaos",
+    "statistics",
+    "brands",
+    "organizations"
+  ]
+}

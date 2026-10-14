@@ -1,0 +1,44 @@
+{
+  "concept": "A wave gently lifting a plastic bottle into the sky, transforming it into a bird that soars above the ocean, symbolizing hope through mindful change.",
+  "headline": "Hope Grows from the Tide",
+  "supporting_copy": "Plastic meets the ocean — transformed into flight, not waste.",
+  "keyword_mapping": [
+    {
+      "keyword": "ocean",
+      "representation": "Vast, serene blue horizon with gentle ripples and distant sun rays"
+    },
+    {
+      "keyword": "plastic",
+      "representation": "A single, intact plastic bottle rising from the water, mid-transition"
+    },
+    {
+      "keyword": "hope",
+      "representation": "The bottle morphs into a flying bird made of clear and translucent plastic"
+    }
+  ],
+  "visual_direction": "Soft focus on the ocean, with a single dynamic upward motion forming the central metaphor",
+  "style": {
+    "mood": "optimistic and serene",
+    "medium": "watercolor with subtle digital layering",
+    "palette": [
+      "sky blue",
+      "soft turquoise",
+      "white",
+      "transparent pastel orange"
+    ]
+  },
+  "must_include": [
+    "ocean",
+    "plastic",
+    "hope"
+  ],
+  "must_avoid": [
+    "statistics",
+    "brands",
+    "organizations",
+    "dark tones",
+    "chaos",
+    "destruction",
+    "fear"
+  ]
+}
