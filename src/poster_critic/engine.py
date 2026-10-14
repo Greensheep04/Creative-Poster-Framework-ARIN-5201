@@ -2,12 +2,15 @@
 
 from importlib.resources import files
 import math
+from collections.abc import Awaitable, Callable
+from contextlib import nullcontext
 
 from .checks import geometry_findings, parse_observation
 from .contracts import AuditInputV1, AuditReportV3
-from .errors import ResponseError, RetryableProviderError
+from .errors import InputError, ResponseError, RetryableProviderError
 from .policy import make_report
 from .ports import Executor, Provider
+from .evidence_review import SupplementalReviewV1, apply_supplemental_review
 
 PROMPT_VERSION = "critic-v4"
 
@@ -32,7 +35,9 @@ def validation_reminder(error: ResponseError) -> str:
 
 class AuditEngine:
     def __init__(self, provider: Provider, executor: Executor, *, max_retries: int = 1,
-                 retry_delay: float = 0.5, max_retry_delay: float = 5.0) -> None:
+                 retry_delay: float = 0.5, max_retry_delay: float = 5.0,
+                 evidence_reviewer: Callable[[AuditInputV1, AuditReportV3], Awaitable[SupplementalReviewV1]] | None = None,
+                 telemetry=None, language_profile=None, expected_framework_revision=None) -> None:
         if type(max_retries) is not int or not 0 <= max_retries <= 1:
             raise ValueError("max_retries must be 0 or 1")
         if any(isinstance(v, bool) or not math.isfinite(v) or not 0 <= v <= 30
@@ -40,29 +45,103 @@ class AuditEngine:
             raise ValueError("retry delays must satisfy 0 <= delay <= maximum <= 30")
         self.provider, self.executor = provider, executor
         self.max_retries, self.retry_delay, self.max_retry_delay = max_retries, retry_delay, max_retry_delay
+        if evidence_reviewer is not None and not callable(evidence_reviewer):
+            raise ValueError('evidence_reviewer must be callable or null')
+        self.evidence_reviewer = evidence_reviewer
+        self.last_evidence: SupplementalReviewV1 | None = None
+        if telemetry is not None:
+            from .telemetry import TelemetryRecorder, provider_measurement_kind
+            if (not isinstance(telemetry, TelemetryRecorder)
+                    or telemetry.execution_mode != ('live' if provider.live else 'fake')
+                    or telemetry.measurement_kind != provider_measurement_kind(provider)):
+                raise InputError('telemetry must match this provider and execution mode')
+        if language_profile is not None:
+            from .language_profiles import validate_language_profile
+            language_profile = validate_language_profile(language_profile)
+        self.telemetry, self.language_profile = telemetry, language_profile
+        self.expected_framework_revision = expected_framework_revision
+        if telemetry is not None and hasattr(executor, 'telemetry'):
+            if executor.telemetry is not None and executor.telemetry is not telemetry:
+                raise InputError('executor belongs to a different telemetry invocation')
+            executor.telemetry = telemetry
+        self._busy = False
+
+    def _stage(self, name, **kwargs):
+        return self.telemetry.stage(name, **kwargs) if self.telemetry else nullcontext()
 
     async def audit(self, audit: AuditInputV1) -> AuditReportV3:
-        program_findings = geometry_findings(audit)
-        prompt = files("poster_critic").joinpath("prompts/critic_v4.txt").read_text(encoding="utf-8")
-        current_prompt = prompt
+        if self._busy:
+            raise InputError('an audit engine cannot be shared by concurrent audits')
+        self._busy = True
+        try:
+            report = await self._audit(audit)
+            if self.telemetry is not None and self.telemetry.scope == 'audit_only':
+                self.telemetry.not_run('delivery')
+                self.telemetry.finish(terminal_outcome='completed', delivery_state='not_called')
+            return report
+        except BaseException as exc:
+            if self.telemetry is not None and self.telemetry.scope == 'audit_only':
+                terminal = 'cancelled' if type(exc).__name__ == 'CancelledError' or isinstance(exc, KeyboardInterrupt) else 'input_error' if isinstance(exc, InputError) else 'execution_error'
+                self.telemetry.finish(terminal_outcome=terminal, delivery_state='not_called', error=exc)
+            raise
+        finally:
+            self._busy = False
+
+    async def _audit(self, audit: AuditInputV1) -> AuditReportV3:
+        self.last_evidence = None
         start = len(self.executor.records)
+        if self.telemetry is not None:
+            self.telemetry.bind_calls(lambda: self.executor.records[start:])
+            self.telemetry.bind_reviewer(self.evidence_reviewer)
+        with self._stage('input_validate'):
+            if self.telemetry is not None:
+                self.telemetry.bind_input(audit)
+                from .telemetry import reviewer_policy_fingerprint, execution_policy_fingerprint
+                from .environment import collect_environment
+                framework = hasattr(self.executor, 'framework_calls')
+                try:
+                    environment = collect_environment(scope='framework_adapter' if framework else 'standalone',
+                        expected_framework_revision=self.expected_framework_revision if framework else None,
+                        require_live=self.provider.live)
+                    self.telemetry.capture_identity(self.provider, language_profile=self.language_profile,
+                        supplemental_policy_sha256=reviewer_policy_fingerprint(self.evidence_reviewer),
+                        execution_policy_sha256=execution_policy_fingerprint(self.provider, self.executor,
+                            max_retries=self.max_retries, retry_delay=self.retry_delay, max_retry_delay=self.max_retry_delay),
+                        environment=environment)
+                except Exception:
+                    # Measurement availability cannot veto a valid business audit.
+                    # Null identity excludes this result from a bound benchmark.
+                    self.telemetry.identity_unavailable()
+            preflight = getattr(self.evidence_reviewer, 'preflight', None)
+            if callable(preflight):
+                preflight(audit)
+            program_findings = geometry_findings(audit)
+            prompt = files("poster_critic").joinpath("prompts/critic_v4.txt").read_text(encoding="utf-8")
+        current_prompt = prompt
         observation, failure = None, None
         for index in range(1 + self.max_retries):
             wait = self.retry_delay if self.provider.live else 0.0
             try:
-                raw = await self.executor.execute_once(
-                    lambda current=current_prompt: self.provider.invoke(audit, current),
-                    model=self.provider.name, live=self.provider.live,
-                )
+                prepare = getattr(self.provider, 'prepare_call', None)
+                with self._stage('request_prepare'):
+                    prepared = prepare(audit, current_prompt) if callable(prepare) else nullcontext(
+                        lambda current=current_prompt: self.provider.invoke(audit, current))
+                    invoke = prepared.__enter__()
+                try:
+                    raw = await self.executor.execute_once(invoke, model=self.provider.name, live=self.provider.live)
+                finally:
+                    import sys
+                    prepared.__exit__(*sys.exc_info())
             except RetryableProviderError as exc:
                 failure = f"{type(exc).__name__}: {exc}"
                 wait = max(wait, exc.retry_after or 0.0)
             else:
                 attempt = self.executor.records[-1].attempt
                 try:
-                    if raw.problem or raw.refusal or raw.finish_reason not in (None, "stop"):
-                        raise ResponseError(raw.problem or "provider refused or did not finish the observation")
-                    observation = parse_observation(raw.text, audit, blind_copy=getattr(self.provider, 'blind_copy', False))
+                    with self._stage('observation_validate', attempt=index + 1):
+                        if raw.problem or raw.refusal or raw.finish_reason not in (None, "stop"):
+                            raise ResponseError(raw.problem or "provider refused or did not finish the observation")
+                        observation = parse_observation(raw.text, audit, blind_copy=getattr(self.provider, 'blind_copy', False))
                 except ResponseError as exc:
                     self.executor.record_validation(attempt, error_type=type(exc).__name__)
                     failure = f"{type(exc).__name__}: {exc}"
@@ -76,8 +155,19 @@ class AuditEngine:
             if index == self.max_retries or wait > self.max_retry_delay:
                 break
             if wait:
-                await self.executor.wait_before_retry(wait)
-        return make_report(
-            audit, observation, program_findings, model=self.provider.name, live=self.provider.live,
-            calls=self.executor.records[start:], prompt_version=PROMPT_VERSION, failure=failure,
-        )
+                with self._stage('retry_wait', attempt=index + 2):
+                    await self.executor.wait_before_retry(wait)
+        with self._stage('report_build'):
+            report = make_report(
+                audit, observation, program_findings, model=self.provider.name, live=self.provider.live,
+                calls=self.executor.records[start:], prompt_version=PROMPT_VERSION, failure=failure,
+            )
+        if self.evidence_reviewer is not None:
+            with self._stage('evidence_review'):
+                review = await self.evidence_reviewer(audit, report)
+                report = apply_supplemental_review(audit, report, review,
+                                                   renderer_source=getattr(self.evidence_reviewer, 'renderer', None))
+                self.last_evidence = SupplementalReviewV1.model_validate_json(review.model_dump_json())
+        if self.telemetry is not None:
+            self.telemetry.bind_report(report)
+        return report
