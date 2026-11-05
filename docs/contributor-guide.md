@@ -2,6 +2,20 @@
 
 本指南面向负责一个海报角色或业务工具的组员。每个成员实现自己的 Agent、模型连接和业务校验器，再由工作流注册表连接角色。
 
+## Layout Planner（A2）基线接入
+
+仓库提供 `poster_framework.layout_planner.LayoutPlannerAgent`，输出 `poster.poster-spec@1`。它将 brief 中的 `copy.title`/`copy.subtitle`（也兼容 `headline` 或 `title`）排成 720×1280 规格，并保留 `context.original_request` 中的原始关键词。上游 Creative Director 应输出 `poster.creative-brief@1`；若其格式名或字段结构不同，在注册时声明 `ContentAdapter`，不要在 A2 中改写文案。
+
+```python
+from poster_framework import AgentSet, PosterWorkflow
+from poster_framework.layout_planner import registration
+
+registrations = [creative_director_registration, registration(), visual_producer_registration, quality_critic_registration]
+workflow = PosterWorkflow(AgentSet(registrations), root="runs")
+```
+
+此基线使用确定性模板，适合作为可运行的接口实现；接入 LLM 时可替换 `LayoutPlannerAgent.run()` 中的规划步骤，但仍须运行 `validate_poster_spec()` 并维持同一输出格式。独立示例：`uv run python examples/layout_planner.py`。
+
 ## 1. 定义内容格式与 Agent
 
 为输入和输出声明明确格式名称及业务版本。`AgentInput` 与 `AgentOutput` 的 `content` 使用 JSON 数据；格式版本代表业务字段约定，框架会另行记录公共接口版本、文件修订号和哈希。

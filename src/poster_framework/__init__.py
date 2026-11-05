@@ -24,6 +24,7 @@ from .registration import (
     PreparedAgentOutput,
 )
 from .generation import ArtifactGenerationRecord, GenerationFingerprint
+from .layout_planner import LAYOUT_BRIEF_FORMAT, POSTER_SPEC_FORMAT, LayoutPlannerAgent, validate_poster_spec
 from .types import (
     CANVAS_HEIGHT,
     CANVAS_WIDTH,
@@ -88,6 +89,9 @@ __all__ = [
     "CANVAS_WIDTH",
     "CacheHit",
     "INTERFACE_VERSION",
+    "LAYOUT_BRIEF_FORMAT",
+    "POSTER_SPEC_FORMAT",
+    "LayoutPlannerAgent",
     "Agent",
     "AgentContext",
     "AgentFrameworkError",
@@ -169,4 +173,6 @@ __all__ = [
     "run_single_agent",
     "run_single_agent_from_request",
     "run_single_agent_from_upstream",
+    "validate_poster_spec",
 ]
+
