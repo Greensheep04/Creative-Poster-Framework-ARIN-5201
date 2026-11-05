@@ -10,6 +10,29 @@ from .errors import (
     ToolInvocationError,
     ToolRegistrationError,
 )
+from .layout_errors import LayoutContractError, MissingFontError, TextOverflowError
+from .layout_checks import (
+    check_image_placements,
+    check_layout_geometry,
+    check_planned_keyword_coverage,
+)
+from .layout_fonts import (
+    FontFace,
+    FontRegistry,
+    TextMeasurement,
+    contrast_ratio,
+    default_family_key,
+    default_font_registry,
+    measure_text_block,
+    pick_text_color,
+)
+from .layout_spec import (
+    PosterSpec,
+    parse_poster_spec,
+    poster_spec_json_schema,
+)
+from .layout_templates import describe_templates, get_template, template_ids
+from .layout_tools import register_layout_tools
 from .registration import (
     AgentRegistration,
     AgentRegistrationSnapshot,
@@ -24,7 +47,16 @@ from .registration import (
     PreparedAgentOutput,
 )
 from .generation import ArtifactGenerationRecord, GenerationFingerprint
-from .layout_planner import LAYOUT_BRIEF_FORMAT, POSTER_SPEC_FORMAT, LayoutPlannerAgent, validate_poster_spec
+from .layout_planner import (
+    BRIEF_FORMAT,
+    LAYOUT_BRIEF_FORMAT,
+    LEGACY_BRIEF_FORMAT,
+    POSTER_SPEC_FORMAT,
+    LayoutPlannerAgent,
+    plan_poster_spec,
+    registration as layout_planner_registration,
+    validate_poster_spec,
+)
 from .types import (
     CANVAS_HEIGHT,
     CANVAS_WIDTH,
@@ -89,9 +121,34 @@ __all__ = [
     "CANVAS_WIDTH",
     "CacheHit",
     "INTERFACE_VERSION",
+    "BRIEF_FORMAT",
     "LAYOUT_BRIEF_FORMAT",
+    "LEGACY_BRIEF_FORMAT",
     "POSTER_SPEC_FORMAT",
     "LayoutPlannerAgent",
+    "FontFace",
+    "FontRegistry",
+    "LayoutContractError",
+    "MissingFontError",
+    "PosterSpec",
+    "TextMeasurement",
+    "TextOverflowError",
+    "check_image_placements",
+    "check_layout_geometry",
+    "check_planned_keyword_coverage",
+    "contrast_ratio",
+    "default_family_key",
+    "default_font_registry",
+    "describe_templates",
+    "get_template",
+    "template_ids",
+    "layout_planner_registration",
+    "measure_text_block",
+    "parse_poster_spec",
+    "pick_text_color",
+    "plan_poster_spec",
+    "poster_spec_json_schema",
+    "register_layout_tools",
     "Agent",
     "AgentContext",
     "AgentFrameworkError",
@@ -175,4 +232,7 @@ __all__ = [
     "run_single_agent_from_upstream",
     "validate_poster_spec",
 ]
+
+
+
 
