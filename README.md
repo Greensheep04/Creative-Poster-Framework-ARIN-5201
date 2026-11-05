@@ -69,6 +69,17 @@ uv run python examples/single_role.py --root .scratch/single-role
 
 该样例使用默认真实执行模式和确定性业务 Agent，不调用外部模型服务。完整的 Fake 工作流入口单独列在前一节。
 
+## 版式规划（A2）
+
+`poster_framework.layout_planner` 提供可运行的 A2：把 `poster.creative-brief@0.1.0` 转成与 `docs/schemas/PosterSpec.json` 兼容的 `poster.spec@0.1.0`。它使用三个受控模板、Pillow 真实文字测量、几何与关键词覆盖检查，并支持 `revise_layout` 的限定字段补丁。工具通过 `register_layout_tools(ToolRegistry())` 注册。
+
+```bash
+uv run python examples/layout_planner.py --root .scratch/layout-planner
+uv run pytest tests/layout
+```
+
+细节见[组员接入指南](docs/contributor-guide.md)与[接口说明](docs/api.md#a2-layout-planner)。
+
 ## 混合 Agent 测试
 
 一次 `PosterWorkflow` 可以组合真实 Agent 与成员自编的确定性测试 Agent。`AgentSet` 为四个角色分别接收 `AgentRegistration`；相邻角色的 `output_formats` 与 `input_formats` 必须相连，内容格式不同时通过 `ContentAdapter` 转换。可参考 [`examples/revision_actions.py`](examples/revision_actions.py)：其中四个 Agent 各自注册，在 `ExecutionMode.real` 下使用 Pillow PNG 检查完整返工路由。该样例的校验器要求 `title`、`keyword_texts`、`columns` 等业务字段，并通过 `revision_validator` 保留原始关键词或已批准标题；这些规则属于样例，成员按自身业务定义校验器。
@@ -115,6 +126,7 @@ uv run python examples/format_upgrade.py --root .scratch/format-upgrade
 ## 能力范围
 
 - 框架提供四个海报 Agent 角色、单角色入口、格式转换、工具调用、版本依赖、文件安全检查、记忆、缓存、调用预算和运行记录。
+- A2 的 `poster.spec@0.1.0` 与 A3 分支的 `docs/schemas/PosterSpec.json` 一致，A3 无需额外适配器即可消费。
 - 模型服务、SDK、提示词、供应商重试策略和业务质量标准由接入方配置。
 - `real` 模式会校验真实 PNG、JPEG、WebP 候选的文件解码、媒体类型、扩展名和尺寸。
 - FakeModel 用于显式演示与测试。Fake 文本候选不会被 `real` 模式接受。
@@ -124,6 +136,8 @@ uv run python examples/format_upgrade.py --root .scratch/format-upgrade
 
 - `src/poster_framework/`：公开接口、工作流与运行组件。
 - `tests/`：接口、运行时、工作流、演示和单角色行为测试。
+- `tests/layout/`：A2 版式规划的契约、测量、模板、检查、工具与四角色集成测试（`uv run pytest tests/layout`）。
 - `examples/`：单角色、工具目录、格式升级、定向返工，以及配套请求输入和单角色输出参考。
 - `docs/api.md`：公共数据结构与调用入口。
 - `docs/contributor-guide.md`：Agent、工具、模型 SDK 和校验器接入说明。
+
