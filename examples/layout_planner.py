@@ -1,18 +1,23 @@
 from __future__ import annotations
 
-import argparse
 import asyncio
 import json
-from pathlib import Path
 
 from poster_framework import (
-    AgentInput, AgentRole, ContentFormat, ExecutionIdentity, ExecutionMode,
-    FrameworkMetadata, OriginalRequest,
+    AgentInput,
+    AgentRegistration,
+    AgentRole,
+    ExecutionIdentity,
+    ExecutionMode,
+    FrameworkMetadata,
+    OriginalRequest,
 )
 from poster_framework.layout_planner import (
-    LAYOUT_BRIEF_FORMAT, LayoutPlannerAgent, POSTER_SPEC_FORMAT, validate_poster_spec,
+    LAYOUT_BRIEF_FORMAT,
+    LayoutPlannerAgent,
+    POSTER_SPEC_FORMAT,
+    validate_poster_spec,
 )
-from poster_framework import AgentRegistration, AgentRole
 
 
 def registration() -> AgentRegistration:
@@ -25,7 +30,7 @@ def registration() -> AgentRegistration:
     )
 
 
-async def run_example(root: Path) -> dict[str, object]:
+async def run_example() -> dict[str, object]:
     request = OriginalRequest.from_keywords("layout-planner-example", ["海洋", "宁静"])
     brief = {"copy": {"title": "静海之蓝", "subtitle": "留一点宁静给自己"}}
     metadata = FrameworkMetadata(
@@ -53,10 +58,7 @@ async def run_example(root: Path) -> dict[str, object]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--root", type=Path, default=Path(".scratch/layout-planner"))
-    args = parser.parse_args()
-    print(json.dumps(asyncio.run(run_example(args.root)), ensure_ascii=False, indent=2))
+    print(json.dumps(asyncio.run(run_example()), ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":
