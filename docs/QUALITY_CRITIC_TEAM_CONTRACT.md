@@ -1,5 +1,7 @@
 # A4 审核接口：输入与输出
 
+当前 A4 进度、后续开发顺序与接入资料清单见 [进度与交接](A4_PROGRESS_AND_NEXT_STEPS.md)。
+
 更新：2026-10-12。输入为 **LocalManifest v1**，输出为 **AuditReport v3**。
 
 A1、A2、A3 分别产出各自的信息；A3 完成最终候选后，由接入程序汇总输入交给 A4。`pass` 自动放行并输出当前候选；只有 `fail/unknown` 返回 A1。**A4 的分流、回调和 unknown 诊断已实现；接入方负责组装输入、连接组员的真实 A1 函数及框架版本。**
@@ -34,7 +36,7 @@ A1、A2、A3 分别产出各自的信息；A3 完成最终候选后，由接入�
 - 图片：单帧 PNG/JPEG，**720×1280**，不超过 **20 MiB**；A4 自行计算图片 hash。
 - 坐标：最终画布像素 `[x0,y0,x1,y1]`，左上角为原点；不是 `[x,y,width,height]`。越界值如实保留给 A4 检查。
 - 四项基础检查为 `keyword_alignment`、`user_constraints`、`text_readability`、`layout_quality`，不能删除；可增加 `text_accuracy`、`layout_geometry`。必需文案会自动启用 `text_accuracy`。
-- 可选上下文可省略或填 `null`；`approved_copy=null` 表示未提供，`[]` 表示没有列出的文案。当前只检查声明框，不测量实际文字边界。
+- 可选上下文可省略或填 `null`；`approved_copy=null` 表示未提供，`[]` 表示没有列出的文案。默认核心路径检查声明框；显式接入 [P1 渲染证据](A4_P1_EVIDENCE_AND_QUALITY.md) 后，可核验绑定的实际 ink bounds、文案、字形和重叠事实。
 - JSON 禁止多余字段。`run_id/candidate_id`、Brief/Spec 版本由接入程序另存并关联；组装时核对图片、文案和布局属于同一候选版本，不能直接把这些版本字段塞入此输入。
 
 示例输入：
@@ -78,7 +80,7 @@ A1、A2、A3 分别产出各自的信息；A3 完成最终候选后，由接入�
 
 `issues[]`：`code` 为问题类型；`severity` 为 `blocking/major/minor`；`source` 为 `program/model`；`evidence` 是具体证据；`suggestion` 是修改建议；位置 `element_id/bbox_xyxy` 可为 `null`。
 
-检查 `status/readability` 使用 `pass/fail/unknown`；`coverage.state` 使用 `assessed/not_assessed/unknown`，`status` 在未评估时可为 `null`。`repair_hint.stage` 类型允许 `brief/layout/asset/render`，**当前程序仅对证据完整、无 blocking 问题的明确布局几何错误生成 `layout` 提示**。
+检查 `status/readability` 使用 `pass/fail/unknown`；`coverage.state` 使用 `assessed/not_assessed/unknown`，`status` 在未评估时可为 `null`。`repair_hint.stage` 类型允许 `brief/layout/asset/render`，当前可基于明确布局几何或绑定的实际渲染事实给出 `layout/render` 提示；缺证据或 OCR 冲突不生成猜测性修复操作。提示仅供 A1 决定后续处理，不是 A4 已执行的修改。
 
 报告还带 `model/prompt_version/execution_mode/calls/vision_calls` 调用记录。接入程序在放行或派发反馈前核对当前候选及依赖版本；A1 只接收 fail/unknown，按上表字段处理。
 
