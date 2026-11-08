@@ -9,6 +9,7 @@ docs/local-gpu-progress.md
 docs/local-gpu-review.md
 docs/local-gpu.md
 docs/poster-quality-progress.md
+docs/poster-quality-round1.md
 docs/qc-handoff.md
 docs/quality-pipeline.md
 docs/schemas/CreativeBrief.json
