@@ -65,6 +65,8 @@ def prepare_asset(data: bytes, element: ImageElement) -> PreparedAsset:
             "fit": element.fit,
             "focus_point_norm": list(element.focus_point_norm),
             "crop_box": crop,
+            "retained_area_ratio": 1.0 if crop is None else (crop[2]-crop[0])*(crop[3]-crop[1])/(sw*sh),
+            "actual_subject_status": "unknown",
             "content_box": content_box,
             "raw_to_processed": transform,
         },

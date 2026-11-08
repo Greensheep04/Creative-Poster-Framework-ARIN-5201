@@ -163,6 +163,7 @@ def render_poster(
                 font_size_px=e.font_size_px,
                 line_height_px=e.line_height_px,
                 font_sha256=layout.font_sha256,
+                font_metrics=fonts.glyph_metrics(e),
             )
         rows.append(row)
     png = encode_png(canvas)

@@ -62,6 +62,12 @@ class FontRegistry:
             str(path), element.font_size_px, index=face.index
         ), digest
 
+    def glyph_metrics(self,element):
+        font,digest=self.resolve(element)
+        return {'font_sha256':digest,'curly_apostrophe_advance_px':font.getlength('\u2019'),
+            'ascii_apostrophe_advance_px':font.getlength("'"),'thumbnail_font_size_px':element.font_size_px*.375,
+            'punctuation_preserved':True}
+
     @classmethod
     def from_config(cls, config: dict, base: Path):
         families = {}

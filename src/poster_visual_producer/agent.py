@@ -34,10 +34,14 @@ class VisualProducerAgent:
         seed=None,
         negative_policy="append",
         max_safe_retries=1,
+        request_validator=None,
+        require_visual_contract=False,
     ):
         if max_safe_retries not in (0, 1):
             raise ValueError("MVP permits zero or one safe retry")
         self.generator, self.fonts = generator, fonts
+        self.request_validator=request_validator
+        self.require_visual_contract=require_visual_contract
         self.seed, self.negative_policy, self.max_safe_retries = (
             seed,
             negative_policy,
@@ -84,6 +88,8 @@ class VisualProducerAgent:
             spec, brief, [k.keyword_id for k in context.original_request.keywords]
         )
         visual_contract = load_contract(inputs, context, upstream['brief']['content'])
+        if self.require_visual_contract and visual_contract is None:
+            raise StageError('MISSING_INPUT','Current A2 visual contract required')
         preflight(spec, self.fonts)  # fail before any costly image submission
         notes = [n for n in memory["notes"] if n["note_id"].startswith(_NOTE + ":")]
         previous = copy.deepcopy(notes[-1]["content"]) if notes else {}
@@ -119,6 +125,17 @@ class VisualProducerAgent:
                 )
             target_asset = matches[0]
         constraints = ()
+        if visual_contract and action in {RevisionAction.regenerate_asset,RevisionAction.rerender}:
+            from poster_framework import RepairAuthorization
+            histories=memory["revision_history"]
+            details=histories[-1].get("changes",{}).get("details",{}) if histories else {}
+            if "authorization" not in details:
+                raise StageError("CONSTRAINT_CONFLICT","Quality repair requires explicit versioned authorization")
+            auth=RepairAuthorization.model_validate(details["authorization"])
+            if auth.action!=action or auth.target!=target or auth.expected_versions!={"brief_version":brief.brief_version,"spec_version":spec.spec_version}:
+                raise StageError("STALE_VERSION","Repair authorization does not match current target")
+            if auth.based_on_candidate.model_dump(mode="json")!={k:previous["candidate_ref"][k] for k in ("artifact_id","revision")}:
+                raise StageError("STALE_VERSION","Repair authorization is for another candidate")
         if (
             action in {RevisionAction.regenerate_asset, RevisionAction.rerender}
             and memory["revision_history"]
@@ -157,6 +174,8 @@ class VisualProducerAgent:
         decisions = []
         warnings = []
         caps = self.generator.capabilities
+        compiled_requests = {}
+        request_checks = {}
         for plan in spec.asset_plan:
             request = compile_request(
                 plan,
@@ -165,6 +184,11 @@ class VisualProducerAgent:
                 negative_policy=self.negative_policy,
                 repair_constraints=constraints if plan.asset_id == target_asset else (),
             )
+            compiled_requests[plan.asset_id]=request
+            if self.request_validator:
+                request_checks[plan.asset_id]=self.request_validator(request)
+        for plan in spec.asset_plan:
+            request=compiled_requests[plan.asset_id]
             request_json = request.as_json()
             fingerprint = GenerationFingerprint.build(
                 provider=caps.provider,
@@ -369,6 +393,11 @@ class VisualProducerAgent:
                 }
             )
         rendered = render_poster(spec, source_data, self.fonts)
+        if visual_contract:
+            from .quality_checks import pending_evidence
+            evidence=pending_evidence(visual_contract,source_data,rendered.manifest)
+            evidence["final_request_checks"]=request_checks
+            refs.append(self._save_json(context,"visual-evidence.json",evidence))
         processed_refs = {}
         for element_id, data in rendered.processed.items():
             processed_refs[element_id] = context.files.write_bytes(
