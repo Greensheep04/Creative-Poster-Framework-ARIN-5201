@@ -139,7 +139,7 @@ class RepairHint(StrictModel):
     element_id: str | None
     asset_key: str | None
     reason: str
-    preserve: list[str]
+    preserve: str | list[str]
 
 class AuditReportV3(BaseModel):
     # The transport's documented call metadata is kept as JSON, never guessed.

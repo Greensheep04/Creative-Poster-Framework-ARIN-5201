@@ -36,7 +36,7 @@ torch = [{ index = "pytorch-cu128", marker = "sys_platform == 'win32'" }]
 dev = ["pytest>=8,<9"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/poster_framework", "src/poster_visual_producer"]
+packages = ["src/poster_framework", "src/poster_visual_producer", "src/poster_critic"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

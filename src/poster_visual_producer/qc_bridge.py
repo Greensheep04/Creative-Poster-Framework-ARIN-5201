@@ -127,7 +127,7 @@ def validate_audit_report(report,bundle,current_candidate):
     coverage={c.check_id:c for c in r.coverage}
     kw={c.keyword_id:c for c in r.keyword_checks}; constraints={c.constraint_id:c for c in r.constraint_checks}; text={c.copy_id:c for c in r.text_checks}
     reasons=[]
-    if r.execution_mode!='real': reasons.append('Fake/non-production audit cannot release a candidate')
+    if r.execution_mode not in ('real', 'live'): reasons.append('Fake/non-production audit cannot release a candidate')
     if r.decision!='pass': reasons.append('A4 decision is '+r.decision)
     if set(kw)!={k.keyword_id for k in m.keywords} or any(c.status!='pass' for c in kw.values()): reasons.append('Keyword checks are incomplete or unsuccessful')
     if set(constraints)!={c.constraint_id for c in m.user_constraints} or any(c.status!='pass' for c in constraints.values()): reasons.append('Constraint checks are incomplete or unsuccessful')

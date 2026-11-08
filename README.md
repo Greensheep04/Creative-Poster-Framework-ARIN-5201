@@ -161,3 +161,5 @@ A3 的素材生成、准确文字渲染、缓存与指定素材返工已实现�
 
 
 本地 GPU 生图和人工 Brief/Spec 案例：[运行指南](docs/local-gpu.md)。
+
+新版团队 A2/A4 与 A3 的接入及离线验证见 [A3 团队集成](docs/a3-upstream-integration.md)。
