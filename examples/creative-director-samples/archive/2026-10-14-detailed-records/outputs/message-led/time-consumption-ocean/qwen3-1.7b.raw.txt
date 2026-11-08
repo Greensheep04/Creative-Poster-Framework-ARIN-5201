@@ -1,0 +1,36 @@
+{
+  "keywords": ["time", "consumption", "ocean"],
+  "interpretation": "A timeless crisis: the ocean's health is being eroded by human consumption over centuries, urging urgent action.",
+  "audience": "Environmental advocates, educators, and general public interested in sustainability.",
+  "objective": "Raise awareness about the irreversible impact of consumption on marine ecosystems and the urgency of sustainable practices.",
+  "core_message": "Time is the thief of the ocean—our consumption is eroding its future, but we can reclaim it.",
+  "concept": {
+    "title": "Time's Tide",
+    "central_idea": "The ocean's fragility is a mirror of human consumption, where time is both the enemy and the solution.",
+    "connection_to_keywords": "Time represents the duration of consumption's impact, while the ocean symbolizes the environment at risk."
+  },
+  "copy": {
+    "headline": "Time's Tide: Consume Wisely, Protect the Ocean",
+    "subtitle": "The ocean's future is a ticking clock—each action today shapes tomorrow.",
+    "call_to_action": "Act now to preserve the planet's last great reservoir."
+  },
+  "visual_direction": {
+    "main_subject": "A clock with waves encircling it, hands moving clockwise.",
+    "setting": "A dark blue ocean with a white clock at the center, surrounded by polluted waves.",
+    "visual_relationship": "The clock's hands rotate, symbolizing time passing, while the waves depict consumption's impact.",
+    "supporting_elements": ["a small island of coral", "a floating plastic bottle", "a shadow of a fish"],
+    "style": "Minimalist with stark contrasts (dark blue vs. white)",
+    "mood": "Urgent and warning"
+  },
+  "layout": {
+    "focal_point": "The clock at the top center, with waves below",
+    "composition": "Vertical layout with the clock at the top, waves descending in a circular pattern",
+    "reading_order": "Headline, subtitle, call to action in descending order",
+    "typography": "Bold, sans-serif font for headline; smaller, serif font for subtitle and call to action"
+  },
+  "palette": {
+    "colors": ["deep blue", "white", "crimson"],
+    "rationale": "Deep blue for the ocean's depth, white for the clock's contrast, crimson for urgency"
+  },
+  "avoid": ["complex symbols", "overly detailed elements", "brand names"]
+}

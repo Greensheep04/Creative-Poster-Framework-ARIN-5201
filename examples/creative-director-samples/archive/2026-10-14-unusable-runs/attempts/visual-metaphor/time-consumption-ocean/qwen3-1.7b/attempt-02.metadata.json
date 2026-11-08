@@ -1,0 +1,9 @@
+{
+  "model": "Qwen/Qwen3-1.7B",
+  "variant": "visual-metaphor",
+  "keyword_slug": "time-consumption-ocean",
+  "status": "provider_error",
+  "error": "Failed to fetch",
+  "started_at": "2026-10-14T08:12:47.619Z",
+  "captured_at": "2026-10-14T08:22:00.455Z"
+}

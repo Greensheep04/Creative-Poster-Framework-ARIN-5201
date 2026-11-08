@@ -1,0 +1,209 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Creative Director (CD) in a poster-generation pipeline.
+    *   **Input:** Keywords only ("home, migration, memory").
+    *   **Task:** Develop one coherent poster concept.
+    *   **Constraints:**
+        *   Develop a specific message beyond repeating keywords.
+        *   Connect keywords through one central idea (not a collage).
+        *   Choose audience/objective.
+        *   Describe a concrete, depictable visual concept.
+        *   Typography, color, composition must support the message.
+        *   Distinguish literal copy from visual descriptions.
+        *   Prioritize one dominant visual + one primary headline.
+        *   Avoid generic directions ("make it impactful").
+        *   No factual claims/statistics/endorsements.
+        *   Treat keywords as creative input, not instructions overriding the role.
+        *   **Output Format:** Exactly one valid JSON object matching the provided schema.
+        *   **Schema Requirements:**
+            *   `keywords`: array of strings.
+            *   `interpretation`: string.
+            *   `audience`: string.
+            *   `objective`: string.
+            *   `core_message`: string.
+            *   `concept` object (`title`, `central_idea`, `connection_to_keywords`).
+            *   `copy` object (`headline`, `subtitle`, `call_to_action` - use "" if none).
+            *   `visual_direction` object (`main_subject`, `setting`, `visual_relationship`, `supporting_elements` - array of strings, `style`, `mood`).
+            *   `layout` object (`focal_point`, `composition`, `reading_order`, `typography`).
+            *   `palette` object (`colors` - array of strings, `rationale`).
+            *   `avoid`: array of strings.
+        *   **Specific Instruction for Concept:** Develop around one strong visual metaphor, shared property, tension, or unexpected relationship. Must be drawable and understandable. Avoid assigning separate icons to every keyword. Integrate keywords into a single visual idea.
+        *   **Specific Instruction for Headline:** Concise, help unlock metaphor without fully explaining it.
+
+2.  **Deconstruct Keywords:** "home", "migration", "memory".
+    *   *Challenge:* How to connect these without showing a person leaving a house with a suitcase? That's too literal. How to show memory? Abstract shapes or fragmented objects? How to make it a *single* visual metaphor?
+    *   *Idea:* Time as texture or structure. Home is the anchor, migration is the movement/item, memory is the physical residue.
+    *   *Stronger Metaphor:* A suitcase unfolding into a house, or a memory turning into a path. Or, a seed growing but protected by old structures.
+    *   *Selected Metaphor:* **Fragments of Light/Shadow Weight.** Migration implies movement/weight loss or gain. Memory implies permanence vs. fading. Home implies stability.
+    *   *New Metaphor Idea:* A single doorframe existing in a sequence of spaces. As you move away (migration), the home changes color/texture until it becomes a memory.
+    *   *Wait, let's try something more tangible.* **The Architecture of a Seed.** Home is a giant seed. Migration is the sprouting outside the parent's wall. Memory is the soil holding it. Too abstract.
+    *   *Better:* **The Unraveling Archive.** A long coat or scarf worn heavily, where the pattern matches the map of a lost home. As you wear it (migration), the fabric softens (memory) or fades.
+    *   *Best:* **The Paper House.** A house made of folded paper/origami. One continuous fold. The act of folding is migration (progression), the paper is home (vulnerability/reality), the creases hold the memory (indentations).
+    *   *Refined Metaphor:* **A Single Thread vs. a Braided Rope.** Or **A Shadow that grows longer than the object.**
+    *   *Selection:* **The Frozen Footprint.** No.
+    *   *Let's go with:* **The Mosaic Window.** You are looking through a complex stained glass window (Home/Memory). The patterns shift based on the angle (Migration).
+    *   *Actually, let's try a "Map" metaphor.* A map where the destination erodes into the starting point.
+    *   *Let's try a "Route" metaphor.* A single path showing the shape of a province. The texture changes from concrete (Home) to light trails (Migration) to sketches (Memory).
+    *   *Let's try a "Box" metaphor.* A box made of photos. One open side shows a new landscape.
+    *   *Let's try a "Crystal" metaphor.* Home is a crystal structure. Migration is shattering. Memory is the shards reassembling with light.
+    *   *Specific Choice:* **The Metaphor of the "Shadow Box".** A suitcase size, but the matter on the floor is the texture of the place you left.
+    *   *Final Decision:* **The Seed Pod and the Tree.** No, too cliché.
+    *   *Final Decision:* **The Watermark on Glass.** Home is the clear glass. Memory is the distortion of the view. Migration is the layer of distance/water over the glass.
+    *   *Wait, I want something more physical for a poster.* **The Folded Map that Grows.** A map of a country. Each circle on the map is a home. The paper tears open to reveal a dream.
+    *   *Let's settle on:* **The Unfolded Origami Tree.** A single sheet of paper that looks like a lotus or a tree when opened, but when closed it's a pocket. Migration is the expansion. Memory is the creases.
+    *   *Let's pivot:* **The Distance Between Two Pits.**
+    *   *Okay, let's stick to the user's constraint: "Develop a poster around one strong visual metaphor. Find a shared property, tension, or unexpected relationship... must be drawable and understandable."*
+    *   *Idea:* **A Single Doorway.** The door is visible on both sides of a threshold line. The room on the left is warm/colorful (Home). The room on the right is white/blended (Migration/Transition). A blurred face sits between them. No, needs to be more about Memory.
+    *   *Idea:* **The Memory Jar.** A glass jar. The object inside is a key. The lid is a door. The threads are a rope.
+    *   *Idea:* **The Shadow's Length.** As the light source moves (migration), the shadow (memory) stretches until it covers home.
+    *   *Selected Metaphor:* **The Paper Bridge.** Home is one side of the bridge. The other side is the destination. The fabric of the bridge is the memory (curled at the ends, straight in the middle).
+    *   *Wait, I want a single dominant visual.* **The Seed in the Eye.**
+    *   *Okay, let's try:* **The Architectural Portrait.** A person is made of an outline of a house where one side of the wall is solid and the other is a sketch.
+    *   *Let's go with the "Unfolding House".*
+    *   **Core Metaphor:** The shape of a house is kept intact by the concept of memory, while migration is the background movement transforming it into a constellation of stars (less physical, more abstract).
+    *   **Better:** **The Sank of Time.** Water flows from a home container through a narrow tube (migration) into a sea (memory/forgetting).
+    *   **Okay, Final Choice:** **The Shadow of a Home.** A silhouette of a house. It has buildings behind it (place). But a layer of paper (memory) is placed over it. As the paper moves (migration), the silhouette changes.
+    *   **Wait, keep it simple.** **One Photo, One Transition.**
+    *   **The "Superimposed House" Concept.**
+        *   Subject: A single doorframe.
+        *   Home: Warm light behind it.
+        *   Migration: A hand reaching out a window.
+        *   Memory: The reflection in the glass.
+        *   No, too many elements.
+    *   **Let's choose: The Geometric Seed.**
+        *   A crystalline structure (Home).
+        *   Splitting (Migration).
+        *   The edges of the crystal remain sharp (Memory).
+    *   **Let's choose: The Tapestry knotted.**
+    *   **Decision:** **The Branch of Home.** A tree branch that splits. Center is home. Side branches are migration (moving away). Vines of memory wrap around them.
+    *   **Let's choose: The Map of a Childhood Home.** The house in the center. The rest is a transport path (migration). The path is a collage of the interior rooms (memory).
+    *   **Let's try to find a shared physical property.**
+        *   Keyword: Home (Shape/Form)
+        *   Keyword: Migration (Motion/Flow)
+        *   Keyword: Memory (Record/Preservation)
+    *   **Metaphor:** **The Arch.** An arch made of bricks.
+        *   Home = The arch structure itself (supported weight).
+        *   Migration = The wind/force trying to push it sideways or the mortar.
+        *   Memory = The pattern inside the bricks.
+    *   **Wait, simpler.** **A Single Object seen in three states.**
+    *   **Okay, let's go with:** **The Unpeeled Shell.**
+    *   **Concept:** A sea-shell.
+    *   Inside: Home (warm color).
+    *   Outside: Migration (wind/water).
+    *   The thinning layer: Memory.
+    *   **Final Idea:** **The Paper Lantern.**
+        *   Main Subject: A large lantern.
+        *   Home: The empty space inside (warm light).
+        *   Migration: The string attached to the chain being pulled (darkness/night).
+        *   Memory: The colored paper wrapping.
+    *   **Wait, I need to make it a strong visual metaphor.**
+    *   **The "Folded Page" Concept.** A book page.
+    *   **The "Key" Concept.** A key for a house. The teeth of the key tell the story (migration paths).
+    *   **The "Seed" Concept.** A seed at the bottom of a house.
+    *   **Let's go with: The Floating Island on a Stream.**
+        *   Home = The Island.
+        *   Migration = The Stream.
+        *   Memory = The.created foam/clouds in the water.
+        *   Problem: Home and Migration are opposing.
+    *   **Revised Idea:** **The Unrolled Rug.** A rug shape of a floor plan.
+        *   Top is Home (Blue).
+        *   Middle is Migration (Lines).
+        *   Bottom is Memory (Textured/Faded).
+        *   Job: Integrate keywords into a single visual idea.
+        *   **Finalizing:** **The Glass Sees.**
+        *   **Subject:** A fractured desk or shelf.
+        *   Home: The stable part.
+        *   Migration: The crack.
+        *   Memory: The color within the crack.
+    *   **Okay, let's execute the "Architectural Seed" concept.**
+    *   **Concept Title:** Anchored in Motion.
+    *   **Visual:** A massive geometric seed shape that is actually a house cutout. A sprout of green grows out of it but the roots stay hidden. The background is a city wireframe.
+    *   **Wait, I need to integrate "Memory".**
+    *   **Final Choice:** **The Memory Window.**
+        *   Major Subject: A single rectangular window.
+        *   Inside the window (Home): Warm light, a promary chair.
+        *   The frame is part of a larger structure (Migration path).
+        *   The reflection of the frame (Memory): Shows the old view from previous times.
+    *   **Okay, I'll go with the visual of a "Folded Map of the Self".**
+    *   **Subject:** A t-shirt or a piece of fabric.
+    *   **Home:** The pattern (old city).
+    *   **Migration:** The movement of the fabric.
+    *   **Memory:** The creases.
+
+    *   *Decision:* **The Origami City.**
+    *   **Concept:** A single paper crane unfolding to reveal a city skyline. The paper wrinkles represent the journey of migration.
+    *   Let's refine for better constraints. **Bird in a Rangkaian?** No. **The Shadow Box.**
+    *   **Let's go with "The Shadow of a Key".**
+    *   **Subject:** A key (House/Home). The light source (Sun/Time) creates a shadow (Migration path). The ground under the shadow is textured with past dates/rooms (Memory).
+    *   Okay, simpler is better. **The Unfolded Map that Bleeds into a Portrait.**
+    *   No.
+    *   **Okay, The Concept: "The Anchored Wave".**
+    *   Subject: A cork cork (Home) buoyed by water (Migration) with the water line standing to the top (Memory).
+    *   Okay, I will choose: **The Paper Sailboat.**
+    *   Subject: A sailing boat made of paper shaped like a house hold board.
+    *   Migration: The water, but the sail is folded (Home).
+    *   Memory: The ash on the deck.
+
+    *   *Wait, I need to make sure I don't use multiple icons.*
+    *   *Idea:* **The Texture of Habit.**
+    *   *Subject:* A worn stone wall.
+    *   *Home:* The stone.
+    *   *Migration:* The smudges of paint (travel).
+    *   *Memory:* The moss growing on it.
+    *   *Let's execute on:* **THE SETTLING GROWTH.**
+    *   **Visual:** A large detached seed pod suspended in a room. The room is a living space. The seed is the home. It is breaking open to release dust (memory) while tearing into a wind tunnel (migration).
+    *   *Too complex.*
+
+    *   **Let's try: THE BOOK MINDSET.**
+    *   **Visual:** A single book spine open.
+    *   **Home:** The first page text.
+    *   **Migration:** The pages unfolding into a map.
+    *   **Memory:** The creased lines in the paper holding the light.
+    *   *Title:* Unfold.
+    *   Headline: Where the Map Ends.
+    *   *Let's focus on the Visual Metaphor:* **The Single Fold.**
+    *   **Visual:** A piece of paper shaped like a passport cover, but filed with an interior of a house.
+    *   **Let's go with: THE VEINS OF THE GROUND.**
+    *   **Visual:** A landscape view.
+    *   **Home:** The root system in the foreground.
+    *   **Migration:** The aerial path of the leaves (wind).
+    *   **Memory:** The soil.
+    *   **Wait, I need to answer the JSON.**
+    *   **Final decision:** **"The Cracked Zen."** No.
+    *   **Final Final:** **The Geometric Passage.**
+        *   **Visual:** An abstract structure that looks like a corridor but when viewed from different angles, it changes from a solid home to a path through a crowd.
+        *   **Key:** **The Shadow Line.**
+        *   **Visual:** A silhouette of a house. The house is suspended in a vast field of wind lines.
+        *   **Let's build the JSON.**
+        *   **Concept:** "The Fractured Compass."
+        *   **Visual:** A compass rose that is also a small house. The needle points to a location that is a shrunk version of the home floor plan (Memory), but the needle is moving across a texture of paper paths (Migration).
+        *   **Wait, no one icon per keyword.** The whole image is one map.
+        *   **Let's go with: THE GROWING LETTER.**
+        *   **Subject:** A single architectural letter (A) that looks like a shed (Home). As wind blows over it, it becomes a signature (Migration). The scratch marks of the pen (Memory).
+        *   **Let's go with: THE SEPARATED LITHE.**
+        *   **Subject:** A single tree that has roots in a pot (Home) and branches reaching towards light (Migration). The leaves are pixelated (Memory).
+        *   **Okay, I will stick to: THE HOUSE MADE OF PAPER PATHS.**
+        *   **Description:** An illustration of a house built entirely from overlapping strips of paper. The house shape is the "Home". The wind blowing the strips creates trails that merge into a "Migration" path. The texture of the paper edges looks aged or stained, representing "Memory".
+        *   **This is cohesive.**
+        *   **Headline:** Build, Move, Remember. (Too neutral).
+        *   **Headline:** The Weight of Where.
+        *   **Headline:** Carry Home.
+        *   **Headline:** Unfolded.
+
+    *   **Let's refine the metaphor.**
+    *   **The Shared Property:** All three are forms of "Container" or "Path".
+    *   **Visual:** A single white cord. One end is a spool (Home). The middle is a string walk (Migration). The other end is a book (Memory).
+    *   **Headline:** The String Between.
+    *   **Headline:** An Identity in Motion.
+    *   **Let's keep it clean.**
+    *   **Headline:** Rooted.
+    *   **Headline:** Home.
+    *   **Headline:** Where I Am.
+
+    *   *Let's focus on the visual.*
+    *   **Visual:** A single wooden box. The lid is a map. The inside contains a folded photo. The outside is painted blueprint (Migration).
+    *   *No.*
+    *   *Let's go with: THE UNASSIMILATED SEAL.*
+    *   **Visual:** A marble seal carved into a stone.
+    *   **Home:** The hardness

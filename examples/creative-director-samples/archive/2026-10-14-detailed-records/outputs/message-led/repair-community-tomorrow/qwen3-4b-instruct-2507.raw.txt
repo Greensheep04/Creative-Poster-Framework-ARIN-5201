@@ -1,0 +1,54 @@
+{
+  "keywords": [
+    "repair",
+    "community",
+    "tomorrow"
+  ],
+  "interpretation": "The act of repair is not just about fixing objects, but about healing relationships and rebuilding trust within a community—this process, when sustained, creates a stronger, more resilient foundation for the future.",
+  "audience": "Urban residents, local leaders, and young people interested in civic engagement and sustainable living",
+  "objective": "To inspire hope and action by showing how community-led repair initiatives can build collective resilience and shape a better tomorrow",
+  "core_message": "Tomorrow begins not with new things, but with the repair of what already exists—within us, in our neighborhoods, and in our shared future.",
+  "concept": {
+    "title": "Tomorrow Starts Here",
+    "central_idea": "Community repair is a foundational act of hope and renewal that strengthens both people and places",
+    "connection_to_keywords": "Repair is not isolated—it is an act of care performed collectively. Community becomes the ecosystem where repair happens, and 'tomorrow' emerges from the strength of those actions"
+  },
+  "copy": {
+    "headline": "Tomorrow Starts Here",
+    "subtitle": "When we repair what's broken, we heal our communities and build a future rooted in care, not consumption",
+    "call_to_action": "Join the repair movement. Start today."
+  },
+  "visual_direction": {
+    "main_subject": "A hands-on repair scene showing a diverse group of people gently reassembling a broken community garden bench with tools and shared materials",
+    "setting": "A sun-dappled urban community garden at golden hour, with patches of green and weathered wooden structures in the background",
+    "visual_relationship": "The hands of the people are interwoven with the bench, symbolizing collective effort and shared responsibility",
+    "supporting_elements": [
+      "A small, repaired tool kit visible on a nearby table",
+      "A child placing a flower in the gap of the bench",
+      "A sign in the background reading 'Community Repair Hub'"
+    ],
+    "style": "Realistic, warm, and grounded with subtle textures to emphasize authenticity",
+    "mood": "Hopeful, inclusive, and resilient"
+  },
+  "layout": {
+    "focal_point": "The hands repairing the bench at the center of the image",
+    "composition": "Triangular balance with the bench at the base, the group of people forming a human shape rising from the ground",
+    "reading_order": "Headline at top center, subtitle below, call to action at bottom right",
+    "typography": "Clean, sans-serif font for headline; slightly warmer, human-weight font for subtitle and CTA"
+  },
+  "palette": {
+    "colors": [
+      "Warm terracotta",
+      "Sunlit green",
+      "Soft beige",
+      "Dusty blue"
+    ],
+    "rationale": "The palette reflects natural, earth-based materials and the warmth of human connection. Terracotta and green evoke the garden and repair work, while beige and dusty blue provide balance and calm"
+  },
+  "avoid": [
+    "Industrial machinery",
+    "Utopian imagery",
+    "Abstract symbols",
+    "Framing repair as a financial or economic solution"
+  ]
+}

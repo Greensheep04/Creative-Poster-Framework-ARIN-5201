@@ -1,0 +1,16 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "provider": "Featherless AI",
+  "source_url": "https://huggingface.co/Qwen/Qwen3.5-4B",
+  "variant": "message-led",
+  "keyword_set": "home-migration-memory",
+  "finish_reason": "stop",
+  "status": "completed",
+  "json_valid": true,
+  "schema_valid": true,
+  "validation_errors": [],
+  "settings": "Widget/provider defaults; numeric parameters not exposed",
+  "input_method": "Single user message; newlines normalized to spaces because widget is a single-line INPUT",
+  "collected_at": "2026-10-14T07:57:00.406Z",
+  "response_id": "32823655-ab5d-49a2-9338-f4e9047fd6e3"
+}

@@ -1,0 +1,54 @@
+{
+  "keywords": [
+    "AI",
+    "creativity",
+    "identity"
+  ],
+  "interpretation": "AI is not just a tool for creativity—it is beginning to shape and reflect human identity in ways that challenge our understanding of authorship and self.",
+  "audience": "tech-savvy professionals and young creatives exploring the role of technology in personal expression",
+  "objective": "To provoke thoughtful reflection on how AI-generated creativity influences and redefines individual identity",
+  "core_message": "Creativity shaped by AI is not a loss of identity—it is a new form of self-expression.",
+  "concept": {
+    "title": "The Mirror of Creation",
+    "central_idea": "AI acts as a mirror, reflecting back not just creative outputs, but evolving personal identities through collaborative creation",
+    "connection_to_keywords": "The interplay between AI (the tool), creativity (the output), and identity (the self) is unified through the metaphor of reflection—where each creative act becomes a moment of self-discovery"
+  },
+  "copy": {
+    "headline": "You Are Not Just the Creator—You Are the Reflection",
+    "subtitle": "AI doesn't replace creativity. It amplifies the self, revealing new layers of identity through every idea born in collaboration.",
+    "call_to_action": ""
+  },
+  "visual_direction": {
+    "main_subject": "A human silhouette standing before a digital mirror, with AI-generated abstract forms flowing from the mirror’s surface into the air and into the silhouette’s body",
+    "setting": "A softly lit, modern studio with blurred digital elements in the background suggesting data streams and neural networks",
+    "visual_relationship": "The human figure is partially transparent, with AI-generated shapes morphing into their limbs and features, showing identity as fluid and co-created",
+    "supporting_elements": [
+      "Subtle floating data particles that resemble brushstrokes or neural connections",
+      "A faint glow along the edges of the mirror, indicating active AI processing"
+    ],
+    "style": "Surreal realism with clean lines and soft gradients",
+    "mood": "Contemplative, forward-looking, slightly mysterious"
+  },
+  "layout": {
+    "focal_point": "The human silhouette in front of the mirror, with the AI-generated forms flowing from the mirror into the figure",
+    "composition": "Diagonal flow from mirror to figure, creating a sense of movement and transformation",
+    "reading_order": "Eye follows the flow from mirror to human, then settles on the headline and subtitle",
+    "typography": "Clean, modern sans-serif with soft drop shadows; headline in bold, subtitle in lighter weight with subtle italics"
+  },
+  "palette": {
+    "colors": [
+      "#1a1a2e",
+      "#00b894",
+      "#f5a623",
+      "#ffffff",
+      "#2d2d44"
+    ],
+    "rationale": "Deep navy establishes a grounded, reflective tone; electric teal symbolizes AI’s intelligence and innovation; warm amber represents human creativity and identity; white provides clarity and contrast; dark gray adds depth and sophistication"
+  },
+  "avoid": [
+    "literal depictions of AI machines or code",
+    "overly technical explanations or data charts",
+    "generic phrases like 'the future of creativity'",
+    "portraying AI as a threat or replacement"
+  ]
+}

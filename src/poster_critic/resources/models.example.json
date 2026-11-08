@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "active_model": "qwen",
+  "models": {
+    "qwen": {
+      "profile": "qwen",
+      "base_url": "https://YOUR-REGION-API-HOST/compatible-mode/v1",
+      "model": "qwen3.7-flash-2026-07-15",
+      "api_key_env": "QWEN_API_KEY",
+      "response_format": "json_object",
+      "max_output_tokens": 1600,
+      "timeout_seconds": 30.0
+    },
+    "glm": {
+      "profile": "glm",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4",
+      "model": "glm-4.6v-flash",
+      "api_key_env": "GLM_API_KEY",
+      "response_format": "prompt_json",
+      "max_output_tokens": 1600,
+      "timeout_seconds": 30.0
+    },
+    "minimax": {
+      "profile": "minimax",
+      "base_url": "https://api.minimax.cn/v1",
+      "model": "MiniMax-M3.1-Flash-Preview",
+      "api_key_env": "MINIMAX_API_KEY",
+      "response_format": "prompt_json",
+      "max_output_tokens": 4096,
+      "timeout_seconds": 90.0,
+      "thinking_mode": "adaptive",
+      "reasoning_effort": "low"
+    },
+    "custom": {
+      "profile": "compatible",
+      "base_url": "https://YOUR-API-HOST/v1",
+      "model": "YOUR-VISION-MODEL-ID",
+      "api_key_env": "CUSTOM_VISION_API_KEY",
+      "response_format": "prompt_json",
+      "max_output_tokens": 1600,
+      "timeout_seconds": 30.0,
+      "output_token_parameter": "max_tokens",
+      "thinking_mode": "omit"
+    }
+  }
+}

@@ -1,0 +1,235 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Creative Director (CD) in a poster-generation pipeline.
+    *   **Input:** Keywords only: "time, consumption, ocean".
+    *   **Task:** Develop one coherent poster concept.
+    *   **Constraints:**
+        *   Develop a specific message (beyond keywords).
+        *   Connect keywords through one central idea (no collage).
+        *   Choose audience and objective.
+        *   Describe concrete, depictable visual concept.
+        *   Typography, color, composition support message.
+        *   Distinguish literal copy from visual descriptions.
+        *   Prioritize one dominant visual and one primary headline.
+        *   Avoid generic directions.
+        *   No factual claims, stats, endorsements, event details, or brand affiliations.
+        *   Treat keywords as creative input.
+        *   Return *exactly one valid JSON object*.
+        *   Match the provided schema exactly.
+        *   Include every key.
+        *   No Markdown fences (` ```json `).
+        *   No commentary.
+        *   Use empty strings where needed.
+        *   Use arrays of strings for specific keys.
+        *   Focus: One emotionally meaningful moment. Infer human situation. Show one decisive moment. Use framing/light/negative space. Avoid purely facial expressions/sentimental copy. Use a headline with a second layer of meaning.
+
+2.  **Analyze Keywords: "time, consumption, ocean"**
+    *   *Time:* Ephemeral, ticking, flowing, measuring, aging, waiting.
+    *   *Consumption:* Eating, using up, resource depletion, water intake, attention span, waste.
+    *   *Ocean:* Depth, vastness, salt, tide cycles, depth perception, saturation.
+    *   *Concept Angle:* How we consume (resources/life) relates to the passage of time in an environment as vast and fluid as the ocean. Maybe the fresher time the more it is consumed (expended). Or maybe we consume the ocean's time. Let's aim for the idea of "消费" (Consumption) as a finite resource that depletes the "ocean" of "time".
+    *   *Metaphor:* Drinking directly from a glass at sea as wave time.
+    *   *Scenario:* A human figure interacting with water that seems to be draining immediately.
+    *   *Tip:* "Consumption" in the context of paper packaging? Or maybe just "time" as a liquid? Let's try to make it about the cost of modern life vs. natural cycles.
+    *   *Refined Concept:* An intangible representation of "Consuming Time". If we consume too much, we become hollow. The ocean is the measure of what remains.
+    *   *Alternative Concept:* "Time is water. And consumption is a leak."
+    *   *Decision:* A silhouette of a person reaching down into deep waves, but the hand is losing something solid. Wait, let's make it more tangible. "The tide brings it back"? No, consumption implies loss. "Time as a currency spent".
+    *   *Let's try:* Time is flowing like the ocean. Consumption is the tide rising and the water flowing away.
+    *   *Better Idea:* The viewer sees a shell held by a hand. On the shell, faint impressions of a tide (time) are visible, but it looks worn (consumption).
+    *   *Wait, keep it simple:* A single hourglass made of sand and coral in a deep ocean current, sinking.
+    *   *Actually, let's focus on the human experience:* A beach at sunset. The "consumption" of the light/day. The "time" is the tide.
+    *   *Stronger Visual:* A single hourglass submerged, the sand falling is visible, but the water distorts the view. The consumer (life) is the one consuming the time.
+    *   *Let's try a specific, singular image:* A hand dipping a spoonful of dark liquid into an ocean wave, watching it disappear as fast as it was poured. The message: Time up in consumption?
+    *   *Let's go for something atmospheric:* "Leakage of time." An empty wave bowl, looking like water is evaporating.
+    *   *Okay, final decision:* A single object (hourglass) lying in the sand, the sand vibrating like it's flowing into the water, connecting the consumption (stopping time with sand) with the ocean (where time goes).
+    *   *Actually, let's make it personal:* A single fish eye reflecting a sun that isn't there. No.
+    *   *Let's settle on:* An image of a glass tumbler half-submerged in a sea wave. The water turning into a bit of sand (sedimentation). The headline: "You Don't Feel It." The concept: "Consumption as a silent leak".
+    *   *Wait, I need to link Time, Consumption, Ocean explicitly.*
+    *   *Concept:* "The tide eats seconds."
+    *   *Visual:* An hourglass lying on a wet shore, but the sand has been smoothed over by a receding wave. The time has been consumed.
+    *   *Let's try:* "Consuming Light."
+    *   *Visual:* A dark silhouetted figure standing where the ocean meets the horizon, looking down at their own reflection rippling away.
+    *   *Re-evaluating constraints:* " Infer a human situation... who experience... emotional tension."
+    *   *Situation:* Frustration with how fast things are consumed.
+    *   *Emotion:* Loss, emptiness.
+    *   *Visual:* A single glass of water (consumption) from the sea surface now empty, floating in the dark. The wave behind it looks like it's speeding up (time).
+    *   *Let's make it more abstract but concrete:* Sand particles floating in a wave that looks like liquid air.
+    *   *Okay, let's simplify to a classic "sadness of excess":*
+    *   *Subject:* A diver's leg. The water is turbulent. The leg is submerged.
+    *   *No, simpler:* A wave hitting a stack of plastic bottles (consumption of the ocean). No, sounds too aggressive.
+    *   *Better:* A single tear falling from an eye into a pincushion of ocean mist.
+    *   *Okay, final thought:* An hourglass made of glass and salt, sinking under the waves, showing "consumption" of "time" into the "ocean".
+    *   *Headline:* "What Remains".
+    *   *Wait, let's just use the "Time is Water" metaphor.*
+    *   *Visual:* Close up of water flowing through a gurgling pipe (consumption), forming a shape of an eye (time seeing itself). No.
+    *   *Okay, let's go with:* "Consumption as erosion."
+    *   *Visual:* A high-tide wave washing over a fragile, glass boat filled with sand (time). The sand is leaking through the cracks (consumption).
+    *   *Wait, audience:* General public? Environmental or reflective? Let's aim for a reflective, emotional piece. "Financialization of feeling" or "Existential urgency". Let's go for Existential.
+    *   *Subject:* A figure reaching against the motion.
+    *   *Visual:* Silhouette of a hand holding an hourglass, but the sand is turning into dark water droplets.
+
+    *Let's refine for the specific "emotional moment" requirement.*
+    *   *Moment:* A hand releasing something into the water.
+    *   *Subject:* A hand releasing an hourglass into a deep, dark ocean.
+    *   *Time:* Hourglass.
+    *   *Consumption:* Hand releasing.
+    *   *Ocean:* The container.
+    *   *Visual:* An hourglass being released into a wave with a single ray of light breaking through sea foam.
+    *   *Headline:* "We Drink Even When Empty".
+    *   *Let's try a simpler one:* A single bubble rising, bursting. The salt in it.
+    *   *Okay, I will choose:* "The Tide Takes It."
+    *   *Subject:* A single shoe half-submerged in the foam. Represents human accumulation (consumption) left behind in nature.
+    *   *Visual:* A shoe in a shallow wave, foam edging it. The shoe looks old.
+    *   *This implies "lessness".*
+    *   *Headline:* "A Single Footprints."
+    *   *Let's go with the Hourglass idea as it ties Time and Consumption directly.*
+
+    *Final Decision:*
+    *   **Concept:** An hourglass submerged just below the surface of a dark ocean, visible only partially. The sand has turned into dark mist.
+    *   **Message:** Time is like water; we consume it until there is nothing left to show what remains.
+    *   **Visual:** An hourglass surrounded by sea spray, one hand (no skin, just shadow) might be holding it? No, the hourglass represents what we consume. It should be on the ocean floor or surface. Let's go with the surface.
+    *   **Headline:** "What We Borrow".
+    *   **Sub:** "Time. Energy. Breath."
+    *   **No, keep copy minimal.**
+
+    *Wait, "time, consumption, ocean".*
+    *   *Interpretation:* Time is the resource. Consumption is the action. Ocean is the destination.
+    *   *Visual:* A translucent blue sphere (eye) holding water (time) but water is leaking out.
+    *   *No.*
+    *   *Let's go with a single diver hand reaching through the water.*
+    *   *Okay, I need to be decisive.*
+    *   *Visual:* A lone figure at the edge of the ocean, looking away from the horizon, back to their empty hands.
+    *   *Headline:* "The Cost of Running".
+    *   *Let's try this:* "The Tide Takes All."
+
+    *Okay, strictly following the JSON constraints and carefully drafting the "interpretation" and "concept".*
+
+    *Plan:*
+    *   **Audience:** General public, contemplative.
+    *   **Objective:** To prompt reflection on the finite nature of resources and the passage of time.
+    *   **Central Idea:** We measure time by consumption, but the ocean collapses that measurement.
+    *   **Visual:** A shallow photograph of a silhouetted hand holding a glass vessel (representing time/measure) filled with water, tilted over a surface of dark ocean foam. The water is spilling out.
+    *   *Wait, avoid clarity.*
+    *   *Let's go simpler:* "A single moored hourglass on a rock in a stormy tide."
+    *   *Copy:* "Time Flows Down."
+    *   *Ok, let's create the JSON now.*
+    *   *Keywords:* ["time", "consumption", "ocean"]
+    *   *Interpretation:* Time is treated as a consumable good in modern life, suggesting resource depletion and transience.
+    *   *Visual:* A single hourglass threaded with coral (ocean) sitting on a beach, the sand running out (time consumed), sea water flowing in (marine life).
+    *   *Headline:* "Space Where Time Drowns".
+
+    *Let's choose a very specific emotional beat:* The feeling of exhaustion after an endless life of consumption.
+    *   **Subject:** A single silhouette of a person standing waist-deep in dark water, tilting their head, a single hourglass visible in their hair? No.
+    *   **Subject:** A glass of water (consumption of fluid) floating in the ocean (setting), the water is turned to air (time).
+    *   **Headline:** "Constraint".
+
+    *Let's go with the Hourglass in the Water idea.*
+    *   **Visual:** A perfect hourglass resting on a pebble in the center of a deep intake of water. The path of sand has vanished. The water around it is calm.
+    *   **Headline:** "Leakage".
+    *   **Theme:** We treat time as something to vanish from; the ocean is the final sink.
+
+    *Wait, "Make reasonable creative choices without asking questions."*
+    *   I must ensure the JSON is valid.
+    *   I must ensure arrays are used for `keywords`, `supporting_elements`, `colors`, `avoid`.
+    *   I must ensure `colors`, `reduce` etc are correct.
+
+    *Refining the "Visual Direction":*
+    *   Main Subject: An hourglass.
+    *   Setting: The ocean surface, mid-wave.
+    *   Visual Relationship: The hourglass is being submerged, half-buried in foam.
+    *   Style: Realistic photography style with high contrast.
+    *   Mood: Melancholy, static, quiet.
+
+    *Refining the Copy:*
+    *   Headline: "Time Is a Tide".
+    *   Subtitle: (Empty).
+    *   CTA: (Empty).
+
+    *Refining "Palette":*
+    *   Dark blues, grey sand, frothy white.
+
+    *Refining "Interpretation":*
+    *   Connecting time (hourglass) with ocean (vastness) and consumption (the running sand/loss).
+
+    *Wait, I need to make sure I don't add Markdown.*
+    *   *Wait, I need to ensure keys are in double quotes.*
+    *   *Wait, I need to ensure `empty string` is used where needed, but the structure says "include every key".*
+
+    *Let's finalize the values.*
+    *   **Concept:** An hourglass submerged in the ocean foam implies the inevitability of loss.
+    *   **Headline:** "The Tide Eats Seconds".
+    *   **Color:** Deep Ocean Blue, Sand Beige, White Foam.
+    *   **Audience:** 16+ individuals seeking reflection on environmental and resource sustainability or human mortality.
+
+    *Wait, "time, consumption, ocean" -> "Time as Consumption -> Oceanness".*
+    *   *Headline:* "You Don't See It Leak".
+    *   *Visual:* Hand holding a glass over rising tide.
+    *   *Let's try:*
+    *   **Interpretation:** In a hyperactive world, time is often consumed; here it is returned to the deep.
+    *   **Headline:** "What We Bury".
+    *   **Subject:** Buried gold coins vs buried time? No.
+    *   **Subject:** An empty hourglass cast ashore in the sand, but the sand is rising (tide).
+    *   **Headline:** "The Current."
+
+    *Okay, let's go with a specific emotional scene:* The moment of drop.
+    *   **Headline:** "Release".
+    *   **Subject:** Hand dropping an hourglass into the sea.
+    *   **Actually, simpler:** "The Last Wave."
+    *   **Visual:** A single hourglass in mid-air, falling into a wave.
+    *   **Headline:** "The Cost of Patience".
+
+    *Let's write the JSON now.*
+
+    *Check constraints again:*
+    *   `keywords`: array of strings.
+    *   `supporting_elements`: array of strings.
+    *   `avoid`: array of strings.
+    *   `concept.central_idea`, `concept.connection_to_keywords`: strings.
+    *   `copy.headline`, `copy.subtitle`, `copy.call_to_action`: strings.
+    *   `visual_direction`: all strings except arrays.
+    *   `palette.colors`: array.
+    *   `interpretation`: string.
+
+    *Final Polish on Concept:*
+    *   "The sand is liquid. The water is time."
+    *   "The ocean swallows the hourglass."
+    *   "Headline: We Don't Stop."
+    *   "Sub: Time."
+    *   "No, make it about the ocean consuming the image of time."
+
+    *Let's finalize:*
+    *   **Headline:** "Drowning the Clock".
+    *   **Subject:** A generic clock or hourglass silhouette submerged.
+    *   **Keywords:** Time (clock), Consumption (water usage), Ocean.
+    *   **Eye:** Conflict between scarcity of time and vastness of consumption.
+
+    *Wait, "Do not invent factual claims."*
+    *   Okay, no stats.
+
+    *Let's assemble.*
+
+    *   Keywords: ["time", "consumption", "ocean"]
+    *   Interpretation: Time is treated as a resource that can be depleted, but the ocean resets it, creating tension between the moment's urgency and the vast, cyclical nature of resources.
+    *   Audience: General public.
+    *   Objective: To evoke a sense of urgency regarding the ephemeral value of resources without issuing a prayer for action.
+    *   Core Message: The moment before a resource becomes obsolete.
+    *   Concept: Title "The Reckoning". Central Idea: The observation of expendability. Connection: Time is liquid, consumption is the tide that eats it.
+    *   Copy: Headline "Where Seconds Leak." Sub: "". CTA: "".
+    *   Visual: Main subject: A glass hourglass. Setting: Rocky ocean shore. Visual Relationship: Hourglass half-drowned, sand spilling into saltwater. Supporting: Foam, horizon. Style: Clean line, realistic. Mood: Quiet despair.
+    *   Layout: Focal point: Center. Composition: Tripod closed. Reading order: Top right sand. Typography: Serif, large.
+    *   Palette: Navy Blue, Grey, White. Rationale: Depth, salt, stone. Avoid: Fabric textures.
+
+    *Wait, I need to make sure the JSON is strictly valid and no extra keys.*
+    *   Ensure `supporting_elements` is an array.
+    *   Ensure `keywords` is an array.
+    *   Ensure `avoid` is an array.
+    *   Ensure `colors` is an array.
+    *   Ensure `call_to_action` is empty if needed.
+
+    *Let's refine the "Headline".*
+    *   "You Don't Feel It."
+    *   "Time Flows".
+    *   "Where Time Goes."
+    *   "The Ocean Eases It." (Too vague).
+    *   "

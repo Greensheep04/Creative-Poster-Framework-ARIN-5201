@@ -1,0 +1,39 @@
+{
+  "concept": "Harmony in Tradition and Technology",
+  "headline": "Tradition, Technology, and Harmony",
+  "keyword_mapping": [
+    {
+      "keyword": "tradition",
+      "representation": "A weathered wooden arch with aged carvings"
+    },
+    {
+      "keyword": "technology",
+      "representation": "A sleek, glowing circuit board in a modern structure"
+    },
+    {
+      "keyword": "harmony",
+      "representation": "A flowing ribbon of light connecting the two elements"
+    }
+  ],
+  "visual_direction": "A central bridge with a traditional wooden arch on one side and a modern tech structure on the other, connected by a glowing light ribbon symbolizing harmony.",
+  "style": {
+    "mood": "serene",
+    "medium": "digital",
+    "palette": [
+      "deep blue",
+      "warm amber"
+    ]
+  },
+  "must_include": [
+    "tradition",
+    "technology",
+    "harmony"
+  ],
+  "must_avoid": [
+    "supporting copy",
+    "split-screen",
+    "statistics",
+    "brands",
+    "organizations"
+  ]
+}

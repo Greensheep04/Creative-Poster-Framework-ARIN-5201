@@ -1,0 +1,15 @@
+Okay, let's tackle this poster concept. The user provided the keywords: time, consumption, ocean. I need to create a coherent message beyond just repeating these words. The central idea should connect them.
+
+First, think about the shared properties. Time and consumption are related to processes that consume resources over time. The ocean is a vast, fluid entity. Maybe the metaphor is something like time as an ocean, where consumption is the waves or currents.
+
+So the core message could be about the relentless nature of time and consumption, mirrored by the ocean's endless flow. The visual metaphor could be a tide that represents time, with waves symbolizing consumption. The ocean itself is the setting, maybe a deep blue background.
+
+Audience: Probably general public, looking for a message about sustainability or time management. Objective could be to highlight the importance of managing consumption in the context of time.
+
+For the concept, the main subject is a tide with waves that represent consumption. The setting is an ocean, maybe a dark blue background. The visual relationship is the tide's movement against the ocean, showing time's passage and consumption as waves.
+
+Headline needs to be concise. Maybe "Time's Tides" to hint at the metaphor. Subtitle could be "Consumption as the Ocean's Currents" to connect the keywords.
+
+Visual direction: Main subject is the tide, setting is an ocean. Visual relationship is the tide moving against the ocean, with waves as consumption. Supporting elements could be stars or a clock to add layers. Style is realistic, mood is mysterious. Palette: deep blue for the ocean, white for the tide, light blue for the waves. Rationale: creates a sense of vastness and time's passage.
+
+Avoid any generic directions, so no mention of impact. Make sure the headline doesn't explain the metaphor but hints at it. Check that all required keys are present and the JSON structure is correct.

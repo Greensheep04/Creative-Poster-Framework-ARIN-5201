@@ -1,0 +1,13 @@
+{
+  "model": "Qwen/Qwen3-1.7B",
+  "provider": "Featherless AI",
+  "source_url": "https://huggingface.co/Qwen/Qwen3-1.7B",
+  "variant": "human-story",
+  "keyword_id": "home-migration-memory",
+  "collected_at": "2026-10-14T08:27:43.992Z",
+  "status": "completed",
+  "request_format": "Single user message; original system and user messages joined with blank line, each newline replaced with one space for single-line widget.",
+  "sampling_settings": "Not exposed by widget; provider defaults",
+  "finish_reason": "stop",
+  "json_valid": true
+}

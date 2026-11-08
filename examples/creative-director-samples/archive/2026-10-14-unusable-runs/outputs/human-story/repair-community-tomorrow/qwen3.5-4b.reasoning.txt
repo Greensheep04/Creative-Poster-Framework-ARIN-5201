@@ -1,0 +1,252 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Creative Director (CD) in a poster-generation pipeline.
+    *   **Input:** Keywords only ("repair", "community", "tomorrow").
+    *   **Task:** Develop one coherent poster concept.
+    *   **Constraints:**
+        *   Make reasonable creative choices without asking questions.
+        *   Develop a specific message beyond simply repeating keywords.
+        *   Connect keywords through one central idea (avoid collage).
+        *   Choose intended audience and communication objective.
+        *   Describe a concrete, depictable visual concept.
+        *   Make typography, color, and composition support the message.
+        *   Distinguish literal poster copy from visual descriptions.
+        *   Prioritize one dominant visual and one primary headline.
+        *   Avoid generic directions; explain actual visual decisions.
+        *   No invented factual claims/statistics/endorsements.
+        *   Treat keywords as creative input.
+        *   Return exactly one valid JSON object matching the provided structure.
+        *   Include every key. No Markdown fences or commentary.
+        *   Use arrays for keywords, supporting_elements, colors, avoid.
+        *   Use strings for all other values.
+        *   Use empty string for subtitle/CTA if not needed.
+        *   Focus: Develop a poster around one emotionally meaningful moment.
+        *   Infer a human situation from keywords. Identify whose experience is represented and what emotional tension matters.
+        *   Show one decisive moment through subject, action, setting, purposeful details.
+        *   Subject may be person, object, or environment suggesting human presence.
+        *   Use framing, distance, light, negative space to communicate emotion.
+        *   Avoid facial expressions/sentimental copy alone.
+        *   Headline introduces a second layer of meaning.
+        *   Do not rely on multiple scenes/panels.
+
+2.  **Analyze Keywords:** "repair", "community", "tomorrow".
+    *   *Initial Thought:* Fixing things in a group so we can build future.
+    *   *Emotional Tension:* Wear and tear vs. resilience. Past struggle vs. future hope. Individual effort vs. collective support.
+    *   *Human Situation:* Someone mending something broken in front of a gathering, or a place where people come together to fix things, looking towards a future.
+    *   *Idea:* A shared tool or object being repaired together, symbolizing the bond that allows the future to stand.
+    *   *Better Visual:* A close-up of hands holding a light source against a dark background, or hands working on a wheel of something (structure). Let's try: A close-up of a tool touching a joint of wood or brick, with light focusing on that point. In the warmth of the light, faint shapes of people's faces are visible in the periphery or the tool itself? No, too abstract.
+    *   *Refined Visual:* A close-up of a ladder leaning against a wall that looks dark but is reinforced by a patch of light or people's hands. Or, a central object (a bridge, a door, a tool) being held together.
+    *   *Selection:* A single hand holding a small tool (hammer/wrench) touching a central crack in a large structure (wall/bridge) that is illuminated by a warm light source, while the rest is in shadow. The connection to community is implied by the shared hands or the scale of the work. The connection to tomorrow is the firmness of the repair.
+    *   *Concept:* Repairing the foundation of "us" yields the future.
+    *   *Audience:* Residents waiting for a better future, those feeling abandoned by infrastructure/caste/social barriers.
+    *   *Objective:* Inspire trust and investment in collective effort.
+
+    *Alternative Concept (More Human):*
+    *   *Visual:* Silhouette of a person sitting on a public bench, looking up at a line of buildings. They are placing a flower pot next to another pot already there.
+    *   *Keywords:* Repairing the environment/community for tomorrow.
+    *   *Wait, "repair" needs to be strong.* fixing a broken thing.
+    *   *Revised Visual:* A close-up view of a boot sole being clicked back onto a metal bar, or glue on a tile.
+    *   *Let's go with the "Hands on a Bridge" trope but stylized.*
+    *   *Actually, let's make it about 'Repair' as a metaphor for relationship.*
+    *   *Visual:* A close-up of an old, ripped fabric or canvas being stitched. But the thread is faint gold (future). Neighbors' faces outside the thread? No.
+    *   *Let's try:* A large, dark circular void in a wall, being filled by a single beam of light coming from outside, casting a "hole is filled" effect. But the "tools" involved are hands.
+    *   *Decided Concept:* A group of people is too many. Focus on one decisive moment. A close-up of hands merging to strike a nail into a load-bearing beam. But the beam symbolizes the community bond.
+    *   *Better:* A broken door frame. A light shines through the gap. The gap represents the story of the break. Hands are in the gap? No.
+    *   *Let's stick to a strong focal point:* A single hand holding a wrench, touching a glowing joint of a large metal structure against a dark industrial backdrop. The "metal structure" represents the community framework. The "light" represents tomorrow.
+    *   *Audience:* Local residents.
+    *   *Objective:* Remind them that breaking isn't permanent; together we fix it.
+
+    *Wait, constraint: "Infer a human situation from the keywords. Identify whose experience the poster represents".*
+    *   Experience: Waiting periods, investment, shared burden.
+    *   Situation: A renovation crew fixing infrastructure late at night.
+
+    *Let's try to make it more emotive.*
+    *   Keywords: Repair, Community, Tomorrow.
+    *   Core Message: Broken systems aren't the end; they are an invitation to rebuild together.
+    *   Visual: Two pairs of hands—one rough, one gloved—working together on a mechanical pivot. The light source comes from a window behind the work area, making shadows long.
+    *   Headline: "Stitched Stronger."
+    *   No, that's a bit cliche.
+
+    *Let's try: The "Light of Repair".*
+    *   Subject: A compass held over a rusted map of a city.
+    *   Instrument: Repairing time/place.
+    *   Let's go simpler. "The Repair That Keeps Us Standing".
+    *   Visual: A cracked glass windowpane on a shop, with wood glue shining through the silica in the forest outside.
+    *   Let's go with a single human figure and an object.
+    *   Subject: A child holding a tool, looking at a broken bike in a park.
+    *   Community: Not by drawing a crowd. By weaving hands together.
+    *   Wait, I need to prioritize one dominant visual.
+    *   *Decision:* A close-up of hands soldering a joint of metal framework against a starry night sky. The metal framework implies infrastructure/community. The soldering symbolizes repair. The stars/night imply tomorrow.
+
+    *Wait, I need to check the constraints again:*
+    *   "Avoid relying on facial expressions or sentimental copy alone."
+    *   "Use framing, distance, light, and negative space to communicate the emotion."
+    *   "A specific message beyond simply repeating the keywords."
+    *   "Poincture" / "Octo/Alpha" ... No, that's thinking.
+
+    *Refining the Visual Concept:*
+    *   Subject: A line of a bridge (metaphorical, not necessarily a bridge). A gear or a bar being sorted into a new structure.
+    *   Let's say: A close-up of a concrete wall with a tool trace visible in the pattern.
+    *   Let's try this: A hand placing a loose brick near a pipe.
+    *   Better: A silhouette of a person using a hammer on a large, rusted hinge. The hinge connects two halves.
+    *   Let's focus on "Tomorrow". Light.
+    *   Visual: A hand holding a small lantern, illuminating a crack in a stone wall. On the wall opposite is the reflection of the lights? No.
+    *   Visual: A close-up of a soldering torch joining a copper connection. The contrast between the dark tube and the hot blue light.
+
+    *Let's settle on:* A silhouette of a hand lifting a heavy stonework piece from a construction site. In the background, through the stone, the sun is breaking through.
+    *   Headline: "Hold the Stone."
+    *   Okay, let's make it about the *act* of repair itself being the bridge to tomorrow.
+    *   Visual: Two gloved hands clasping an old, weathered handle of a door on a stone building. The door is partially broken. The bar of metal is the key.
+    *   Subject: Hands (community -> broad).
+    *   Action: Joining.
+    *   Light: Dusk/Blue hour (Tomorrow).
+    *   Headline: Open Until Open.
+    *   No, that's weak.
+
+    *Stronger Headline:* "Foundations of Tomorrow." No, generic.
+    *   "Every Held Part Becomes Whole."
+    *   "Crossing Aged."
+    *   "Duty to the Future."
+    *   "One Joint." (Like a hinge).
+    *   "Repair & Rebuild."
+
+    *Let's try this:*
+    *   Visual: Close-up of a rough hand holding a broom part (repair) cleaning dust from a floor (community) where a child's drawing is being preserved but covered? No.
+    *   Visual: A close-up of a window frame crack. Inside the gap, a light beam forms a shape from the future.
+    *   Visual: A close-up of a pair of hands taping a bridge photo to a map.
+    *   No, let's go with the "Hands holding a light" concept.
+    *   Subject: Two hands holding a small bulb above a dark background.
+    *   Setting: Industrial workshop.
+    *   Mood: Hopeful, Solid.
+    *   Headline: "Light the Way."
+    *   Wait, "Tomorrow" is in the keyword.
+    *   Headline: "Tomorrow Built Tonight."
+    *   Is it specific enough?
+    *   Let's go with the "key" metaphor.
+    *   Visual: A hand holding a key, turning it in a gear system. The gears are made of community icons? No.
+    *   Visual: A hand holding a wrench against a dark wall. A faint beam of light passes through the hole in the wear caused by the wrench head.
+    *   Okay, finalized visual: A close-up, macro shot of a worn metal hinge. Light is shining through the crack, bordered by a gloved hand on the right. The focus is on the connection point.
+    *   Headline: "Where the Cracked Meets the Strong." (Too long). "Held Together." "Mended."
+    *   Let's use a headline that implies the future. "Tomorrow is Hollowed Hand." No. "Where Hands Meet."
+    *   "The Future is Wired to Us."
+    *   "Tomorrow Stands."
+    *   "Solidly."
+    *   Let's try: "Solid Tomorrow." No.
+    *   "Bridge to Tomorrow."
+    *   Let's use "Repair to Future."
+    *   Headline: "We Repair the Tomorrow."
+    *   Subtitle: "Community holds the ground."
+    *   CTA: Leave it empty.
+
+    *Constraint Check:* "Use arrays for keywords, supporting_elements, colors, and avoid." "All other values must be strings." "Use an empty string when no subtitle or call to action is needed."
+    *   Key: "parse JSON".
+    *   Key: "keywords": ["repair", "community", "tomorrow"] (Must be strings in array).
+    *   Structure matches exactly.
+    *   No markdown.
+    *   No extra text.
+
+    *Refining the Interpretation:*
+    *   Inferred human situation: Neighbors congregating to fix public infrastructure or social tension.
+    *   Experience: Vulnerability masking resilience.
+    *   Emotional Tension: The fragility of the repair vs the strength of the community.
+
+    *Refining the Visual Direction:*
+    *   Main Subject: A single pair of hands fixing a rusted hinge on a heavy door.
+    *   Setting: A workshop or archive room at dusk.
+    *   Subject = Connection = Hope for Tomorrow.
+    *   Composition: Asymmetrical, bottom heavy.
+    *   Mood: Hopeful, grounded.
+    *   Light: Chiaroscuro. Strong side light from the top left on the hands.
+    *   Colors: Rusty orange, slate grey, cool blue for shadows.
+    *   Pay attention to: Negative space in the hinge mechanism.
+
+    *Refining Layout:*
+    *   Focal Point: The hinge point where the light hits.
+    *   Composition: Minimalist, focused on the touch point.
+    *   Typography: Strong, clean sans-serif.
+    *   Reading: Headline top left. Copy in bottom right.
+    *   Headline: "Tomorrow is a Repair." (A bit abstract).
+    *   Headline: "We Fix Tomorrow." (Direct).
+    *   Headline: "Forged Together."
+    *   Headline: "Hold for Tomorrow."
+    *   Headline: "Tomorrow Starts Here."
+    *   Headline: "Built in the Silence."
+    *   Headline: "Permanent Tomorrow."
+    *   Let's go with: "Tomorrow is Handed Down."
+    *   Let's try: "Where Broken Things Stand."
+    *   Headline: "Tomorrow Is Built on Today."
+    *   Headline: "Repairing Tomorrow." (Tautology).
+    *   Headline: "Tomorrow, Together." (Too simple).
+    *   Headline: "The Next Nails."
+    *   Headline: "Repair for Tomorrow." (Too functional).
+    *   Headline: "We Hold the Line."
+    *   Headline: "Tomorrow Requires Us."
+    *   Let's go with: "Tomorrow Starts at the Joint." (Poetic).
+    *   "Joint" = hinge/repair/connection.
+    *   Headline: "Tomorrow Starts at the Joint."
+
+    *Wait, I need to check the array constraint.*
+    *   "keywords": [], "supporting_elements": [], "colors": [], "avoid": [].
+    *   Wait, the example structure has "keywords" as an Array, "colors" as an Array, "avoid" as an Array.
+    *   Constraints say: "keywords": [], "supporting_elements": [], "palette": {"colors": [], ...}.
+    *   But the structure I need to output says: "keywords": [] at top level.
+    *   Wait, I need to look at the JSON requirement again.
+    *   "Use arrays of strings for keywords, supporting_elements, colors, and avoid."
+    *   So "keywords" (top level) is an array.
+    *   "color": "palette" inside, "colors" (array) inside palette.
+
+    *Wait, looking at the provided structure:*
+    *   `"keywords": []`
+    *   `"supporting_elements": []`
+    *   `"palette":` -> `"colors": []`
+
+    *Okay, I will fill these in.*
+
+    *Final Polish of Concept:*
+    *   I want a visual concept that feels physically present but emotional.
+    *   Subject: A gloved hand pressing a bolt into a large iron plate.
+    *   Background: The rest is dark, industrial.
+    *   Lighting: The glow of the bolt hole.
+    *   Core Message: Our presence creates stability.
+
+    *Headline:* "Tomorrow is Bolted." (Too industrial).
+    *   Headline:* "Footprint Tomorrow." No.
+    *   Headline:* "The Cost of Tomorrow." No.
+    *   Headline:* "Tomorrow to Stand."
+    *   Headline:* "Tomorrow Should Stand."
+    *   Headline:* "The Structure of Tomorrow."
+    *   Headline:* "Tomorrow Built."
+    *   Headline:* "For the Long Haul."
+    *   Headline:* "Tomorrow, Together." (Classic).
+    *   Headline:* "New Tomorrow."
+    *   Let's go with: "Tomorrow Starts Here." (Common).
+    *   "The Joint We Hold."
+    *   "Tomorrow is a Watch." No.
+    *   "Hold Tomorrow."
+    *   "Tomorrow, Honored."
+    *   Let's go with: "Tomorrow Needs Staying Power."
+    *   Headline: "Tomorrow, United."
+    *   Headline: "We Repair Tomorrow." (Simple).
+    *   Headline: "Tomorrow, Together." (Implies community + repair + time).
+    *   Let's try: "Tomorrow is in the Hand."
+    *   Headline: "Tomorrow is Made."
+    *   Headline: "Tomorrow, Made Safe."
+    *   Headline: "Tomorrow Starts Now."
+    *   Okay, let's use: "Tomorrow Supported."
+    *   Headline: "Tomorrow Supported."
+    *   No, "Support" is action. "Repair" is key.
+    *   Headline: "Held."
+    *   Headline: "Held for Tomorrow."
+    *   Headline: "Today for Tomorrow."
+    *   Headline: "Tomorrow We Hold."
+    *   Headline: "Tomorrow, Our Burden."
+    *   Headline: "Tomorrow Found."
+    *   Headline: "Tomorrow Found." (Too simple).
+    *   Headline: "The Way We Mended."
+    *   Headline: "Tomorrow Mended."
+    *   Let's try: "Tomorrow Made Whole."
+    *   Headline: "Tomorrow Made Whole."
+    *   Okay, I'll go with: "Tomorrow Made Whole."
+
+    *Wait, let's ensure the visual supports this.*

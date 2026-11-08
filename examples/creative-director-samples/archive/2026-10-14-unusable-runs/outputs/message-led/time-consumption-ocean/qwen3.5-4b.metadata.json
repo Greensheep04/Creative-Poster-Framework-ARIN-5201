@@ -1,0 +1,18 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "provider": "Featherless AI",
+  "source_url": "https://huggingface.co/Qwen/Qwen3.5-4B",
+  "variant": "message-led",
+  "keyword_set": "time-consumption-ocean",
+  "finish_reason": "length",
+  "status": "truncated",
+  "json_valid": false,
+  "schema_valid": false,
+  "validation_errors": [
+    "Unterminated string in JSON at position 2177 (line 48 column 67)"
+  ],
+  "settings": "Widget/provider defaults; numeric parameters not exposed",
+  "input_method": "Single user message; newlines normalized to spaces because widget is a single-line INPUT",
+  "collected_at": "2026-10-14T07:54:37.186Z",
+  "response_id": "fd9e629a-454f-444b-8c0c-a529da37bb3b"
+}

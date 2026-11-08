@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Creative Director poster concept",
+  "type": "object",
+  "properties": {
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "interpretation": {
+      "type": "string"
+    },
+    "audience": {
+      "type": "string"
+    },
+    "objective": {
+      "type": "string"
+    },
+    "core_message": {
+      "type": "string"
+    },
+    "concept": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "central_idea": {
+          "type": "string"
+        },
+        "connection_to_keywords": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "central_idea",
+        "connection_to_keywords"
+      ],
+      "additionalProperties": false
+    },
+    "copy": {
+      "type": "object",
+      "properties": {
+        "headline": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "call_to_action": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "headline",
+        "subtitle",
+        "call_to_action"
+      ],
+      "additionalProperties": false
+    },
+    "visual_direction": {
+      "type": "object",
+      "properties": {
+        "main_subject": {
+          "type": "string"
+        },
+        "setting": {
+          "type": "string"
+        },
+        "visual_relationship": {
+          "type": "string"
+        },
+        "supporting_elements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "style": {
+          "type": "string"
+        },
+        "mood": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "main_subject",
+        "setting",
+        "visual_relationship",
+        "supporting_elements",
+        "style",
+        "mood"
+      ],
+      "additionalProperties": false
+    },
+    "layout": {
+      "type": "object",
+      "properties": {
+        "focal_point": {
+          "type": "string"
+        },
+        "composition": {
+          "type": "string"
+        },
+        "reading_order": {
+          "type": "string"
+        },
+        "typography": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "focal_point",
+        "composition",
+        "reading_order",
+        "typography"
+      ],
+      "additionalProperties": false
+    },
+    "palette": {
+      "type": "object",
+      "properties": {
+        "colors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rationale": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "colors",
+        "rationale"
+      ],
+      "additionalProperties": false
+    },
+    "avoid": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "keywords",
+    "interpretation",
+    "audience",
+    "objective",
+    "core_message",
+    "concept",
+    "copy",
+    "visual_direction",
+    "layout",
+    "palette",
+    "avoid"
+  ],
+  "additionalProperties": false
+}

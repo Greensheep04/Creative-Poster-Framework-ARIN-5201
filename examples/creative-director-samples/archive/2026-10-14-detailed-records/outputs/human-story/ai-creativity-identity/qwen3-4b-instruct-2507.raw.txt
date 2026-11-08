@@ -1,0 +1,56 @@
+{
+  "keywords": [
+    "AI",
+    "creativity",
+    "identity"
+  ],
+  "interpretation": "A human artist confronts an AI-generated version of their own work, realizing that creativity can be replicated, but identity remains uniquely personal and irreplaceable.",
+  "audience": "Young creatives and artists navigating technology in their work",
+  "objective": "To inspire artists to affirm their originality and emotional authenticity in an age of AI-generated content",
+  "core_message": "Creativity can be imitated, but identity is forged in human experience and emotion",
+  "concept": {
+    "title": "The Mirror of Creation",
+    "central_idea": "A pivotal moment where an artist sees their own work recreated by AI, triggering a quiet but profound realization about the difference between imitation and selfhood",
+    "connection_to_keywords": "AI represents the technological force that replicates creativity; creativity is the human capacity being mirrored; identity emerges as the emotional and personal truth behind the work"
+  },
+  "copy": {
+    "headline": "What You Create Is Yours — Not What the Machine Copies",
+    "subtitle": "",
+    "call_to_action": ""
+  },
+  "visual_direction": {
+    "main_subject": "A single, abstract painting hanging on a wall — half in shadow, half illuminated by a single beam of light",
+    "setting": "A dimly lit studio at twilight, with a large window showing a city skyline in the background",
+    "visual_relationship": "The painting is split vertically — the left side is a realistic, emotionally expressive portrait of a person (the artist), while the right side is a smooth, symmetrical, AI-generated version of the same face, rendered in digital precision",
+    "supporting_elements": [
+      "A cracked mirror on the floor reflecting only the AI version",
+      "A single pencil resting on a desk, slightly out of focus",
+      "A faint fingerprint on the edge of the painting, visible only in shadow"
+    ],
+    "style": "Semi-realistic, with strong contrasts between organic and synthetic forms",
+    "mood": "Quiet introspection, emotional tension, subtle melancholy"
+  },
+  "layout": {
+    "focal_point": "The split painting, centered in the frame with the beam of light emphasizing the division",
+    "composition": "Diagonal balance — the light beam cuts across the painting from top-left to bottom-right, guiding the viewer’s eye through the contrast",
+    "reading_order": "Start with the painting, move to the mirror and the pencil, then the fingerprint in the corner",
+    "typography": "Minimalist, serif font for the headline; placed just below the painting, aligned to the left edge with slight negative space"
+  },
+  "palette": {
+    "colors": [
+      "deep charcoal gray",
+      "soft silver",
+      "warm amber light",
+      "faint blue shadow",
+      "muted white"
+    ],
+    "rationale": "The charcoal and gray establish a grounded, human feel; silver reflects the AI’s cold precision; amber light symbolizes the warmth and emotion of human creativity; blue shadow adds depth and emotional distance; white maintains clarity and space"
+  },
+  "avoid": [
+    "facial expressions",
+    "textured digital noise",
+    "overly sentimental language",
+    "multiple scenes or panels",
+    "explicit AI logos or branding"
+  ]
+}

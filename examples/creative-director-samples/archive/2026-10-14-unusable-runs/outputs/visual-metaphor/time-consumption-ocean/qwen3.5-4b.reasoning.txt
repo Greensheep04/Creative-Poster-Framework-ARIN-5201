@@ -1,0 +1,197 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Creative Director (CD) in a poster-generation pipeline.
+    *   **Input:** Keywords only ("time", "consumption", "ocean").
+    *   **Task:** Develop one coherent poster concept connecting these keywords through a central idea.
+    *   **Constraints:**
+        *   No questions.
+        *   Make reasonable creative choices.
+        *   Develop a specific message beyond repeating keywords.
+        *   Avoid collage of unrelated symbols.
+        *   Define audience and objective.
+        *   Describe concrete, depictable visual concept.
+        *   Support message with typography, color, composition.
+        *   Distinguish literal copy from visual descriptions.
+        *   Prioritize one dominant visual and one primary headline.
+        *   No factual claims/stats/endorsements/brand affiliations.
+        *   Output format: Exact JSON object with specific structure.
+        *   No Markdown fences, no commentary.
+        *   Empty strings for missing subtitle/CTA.
+        *   Arrays for keywords, supporting_elements, colors, avoid.
+    *   **Specific Instruction:** Develop a poster around one strong visual metaphor. Find shared property/tension/unexpected relationship. Express relationship through concrete visual transformation/juxtaposition. Metaphor must be drawable. Avoid assigning separate icons to every keyword.
+
+2.  **Analyze Keywords:**
+    *   *Time*: Abstract, flowing, ticking, eroding, passing.
+    *   *Consumption*: Using up, taking, waste, bottles, minerals, appetite.
+    *   *Ocean*: Water, vastness, deep, blue, life, decay, rise.
+
+3.  **Brainstorming Connections:**
+    *   *Idea 1:* Drinking water leaks into sand clock? (A bit literal).
+    *   *Idea 2:* The ocean is rising where crust has been worn down by time and human consumption? (Too complex).
+    *   *Idea 3:* An endless ocean of recirculated water where the waves are made of clocks that melt? (Too abstract).
+    *   *Idea 4:* **Time as a resource (water) that is being consumed.** Time is a liquid river we run out of, like a finite ocean.
+    *   *Idea 5:* **The ocean receding due to time and consumption.** Maybe the ocean is painted on a wall that is wearing away?
+    *   *Selected Metaphor:* **The Ocean as a Bank Account of Time.** The water level drops as time passes and we consume it.
+    *   *Selector:* Let's try a more visual, tangible interpretation. Time and consumption turn the ocean into sand or salt. Or the ocean *is* the measured time.
+    *   *Refined Metaphor:* Time is the water in the ocean. Consumption is the draining.
+    *   *Better Metaphor:* **The Tideclock.** A melting clock inside a volume of water, consuming the water itself.
+    *   *Best Metaphor:* **Subterranean Salt Ocean.** A clock sank into the ocean, consuming salt over time.
+    *   *Let's go with:* **The Ocean is the Container of Time, Being Consumed.**
+    *   *Visual:* A great wave forming that reveals itself as a hourglass structure or melting clockwork, dripping into sand that makes up the shore. Or an hourglass where the sand forms a coral reef.
+    *   *Wait, stick to the symbols given.* Time, Consumption, Ocean.
+    *   *Concept:* A massive clock tower dissolving into ocean water on the horizon. The hands are melting plastic? No, let's keep it elemental.
+    *   *Concept:* **A glass of water (consumption) sitting on a clock (time), but the water is overflowing into an abyss labeled Ocean.**
+    *   *Stronger Concept:* **The Ocean is a finite resource of time.** Visual: The horizon is an endless horizon, but the water level is depicted as dry sand (consumption/time) and the ocean is eroding the clock.
+    *   *Let's try:* **A River of Time Flows into an Ocean.** The river is getting faster and deeper.
+    *   *Let's try:* **A melting clock sinkhole opening up to reveal a sea of gears.**
+
+    *   *Decision:* **The Ocean is the Hourglass.**
+    *   *Visual:* A silhouette of a person submerged. The water level is high. The clock is *under* the water.
+    *   *Wait, simpler:* **The Tide as Time.** Waves are synchronized with the faces of clocks. The clocks are burning? No.
+
+    *   *Selected Concept:* **A large gallon of water that is an hourglass.**
+    *   *Description:* An army of marbles in a sea bottle.
+    *   *Let's try:* **The Ocean Growing, The Clock Shrinking.**
+    *   *Core Message:* Infinite potential is being consumed by time and use.
+    *   *Visual:* An ocean that is made of translucent gears turning inside the deep blue. They represent the consumption side. Time is the space between them.
+    *   *Actually, let's go with "Time is the depth".*
+    *   *Visual:* A single drop of ink falling into a massive pocket of static blue. The ink swirls into a sand timer shape.
+    *   *Okay, Final Idea:* **A clock submerged in an ocean of water where the water is being drained away.**
+    *   *Visual:* A giant, polished grandfather clock floating in a calm sea, but the face and hands are cracking and leaking outwards, turning the surrounding blue water into shelf black sand.
+    *   *Refinement:* **A Clock Dissolving into an Ocean Horizon.** The mechanism of time is melting into the survey of the ocean.
+    *   *Revised Concept:* **The Ocean is the Eye of the Clock.**
+    *   *Visual:* An enormous human-made circle (clock face) submerged beneath the ocean surface, but the sun is shining from the other side, so the water reveals the face.
+    *   *Okay, let's go with:* **The Ocean is the water clock.**
+    *   *Visual:* A large bowl of ocean water. The water level is dropping (consumption). A line floats across to measure time.
+    *   *Wait, let's go with something singular.*
+    *   *Concept:* **The Ocean is a Tank of Time.**
+    *   *Visual:* A giant cistern. Water flows out of it into a sink (consumption). The water level represents Time.
+
+    *   *Let's try to find tension.* Time stops consumption? Time accelerates consumption?
+    *   *Let's go with:* **An Hourglass of Ocean Water.**
+    *   *Visual:* An hourglass shape. The sand inside is replaced by a swirling, dynamic blue water volume. As time passes (sand falls), the ocean recedes.
+    *   *Connection:* Sand = Time, Water = Ocean, Gravity/Flow = Consumption.
+    *   *Wait, Sand is in an Hourglass. This is clearer.* "Time" = Sand/Glass, "Ocean" = Liquid/Volume, "Consumption" = The depletion of the liquid.
+    *   *Visual:* A massive glass structure (hourglass style). The upper chamber holds blue water ("Ocean"). The lower chamber holds black sand ("Time"). The gap shows the consumption (the water being siphoned away).
+    *   *Let's make it more cohesive.*
+    *   *Visual:* An ocean crashing *into* a stone hourglass. The waves are the water filling the goblets of the hourglass. The waves are receding (consumption).
+    *   *Okay, let's settle on this:* **A Giant Hourglass Buried in a Field of Shifting Blue Water.**
+    *   *No, let's go with:* **The Tide Clock.**
+    *   *Visual:* The ocean waves form the hourhand of a massive clock face. The water receding is the consumption.
+    *   *This implies time is the ocean, consumption is the receding, warning of depletion.*
+    *   *Headline:* "Time Leaks."
+    *   *Headline needs to be concise.* "Endless Tide."
+    *   *Headline:* "Counting Down the Sea."
+    *   *Connection:* The ocean height measures time. Consumption lowers the water.
+
+    *   *Wait, I need a "Literal Poster Copy" AND "Visual Description".*
+    *   *Let's define the visual clearly.*
+    *   *Subject:* A blue wave that forms the shape of a ticking second hand (Time) against the background of foam (Consumption). The ocean horizon is low.
+    *   *Okay, I'll go with:* **A Glass of Ocean Water on a Sand Clock.**
+    *   *No...*
+    *   *Let's try:* **The Ocean as Water Clock.**
+    *   *Visual:* A celestial sphere representing the ocean. A shadow clock on it. The clock hand is dropping into the ocean (consumption).
+    *   *Okay, I'll define the visual as:* **A droplet of water being absorbed into a massive ocean clock.**
+    *   *Key:* **The Ocean is an Hourglass.**
+    *   *Visual:* Two large glass bulbs of water stacked. A clear gap. The bottom bulb is now dry (consumption). Blue tint.
+    *   *Message:* We consume the ocean to measure time.
+    *   *Wait, "Time" is the sand in an hourglass.*
+    *   *Okay:* **A massive Hourglass where the Sand is the Ocean.**
+    *   *Visual:* An oversized hourglass. Inside, instead of sand, there are countless tiny blue spheres representing the ocean water. The sand below has turned to debris (consumption).
+    *   *Simpler:* **A full glass of water (ocean) on top of a ticking board (time) where the glass is an hourglass shape.**
+    *   *Okay, let's stop overcomplicating.*
+    *   *Concept:* **The Ocean as a Liquid Reserve of Time.**
+    *   *Visual:* A drop of water falling into a clock face. The water ripples to form sand.
+    *   *Concept:* **Tidal Ticking.**
+    *   *Visual:* The waves are clock hands. The moon is a consumer.
+    *   *Final Choice:* **A submerged clock tower.**
+    *   *Visual:* A mechanical clock tower half-submerged in deep blue water. The mechanism on the facade is eating away (consumption). The gears on the gear mechanism are melting into the sea (time passing).
+
+    *   *Wait, I need to integrate three keywords into ONE strong visual metaphor.*
+    *   *Metaphor:* **The Ocean is Timed by what we consume.**
+    *   *Visual:* A cylindrical vessel (OFSM). The water level drops (Consumption). The timestamps fade as the water drops (Time).
+    *   *Okay, let's go with:* **The Hourglass is Water.**
+    *   *Visual:* An hourglass containing a swirling ocean. The sand is the waves. The time is the gap. The consumption is the leaking.
+    *   *Okay, I will focus on the idea that the ocean is the face of the clock, and consumption is the tide receding.*
+    *   *Visual:* A massive clock face made entirely of water surface. The ocean horizon is visible through the hourglass drop.
+    *   *Better:* **A Clock Tower made of Sea.**
+    *   *Visual:* A structure standing out of the sea. It is an coastline shaped like clock hands.
+    *   *Okay, let's look at the keywords: Time, Consumption, Ocean.*
+    *   *Metaphor:* **An Ocean Full of Bottled Time.**
+    *   *Visual:* A submerged barge. Bottles inside.
+    *   *Let's go with:* **An Ocean Erosion Clock.**
+    *   *Visual:* A large grandfather clock submerged. The hands are green algae. The face is melting into sand.
+    *   *Let's go.* **A massive hourglass where the top bulb is filled with ocean water, and the bottom bulb is full of time (sand), connecting with a flowing stream of water consuming the sand into the deep sea below.**
+
+    *   *Let's refine the concept for the JSON.*
+    *   *Keywords:* [ "time", "consumption", "ocean" ]
+    *   *Interpretation:* The analogy of time as a diminished quantity.
+    *   *Metaphor:* **The Hourglass of the Deep.**
+    *   *Visual:* An oversized hourglass. The sand inside represents time. The ocean water surrounds it, consuming it.
+    *   *Wait, I need a stronger visual.*
+    *   *Let's do this:* **The Ocean rising over a clock.**
+    *   *Wait, "consumption" needs to be clear.*
+    *   *Idea:* **A river of water flowing into an ocean clock.**
+    *   *Visual:* An ocean horizon. In the foreground, a glass hourglass is placed. The sand is flowing down, turning into waves which crash into the ocean.
+    *   *Okay, let's settle on:* **The Ocean Level Chart.**
+    *   *Visual:* A topographic map of an ocean floor, but the lines represent time. The land is disappearing (consumption).
+    *   *No, ink.*
+    *   *Okay, final decision:* **A clock submerged in the ocean.**
+    *   *Visual:* A large, broken clock face floating in the ocean. The hands are liquid water. The water is draining out.
+    *   *Headline:* "Time Drowns."
+    *   *Visual details:* A single clock face (Time). A submarine/ship is sucking it up? No, The ocean (the medium) is consuming the clock's integrity.
+    *   *Wait, let's make it:* **The Ocean is the Container.**
+    *   *Visual:* A filling container. Time is the water level. Usage (consumption) causes a drop.
+    *   *Let's go with:* **The Ticking Tank.**
+    *   *Visual:* A massive cylindrical cistern under sea. The water inside is white (Noise/Time).
+    *   *Okay, I will choose:* **An Hourglass View of the Ocean.**
+    *   *Visual:* A cross-section of the earth (Ocean). Inside, a sand timer mechanism holds the blue water level. Water leaks down.
+
+    *   *Wait, let's simplify for clarity.*
+    *   *Concept:* **The Tide Measures the Cost of Time.**
+    *   *Visual:* **An Ocean Wave shaped like a sand timer.**
+    *   *Visual:* A wave crest. Inside the wave glass, there is an hour of water. As time passes, the hour glass cracks.
+    *   *Let's try this one:* **A sinking clock tower.**
+    *   *Visual:* A clock tower partially submerged in water. The hands are soaking. The sand is leaking from the base into the ocean trench.
+    *   *Audience:* General awareness.
+    *   *Objective:* Encourage rethinking value of resources (Time/Ocean).
+
+    *   *Let's try a more cohesive metaphor:* **Time is a Liquid That we Drain.**
+    *   *Visual:* A clear tank standing between the viewer and a vast ocean. The level of water in the tank is low (consumption). The tank is labeled "TIME" in a stylized font.
+    *   *Better:* **The Ocean is the Tank.**
+    *   *Visual:* An ocean wave that forms the shape of an hourglass, the water inside is clear blue, the sand below is turning into dust.
+    *   *Okay, I will build the "Liquid Time" concept.*
+    *   *Concept:* **Liquid Time is the Ocean.**
+    *   *Visual:* The ocean horizon is flat. A clock hand plunges into the water. The hand dissolves.
+    *   *Okay, let's pick the most coherent one:* **A Grandfather Clock dissolving into the Ocean.**
+    *   *Headline:* "Time Sinks."
+    *   *Concept:* **The Clock as the Ocean State.**
+    *   *Wait, "Consumption" is missing.*
+    *   *Okay:* **A Subscription Box for the Ocean.**
+    *   *Visual:* A subscription box with the ocean. The seal is worn.
+    *   *Okay, I'll go with:* **The Hourglass of the Deep.**
+    *   *Visual:* A giant hourglass submerged in a calm ocean trench. The sand inside represents "Time". The water at the bottom represents "Consumption". The connection is that the sand (time) is sucked down to the ocean floor (consumption).
+    *   *Wait, sand forms time in hourglass.*
+    *   *So the Ocean is the sink for Time.*
+    *   *Visual:* A river flowing into a clock face.
+    *   *Final Meeting:* **The Ocean as the Economy of Time.**
+    *   *Visual:* An ocean wave. Inside the wave is an hourglass. The sand is falling faster.
+    *   *Okay, final decision:*
+    *   *Visual:* An hourglass submerged in the sea. The glass rim is being eaten away by the water (Consumption). The sand inside represents Time.
+    *   *Wait, glass eating == Consumption. Sand == Time. Ocean == Context.*
+    *   *Perfect.*
+    *   *Visual:* An oversized translucent hourglass submerged in deep blue water. The rim is corroded/eroded. Sand is falling rapidly. The sand accumulates on the seabed (Consumption).
+    *   *Headline:* "Time Expires."
+    *   *Headline:* "Time as Resource."
+    *   *Headline:* "Time Flow."
+    *   *Headline:* "The Cost of Tide."
+    *   *Let's use:* "Time's Tide."
+    *   *Wait, I need to ensure "Time, Consumption, Ocean" are clear.*
+    *   *Headline:* "Time Consumes."
+    *   *Visual:* **An Hourglass with Water Sand.**
+    *   *Okay, I will write the JSON now.*
+
+4.  **Drafting Content:**
+    *   **Keywords:** ["time", "consumption", "ocean"]
+    *   **Interpretation:** An extreme metaphor equating the finite passage of

@@ -1,0 +1,54 @@
+{
+  "keywords": [
+    "urban loneliness",
+    "connection",
+    "windows"
+  ],
+  "interpretation": "Windows serve as both barriers and bridges in the urban landscape — reflecting solitude while also offering glimpses of human connection across distances.",
+  "audience": "Young professionals living in dense city environments",
+  "objective": "To evoke empathy for urban loneliness while visually suggesting the possibility of connection through shared perspectives",
+  "core_message": "Loneliness is not absence — it is the quiet reflection in a window, waiting for a glance across the street.",
+  "concept": {
+    "title": "The Glance",
+    "central_idea": "A single window in a city building reflects not just the outside world, but the mirrored image of another person — creating a moment of unexpected connection through shared space.",
+    "connection_to_keywords": "Urban loneliness is expressed through the window’s reflective surface showing a solitary figure. Connection emerges when the reflection subtly shifts to show two people looking at each other across the street — a transformation that mirrors the potential for human connection in isolation."
+  },
+  "copy": {
+    "headline": "A Glance Is All It Takes",
+    "subtitle": "In the quiet of city windows, loneliness reflects — but so does connection.",
+    "call_to_action": ""
+  },
+  "visual_direction": {
+    "main_subject": "A tall building window with a reflective surface showing two figures in the street below",
+    "setting": "Midday in a modern city with gray skies and a grid of buildings",
+    "visual_relationship": "The reflection in the window shows a solitary figure in the foreground, then subtly shifts to show two people looking at each other across the street — the transformation is implied by a soft blur and a shift in perspective, not abrupt change",
+    "supporting_elements": [
+      "Faint outlines of city traffic in the background",
+      "A single tree branch leaning slightly into the window's reflection",
+      "A flicker of sunlight hitting the glass at an angle"
+    ],
+    "style": "Minimalist realism with soft lighting and subtle depth",
+    "mood": "Quiet, reflective, hopeful"
+  },
+  "layout": {
+    "focal_point": "The central window with the reflective transformation",
+    "composition": "Rule of thirds with the window placed slightly off-center, leading the eye into the reflection",
+    "reading_order": "Eye moves from the cityscape background to the window, then into the reflection, and finally to the headline",
+    "typography": "Clean, sans-serif font with soft drop shadows; headline in bold, subtitle in lighter weight"
+  },
+  "palette": {
+    "colors": [
+      "steel gray",
+      "soft white",
+      "dull gold",
+      "dark blue"
+    ],
+    "rationale": "Steel gray and white establish the urban, cold environment; dull gold represents the subtle warmth of human connection; dark blue adds depth and emotional resonance without overwhelming the scene"
+  },
+  "avoid": [
+    "overly abstract shapes",
+    "crowded city scenes with multiple people",
+    "explicit depictions of sadness or despair",
+    "icons or symbols representing loneliness or connection separately"
+  ]
+}

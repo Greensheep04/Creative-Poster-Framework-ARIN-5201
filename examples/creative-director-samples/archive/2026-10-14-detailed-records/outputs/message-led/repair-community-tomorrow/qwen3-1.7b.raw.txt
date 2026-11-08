@@ -1,0 +1,36 @@
+{
+  "keywords": ["repair", "community", "tomorrow"],
+  "interpretation": "A collective vision of resilience where community-driven repair fosters a sustainable future.",
+  "audience": "Young professionals and eco-conscious individuals",
+  "objective": "Inspire action toward community-based solutions for environmental and social renewal.",
+  "core_message": "Community's collaborative repair of systems ensures a resilient tomorrow.",
+  "concept": {
+    "title": "The Future We Build",
+    "central_idea": "A mosaic of hands shaping a brighter future through collective care.",
+    "connection_to_keywords": "Repair (hands) + community (group) = tomorrow (future light)"
+  },
+  "copy": {
+    "headline": "Repaired Together: Building Tomorrow's Future",
+    "subtitle": "Your community's work today shapes the world tomorrow.",
+    "call_to_action": "Join the repair movement"
+  },
+  "visual_direction": {
+    "main_subject": "A group of hands interlocking in a circular formation, each holding a glowing blue light",
+    "setting": "A futuristic cityscape at dusk with floating solar panels and bioluminescent trees",
+    "visual_relationship": "Hands form a rotating wheel, light radiating outward as the wheel spins",
+    "supporting_elements": ["a holographic map of interconnected systems", "a tree with intertwined roots", "a clock showing 2030"],
+    "style": "High-contrast realism with soft glow effects",
+    "mood": "Hopeful and collaborative"
+  },
+  "layout": {
+    "focal_point": "The rotating hands wheel in the center",
+    "composition": "Symmetrical balance with the wheel at the top and bottom of the frame",
+    "reading_order": "Headline at top, subtitle below, call to action at bottom",
+    "typography": "Bold, sans-serif headline with glowing text overlay"
+  },
+  "palette": {
+    "colors": ["navy blue", "emerald green", "golden amber"],
+    "rationale": "Navy blue for trust, emerald green for growth, golden amber for hope"
+  },
+  "avoid": ["statistical claims", "brand names", "complex explanations"]
+}

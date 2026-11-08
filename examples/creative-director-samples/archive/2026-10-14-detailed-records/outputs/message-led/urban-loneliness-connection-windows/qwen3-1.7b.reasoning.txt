@@ -1,0 +1,17 @@
+Okay, let's tackle this poster concept. The user provided the keywords: urban loneliness, connection, windows. I need to create a coherent message beyond just repeating these words.
+
+First, I need to connect these keywords. Urban loneliness is about feeling isolated in a city, connection is about building relationships, and windows are a common element in cities. Maybe the idea is that windows are a way to bridge the gap between loneliness and connection. So the central theme could be that windows are the key to connection in urban settings.
+
+The audience is probably people living in cities, maybe young professionals or students. The objective is to encourage them to use windows as a tool for connection. The core message would be that windows are the invisible bridges between loneliness and connection.
+
+For the visual concept, a main subject could be a person looking out a window, but with a twist. Maybe the person is holding a phone or a book, showing they're trying to connect. The setting is a city skyline, with windows reflecting the outside world. The visual relationship would be the person's interaction with the window and the city.
+
+Supporting elements could be other people through the windows, maybe a street scene or a group of people. The style should be modern, maybe a mix of realism and digital elements. The mood is hopeful, showing that connection is possible.
+
+The headline needs to add meaning. Instead of just "Window Connection," maybe "Bridges Between Us" or "The Window's Secret." The subtitle could mention the city's pulse and the power of connection.
+
+Colors: Maybe soft blues and greens for the city, with warm tones for the person's emotions. Palette rationale would explain that these colors evoke calm and hope.
+
+Avoid any generic directions. Make sure the visual is clear and the typography is distinct. The focal point is the person looking out the window, with the city in the background. The reading order starts with the headline, then the subtitle, then the call to action.
+
+Check if all required fields are included. Keywords, interpretation, audience, objective, core message, concept, copy, visual direction, layout, palette, avoid. Make sure the JSON is valid and follows the structure.

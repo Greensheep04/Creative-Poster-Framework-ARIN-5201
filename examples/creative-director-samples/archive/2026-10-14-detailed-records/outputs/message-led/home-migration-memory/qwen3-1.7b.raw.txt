@@ -1,0 +1,36 @@
+{
+  "keywords": ["home", "migration", "memory"],
+  "interpretation": "A journey of returning to home after migration, with memory as the emotional anchor.",
+  "audience": "People reflecting on personal or collective journeys, cultural identity, and nostalgia.",
+  "objective": "To evoke emotional resonance and provoke reflection on the interplay between movement, loss, and remembrance.",
+  "core_message": "Home is not a destination, but the echo of memories carried through migration.",
+  "concept": {
+    "title": "The Echo of Steps",
+    "central_idea": "Migration is the act of leaving, but memory is the compass that guides home.",
+    "connection_to_keywords": "Home is the destination, migration is the journey, and memory is the compass that maps the path."
+  },
+  "copy": {
+    "headline": "The Road Home",
+    "subtitle": "Where Memories Guide Us",
+    "call_to_action": "Trace your roots, step into your story."
+  },
+  "visual_direction": {
+    "main_subject": "A person holding a suitcase and a photo album, standing at a train station.",
+    "setting": "A twilight train station with a distant cityscape and a moonlit sky.",
+    "visual_relationship": "The suitcase moves toward the home city, while the photo album reveals fragmented memories.",
+    "supporting_elements": ["Stars as memory markers", "A map in the background", "A clock showing departure time"],
+    "style": "Minimalist with warm, golden lighting to emphasize warmth of home and cool, blue tones for the journey.",
+    "mood": "Reflective, hopeful, and nostalgic."
+  },
+  "layout": {
+    "focal_point": "The person's face in the center, with the suitcase and album on the left and the train station in the background.",
+    "composition": "Vertical layout with the person at eye level, suitcase and album on the left, train station in the right.",
+    "reading_order": "Headline at top, subtitle below, copy in the lower right.",
+    "typography": "Bold serif font for headline and subtitle, sans-serif for copy with a warm tone."
+  },
+  "palette": {
+    "colors": ["gold", "red", "blue", "green"],
+    "rationale": "Gold and red symbolize home's warmth and vitality; blue and green represent the journey and memory."
+  },
+  "avoid": ["generic directions", "factual claims", "brand affiliations"]
+}

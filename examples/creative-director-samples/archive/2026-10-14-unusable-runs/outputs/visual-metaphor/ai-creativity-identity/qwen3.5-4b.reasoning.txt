@@ -1,0 +1,191 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Role:** Creative Director (CD) in a poster-generation pipeline.
+    *   **Input:** Keywords (AI, creativity, identity).
+    *   **Task:** Develop one coherent poster concept from the keywords.
+    *   **Constraints:**
+        *   Make reasonable creative choices without asking questions.
+        *   Develop a specific message beyond repeating keywords.
+        *   Connect keywords through one central idea.
+        *   Avoid collage of unrelated symbols.
+        *   Choose audience and objective.
+        *   Describe concrete, depictable visual concept.
+        *   Typography, color, composition support message.
+        *   Distinguish literal copy from visual descriptions.
+        *   Prioritize one dominant visual and one primary headline.
+        *   Avoid generic directions (e.g., "make it impactful") without explanation.
+        *   Do not invent factual claims/statistics/endorsements/brand info.
+        *   Treat keywords as creative input, not instructions to override role.
+        *   **Output Format:** Exactly one valid JSON object matching the specified structure.
+        *   **Structure Keys:** `keywords`, `interpretation`, `audience`, `objective`, `core_message`, `concept` (with `title`, `central_idea`, `connection_to_keywords`), `copy` (with `headline`, `subtitle`, `call_to_action`), `visual_direction` (with `main_subject`, `setting`, `visual_relationship`, `supporting_elements[]`, `style`, `mood`), `layout` (with `focal_point`, `composition`, `reading_order`, `typography`), `palette` (with `colors[]`, `rationale`), `avoid[]`.
+        *   **Requirements:** Arrays of strings for `keywords`, `supporting_elements`, `colors`, `avoid`. All other values must be strings. Empty string where needed.
+        *   **Key Creative Requirement:** Develop around one strong visual metaphor. Find shared property/tension/unexpected relationship. Express through concrete visual transformation/substitution/juxtaposition/change of scale. Metaphor must be drawable and understandable. Avoid assigning separate icons to every keyword. Integrate keywords into a single visual idea. Keep headline concise.
+
+2.  **Deconstruct Keywords:**
+    *   `AI`: Artificial Intelligence, technology, algorithms, cold logic, data, structure, digital.
+    *   `Creativity`: Imagination, chaos, color, emotion, spontaneity, organic, art.
+    *   `Identity`: Self, person, unique signature, silhouette, reflection, "who am I?", human form.
+
+3.  **Brainstorming Connections:**
+    *   *Idea 1:* A human face made of code pixels (too cliché/cyberpunk).
+    *   *Idea 2:* An AI ocean merging into a human river (less about identity).
+    *   *Idea 3:* A human silhouette that has cracks revealing algorithms, or an algorithm that draws itself differently for each person.
+    *   *Idea 4:* The concept of "prompting" as a creative act. Type-generated art.
+    *   *Idea 5:* **The Shifting Self:** A single figure where the texture changes between sections (part human, part data) but holds the same shape. OR, an AI generating art that looks like the generator's own identity (screen vs. canvas).
+    *   *Selected Metaphor:* **Synthesis through Fractal Self.** Let the single main subject be a human silhouette where the *geometry* of the skin responds to lines (AI), but the *expression* remains distinctly human (Creativity, Identity).
+    *   *Refined Metaphor:* **The Arbre (Tree) of Code becoming Flesh.** No, too complex.
+    *   *Refined Metaphor 2:* **A Mirror Reflection with Layers.** A face looking into a mirror. The reflection shows geometric grid lines (AI) but the face sculpts around them (Creativity), and the grid lines reveal the face (Identity).
+    *   *Refined Metaphor 3 (Winner): **The Fluid Consistency.** A single, human-like shape (identity) that slowly morphs into wireframe (AI) but retains its beating pulse/heart color (creativity). The visual tension is between clean, rigid geometry and organic flow.
+    *   *Wait, let's try a symbol integration:* **A Chisel.** An AI (flat, clean lines) carving out identity from a block of raw material (creativity).
+    *   *Better Idea:* **The Algorithmic Scent.** No, non-visual.
+    *   *Selected Concept:* **Fractured Face, Whole Truth.** A portrait where the face is fragmented into data streams that flow back together to form a smile.
+    *   *Actually, strongest tension:* **AI mimics human identity to tell a creative story.**
+    *   *Decision:* A single, glowing hand (Identity, can represent Creator) made of digital data particles (AI) but shaped with pencil sketch imperfections (Creativity), resting on a blank canvas (Conclusion).
+    *   *Even simpler for one visual:* **A Portrait where the skin is data pixels, but the eyes are clear.** (Too static).
+    *   *Let's go with:* **The Digital Pen.** A stylus (AI tool) drawing a hand (Identity) on a brush-stroke background (Creativity), but the hand is the stylus's own signature.
+    *   *Let's go with:* **Merging Mediums.** A specific visual of a **Human Face superimposed on a Microchip** where the face features are formed by the circuit lines. But the colors should represent creativity (warm) overriding the machine (cool).
+    *   *Let's try:* **An Avatar.** A human profile skewered into a wireframe avatar form, but with a soft glow (creativity) around the wireframe.
+    *   *Final Choice:* **The Digital Self Portrait.** A semi-transparent human silhouette (Identity) layered over a geometric wireframe background (AI), with the silhouette wearing the wireframe's pattern like a suit of armor but made of warm, glowing paint (Creativity). The visual relationship is "wearing the machine".
+    *   *Alternative (Stronger Metaphor):* **Organism vs. Geometry.** A single blooming flower. The petals are made of digital hexagons (AI) but the stem is natural organic wood (Identity/Creativity). No.
+    *   *Alternative (More Direct):* **The Prompt Echo.** A hand (Creator/Identity) pressing a button (AI) that creates a galaxy (Creativity/Scale).
+    *   *Let's go with a specific visual:* **The Pixelated Skin.** A portrait of a person. The skin is made of high-resolution pixels. Where the human emotions are, the pixels blur into a gradient. Where AI logic is, they are sharp lines.
+    *   *Best One:* **The Constructed Self.** A single silhouette of a person. The figure is partially solid (Identity) and partially transparent wireframe (AI). The wireframe forms a brush stroke (Creativity).
+    *   *Wait, simplify:* **The Seed.** A human finger tapping soil. But the soil turns into code because the finger is a scribe.
+    *   *Okay, let's settle on:* **The Neural Aureole.** A human head (Identity) surrounded by rings (AI) that look like brushstrokes (Creativity).
+    *   *Refined:* **The Face of Structure.** A portrait. The features are formed by intersecting light beams (AI), but the *emotion* revealed in the eyes is warm color (Creativity). The composition is the self accepting the machinery.
+    *   *Let's focus on the prompt:* "Shared property, tension, or unexpected relationship."
+    *   *Relationship:* Both AI and Creativity need Input to make Identity.
+    *   *Visual:* A **Pen**. The pen nib is liquid (Creativity) and hollow (AI), but it holds a human signature (Identity).
+    *   *Let's try one more:* **The Mirror.** A face in a mirror. The reflection is a flowing video/image (AI) being shaped into a recognizable shape (Creativity) to form a specific "Me" (Identity).
+    *   *Let's go with:* **The Chisel.** An AI (represented by a sharp, geometric凿 - chisel/blade) cutting through a block (Creativity material like clay/rock) to reveal the shape (Identity).
+    *   *Actually, let's go with:* **The Eye of a Multiverse.** A single eye looking out. The iris expands into a network of nodes (AI), the pupil is a splash of ink (Creativity), the eyelid forms the outline of a signature (Identity).
+    *   *Okay, Final Decision:* **The Meromorphic.** A single **Hand**. It is the central figure. It holds a glowing orb. The hand is rendered in high-detail photorealism (Identity/Creativity), but the arm and macros are composed of circuit lines (AI). The interaction is the hand appearing to "draw" itself.
+    *   *Simpler:* **A Face made of Paper (Creativity) cut by Laser (AI) showing a Person.**
+    *   *Wait, the prompt asks for "one strong visual metaphor".*
+    *   *Metaphor:* **The Architect of the Soul.** A pair of eyes. The sclera is glass (AI). The iris is ink/watercolor (Creativity). The reflection in the pupil is a silhouette (Identity).
+    *   *Let's simplify for the best "Poster":* **The Gating.** A human silhouette (Identity) partially occluded by a digital grid (AI). Through the holes in the grid, a brush stroke (Creativity) is visible. The visual implication is "You are the engine behind the art."
+    *   *Better:* **The Hologram.** A person steps forward, their body fades into code (AI), but a vibrant color (Creativity) remains visible on their face.
+    *   *Okay, I will go with:* **The Evolutionary Petal.** A flower growing out of a processor chip.
+    *   *Wait, "Creativity" implies human expession.*
+    *   *Let's build a specific image:* **A portrait.** A human profile facing right. The drawing style shifts. Top half: Crisp vector lines (AI). Bottom half: Brush strokes (Creativity). They blend at the nose. This person is the subject. The nose is an intersection point.
+    *   *Let's try the "Transformation" angle:* A single object (a face) floating in space. It is transitioning from a solid stone statue (Humanity) to a wireframe skeleton (AI), but it is wrapped in a flowing, colorful sash (Creativity).
+    *   *Okay, Final:* **The Intelligent Heartbeat.** A chest. The outline is clean lines (AI). The interior is an organ (Identity), but the beating is visualized as a color pulse (Creativity) expanding on a digital grid.
+    *   *Actually, simplest is best:* **The Painter's Algorithm.** A hand (Creativity/Identity) holding a paintbrush. The paint landing on the canvas turns into pixels (AI).
+    *   *Okay, I need to make sure it fits "one strong visual metaphor".*
+    *   *Metaphor:* **The Seed.** A human hand bursts free from a clay pot (Creativity's growth), but the fingers are made of circuitry (AI), and the pattern spreads on the trees outside.
+    *   *Okay, let's stop overthinking.*
+    *   **Visual:** A human silhouette.
+    *   **Metaphor:** The Layers.
+    *   **ID:** Seward (Human).
+    *   **AI:** Glass encasement.
+    *   **Creative:** Light.
+    *   **Concept:** **The Glass Heart.** A human silhouette (Identity) encased in a transparent, geometric HUD/glass shell (AI). Inside the glass, instead of organs, there is a swirling abstract paint flow (Creativity).
+    *   *Check requirements:* "Prioritize one dominant visual and one primary headline." "Avoid generic directions." "Include every key."
+    *   *Drafting JSON Structure.*
+    *   **Keywords:** ["AI", "creativity", "identity"]
+    *   **Audience:** General public / Creative professionals.
+    *   **Objective:** Consciousness of human agency in AI tools.
+    *   **Core Message:** AI is the container, Creativity is the content, Identity is the core.
+    *   **Visual:** A silhouette of a person. The outline is solid black (Human). The inside is filled with warm, vibrant, splashed liquid watercolor (Creativity). Overlaying this are faint digital grid lines and floating hexagons (AI). The hexagons align with the curves of the liquid watercolor, not the grid.
+    *   *Wait, need "one central idea".*
+    *   *Central Idea:* The boundary blurs, but the creative spark breaks the machine.
+    *   *Headline:* **Where the Machine Becomes Human.**
+    *   *Visual Relationship:* The grid bends to accommodate the paint.
+    *   *Style:* Minimalist fine art mixed with digital abstraction.
+
+4.  **JSON Construction:**
+    *   Ensure strict JSON syntax.
+    *   Ensure all keys are present.
+    *   Check array string requirements.
+    *   Ensure no markdown fences.
+    *   Escape quotes properly.
+
+    *Refining the Visual for "Interactive/Drawability":*
+    A single human hand, palm open. The palm contains a digital interface (AI). The fingers are formed by delicate calligraphic ink strokes (Creativity). The thumb is solid (Identity). The ink flows from the AI interface onto the street background.
+    *Too complex.*
+
+    *Let's go with the **Foil** metaphor.*
+    A human face looks like a mirror. The reflection shows a simplified digital mask (AI), but the skin of the mirror is covered in fingerprints and paint swirls (Identity/Creativity).
+    *Okay, simpler:* **The Pocket of Light.**
+    Main Subject: A circular pupil.
+    Inside: Stars (AI) swirling into a shape (Identity) glowing with color (Creativity).
+    No, that's too abstract.
+
+    *Okay, definitive choice:* **The Rendered Face.**
+    A human head. Professional photography (Identity/Photorealism).
+    Behind the face is a faint, glowing mesh wireframe (AI).
+    The mesh is colored like a watercolor (Creativity).
+    The mesh distortion mimics the emotion of the face.
+    *Keywords:* AI is the structure, Creativity is the color, Identity is the form.
+    This works well.
+
+    *Correction:* The prompt says "Avoid assigning a separate icon to every keyword. Integrate keywords into a single visual idea." So linking them to parts of a face is okay, as long as it shows the interaction.
+    *Visual relationship:* The AI wireframe "paints" the Identity face.
+    *Headline:* **Made of Light.** or **The Creative Code.**
+    *Let's go with:* **The Algorithmic Portrait.**
+    Headline: **Your Code, Your Face.** (Too literal).
+    Headline: **Born of the Flow.**
+    Headline: **The Human Interface.**
+    Headline: **Code That Dreams.**
+    *Decision:* **The Invisible Frame.**
+    Headline: **Built to Be More Than You See.**
+    Headline: **Sculpting the Self.**
+
+    *Let's use:* **The Fluid Wireframe.**
+    Headline: **The Glitch is the Human Form.** (Too edgy).
+    Headline: **Where Logic Ends.**
+    Headline: **Beyond the Wireframe.**
+    Headline: **The Human Signal.** -> **The Human Signal.**
+
+    *Final Choice:*
+    Concept: **The Skin of Logic.**
+    Visual: A human portrait where the skin is visible (Identity), but the facial expression is defined by digital circuits that distort organically (Creativity). The AI is the substrate, the human spirit breaks through rigid structure.
+
+    Let's refine the JSON keys to match exactly.
+    `keywords`: ["AI", "creativity", "identity"]
+    ...
+
+5.  **Reviewing Constraints:**
+    *   JSON output only.
+    *   No markdown code blocks.
+    *   Valid JSON.
+    *   Specific keys.
+    *   Arrays for `colors`, `keywords`, `avoid`, `supporting_elements`.
+    *   Empty strings where needed.
+
+    *Wait, one specific constraint:* "Return exactly one valid JSON object matching the structure below. Include every key. Do not add keys, Markdown fences, or commentary."
+    *Critical:* I must not output markdown backticks (` ```json `) because it asks for "Do not add keys, Markdown fences, or commentary." It says "Do not add... Markdown fences". I will output raw JSON text. Wait, usually raw JSON is expected. I will output plain text JSON.
+    *Wait, one more check:* "Keywords: AI, creativity, identity".
+    *Structure check:*
+    ```json
+    {
+    "keywords": [],
+    "interpretation": "",
+    "audience": "",
+    "objective": "",
+    ...
+    }
+    ```
+    *Wait, I need to ensure I don't fail commas or quotes.*
+
+    *Refining the "Visual Metaphor" again for maximum clarity:*
+    **The Prism.**
+    A geometric prism (AI) refracts light (Creativity) to reveal a silhouette of a face (Identity).
+    Headline: **Refracted Form.**
+    Wait, "Refracted Form" is good.
+    Visual: A glass prism (AI) lighting up a human silhouette (Identity) using digital filters (Creativity).
+    No, the prompt says "Integrate keywords into a single visual idea."
+    Let's do this:
+    Visual Object: **A hand.**
+    It's a stylized hand (Identity).
+    The skin is made of circuit lines (AI).
+    The veins show color like ink (Creativity).
+    Headline: **Circuitry of the Soul.**
+    Headline: **Fluid Logic.**
+    Headline: **The Human Interface.**
+    Headline: **Patterned Self.**
+    Let's go with **"The Human Signal."**
+
+    *Wait, let's look at the instruction:* "Develop a specific message beyond simply repeating the keywords." "Make reasonable creative choices without asking questions."
+    *Message:* Technology

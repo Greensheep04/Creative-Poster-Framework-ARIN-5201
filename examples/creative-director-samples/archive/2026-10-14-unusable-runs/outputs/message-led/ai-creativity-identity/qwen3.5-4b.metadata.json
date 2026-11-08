@@ -1,0 +1,15 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "provider": "Featherless AI",
+  "source_url": "https://huggingface.co/Qwen/Qwen3.5-4B",
+  "variant": "message-led",
+  "keyword_id": "ai-creativity-identity",
+  "collected_at": "2026-10-14T08:42:54.017Z",
+  "status": "completed",
+  "finish_reason": "length",
+  "json_valid": false,
+  "settings": "Widget/provider defaults; numeric parameters not exposed",
+  "input_method": "Original system and user messages joined with blank line; each newline replaced with one space for a single user-message widget.",
+  "resumed_after_user_authorization": true,
+  "response_id": "e793d355-9dc9-4d6e-b639-a8105267253c"
+}

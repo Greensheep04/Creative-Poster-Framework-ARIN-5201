@@ -1,0 +1,606 @@
+{
+  "archived_at": "2026-10-14T17:18:54.469686+08:00",
+  "reason": "User requested that truncated and unusable runs be excluded from active samples and preserved in archive.",
+  "files": [
+    {
+      "original_path": "README.md",
+      "archived_path": "collection-before-cleanup/README.md",
+      "sha256": "044833876953dc1480397e7607b7f4deca39579c58ac13a20456ec9c3af2046d",
+      "action": "copied"
+    },
+    {
+      "original_path": "run-plan.json",
+      "archived_path": "collection-before-cleanup/run-plan.json",
+      "sha256": "16f1889c973e76b2844e002ebb7b9f154b7729f10dec20ca771793709d4b8573",
+      "action": "copied"
+    },
+    {
+      "original_path": "collection-status.json",
+      "archived_path": "collection-before-cleanup/collection-status.json",
+      "sha256": "d2a27812d97be9f2e98d89fb65f7865672753cfb9e7f336d9d1e8bad5235da88",
+      "action": "copied"
+    },
+    {
+      "original_path": "validation-report.json",
+      "archived_path": "collection-before-cleanup/validation-report.json",
+      "sha256": "c3586d3a93ed77c4fea858da5d98c4877dfc59ea578c2bb495d727fec9b93921",
+      "action": "copied"
+    },
+    {
+      "original_path": "validation-report.md",
+      "archived_path": "collection-before-cleanup/validation-report.md",
+      "sha256": "50f4bd62225183afed1e44c94cef448e7732b86ac1b1d4fe60f2ce092804ba8b",
+      "action": "copied"
+    },
+    {
+      "original_path": "resume.md",
+      "archived_path": "collection-before-cleanup/resume.md",
+      "sha256": "7f69d2d55504c04830636ec38fc32e9c35351b6e0a4e5598eb40e4f09d57aafd",
+      "action": "copied"
+    },
+    {
+      "original_path": "validate_samples.py",
+      "archived_path": "collection-before-cleanup/validate_samples.py",
+      "sha256": "0f0c36bc9b86d381544276da1820eb907c7910450a22fa4701ddba46e938a150",
+      "action": "copied"
+    },
+    {
+      "original_path": "outputs/message-led/urban-loneliness-connection-windows/qwen3.5-4b.metadata.json",
+      "archived_path": "outputs/message-led/urban-loneliness-connection-windows/qwen3.5-4b.metadata.json",
+      "sha256": "f272665acaa33bc4a32f26d6ae11e55743b95aa519dd50b155c646df4ff9a9f5",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/urban-loneliness-connection-windows/qwen3.5-4b.raw.txt",
+      "archived_path": "outputs/message-led/urban-loneliness-connection-windows/qwen3.5-4b.raw.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/urban-loneliness-connection-windows/qwen3.5-4b.reasoning.txt",
+      "archived_path": "outputs/message-led/urban-loneliness-connection-windows/qwen3.5-4b.reasoning.txt",
+      "sha256": "9f77401c32a1105b336d2a2557ad058ba3c27c4d7f7ecfeb7c30ee5410f12aed",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/urban-loneliness-connection-windows/qwen3.5-4b.request.txt",
+      "archived_path": "outputs/message-led/urban-loneliness-connection-windows/qwen3.5-4b.request.txt",
+      "sha256": "8f0e7fdf064d20b7014b021c8f49bad9da7683f3825f92ceb0ac8b7bb16e276b",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/urban-loneliness-connection-windows/qwen3.5-4b.response.json",
+      "archived_path": "outputs/message-led/urban-loneliness-connection-windows/qwen3.5-4b.response.json",
+      "sha256": "fa6ab33f1bf66f4d41dbc1e817eb9933ddbc95a7d2cc12cfab1f52bc9b59e7f5",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/time-consumption-ocean/qwen3.5-4b.metadata.json",
+      "archived_path": "outputs/message-led/time-consumption-ocean/qwen3.5-4b.metadata.json",
+      "sha256": "9f98cacff002d82238653f2ed299c2f71841a948f6ba79dded11b5203d187eb8",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/time-consumption-ocean/qwen3.5-4b.raw.txt",
+      "archived_path": "outputs/message-led/time-consumption-ocean/qwen3.5-4b.raw.txt",
+      "sha256": "e9bcc67f59743dc3ac799c6fd62d79dbe06f996cc8b464c0886bfac66ecf18ea",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/time-consumption-ocean/qwen3.5-4b.reasoning.txt",
+      "archived_path": "outputs/message-led/time-consumption-ocean/qwen3.5-4b.reasoning.txt",
+      "sha256": "524dc37fbe59e9c29dae497ba5a67c490323e28b67340a03a9730ba58971ff07",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/time-consumption-ocean/qwen3.5-4b.request.txt",
+      "archived_path": "outputs/message-led/time-consumption-ocean/qwen3.5-4b.request.txt",
+      "sha256": "3bceaacbc59ff5565b110add6410e3614ca15e7e2eccdca2df55aa9fe38272a5",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/time-consumption-ocean/qwen3.5-4b.response.json",
+      "archived_path": "outputs/message-led/time-consumption-ocean/qwen3.5-4b.response.json",
+      "sha256": "2002ecf176c8df2b5ffc5de790f266eb663f49c65e181182077187504c36e9ad",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/ai-creativity-identity/qwen3.5-4b.metadata.json",
+      "archived_path": "outputs/message-led/ai-creativity-identity/qwen3.5-4b.metadata.json",
+      "sha256": "5c86654fdcb28ef81b0dd2a85581a129f090aca65afdf5bd487bfcde95c681f5",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/ai-creativity-identity/qwen3.5-4b.raw.txt",
+      "archived_path": "outputs/message-led/ai-creativity-identity/qwen3.5-4b.raw.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/ai-creativity-identity/qwen3.5-4b.reasoning.txt",
+      "archived_path": "outputs/message-led/ai-creativity-identity/qwen3.5-4b.reasoning.txt",
+      "sha256": "e4d692fff5751d1953c3bee0755dfcf31badcbb9e67e019f1f0e1cd3d5fad6fd",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/ai-creativity-identity/qwen3.5-4b.request.txt",
+      "archived_path": "outputs/message-led/ai-creativity-identity/qwen3.5-4b.request.txt",
+      "sha256": "b9d8ee2052786548e30e76db65abb84ed3abd769ad7d7ef851100564a1a740b4",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/ai-creativity-identity/qwen3.5-4b.response.json",
+      "archived_path": "outputs/message-led/ai-creativity-identity/qwen3.5-4b.response.json",
+      "sha256": "12e3c0f907ee9cc6dbc256ded32c386d5621096d804a37830777fd2abc9508c7",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/repair-community-tomorrow/qwen3.5-4b.metadata.json",
+      "archived_path": "outputs/message-led/repair-community-tomorrow/qwen3.5-4b.metadata.json",
+      "sha256": "ecba0a4e5a96e0658fe63cca9da07a54fe5f6b74b8f915fddac68d3ac68c5ee2",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/repair-community-tomorrow/qwen3.5-4b.raw.txt",
+      "archived_path": "outputs/message-led/repair-community-tomorrow/qwen3.5-4b.raw.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/repair-community-tomorrow/qwen3.5-4b.reasoning.txt",
+      "archived_path": "outputs/message-led/repair-community-tomorrow/qwen3.5-4b.reasoning.txt",
+      "sha256": "fcd131874826fa56363e1df5f156a9e82db5a8acb55a506fed873372b483526d",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/repair-community-tomorrow/qwen3.5-4b.request.txt",
+      "archived_path": "outputs/message-led/repair-community-tomorrow/qwen3.5-4b.request.txt",
+      "sha256": "02ff3c2f79fd5b643a30ce8926f2a03706fe61de903b59d495f2d340801e9918",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/repair-community-tomorrow/qwen3.5-4b.response.json",
+      "archived_path": "outputs/message-led/repair-community-tomorrow/qwen3.5-4b.response.json",
+      "sha256": "f6e298423a3c2cfc8883d7f6a61a073ec6935a2bd23843119d3a743c7ce19ae2",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3.5-4b.metadata.json",
+      "archived_path": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3.5-4b.metadata.json",
+      "sha256": "9ea1986325552d8ad18f36fb30ab3750bb9cdf6105719a03a02dde10829c293e",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3.5-4b.raw.txt",
+      "archived_path": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3.5-4b.raw.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3.5-4b.reasoning.txt",
+      "archived_path": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3.5-4b.reasoning.txt",
+      "sha256": "a0debd58b2ab39c32830280a456f695374661338af41fb85363a6991e870d913",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3.5-4b.request.txt",
+      "archived_path": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3.5-4b.request.txt",
+      "sha256": "39d03ff02bfa298d36fb9c0f1b761e01af08655197dd351c861a75417ef1600a",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3.5-4b.response.json",
+      "archived_path": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3.5-4b.response.json",
+      "sha256": "10531e1d83526fa5a25006c09956315c46ecc0dd60bb8fbaf33eeba4edd4bf50",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/time-consumption-ocean/qwen3.5-4b.metadata.json",
+      "archived_path": "outputs/visual-metaphor/time-consumption-ocean/qwen3.5-4b.metadata.json",
+      "sha256": "3d0dcc36ddef154a688aeeb78cb1250cd8171676d8e64869da219014bc612f0d",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/time-consumption-ocean/qwen3.5-4b.raw.txt",
+      "archived_path": "outputs/visual-metaphor/time-consumption-ocean/qwen3.5-4b.raw.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/time-consumption-ocean/qwen3.5-4b.reasoning.txt",
+      "archived_path": "outputs/visual-metaphor/time-consumption-ocean/qwen3.5-4b.reasoning.txt",
+      "sha256": "82df14077bc9bbf6e65cef164f24dfcfe3b8e0996e83465316b8937bedbea7d7",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/time-consumption-ocean/qwen3.5-4b.request.txt",
+      "archived_path": "outputs/visual-metaphor/time-consumption-ocean/qwen3.5-4b.request.txt",
+      "sha256": "c970503fd329b551e4bc0ccf1a7349f924605fcb7d42dd9264b3a1569a13ad3b",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/time-consumption-ocean/qwen3.5-4b.response.json",
+      "archived_path": "outputs/visual-metaphor/time-consumption-ocean/qwen3.5-4b.response.json",
+      "sha256": "bc7acc36e3653b6b3f1fe137d91121b5154a2e638d185ea186b27a3ed1ab7fe3",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/home-migration-memory/qwen3.5-4b.metadata.json",
+      "archived_path": "outputs/visual-metaphor/home-migration-memory/qwen3.5-4b.metadata.json",
+      "sha256": "994b27a59c3afce96887c2269a91ab8ae0df224bb2d226eb9abd780aed02e62d",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/home-migration-memory/qwen3.5-4b.raw.txt",
+      "archived_path": "outputs/visual-metaphor/home-migration-memory/qwen3.5-4b.raw.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/home-migration-memory/qwen3.5-4b.reasoning.txt",
+      "archived_path": "outputs/visual-metaphor/home-migration-memory/qwen3.5-4b.reasoning.txt",
+      "sha256": "01bcbc27539211e8f9738d27648c3964f7c9cf093ec6336689b88a9a36c1e51e",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/home-migration-memory/qwen3.5-4b.request.txt",
+      "archived_path": "outputs/visual-metaphor/home-migration-memory/qwen3.5-4b.request.txt",
+      "sha256": "dccab0f8ea4a60044fa5f8e678ad366f5f338c4fde10cd74116a53c72fdde1b7",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/home-migration-memory/qwen3.5-4b.response.json",
+      "archived_path": "outputs/visual-metaphor/home-migration-memory/qwen3.5-4b.response.json",
+      "sha256": "0441cd12652da24f5f0922d09e4a7dff713db5c40abd488f04a1a2ccbc42691c",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/ai-creativity-identity/qwen3.5-4b.metadata.json",
+      "archived_path": "outputs/visual-metaphor/ai-creativity-identity/qwen3.5-4b.metadata.json",
+      "sha256": "17876b7d0b57bdd9c20c431164fea6d5b2076c83e9872e79c2ebedf281cbedb3",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/ai-creativity-identity/qwen3.5-4b.raw.txt",
+      "archived_path": "outputs/visual-metaphor/ai-creativity-identity/qwen3.5-4b.raw.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/ai-creativity-identity/qwen3.5-4b.reasoning.txt",
+      "archived_path": "outputs/visual-metaphor/ai-creativity-identity/qwen3.5-4b.reasoning.txt",
+      "sha256": "f85b0a8affb6ba7b4ad8afab081e8a53624a163ec47117e64fea431b8a29d3bf",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/ai-creativity-identity/qwen3.5-4b.request.txt",
+      "archived_path": "outputs/visual-metaphor/ai-creativity-identity/qwen3.5-4b.request.txt",
+      "sha256": "515b42cd43c94ac8b22cf3df72501fc8f197788ac7b6b62e09b3491966f3fbc9",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/ai-creativity-identity/qwen3.5-4b.response.json",
+      "archived_path": "outputs/visual-metaphor/ai-creativity-identity/qwen3.5-4b.response.json",
+      "sha256": "5500a10d53f28350dad26e7761cd818d4a5c43fdee002437b1b977dd1970f0e2",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/repair-community-tomorrow/qwen3.5-4b.metadata.json",
+      "archived_path": "outputs/visual-metaphor/repair-community-tomorrow/qwen3.5-4b.metadata.json",
+      "sha256": "d90f3d4a452d8fc7f1cbd4abf626ba413d54948a23ecd37bc50116152af59e9d",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/repair-community-tomorrow/qwen3.5-4b.raw.txt",
+      "archived_path": "outputs/visual-metaphor/repair-community-tomorrow/qwen3.5-4b.raw.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/repair-community-tomorrow/qwen3.5-4b.reasoning.txt",
+      "archived_path": "outputs/visual-metaphor/repair-community-tomorrow/qwen3.5-4b.reasoning.txt",
+      "sha256": "f0f1f14864e2a9850b61cd6d5101839ec8b3922be1cf4f11a0ba323868045b5e",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/repair-community-tomorrow/qwen3.5-4b.request.txt",
+      "archived_path": "outputs/visual-metaphor/repair-community-tomorrow/qwen3.5-4b.request.txt",
+      "sha256": "f893a2538ad60c45c2a27aa3f982bae111f377f1109e407c9afd837681d26d51",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/visual-metaphor/repair-community-tomorrow/qwen3.5-4b.response.json",
+      "archived_path": "outputs/visual-metaphor/repair-community-tomorrow/qwen3.5-4b.response.json",
+      "sha256": "d2419be1d41527d38fbe550084d08ffb2edfe1162e2275deb22ed3d9c8c40884",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/urban-loneliness-connection-windows/qwen3.5-4b.metadata.json",
+      "archived_path": "outputs/human-story/urban-loneliness-connection-windows/qwen3.5-4b.metadata.json",
+      "sha256": "104c606548de8e1688b5663b1013ba099c2f1a2dd3ba75a947379af664d64faf",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/urban-loneliness-connection-windows/qwen3.5-4b.raw.txt",
+      "archived_path": "outputs/human-story/urban-loneliness-connection-windows/qwen3.5-4b.raw.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/urban-loneliness-connection-windows/qwen3.5-4b.reasoning.txt",
+      "archived_path": "outputs/human-story/urban-loneliness-connection-windows/qwen3.5-4b.reasoning.txt",
+      "sha256": "680d65b029454eb562b61e4b37671ee38f60a37de565a6f38723c07a4f7631b2",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/urban-loneliness-connection-windows/qwen3.5-4b.request.txt",
+      "archived_path": "outputs/human-story/urban-loneliness-connection-windows/qwen3.5-4b.request.txt",
+      "sha256": "0744943a6f6d9302b826501f225af952f8057f74e7a7c90761011e6f77b71237",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/urban-loneliness-connection-windows/qwen3.5-4b.response.json",
+      "archived_path": "outputs/human-story/urban-loneliness-connection-windows/qwen3.5-4b.response.json",
+      "sha256": "f5b6b69749d5fce29e78b86c1967a94f75dc37c4015e5c3bf805a120a852deaa",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/time-consumption-ocean/qwen3.5-4b.metadata.json",
+      "archived_path": "outputs/human-story/time-consumption-ocean/qwen3.5-4b.metadata.json",
+      "sha256": "1a4cd70da8f1217f872a21c25c03b1f0870849887a50835f55fe392106ee1482",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/time-consumption-ocean/qwen3.5-4b.raw.txt",
+      "archived_path": "outputs/human-story/time-consumption-ocean/qwen3.5-4b.raw.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/time-consumption-ocean/qwen3.5-4b.reasoning.txt",
+      "archived_path": "outputs/human-story/time-consumption-ocean/qwen3.5-4b.reasoning.txt",
+      "sha256": "a6c1a6321d34708411bf15064ebec59a0ca26c169b336c27b3c3d2dea34152a6",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/time-consumption-ocean/qwen3.5-4b.request.txt",
+      "archived_path": "outputs/human-story/time-consumption-ocean/qwen3.5-4b.request.txt",
+      "sha256": "c6d9b52a07f8a0d5a4c3e9cc1f5a88986b26f7fa053103b47f23b67ea2b1b84b",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/time-consumption-ocean/qwen3.5-4b.response.json",
+      "archived_path": "outputs/human-story/time-consumption-ocean/qwen3.5-4b.response.json",
+      "sha256": "05c5c97ca14e10e80f4da98c8bd15a95ba7b6f7f31348421ea1d0ce5bd6e444c",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/home-migration-memory/qwen3.5-4b.metadata.json",
+      "archived_path": "outputs/human-story/home-migration-memory/qwen3.5-4b.metadata.json",
+      "sha256": "2bba60e31d413ab901aaf34df5583a32c507d2c1161144b016d59e975f5bff52",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/home-migration-memory/qwen3.5-4b.raw.txt",
+      "archived_path": "outputs/human-story/home-migration-memory/qwen3.5-4b.raw.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/home-migration-memory/qwen3.5-4b.reasoning.txt",
+      "archived_path": "outputs/human-story/home-migration-memory/qwen3.5-4b.reasoning.txt",
+      "sha256": "911867fb041b1d822cf8b8bdc8b702cea6bfad49e2e7ecdc4e07917833fe865f",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/home-migration-memory/qwen3.5-4b.request.txt",
+      "archived_path": "outputs/human-story/home-migration-memory/qwen3.5-4b.request.txt",
+      "sha256": "639bce5561b4463d364b1f0bfa05dfd73e06ddc830ed75cc6dfe31c5a462b032",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/home-migration-memory/qwen3.5-4b.response.json",
+      "archived_path": "outputs/human-story/home-migration-memory/qwen3.5-4b.response.json",
+      "sha256": "601f445c05e888155b2e3a47591d2ee5fd2c67c9aa589009ea9aaafa800c0e48",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/ai-creativity-identity/qwen3.5-4b.error.json",
+      "archived_path": "outputs/human-story/ai-creativity-identity/qwen3.5-4b.error.json",
+      "sha256": "6a7ddb481a8a786d2f5180cacaef00cf9d0401c83170b5532de569b2cc027fc0",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/ai-creativity-identity/qwen3.5-4b.metadata.json",
+      "archived_path": "outputs/human-story/ai-creativity-identity/qwen3.5-4b.metadata.json",
+      "sha256": "6a7ddb481a8a786d2f5180cacaef00cf9d0401c83170b5532de569b2cc027fc0",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/ai-creativity-identity/qwen3.5-4b.request.txt",
+      "archived_path": "outputs/human-story/ai-creativity-identity/qwen3.5-4b.request.txt",
+      "sha256": "3e2e38eda24c39621553331ab32c13c87606566279c0b096ad6175c7eb088631",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/repair-community-tomorrow/qwen3.5-4b.metadata.json",
+      "archived_path": "outputs/human-story/repair-community-tomorrow/qwen3.5-4b.metadata.json",
+      "sha256": "7ac7e63d432a020cfe728ba2c129fd59899358b5d6553327f99df88a0a9bc0c3",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/repair-community-tomorrow/qwen3.5-4b.raw.txt",
+      "archived_path": "outputs/human-story/repair-community-tomorrow/qwen3.5-4b.raw.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/repair-community-tomorrow/qwen3.5-4b.reasoning.txt",
+      "archived_path": "outputs/human-story/repair-community-tomorrow/qwen3.5-4b.reasoning.txt",
+      "sha256": "51806764cbb456f80b0d6ff5b61c5be23d0d1a222652fe07b55381523200891d",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/repair-community-tomorrow/qwen3.5-4b.request.txt",
+      "archived_path": "outputs/human-story/repair-community-tomorrow/qwen3.5-4b.request.txt",
+      "sha256": "5f192a975c015df96d01cc4f0d5ea5288c66c6ca9e546e8a1340e264730888fe",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/human-story/repair-community-tomorrow/qwen3.5-4b.response.json",
+      "archived_path": "outputs/human-story/repair-community-tomorrow/qwen3.5-4b.response.json",
+      "sha256": "d3a3bdd5abeb3f6cb4c8e1f8cd5ab9afeeb8d19a4f573c4832e7fdda843fd9e5",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/human-story/ai-creativity-identity/qwen3.5-4b/resumed-attempt-1.error.json",
+      "archived_path": "attempts/human-story/ai-creativity-identity/qwen3.5-4b/resumed-attempt-1.error.json",
+      "sha256": "6fe3f8a55f1378d2362b71c71d3011f1463e869dc0c6f15bf93983673ca42bd7",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/human-story/ai-creativity-identity/qwen3.5-4b/resumed-attempt-2.error.json",
+      "archived_path": "attempts/human-story/ai-creativity-identity/qwen3.5-4b/resumed-attempt-2.error.json",
+      "sha256": "ad1c2441d10296f4d4904f20ce87a0640dbdfb3d4b6a13e1534a119d2c7e3376",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/message-led/time-consumption-ocean/qwen3-4b-instruct-2507-attempt-1.json",
+      "archived_path": "attempts/message-led/time-consumption-ocean/qwen3-4b-instruct-2507-attempt-1.json",
+      "sha256": "66cd9d9e3c16d929af785521ef65cca7aca164897b199d75f5eb16cb912298ea",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/message-led/urban-loneliness-connection-windows/qwen3.5-4b/attempt-02.metadata.json",
+      "archived_path": "attempts/message-led/urban-loneliness-connection-windows/qwen3.5-4b/attempt-02.metadata.json",
+      "sha256": "163506ce33e25cbc6bbc3a70e972fa8dec71e2b6b18921611c09c6344c48fe38",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/message-led/urban-loneliness-connection-windows/qwen3.5-4b/attempt-02.raw.txt",
+      "archived_path": "attempts/message-led/urban-loneliness-connection-windows/qwen3.5-4b/attempt-02.raw.txt",
+      "sha256": "6597f3d668dd5689644618c62161735f4e2bfc9c64beaccef9310b5f7a85670c",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/message-led/urban-loneliness-connection-windows/qwen3.5-4b/attempt-02.reasoning.txt",
+      "archived_path": "attempts/message-led/urban-loneliness-connection-windows/qwen3.5-4b/attempt-02.reasoning.txt",
+      "sha256": "6347b30de7355a368f38d778de1f34ed92ccfe610dc67a5afd448ba25e03bb21",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/message-led/urban-loneliness-connection-windows/qwen3.5-4b/attempt-02.request.txt",
+      "archived_path": "attempts/message-led/urban-loneliness-connection-windows/qwen3.5-4b/attempt-02.request.txt",
+      "sha256": "e25142b83ef3deed98318e4be55276df5b0728ea3ff90c1ace1398e517bf8e67",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/message-led/urban-loneliness-connection-windows/qwen3.5-4b/attempt-02.response.json",
+      "archived_path": "attempts/message-led/urban-loneliness-connection-windows/qwen3.5-4b/attempt-02.response.json",
+      "sha256": "e581e635c55051a29f5494ffa81a4843e30f49cc6ef9ea3a130f67fff985a047",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-01.json",
+      "archived_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-01.json",
+      "sha256": "aeb243bad377f7760e2025d34444bc08061edd44801963f1ae69a8361376816c",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-01.metadata.json",
+      "archived_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-01.metadata.json",
+      "sha256": "af0c8a19c42e188845d9111c59cf5d1df1b98073eae4dd9569e0a8643294d039",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-01.raw.txt",
+      "archived_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-01.raw.txt",
+      "sha256": "1753fe4c5d5716f97bd9e6cc126242fda5ca2c438f6e9a6487a334e3c52a90f9",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-01.reasoning.txt",
+      "archived_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-01.reasoning.txt",
+      "sha256": "ddea2e74b40c37e7085fa85c4a8ffbf3976826d30a451f7ff8b86caf0b23d09f",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-01.request.txt",
+      "archived_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-01.request.txt",
+      "sha256": "10b92a357728b4f32ab45ade1d0d7823577a81dea255c62b5cde80fdcbdb7e6a",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-01.response.json",
+      "archived_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-01.response.json",
+      "sha256": "61ba4d4bc23888e3f95f5ee1f160da8a41877c519b9415b3f725ecb2cc058b83",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-02.metadata.json",
+      "archived_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-02.metadata.json",
+      "sha256": "a917c5e50b8248feb40181e9688d6f9df5ad0c1ca597e7deea83cee152d03254",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-02.request.txt",
+      "archived_path": "attempts/visual-metaphor/time-consumption-ocean/qwen3-1.7b/attempt-02.request.txt",
+      "sha256": "c970503fd329b551e4bc0ccf1a7349f924605fcb7d42dd9264b3a1569a13ad3b",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/visual-metaphor/urban-loneliness-connection-windows/qwen3-1.7b/attempt-01.json",
+      "archived_path": "attempts/visual-metaphor/urban-loneliness-connection-windows/qwen3-1.7b/attempt-01.json",
+      "sha256": "a5ca6a8b4242ebece2558f0f334556545e26e3623c026e11d68dc259c02db109",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/visual-metaphor/urban-loneliness-connection-windows/qwen3-1.7b/attempt-01.metadata.json",
+      "archived_path": "attempts/visual-metaphor/urban-loneliness-connection-windows/qwen3-1.7b/attempt-01.metadata.json",
+      "sha256": "d84505c4e40d61d9b8a251272224302bd92c870710707e8876fd9552053c7352",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/visual-metaphor/urban-loneliness-connection-windows/qwen3-1.7b/attempt-01.raw.txt",
+      "archived_path": "attempts/visual-metaphor/urban-loneliness-connection-windows/qwen3-1.7b/attempt-01.raw.txt",
+      "sha256": "11ac00f800660cfffe44ed9dd9dcd568b8a0179eba70cffacff01199bd67e7e1",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/visual-metaphor/urban-loneliness-connection-windows/qwen3-1.7b/attempt-01.reasoning.txt",
+      "archived_path": "attempts/visual-metaphor/urban-loneliness-connection-windows/qwen3-1.7b/attempt-01.reasoning.txt",
+      "sha256": "71e9638046025b22337d7f7515ef5c5bf58a785ac34710cfbfea08f5ac5a2a1e",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/visual-metaphor/urban-loneliness-connection-windows/qwen3-1.7b/attempt-01.request.txt",
+      "archived_path": "attempts/visual-metaphor/urban-loneliness-connection-windows/qwen3-1.7b/attempt-01.request.txt",
+      "sha256": "d663e089ece49a6feeeb96a378dca078d50bf0d73e89f816e30d178b1f39b6b3",
+      "action": "moved"
+    },
+    {
+      "original_path": "attempts/visual-metaphor/urban-loneliness-connection-windows/qwen3-1.7b/attempt-01.response.json",
+      "archived_path": "attempts/visual-metaphor/urban-loneliness-connection-windows/qwen3-1.7b/attempt-01.response.json",
+      "sha256": "52fa87e95d43e80589c18042ea2bbff30ad9c6a6cd58d9ef23b790b504aff841",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/time-consumption-ocean/qwen3-1.7b.attempt-1.error.json",
+      "archived_path": "outputs/message-led/time-consumption-ocean/qwen3-1.7b.attempt-1.error.json",
+      "sha256": "3213b701f435fa80d73adace0a30cf36b5e4d8a48f3ea83b1c13f89cacce0c4f",
+      "action": "moved"
+    },
+    {
+      "original_path": "outputs/message-led/time-consumption-ocean/qwen3-1.7b.attempt-2.error.json",
+      "archived_path": "outputs/message-led/time-consumption-ocean/qwen3-1.7b.attempt-2.error.json",
+      "sha256": "99f73c8a33a40ad268d2574e162ec786744cd31b6287b0d4f02748269d86fc01",
+      "action": "moved"
+    },
+    {
+      "original_path": "evidence/qwen3.5-resume-provider-error.png",
+      "archived_path": "evidence/qwen3.5-resume-provider-error.png",
+      "sha256": "2ff03725e455be715e2e582eb97e3fffcadcb1d87da13af1d983fd2e09fe14a5",
+      "action": "moved"
+    }
+  ]
+}

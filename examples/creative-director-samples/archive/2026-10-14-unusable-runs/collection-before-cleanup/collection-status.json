@@ -1,0 +1,351 @@
+{
+  "updated_at": "2026-10-14T17:02:29.737463+08:00",
+  "timezone": "Asia/Hong_Kong",
+  "collection_status": "all_planned_runs_attempted_with_failures",
+  "planned_runs": 45,
+  "attempted_planned_cases": 45,
+  "captured_api_responses": 44,
+  "usable_json_schema_and_exact_keywords": 31,
+  "truncated_responses": 13,
+  "provider_error_without_response": 1,
+  "pending_generations": 0,
+  "paused_runs": 0,
+  "usable_samples_complete": false,
+  "user_decision": "User resumed the 12 missing Qwen3.5 cases after the earlier pause.",
+  "resumed_batch": {
+    "planned_cases": 12,
+    "captured_responses": 11,
+    "valid_json": 0,
+    "empty_final_content_with_length_finish": 11,
+    "provider_errors_without_response": 1,
+    "extra_retry_for_provider_error": 1
+  },
+  "by_variant": {
+    "message-led": {
+      "Qwen/Qwen3-4B-Instruct-2507": {
+        "captured_responses": 5,
+        "valid": 5,
+        "errors_without_response": 0
+      },
+      "Qwen/Qwen3-1.7B": {
+        "captured_responses": 5,
+        "valid": 5,
+        "errors_without_response": 0
+      },
+      "Qwen/Qwen3.5-4B": {
+        "captured_responses": 5,
+        "valid": 1,
+        "errors_without_response": 0
+      }
+    },
+    "visual-metaphor": {
+      "Qwen/Qwen3-4B-Instruct-2507": {
+        "captured_responses": 5,
+        "valid": 5,
+        "errors_without_response": 0
+      },
+      "Qwen/Qwen3-1.7B": {
+        "captured_responses": 5,
+        "valid": 5,
+        "errors_without_response": 0
+      },
+      "Qwen/Qwen3.5-4B": {
+        "captured_responses": 5,
+        "valid": 0,
+        "errors_without_response": 0
+      }
+    },
+    "human-story": {
+      "Qwen/Qwen3-4B-Instruct-2507": {
+        "captured_responses": 5,
+        "valid": 5,
+        "errors_without_response": 0
+      },
+      "Qwen/Qwen3-1.7B": {
+        "captured_responses": 5,
+        "valid": 5,
+        "errors_without_response": 0
+      },
+      "Qwen/Qwen3.5-4B": {
+        "captured_responses": 4,
+        "valid": 0,
+        "errors_without_response": 1
+      }
+    }
+  },
+  "fidelity_audit": [
+    {
+      "raw": "outputs/message-led/urban-loneliness-connection-windows/qwen3-4b-instruct-2507.raw.txt",
+      "api_response": "outputs/message-led/urban-loneliness-connection-windows/qwen3-4b-instruct-2507.api-response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/message-led/urban-loneliness-connection-windows/qwen3-1.7b.raw.txt",
+      "api_response": "outputs/message-led/urban-loneliness-connection-windows/qwen3-1.7b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/message-led/urban-loneliness-connection-windows/qwen3.5-4b.raw.txt",
+      "api_response": "outputs/message-led/urban-loneliness-connection-windows/qwen3.5-4b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/message-led/time-consumption-ocean/qwen3-4b-instruct-2507.raw.txt",
+      "api_response": "outputs/message-led/time-consumption-ocean/qwen3-4b-instruct-2507.api-response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/message-led/time-consumption-ocean/qwen3-1.7b.raw.txt",
+      "api_response": "outputs/message-led/time-consumption-ocean/qwen3-1.7b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/message-led/time-consumption-ocean/qwen3.5-4b.raw.txt",
+      "api_response": "outputs/message-led/time-consumption-ocean/qwen3.5-4b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/message-led/home-migration-memory/qwen3-4b-instruct-2507.raw.txt",
+      "api_response": "outputs/message-led/home-migration-memory/qwen3-4b-instruct-2507.api-response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/message-led/home-migration-memory/qwen3-1.7b.raw.txt",
+      "api_response": "outputs/message-led/home-migration-memory/qwen3-1.7b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/message-led/home-migration-memory/qwen3.5-4b.raw.txt",
+      "api_response": "outputs/message-led/home-migration-memory/qwen3.5-4b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/message-led/ai-creativity-identity/qwen3-4b-instruct-2507.raw.txt",
+      "api_response": "outputs/message-led/ai-creativity-identity/qwen3-4b-instruct-2507.api-response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/message-led/ai-creativity-identity/qwen3-1.7b.raw.txt",
+      "api_response": "outputs/message-led/ai-creativity-identity/qwen3-1.7b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/message-led/ai-creativity-identity/qwen3.5-4b.raw.txt",
+      "api_response": "outputs/message-led/ai-creativity-identity/qwen3.5-4b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/message-led/repair-community-tomorrow/qwen3-4b-instruct-2507.raw.txt",
+      "api_response": "outputs/message-led/repair-community-tomorrow/qwen3-4b-instruct-2507.api-response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/message-led/repair-community-tomorrow/qwen3-1.7b.raw.txt",
+      "api_response": "outputs/message-led/repair-community-tomorrow/qwen3-1.7b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/message-led/repair-community-tomorrow/qwen3.5-4b.raw.txt",
+      "api_response": "outputs/message-led/repair-community-tomorrow/qwen3.5-4b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3-4b-instruct-2507.raw.txt",
+      "api_response": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3-4b-instruct-2507.api-response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3-1.7b.raw.txt",
+      "api_response": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3-1.7b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3.5-4b.raw.txt",
+      "api_response": "outputs/visual-metaphor/urban-loneliness-connection-windows/qwen3.5-4b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/visual-metaphor/time-consumption-ocean/qwen3-4b-instruct-2507.raw.txt",
+      "api_response": "outputs/visual-metaphor/time-consumption-ocean/qwen3-4b-instruct-2507.api-response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/visual-metaphor/time-consumption-ocean/qwen3-1.7b.raw.txt",
+      "api_response": "outputs/visual-metaphor/time-consumption-ocean/qwen3-1.7b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/visual-metaphor/time-consumption-ocean/qwen3.5-4b.raw.txt",
+      "api_response": "outputs/visual-metaphor/time-consumption-ocean/qwen3.5-4b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/visual-metaphor/home-migration-memory/qwen3-4b-instruct-2507.raw.txt",
+      "api_response": "outputs/visual-metaphor/home-migration-memory/qwen3-4b-instruct-2507.api-response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/visual-metaphor/home-migration-memory/qwen3-1.7b.raw.txt",
+      "api_response": "outputs/visual-metaphor/home-migration-memory/qwen3-1.7b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/visual-metaphor/home-migration-memory/qwen3.5-4b.raw.txt",
+      "api_response": "outputs/visual-metaphor/home-migration-memory/qwen3.5-4b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/visual-metaphor/ai-creativity-identity/qwen3-4b-instruct-2507.raw.txt",
+      "api_response": "outputs/visual-metaphor/ai-creativity-identity/qwen3-4b-instruct-2507.api-response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/visual-metaphor/ai-creativity-identity/qwen3-1.7b.raw.txt",
+      "api_response": "outputs/visual-metaphor/ai-creativity-identity/qwen3-1.7b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/visual-metaphor/ai-creativity-identity/qwen3.5-4b.raw.txt",
+      "api_response": "outputs/visual-metaphor/ai-creativity-identity/qwen3.5-4b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/visual-metaphor/repair-community-tomorrow/qwen3-4b-instruct-2507.raw.txt",
+      "api_response": "outputs/visual-metaphor/repair-community-tomorrow/qwen3-4b-instruct-2507.api-response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/visual-metaphor/repair-community-tomorrow/qwen3-1.7b.raw.txt",
+      "api_response": "outputs/visual-metaphor/repair-community-tomorrow/qwen3-1.7b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/visual-metaphor/repair-community-tomorrow/qwen3.5-4b.raw.txt",
+      "api_response": "outputs/visual-metaphor/repair-community-tomorrow/qwen3.5-4b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/human-story/urban-loneliness-connection-windows/qwen3-4b-instruct-2507.raw.txt",
+      "api_response": "outputs/human-story/urban-loneliness-connection-windows/qwen3-4b-instruct-2507.api-response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/human-story/urban-loneliness-connection-windows/qwen3-1.7b.raw.txt",
+      "api_response": "outputs/human-story/urban-loneliness-connection-windows/qwen3-1.7b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/human-story/urban-loneliness-connection-windows/qwen3.5-4b.raw.txt",
+      "api_response": "outputs/human-story/urban-loneliness-connection-windows/qwen3.5-4b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/human-story/time-consumption-ocean/qwen3-4b-instruct-2507.raw.txt",
+      "api_response": "outputs/human-story/time-consumption-ocean/qwen3-4b-instruct-2507.api-response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/human-story/time-consumption-ocean/qwen3-1.7b.raw.txt",
+      "api_response": "outputs/human-story/time-consumption-ocean/qwen3-1.7b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/human-story/time-consumption-ocean/qwen3.5-4b.raw.txt",
+      "api_response": "outputs/human-story/time-consumption-ocean/qwen3.5-4b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/human-story/home-migration-memory/qwen3-4b-instruct-2507.raw.txt",
+      "api_response": "outputs/human-story/home-migration-memory/qwen3-4b-instruct-2507.api-response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/human-story/home-migration-memory/qwen3-1.7b.raw.txt",
+      "api_response": "outputs/human-story/home-migration-memory/qwen3-1.7b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/human-story/home-migration-memory/qwen3.5-4b.raw.txt",
+      "api_response": "outputs/human-story/home-migration-memory/qwen3.5-4b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/human-story/ai-creativity-identity/qwen3-4b-instruct-2507.raw.txt",
+      "api_response": "outputs/human-story/ai-creativity-identity/qwen3-4b-instruct-2507.api-response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/human-story/ai-creativity-identity/qwen3-1.7b.raw.txt",
+      "api_response": "outputs/human-story/ai-creativity-identity/qwen3-1.7b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/human-story/repair-community-tomorrow/qwen3-4b-instruct-2507.raw.txt",
+      "api_response": "outputs/human-story/repair-community-tomorrow/qwen3-4b-instruct-2507.api-response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/human-story/repair-community-tomorrow/qwen3-1.7b.raw.txt",
+      "api_response": "outputs/human-story/repair-community-tomorrow/qwen3-1.7b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    },
+    {
+      "raw": "outputs/human-story/repair-community-tomorrow/qwen3.5-4b.raw.txt",
+      "api_response": "outputs/human-story/repair-community-tomorrow/qwen3.5-4b.response.json",
+      "raw_matches_api": true,
+      "model_matches": true
+    }
+  ],
+  "notes": [
+    "No new usable JSON was obtained from the resumed batch.",
+    "Qwen3.5 still has only one valid sample, home/migration/memory under message-led.",
+    "The prior 30 valid outputs from the other two models are unchanged.",
+    "No malformed output was repaired or fabricated.",
+    "Provider defaults were retained for prompt comparison; widget controls do not expose numeric generation limits or thinking-mode settings.",
+    "All missing combinations were attempted in prompt-type order.",
+    "A complete collection of 45 usable briefs has NOT been achieved."
+  ]
+}
