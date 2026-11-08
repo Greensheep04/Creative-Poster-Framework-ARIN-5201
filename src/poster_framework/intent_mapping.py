@@ -18,7 +18,7 @@ PROPOSITIONS = [
  (r"fragmented mosaic.*spiral.*doorway", "fragmented home mosaic: windows, chair, photographs spiral into open doorway"),
  (r"tilted and layered.*central doorway", "tilted displaced fragments surround a stable central doorway"),
  (r"half.restored.*mortar", "half-restored cracked brick wall, fresh mortar and bricks"),
- (r"one side.*cracks.*hands and feet", "cracked versus repaired wall, foreground hands and feet, tools at base"),
+ (r"one side.*cracks.*hands and feet", "foreground hands and feet, hands jointly repairing wall with tools, cracked versus repaired sections"),
  (r"tools laid nearby.*hands and feet", "foreground hands and tools repairing wall"),
  (r"lone figure.*holding.*bottle.*watch", "one person holding plastic bottle and broken watch at receding shore"),
  (r"figure.*facing the horizon.*ocean in the background", "person facing horizon, receding ocean behind"),
@@ -30,11 +30,11 @@ PROPOSITIONS = [
  (r"three stages of migration", "three houses along left-to-right migration path"),
  (r"path.*one house to the next", "path connects past and present houses"),
  (r"past homes", "ghostly past houses in background"),
- (r"ocean surface.*waves.*deepen and darken", "horizontal ocean waves darken progressively left to right"),
- (r"flowing mass of consumption.*darker and more turbulent", "consumption waste carried in waves, increasingly dark turbulent degraded ocean"),
+ (r"ocean surface.*waves.*deepen and darken", "ocean waves darken left to right"),
+ (r"flowing mass of consumption.*darker and more turbulent", "consumption waste in turbulent polluted waves"),
  (r"icons of shopping bags.*electronic devices", "shopping bags, plastic bottles, electronic devices embedded in waves"),
  (r"radial symmetry.*mosaic", "radial mosaic around central doorway"),
- (r"horizontal split.*calm ocean.*turbulent", "left calm water, right dark turbulent water and eroding shore"),
+ (r"horizontal split.*calm ocean.*turbulent", "left calm ocean, right dark waves eroding shore"),
 ]
 
 def propositions(text, category):

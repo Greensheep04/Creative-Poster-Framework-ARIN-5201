@@ -46,3 +46,10 @@ def test_legacy_visual_requirements_pointer_is_truthful():
  c=extract(value)
  assert any(r.source.pointer=='/visual_requirements/main_subject' for r in c.requirements)
  assert not any(r.source.pointer.startswith('/visual_direction') for r in c.requirements)
+
+
+def test_hex_palette_compiles_to_named_color_with_original_trace():
+ value=raw();value['palette']={'colors':['#87CEEB','#003366']}
+ result=compile_visual_prompts(extract(value),count_tokens=lambda t:[1,1])
+ assert 'sky blue' in result['positive'] and 'navy blue' in result['positive']
+ assert any(r['source']['quote']=='#003366' and r['fragments']==['navy blue'] for r in result['receipts'])
