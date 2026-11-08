@@ -608,6 +608,12 @@ class PosterWorkflow:
     ) -> tuple[FileReference, ...]:
         references: list[ArtifactReference] = []
         references.extend(state.get("assets", []))
+        if role in {AgentRole.layout_planner, AgentRole.visual_producer}:
+            for key in (("brief",) if role == AgentRole.layout_planner else ("brief", "layout")):
+                stage = state.get(key)
+                if stage is not None:
+                    references.extend(r for r in stage.output.artifacts
+                                      if r.purpose == ArtifactPurpose.evidence)
         candidate = state.get("candidate")
         if (
             candidate is None

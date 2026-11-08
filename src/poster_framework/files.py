@@ -11,6 +11,7 @@ from .types import (
     ArtifactPurpose,
     ArtifactReference,
     ExecutionIdentity,
+    FileReference,
     VersionDependency,
 )
 
@@ -362,6 +363,17 @@ class ScopedRunFiles:
             raise FileSecurityError("invocation identity cannot identify a safe directory")
         path = PurePosixPath("invocations") / self._identity.role.value / invocation_id
         return (path / PurePosixPath(filename)).as_posix()
+
+    def resolve_file(self, reference: FileReference) -> ArtifactReference:
+        """Resolve only an exactly matching file registered in this current run."""
+        if not isinstance(reference, FileReference) or reference.run_id != self._identity.run_id:
+            raise FileSecurityError("file reference belongs to another run")
+        actual = self._store.reference(reference.file_id)
+        if any(getattr(actual, key) != getattr(reference, key) for key in
+               ("run_id", "uri", "revision", "sha256", "media_type")):
+            raise FileSecurityError("file reference does not match issued identity")
+        self._store.read(actual)
+        return actual
 
     def read(self, reference: ArtifactReference) -> bytes:
         if reference.run_id != self._identity.run_id:

@@ -18,6 +18,7 @@ from .contracts import (
     ImageElement,
 )
 from .generators import compile_request, ProviderError
+from .contract_io import load_contract
 from .renderer import preflight, render_poster
 from .registration import SPEC_FORMAT, CANDIDATE_FORMAT
 
@@ -82,6 +83,7 @@ class VisualProducerAgent:
         validate_pair(
             spec, brief, [k.keyword_id for k in context.original_request.keywords]
         )
+        visual_contract = load_contract(inputs, context, upstream['brief']['content'])
         preflight(spec, self.fonts)  # fail before any costly image submission
         notes = [n for n in memory["notes"] if n["note_id"].startswith(_NOTE + ":")]
         previous = copy.deepcopy(notes[-1]["content"]) if notes else {}
