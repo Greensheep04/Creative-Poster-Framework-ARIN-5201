@@ -2,7 +2,8 @@
 import copy,math,re
 from dataclasses import dataclass
 from types import SimpleNamespace
-from .layout_planner import plan_poster_spec
+from .layout_planner import _visual_prompt,_binding_evidence,_brief_bindings,_check_keywords
+from .layout_templates import resolve_palette,build_hero_element,hero_asset_plan
 from .layout_templates import get_template,background_color,slot_text_color
 from .layout_fonts import wrap_text
 from .layout_checks import check_layout_geometry
@@ -54,6 +55,29 @@ def score_templates(raw):
         add('full_bleed_v1',20,'A1 explicitly reserves overlay space (actual contrast still unknown)')
     return [{'template_id':k,'score':v,'reasons':reasons[k]} for k,v in sorted(scores.items(),key=lambda p:-p[1])]
 
+def common_spec(raw,request,family):
+    """Build shared contract fields without an unrelated template text fitter."""
+    _check_keywords(raw,request)
+    template=get_template('split_stack_v1');palette=resolve_palette(raw)
+    title=raw['copy']['headline'];subtitle=raw['copy'].get('subtitle','')
+    brief_bindings=_brief_bindings(raw);bindings=[]
+    for keyword in request.keywords:
+        ids=['hero']
+        if keyword.text in title:ids.append('title')
+        if subtitle and keyword.text in subtitle:ids.append('subtitle')
+        bindings.append({'keyword_id':keyword.keyword_id,'element_ids':ids,
+          'layout_evidence':_binding_evidence(keyword.text,ids,title=title,subtitle=subtitle,
+              brief_binding=brief_bindings.get(keyword.keyword_id),template_id=template.template_id)})
+    prompt,negative=_visual_prompt(raw,request)
+    return {'schema_version':'0.1.0','run_id':request.run_id,'spec_version':1,
+      'based_on':{'brief_version':raw.get('brief_version',1)},
+      'canvas':{'width':720,'height':1280,'color_mode':'RGB'},'template_id':template.template_id,
+      'background':{'color':background_color(template,palette)},
+      'design_tokens':{'palette':palette,'font_family_key':family,'safe_margin_px':36},
+      'asset_plan':[hero_asset_plan(template,prompt=prompt,negative_prompt=negative,keyword_ids=[k.keyword_id for k in request.keywords])],
+      'elements':[build_hero_element(template)],'keyword_element_bindings':bindings,
+      'allowed_overlaps':[],'render_policy':{'text_overflow':'error','missing_font':'error','output_format':'PNG'}}
+
 class QualityPlanningPolicy:
     def __init__(self,*,design_goal='independent_concept_exploration',typography=None,
                  role_families=None,series_template='split_stack_v1',series_title_size=56,series_body_size=26):
@@ -70,7 +94,7 @@ class QualityPlanningPolicy:
         title_family=self.families.get('serif',family) if re.search(r'(?<!sans-)serif',headline_direction) else self.families.get('sans',family)
         body_family=self.families.get('handwritten',family) if 'handwritten' in typo else (self.families.get('sans',family) if 'sans-serif for subtitle' in typo else title_family)
         if self.goal=='cohesive_poster_series':title_family=body_family=family
-        base=plan_poster_spec(raw,request=request,registry=registry,font_family_key=family,template_id='split_stack_v1')
+        base=common_spec(raw,request,family)
         for template_id in candidates:
             try:
                 spec,evidence=self._candidate(base,raw,template_id,registry,title_family,body_family)
@@ -93,6 +117,9 @@ class QualityPlanningPolicy:
         framed=template_id=='framed_hero_v1';bleed=template_id=='full_bleed_v1'
         y=64 if framed else (860 if bleed else 808)
         align='center' if framed else 'left'
+        direction=raw.get('layout',{}).get('typography','').lower()
+        if re.search(r'aligned to (?:the )?left|left.aligned',direction):align='left'
+        elif re.search(r'aligned to (?:the )?center|center.aligned',direction):align='center'
         texts=[]
         color=slot_text_color(template.text_slots[0],background,spec['design_tokens']['palette'])
         def text(id,text,family,weight,size,leading,height,y,max_lines):

@@ -1,6 +1,7 @@
 """Deterministic A2 conflict checks. Clarifications never mutate original A1."""
 import re
 from .intent_mapping import ENTITIES
+from .visual_requirements import Requirement
 
 def resolve_intent(contract, clarifications=()):
     reqs=list(contract.requirements);issues=list(contract.issues);resolutions=[]
@@ -30,7 +31,13 @@ def resolve_intent(contract, clarifications=()):
         for i,r in held:
             if not {'plastic bottle','watch'}<=set(r.entities):
                 issues.append({'code':'CLARIFICATION_NOT_APPLICABLE','status':'needs_confirmation'});continue
-            replace(i,predicates=['foreground close view: one person holding clearly visible plastic bottle and broken watch'])
+            replace(i,predicates=['foreground close view: one person holding exactly one plastic bottle and one broken watch'])
+        for _,r in held:
+            reqs.append(Requirement(requirement_id=r.requirement_id+'-quantity',category='forbidden',priority='forbidden',
+                source=r.source,entities=['plastic bottle','watch'],
+                predicates=['extra bottles, extra watches, bottles on ground, watches on ground'],
+                priority_basis='explicit approved HELD_PROPS_FOREGROUND quantity/location restriction',
+                resolution_id='HELD_PROPS_FOREGROUND'))
         resolved('HELD_PROPS_FOREGROUND','User approved held props; duplicate ground placements superseded, not deleted',[r.requirement_id for _,r in held+grounded],approved['HELD_PROPS_FOREGROUND'])
     forbidden=[r for r in reqs if r.priority=='forbidden']
     for i,r in enumerate(reqs):
@@ -45,7 +52,8 @@ def resolve_intent(contract, clarifications=()):
         if r.priority!='required':continue
         for f in forbidden:
             # Qualified prohibitions have a narrower scope than an object ban.
-            if re.search(r'icons?|brands?|logo|map|literal|facial|crowds?|in motion|slogans?',f.source.quote,re.I):continue
+            if re.match(r'^(?:no\s+)?(?:icons?\s+(?:of|for)|individual\s+icons?\s+for|a\s+map\s+of|maps?\b|overly\s+literal\s+depictions\s+of|facial\s+expressions|crowds?\b|generic\s+slogans?\s+like)',f.source.quote,re.I):continue
+            if f.resolution_id=='HELD_PROPS_FOREGROUND':continue
             banned={name for name,pattern in ENTITIES.items() if re.search(pattern,f.source.quote,re.I)}
             common=set(r.entities)&banned
             if common:

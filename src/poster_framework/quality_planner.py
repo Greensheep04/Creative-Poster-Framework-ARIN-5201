@@ -45,6 +45,11 @@ class QualityLayoutPlanner:
             layout_evidence={'basis':'A1 descriptions only','actual_subject_positions':'unknown'}
         for plan in spec['asset_plan']:
             plan['prompt']=compilation['positive'];plan['negative_prompt']=compilation['negative']
+        for receipt in compilation['receipts']:
+            if receipt['status']=='pending_layout':
+                receipt['status']='partial_layout' if receipt['source']['pointer'].endswith('/typography') and layout_evidence.get('unsupported_preferences') else 'planned_layout'
+                receipt['spec_targets']=[{'id':e['id'],'box':e['box'],**({k:e[k] for k in ('align','font_family_key','font_size_px')} if e['type']=='text' else {'fit':e['fit']})} for e in spec['elements']]
+                receipt['unsupported_preferences']=layout_evidence.get('unsupported_preferences',[])
         envelope={'contract':contract.model_dump(mode='json'),'compilation':compilation,
                   'spec_sha256':digest(spec),'brief_sha256':digest(inputs.content),
                   'source_ref':source_ref.model_dump(mode='json'),'layout_evidence':layout_evidence}

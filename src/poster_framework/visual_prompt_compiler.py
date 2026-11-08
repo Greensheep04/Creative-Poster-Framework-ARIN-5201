@@ -21,11 +21,12 @@ def compile_visual_prompts(contract, *, count_tokens, limit=77):
         if req.disposition=='superseded':
             receipts.append({'requirement_id':req.requirement_id,'source':req.source.model_dump(),'priority':req.priority,'status':'authorized_superseded','resolution_id':req.resolution_id});continue
         if req.category in ('goal','reading_order','typography','composition') and not req.predicates:
-            receipts.append({'requirement_id':req.requirement_id,'source':req.source.model_dump(),'priority':req.priority,'status':'applied_layout' if req.category!='goal' else 'context_only','evidence_ids':[r.requirement_id for r in requirements if r.priority=='required' and r.entities]})
+            receipts.append({'requirement_id':req.requirement_id,'source':req.source.model_dump(),'priority':req.priority,'status':'pending_layout' if req.category!='goal' else 'context_only','evidence_ids':[r.requirement_id for r in requirements if r.priority=='required' and r.entities]})
             continue
         fragments = req.predicates or req.entities
         if req.category=='relation' and not req.predicates:fragments=[]
-        if req.category in ('style','mood','palette','forbidden'): fragments=[color_words(req.source.quote) if req.category=='palette' else req.source.quote]
+        if req.category in ('style','mood','palette'): fragments=[color_words(req.source.quote) if req.category=='palette' else req.source.quote]
+        if req.category=='forbidden':fragments=req.predicates or [req.source.quote]
         if not fragments:
             if req.priority=='required':raise IntentError([{'code':'UNMAPPED_REQUIRED_RELATION','pointers':[req.source.pointer]}])
             receipts.append({'requirement_id':req.requirement_id,'source':req.source.model_dump(),'priority':req.priority,'status':'unmapped_preferred','reason':'not supported by deterministic vocabulary'});continue

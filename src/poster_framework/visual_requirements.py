@@ -34,6 +34,7 @@ class VisualContract(Model):
     requirements: list[Requirement]
     source_fields: list[str]
     issues: list[dict] = Field(default_factory=list)
+    keyword_evidence: list[dict] = Field(default_factory=list)
     resolutions: list[dict] = Field(default_factory=list)
 
 class IntentError(ValueError):

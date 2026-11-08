@@ -37,13 +37,20 @@ configuration with keys default_family, role_families (serif/sans/handwritten),
 and families (same existing FontRegistry configuration format). Paths belong in
 local configuration, never reusable library code. No fonts/models are downloaded.
 
-Run python -m examples.visual.quality_regression with --model-dir MODEL_DIR,
+Run python -m examples.visual.quality_regression with --authorization AUTHORIZATION, --model-dir MODEL_DIR,
 --font-config CONFIG, --output-dir NEW_DIRECTORY and --dry-run first. Then use
-a new directory without --dry-run. --baseline-dir optionally enables comparisons.
+a directory without --dry-run. --resume recovers only unattempted cases under a new immutable recovery subdirectory. --baseline-dir optionally enables comparisons.
 All six must preflight before any image call. Existing pinned SDXL, 30 steps,
 guidance 6 and seed 42 are retained. CPU model offload reduces VRAM; denoising
 runs on CUDA, with no CPU fallback.
 
+The persistent ledger is bound to an explicit authorization ID and all six
+source hashes, under the project runtime image-authorizations directory.
+Changing output directories cannot reset it. Kernel locks release after process
+death; interrupted/pending attempts remain spent. Existing completed results are
+recovered, never regenerated. The authorization file declares authorization_id,
+round=1, limit=6 and sources (case ID to original SHA-256). It is trusted
+application configuration, not an Agent-generated permission.
 The persistent ledger permits six first-round attempts, one per sample.
 Failures, interruptions and pending operations consume capacity; no automatic
 retry or overwrite. Each framework run permits one image operation, zero A4.
@@ -54,7 +61,7 @@ nine operations before the user sees round one and decides.
 Each case saves original A1 bytes, contract and receipts, Spec, final prompts,
 tokenizer counts/parameters/seeds, framework records, raw source, final PNG and
 render/visual evidence. Technical checks do not establish semantic success.
-Actual semantic source/poster statuses start unknown. Source-bound observations
+Actual semantic source/poster statuses start unknown. Source-, poster-, Spec- and requirement-bound observations
 can carry object boxes, projected sizes, crop safety and thumbnail size. Initial
 48px raw/24px projected prop-side thresholds supplement recognizability review.
 
@@ -72,3 +79,17 @@ issues go to A2 replanning or separately authorized asset work.
 Evaluate engineering, semantics and design separately. Unknown never passes.
 Unit-test success cannot substitute for visual evidence. Show round one before
 spending further image operations.
+
+
+## First-round history and review corrections
+The first six actual images were generated at 8dca025 before the final
+independent review. Their original requests, registered contracts, images and
+records remain intact. The review's code corrections consume zero new image
+operations. A later dry preflight records the corrected intended requests,
+including case 03 quantity/ground exclusions and case 04 left alignment; do not
+present those new requests as the ones that generated the archived six images.
+All six existing operations were migrated to the authorization ledger with the
+original ledger path and SHA-256, without resetting its spent count.
+Old private sidecars are historical evidence; new executions/rework require a
+fresh A2 sidecar meeting the strengthened provenance checks. Public JSON schemas
+and existing required backend interfaces are unchanged.

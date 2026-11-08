@@ -15,14 +15,18 @@ def pending_evidence(contract,source_data,manifest):
        'spec_sha256':contract['spec_sha256'],'technical_checks':technical,
        'visual_checks':[{'requirement_id':r['requirement_id'],'priority':r['priority'],
          'source_status':'unknown','poster_status':'unknown','reason':'Actual pixels require inspection'}
-         for r in contract['contract']['requirements'] if r['priority']=='required' and r['disposition']=='active'],
+         for r in contract['contract']['requirements'] if r['priority'] in ('required','forbidden') and r['disposition']=='active'],
        'processing':[{'element_id':r['element_id'],'record':r['processing']} for r in manifest['elements'] if r['type']=='image'],
        'issues':[{'code':'VISUAL_EVIDENCE_PENDING','status':'unknown','route':'A2_replan_or_authorized_asset_rework'}],
        'layout_changed_by_a3':False}
 
-def evaluate_observation(*,data,processing,observation,min_source_side=48,min_poster_side=24,thumbnail_scale=.375):
+def evaluate_observation(*,data,processing,observation,poster_data,spec,requirement_id,min_source_side=48,min_poster_side=24,thumbnail_scale=.375):
     sha=hashlib.sha256(data).hexdigest()
     if observation['source_sha256']!=sha:raise ValueError('Observation belongs to different source bytes')
+    from poster_framework.visual_requirements import digest
+    expected={'poster_sha256':hashlib.sha256(poster_data).hexdigest(),'spec_sha256':digest(spec),'requirement_id':requirement_id}
+    for key,value in expected.items():
+        if observation.get(key)!=value:raise ValueError('Observation '+key+' belongs to a different poster/spec/requirement')
     states=('pass','fail','unknown')
     if observation['source_status'] not in states or observation['poster_status'] not in states:raise ValueError('Invalid visual status')
     result=dict(observation);boxes=[]

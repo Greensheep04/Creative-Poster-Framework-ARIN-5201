@@ -1,6 +1,7 @@
 import asyncio,copy,hashlib
 import pytest
 from poster_visual_producer.quality_checks import evaluate_observation
+from poster_framework.visual_requirements import digest
 from poster_visual_producer.image_budget import FirstRoundLedger,BudgetedGenerator
 from poster_visual_producer.generators import FixtureImageGenerator,compile_request
 from poster_visual_producer.contracts import ImageElement
@@ -10,13 +11,13 @@ from tests.visual.helpers import png
 def test_actual_bbox_crop_loss_and_unknown_never_pass(spec_data):
     e=ImageElement.model_validate(spec_data['elements'][0])
     data=png();processing=prepare_asset(data,e).record
-    obs={'source_sha256':hashlib.sha256(data).hexdigest(),'source_status':'pass','poster_status':'unknown','object_boxes_norm':[[.4,.4,.6,.6]]}
-    r=evaluate_observation(data=data,processing=processing,observation=obs)
+    obs={'source_sha256':hashlib.sha256(data).hexdigest(),'poster_sha256':hashlib.sha256(data).hexdigest(),'spec_sha256':digest(spec_data),'requirement_id':'r','source_status':'pass','poster_status':'unknown','object_boxes_norm':[[.4,.4,.6,.6]]}
+    r=evaluate_observation(data=data,processing=processing,observation=obs,poster_data=data,spec=spec_data,requirement_id='r')
     assert r['status']=='unknown'
     obs['source_sha256']='wrong'
-    with pytest.raises(ValueError):evaluate_observation(data=data,processing=processing,observation=obs)
+    with pytest.raises(ValueError):evaluate_observation(data=data,processing=processing,observation=obs,poster_data=data,spec=spec_data,requirement_id='r')
     obs['source_sha256']=hashlib.sha256(data).hexdigest();obs['poster_status']='pass';obs['object_boxes_norm']=[[0,0,.02,.02]]
-    assert evaluate_observation(data=data,processing=processing,observation=obs)['poster_status']=='fail'
+    assert evaluate_observation(data=data,processing=processing,observation=obs,poster_data=data,spec=spec_data,requirement_id='r')['poster_status']=='fail'
 
 def test_budget_counts_failures_rejects_retries_and_survives_reload(tmp_path,spec_data):
     ledger=FirstRoundLedger(tmp_path/'budget.json');gen=FixtureImageGenerator(lambda r:png())

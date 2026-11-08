@@ -25,6 +25,12 @@ from .registration import SPEC_FORMAT, CANDIDATE_FORMAT
 _NOTE = "visual-production-state-v1"
 
 
+def _source_fingerprint(request,caps):
+    return GenerationFingerprint.build(provider=caps.provider,model=caps.model,weights=caps.weights_version,
+        prompt=request.prompt,parameters={'size':list(request.size),'negative_prompt':request.negative_prompt,
+        'seed':request.seed,'backend':dict(caps.generation_parameters)},reference_materials=(),
+        processing_config={'source_pipeline':'validated-source-v1'})
+
 class VisualProducerAgent:
     def __init__(
         self,
@@ -125,6 +131,7 @@ class VisualProducerAgent:
                 )
             target_asset = matches[0]
         constraints = ()
+        authorized_constraints = None
         if visual_contract and action in {RevisionAction.regenerate_asset,RevisionAction.rerender}:
             from poster_framework import RepairAuthorization
             histories=memory["revision_history"]
@@ -136,6 +143,7 @@ class VisualProducerAgent:
                 raise StageError("STALE_VERSION","Repair authorization does not match current target")
             if auth.based_on_candidate.model_dump(mode="json")!={k:previous["candidate_ref"][k] for k in ("artifact_id","revision")}:
                 raise StageError("STALE_VERSION","Repair authorization is for another candidate")
+            authorized_constraints=tuple(auth.constraints)
         if (
             action in {RevisionAction.regenerate_asset, RevisionAction.rerender}
             and memory["revision_history"]
@@ -159,6 +167,8 @@ class VisualProducerAgent:
                         "Repair constraints must be a bounded list of strings",
                     )
                 constraints = tuple(raw_constraints)
+                if authorized_constraints is not None and constraints!=authorized_constraints:
+                    raise StageError("CONSTRAINT_CONFLICT","Repair plan differs from explicit authorization")
                 if any(
                     not isinstance(c, str) or not c.strip() or len(c) > 1000
                     for c in constraints
@@ -166,6 +176,8 @@ class VisualProducerAgent:
                     raise StageError(
                         "SCHEMA_INVALID", "Repair constraints must be text"
                     )
+        if authorized_constraints is not None:
+            constraints=authorized_constraints
         start = context.metadata.usage.image_operations
         bindings = {}
         source_data = {}
@@ -174,6 +186,9 @@ class VisualProducerAgent:
         decisions = []
         warnings = []
         caps = self.generator.capabilities
+        is_sdxl='sdxl' in caps.model.lower() or 'stable-diffusion-xl' in caps.model.lower()
+        if visual_contract and is_sdxl and self.request_validator is None:
+            raise StageError('MISSING_INPUT','Quality SDXL requires the final dual-tokenizer validator')
         compiled_requests = {}
         request_checks = {}
         for plan in spec.asset_plan:
@@ -187,40 +202,19 @@ class VisualProducerAgent:
             compiled_requests[plan.asset_id]=request
             if self.request_validator:
                 request_checks[plan.asset_id]=self.request_validator(request)
+        if visual_contract and action==RevisionAction.regenerate_asset:
+            for plan in spec.asset_plan:
+                if plan.asset_id==target_asset:continue
+                old=previous.get('bindings',{}).get(plan.asset_id)
+                base=compile_request(plan,caps,seed=self.seed,negative_policy=self.negative_policy)
+                if not old or old.get('base_fingerprint_key',old['fingerprint_key'])!=_source_fingerprint(base,caps).key:
+                    raise StageError('CONSTRAINT_CONFLICT','Unaffected asset generation settings changed; no image submitted')
         for plan in spec.asset_plan:
             request=compiled_requests[plan.asset_id]
             request_json = request.as_json()
-            fingerprint = GenerationFingerprint.build(
-                provider=caps.provider,
-                model=caps.model,
-                weights=caps.weights_version,
-                prompt=request.prompt,
-                parameters={
-                    "size": list(request.size),
-                    "negative_prompt": request.negative_prompt,
-                    "seed": request.seed,
-                    "backend": dict(caps.generation_parameters),
-                },
-                reference_materials=(),
-                processing_config={"source_pipeline": "validated-source-v1"},
-            )
-            base_request = compile_request(
-                plan, caps, seed=self.seed, negative_policy=self.negative_policy
-            )
-            base_fingerprint = GenerationFingerprint.build(
-                provider=caps.provider,
-                model=caps.model,
-                weights=caps.weights_version,
-                prompt=base_request.prompt,
-                parameters={
-                    "size": list(base_request.size),
-                    "negative_prompt": base_request.negative_prompt,
-                    "seed": base_request.seed,
-                    "backend": dict(caps.generation_parameters),
-                },
-                reference_materials=(),
-                processing_config={"source_pipeline": "validated-source-v1"},
-            )
+            fingerprint = _source_fingerprint(request,caps)
+            base_request = compile_request(plan,caps,seed=self.seed,negative_policy=self.negative_policy)
+            base_fingerprint = _source_fingerprint(base_request,caps)
             old = previous.get("bindings", {}).get(plan.asset_id)
             force = plan.asset_id == target_asset
             reusable = (

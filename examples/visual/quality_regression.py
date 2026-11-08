@@ -24,7 +24,7 @@ from poster_visual_producer.renderer import preflight
 from poster_visual_producer.backends import create_generator
 from poster_visual_producer.generators import compile_request
 from poster_visual_producer.prompt_validation import SDXLPromptValidator
-from poster_visual_producer.image_budget import FirstRoundLedger,BudgetedGenerator
+from poster_visual_producer.image_budget import FirstRoundLedger,BudgetedGenerator,authorization_ledger
 from poster_visual_producer.exports import export_formal,export_comparison
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -73,10 +73,26 @@ async def prepare(case,folder,generator,fonts,lfonts,validator,font_policy,clari
        'a1_execution':'replay of existing remote A1 model output','a2_execution':'actual deterministic A2 quality planner',
        'a3_execution':'existing local CUDA SDXL backend then Pillow','a4_included':False}
 
+def comparison_for_case(row,baseline,folder,font):
+    before=next((r for r in baseline if r['source']==row['source']),None)
+    if before is None:return {'status':'unavailable','reason':'No matching baseline'}
+    try:
+        details=export_comparison([{'poster':before['poster'],'label':'BEFORE','details':'Original baseline | seed 42'},
+          {'poster':row['poster'],'label':'AFTER','details':'Round 1 | seed 42'}],folder/'before-after.png',font,columns=2)
+        return {'status':'exported',**details}
+    except Exception as error:
+        return {'status':'unavailable','error_type':type(error).__name__,'reason':str(error)}
+
 async def main(args):
     if not args.model_dir:raise ValueError('--model-dir or POSTER_SDXL_MODEL_DIR required')
+    cases=json.loads((ROOT/'examples/visual/quality-cases.json').read_text(encoding='utf-8'))
+    authorization=json.loads(Path(args.authorization).read_text(encoding='utf-8'))
+    if authorization.get('sources')!={c['id']:c['source_sha256'] for c in cases}:
+        raise ValueError('Authorization does not match the six source identities')
     output=Path(args.output_dir).resolve()
-    if output.exists():raise ValueError('Use a new run directory; existing results are immutable and never regenerated automatically')
+    if output.exists():
+        if not args.resume:raise ValueError('Use --resume to recover only unattempted cases; existing results remain immutable')
+        output=output/('recovery-'+uuid4().hex[:8])
     output.mkdir(parents=True)
     font_policy=json.loads(Path(args.font_config).read_text(encoding='utf-8'))
     fonts=FontRegistry.from_config(font_policy['families'],ROOT)
@@ -84,26 +100,32 @@ async def main(args):
     backend=json.loads((ROOT/'examples/visual/backend-sdxl.json').read_text(encoding='utf-8'))
     backend.update(model_dir=str(Path(args.model_dir).resolve()),cpu_offload=True)
     generator=create_generator(backend);validator=SDXLPromptValidator(Path(args.model_dir))
-    save(output/'backend.json',backend);save(output/'font-policy.json',font_policy)
-    cases=json.loads((ROOT/'examples/visual/quality-cases.json').read_text(encoding='utf-8'))
+    save(output/'backend.json',backend);save(output/'font-policy.json',font_policy);save(output/'authorization.json',authorization)
     clarifications=json.loads((ROOT/'examples/visual/quality-clarifications.json').read_text(encoding='utf-8'))
-    ready=[];errors=[]
+    ledger=authorization_ledger(ROOT/'runs',authorization)
+    attempted={} if args.dry_run else {r['case_id']:r for r in ledger.snapshot()['attempts']}
+    ready=[];errors=[];rows=[]
     for case in cases:
+        if case['id'] in attempted:
+            previous=attempted[case['id']]
+            row=previous.get('result',{**case,'status':'attempted_not_retried','previous_attempt':previous})
+            rows.append(row);print('NO RETRY '+case['id']+' '+row['status'],flush=True);continue
         try:
             row=await prepare(case,output/case['id'],generator,fonts,lfonts,validator,font_policy,clarifications)
             ready.append(row);print('PREFLIGHT '+case['id']+' '+str(row['tokenizer_checks']),flush=True)
         except Exception as error:
             errors.append({'id':case['id'],'error_type':type(error).__name__,'error':str(error)})
-    save(output/'preflight.json',{'ready':ready,'errors':errors,'image_operations':0})
-    if errors:raise ValueError('Preflight blocked; zero image operations. See preflight.json')
+    save(output/'preflight.json',{'ready':ready,'errors':errors,'new_image_operations':0,'previous_attempts':len(attempted)})
+    if errors:raise ValueError('Preflight blocked; zero new image operations. See preflight.json')
     if args.dry_run:return
-    ledger=FirstRoundLedger(output/'budget.json');rows=[]
     baseline=json.loads((Path(args.baseline_dir)/'report.json').read_text(encoding='utf-8')) if args.baseline_dir else []
+    label_font=ImageFont.truetype(str(fonts.families[font_policy['default_family']][400].path),18)
     for row in ready:
         folder=Path(row['folder']);started=time.perf_counter()
         try:
             print('GPU GENERATING '+row['id'],flush=True)
-            result=await run_single_agent_from_upstream(registration(BudgetedGenerator(generator,ledger,row['id']),fonts,
+            result=await run_single_agent_from_upstream(registration(BudgetedGenerator(generator,ledger,row['id'],
+                source_sha256=row['source_sha256'],run_dir=str(folder)),fonts,
                 seed=42,max_safe_retries=0,request_validator=validator,require_visual_contract=True),
                 folder/'a2-record.json',root=folder/'store',record_path=folder/'a3-record.json')
             c=result.output.content;save(folder/'candidate.json',c)
@@ -111,24 +133,27 @@ async def main(args):
             exported=export_formal(png,folder/'poster.png')
             raw_ref=c['assets'][0]['source_ref'];(folder/'raw.png').write_bytes(artifact_path(folder/'store',raw_ref).read_bytes())
             manifest=json.loads(artifact_path(folder/'store',c['manifest_ref']).read_text(encoding='utf-8'));save(folder/'render-manifest.json',manifest)
-            expected=adapt_a1((folder/'a1-original.json').read_bytes(),OriginalRequest.from_keywords('verify',json.loads((folder/'a1-original.json').read_bytes())['keywords']),row['source'])['copy']
+            original=(folder/'a1-original.json').read_bytes()
+            expected=adapt_a1(original,OriginalRequest.from_keywords('verify',json.loads(original)['keywords']),row['source'])['copy']
             assert {k:v['text'] for k,v in expected.items()}=={t['copy_ref']:t['text'] for t in c['text_manifest']}
             evidence_ref=next(r for r in result.output.artifacts if r.uri.endswith('visual-evidence.json'))
             evidence=json.loads(artifact_path(folder/'store',evidence_ref.model_dump(mode='json')).read_text(encoding='utf-8'));save(folder/'visual-evidence-pending.json',evidence)
-            row.update(status='rendered',poster=exported['path'],raw=str(folder/'raw.png'),elapsed_seconds=round(time.perf_counter()-started,3),exact_copy_verified=True,semantic_status='unknown',design_status='unknown')
-            if baseline:
-                before=next(r for r in baseline if r['source']==row['source'])
-                label_font=ImageFont.truetype(str(fonts.families[font_policy['default_family']][400].path),20)
-                export_comparison([{'poster':before['poster'],'label':'BEFORE','details':'Original baseline | seed 42'},{'poster':row['poster'],'label':'AFTER','details':'Round 1 | seed 42'}],folder/'before-after.png',label_font,columns=2)
+            row.update(status='rendered',poster=exported['path'],raw=str(folder/'raw.png'),elapsed_seconds=round(time.perf_counter()-started,3),
+                exact_copy_verified=True,semantic_status='unknown',design_status='unknown')
+            if args.baseline_dir:row['comparison']=comparison_for_case(row,baseline,folder,label_font)
         except Exception as error:
             row.update(status='failed',error_type=type(error).__name__,error=str(error),elapsed_seconds=round(time.perf_counter()-started,3))
-        rows.append(row);save(output/'report.json',rows)
+        rows.append(row);save(output/'report.json',sorted(rows,key=lambda r:r['id']))
+        if row['id'] in {a['case_id'] for a in ledger.snapshot()['attempts']}:ledger.attach_result(row['id'],row)
         print('RESULT '+row['id']+' '+row['status'],flush=True)
+    rows=sorted(rows,key=lambda r:r['id']);save(output/'report.json',rows)
     rendered=[r for r in rows if r['status']=='rendered']
     if rendered:
-        label_font=ImageFont.truetype(str(fonts.families[font_policy['default_family']][400].path),18)
-        export_comparison([{'poster':r['poster'],'label':r['id']+' | '+r['title'],'details':'Round 1 | seed 42 | inspect evidence'} for r in rendered],output/'contact-sheet.png',label_font)
-    save(output/'round-status.json',{'status':'awaiting_user_round1_review','rendered':len(rendered),'attempts':json.loads(ledger.path.read_text()) if ledger.path.exists() else {'attempts':[]},'remaining_total_ceiling':15-len(json.loads(ledger.path.read_text())['attempts']) if ledger.path.exists() else 15,'further_generation_authorized':False})
+        export_comparison([{'poster':r['poster'],'label':r['id']+' | '+r['title'],
+          'details':'Round 1 | seed 42 | inspect evidence'} for r in rendered],output/'contact-sheet.png',label_font)
+    state=ledger.snapshot()
+    save(output/'round-status.json',{'status':'awaiting_user_round1_review','rendered':len(rendered),'budget_ref':str(ledger.path),
+      'attempts':state,'remaining_total_ceiling':15-len(state['attempts']),'further_generation_authorized':False})
     print('FIRST ROUND COMPLETE; stop for visual evidence and user decision',flush=True)
 
 if __name__=='__main__':
@@ -138,4 +163,6 @@ if __name__=='__main__':
     parser.add_argument('--output-dir',required=True)
     parser.add_argument('--baseline-dir')
     parser.add_argument('--dry-run',action='store_true')
+    parser.add_argument('--authorization',required=True)
+    parser.add_argument('--resume',action='store_true')
     asyncio.run(main(parser.parse_args()))

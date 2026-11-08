@@ -224,6 +224,7 @@ tests/visual/test_quality_checks.py
 tests/visual/test_quality_exports.py
 tests/visual/test_quality_files.py
 tests/visual/test_quality_pipeline.py
+tests/visual/test_quality_review_regressions.py
 tests/visual/test_qwen_backend.py
 tests/visual/test_qwen_download.py
 tests/visual/test_rendering.py
