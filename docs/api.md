@@ -65,6 +65,25 @@ await run_single_agent_from_upstream(
 
 `ContentAdapter` 包含 `adapter_id`、`source_format`、`target_format` 和 `transform`。`transform` 接收并返回 JSON 值。输入适配器的目标格式必须列入 `input_formats`；输出适配器的源格式必须列入 `output_formats`。格式转换记录由框架生成，并保存源内容、目标内容、格式和来源信息。
 
+## A2 Layout Planner
+
+`poster_framework.layout_planner` 提供可运行的 A2：输入 `poster.creative-brief@0.1.0`（兼容 `@1`），输出 `poster.spec@0.1.0`，字段与 `docs/schemas/PosterSpec.json` 对齐。
+
+| 公开对象 | 说明 |
+|---|---|
+| `LayoutPlannerAgent(template_id=None, registry=None)` | 异步 Agent；`template_id` 固定版式，`registry` 注入字体环境 |
+| `plan_poster_spec(brief, *, request, template_id=None, previous_spec=None, revision_action=None, registry=None)` | 纯函数，返回已校验的规格字典 |
+| `registration()` | 声明角色、输入/输出格式与 `output_validator` |
+| `register_layout_tools(registry)` | 注册 `layout.*` 工具，见组员接入指南 |
+| `validate_poster_spec(value)` | 结构化与跨字段校验；失败抛 `LayoutContractError` |
+| `check_layout_geometry(spec)`、`check_planned_keyword_coverage(request, spec)` | 确定性检查，返回 `{"ok": bool, "issues": [...], ...}` |
+| `describe_templates()`、`template_ids()`、`get_template(id)` | 受控模板目录 |
+| `measure_text_block(...)`、`default_font_registry()` | 真实文字测量与字体注册表 |
+
+错误类型均继承 `AgentFrameworkError` 与 `ValueError`：`LayoutContractError`（契约/引用错误）、`MissingFontError`（字体或字重不存在）、`TextOverflowError`（文案在最小字号下仍放不下）。A2 不截断文案，也不静默缩小到最小字号以下；这些情况会让本阶段失败，交由上游改写文案。
+
+`plan_poster_spec` 的 `previous_spec` 仅用于 `revise_layout`：有 `brief["layout_patch"]` 时应用白名单补丁并递增 `spec_version`，否则轮换模板；模板被固定且没有补丁时抛错。
+
 ## A4 审核与返工
 
 `ReviewRecord` 的决策字段包括 `decision`、`candidate_id`、`candidate_revision`、`reviewer_identity`、`action`、`target`、`keyword_results` 和 `details`。A4 应明确它审核的候选编号与修订号，并为 `original_request.keywords` 中每个关键词提供一个状态为 `pass`、`fail` 或 `unknown` 的 `KeywordReviewResult`。重复关键词编号会在 `ReviewRecord` 校验时抛出验证异常。候选编号或修订号与当前候选不符、或审核身份与当前调用不符时，工作流会抛出 `AgentIdentityMismatchError`；关键词覆盖不全时，工作流返回 `needs_review`。
