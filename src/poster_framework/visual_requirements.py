@@ -24,6 +24,8 @@ class Requirement(Model):
     source: Source
     entities: list[str] = Field(default_factory=list)
     predicates: list[str] = Field(default_factory=list)
+    disposition: Literal['active','superseded'] = 'active'
+    resolution_id: str | None = None
     priority_basis: str = "source-field policy"
 
 class VisualContract(Model):

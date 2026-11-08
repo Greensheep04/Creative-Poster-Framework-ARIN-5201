@@ -22,8 +22,11 @@ def test_lossless_a1_adapter():
     assert brief['reference_notes'][0]['original_a1']==raw
     assert brief['copy']['title']['text']==raw['copy']['headline']
 
-def test_real_a2_contract_reaches_a3_request(tmp_path):
+@pytest.mark.parametrize("ban",[False,True])
+def test_real_a2_contract_reaches_a3_request(tmp_path,ban):
     data=SOURCE.read_bytes();raw=json.loads(data)
+    if ban:
+        raw['avoid']=['brick wall'];data=json.dumps(raw).encode()
     request=OriginalRequest.from_keywords('quality',raw['keywords']);f=fonts()
     lf=LayoutFonts({(k,w):FontFace(k,w,v.path,v.index,'test') for k,weights in f.families.items() for w,v in weights.items()})
     class Publish:
@@ -42,6 +45,12 @@ def test_real_a2_contract_reaches_a3_request(tmp_path):
         await run_single_agent(a1,inputs,session=session,record_path=tmp_path/'a1.json')
         planner=QualityLayoutPlanner(registry=lf,font_family_key='noto_sans_sc',count_tokens=lambda t:[1,1],planning_policy=Policy())
         a2=AgentRegistration(role=AgentRole.layout_planner,instance_factory=lambda c:planner,input_formats=frozenset({BRIEF_FORMAT}),output_formats=frozenset({SPEC_FORMAT}))
+        if ban:
+            from poster_framework.visual_requirements import IntentError
+            with pytest.raises(IntentError,match='REQUIRED_OBJECT_FORBIDDEN'):
+                await run_single_agent_from_upstream(a2,tmp_path/'a1.json',root=tmp_path/'store',record_path=tmp_path/'a2.json')
+            assert not (tmp_path/'a3.json').exists()
+            return
         layout=await run_single_agent_from_upstream(a2,tmp_path/'a1.json',root=tmp_path/'store',record_path=tmp_path/'a2.json')
         seen=[]
         def generate(req):seen.append(req);return png()

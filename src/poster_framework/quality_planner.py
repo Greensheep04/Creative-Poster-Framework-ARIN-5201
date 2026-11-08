@@ -33,9 +33,8 @@ class QualityLayoutPlanner:
     async def run(self,inputs,context):
         source_ref,data,raw=read_a1_source(inputs,context)
         contract=extract_visual_requirements(raw,source_bytes=data,priorities=self.priorities)
-        if self.clarifications:
-            from .intent_conflicts import resolve_intent
-            contract=resolve_intent(contract,self.clarifications)
+        from .intent_conflicts import resolve_intent
+        contract=resolve_intent(contract,self.clarifications)
         compilation=compile_visual_prompts(contract,count_tokens=self.count_tokens,limit=self.token_limit)
         if self.planning_policy:
             spec,layout_evidence=self.planning_policy.plan(raw,context.original_request,self.registry,self.family)

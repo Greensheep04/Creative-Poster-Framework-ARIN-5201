@@ -4,8 +4,10 @@ from .visual_requirements import IntentError
 def compile_visual_prompts(contract, *, count_tokens, limit=77):
     if contract.issues: raise IntentError(contract.issues)
     positive=[];negative=['text','logos','watermarks'];receipts=[]
-    requirements=sorted(contract.requirements,key=lambda r: {'required':0,'forbidden':1,'preferred':2,'optional':3}[r.priority])
+    requirements=sorted(contract.requirements,key=lambda r: ({'required':0,'forbidden':1,'preferred':2,'optional':3}[r.priority], {'composition':0,'style':1,'palette':2,'scene':3,'subject':4}.get(r.category,5)))
     for req in requirements:
+        if req.disposition=='superseded':
+            receipts.append({'requirement_id':req.requirement_id,'source':req.source.model_dump(),'priority':req.priority,'status':'authorized_superseded','resolution_id':req.resolution_id});continue
         if req.category in ('goal','reading_order','typography','composition') and not req.predicates:
             receipts.append({'requirement_id':req.requirement_id,'source':req.source.model_dump(),'priority':req.priority,'status':'applied_layout' if req.category!='goal' else 'context_only','evidence_ids':[r.requirement_id for r in requirements if r.priority=='required' and r.entities]})
             continue
