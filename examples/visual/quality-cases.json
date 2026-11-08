@@ -1,0 +1,60 @@
+[
+  {
+    "id": "01",
+    "title": "Home Migration Memory",
+    "source": "examples/creative-director-samples/Qwen3-4B-Instruct-2507/home-migration-memory/message-led.json",
+    "source_sha256": "865ff0c373c03c658c70f554ce3c4135faf9942b959dbc09f57cb8a0f7efd609",
+    "priorities": {},
+    "priority_basis": "User-approved six-sample regression evidence in Phase 2 task"
+  },
+  {
+    "id": "02",
+    "title": "The Wall We Built",
+    "source": "examples/creative-director-samples/Qwen3-4B-Instruct-2507/repair-community-tomorrow/human-story.json",
+    "source_sha256": "d8f3a8f51b63c3a3d3aca491e508705195825c92c254b65a3a50c167580461c8",
+    "priorities": {
+      "/visual_direction/supporting_elements/0": "required"
+    },
+    "priority_basis": "User-approved six-sample regression evidence in Phase 2 task"
+  },
+  {
+    "id": "03",
+    "title": "Time is not a resource",
+    "source": "examples/creative-director-samples/Qwen3-4B-Instruct-2507/time-consumption-ocean/human-story.json",
+    "source_sha256": "362245e104981d06b21911848fe304ec48096f9290b3a19e9620c6b2043341e3",
+    "priorities": {},
+    "priority_basis": "User-approved six-sample regression evidence in Phase 2 task"
+  },
+  {
+    "id": "04",
+    "title": "Urban Loneliness",
+    "source": "examples/creative-director-samples/Qwen3-4B-Instruct-2507/urban-loneliness-connection-windows/human-story.json",
+    "source_sha256": "7271af8e551a57de0f2643b08219208a4f99e7a2ebdc7bfc550a0689d6d21ff9",
+    "priorities": {},
+    "priority_basis": "User-approved six-sample regression evidence in Phase 2 task"
+  },
+  {
+    "id": "05",
+    "title": "Home Moves With Memory",
+    "source": "examples/creative-director-samples/Qwen3-4B-Instruct-2507/home-migration-memory/visual-metaphor.json",
+    "source_sha256": "e926709752ed4d084fa8af2e3f158e123dada2c0d7e917fb858575829f746ad4",
+    "priorities": {
+      "/visual_direction/setting": "required",
+      "/visual_direction/supporting_elements/0": "required",
+      "/visual_direction/supporting_elements/1": "required",
+      "/layout/composition": "required"
+    },
+    "priority_basis": "User-approved six-sample regression evidence in Phase 2 task"
+  },
+  {
+    "id": "06",
+    "title": "Time Consumption Ocean",
+    "source": "examples/creative-director-samples/Qwen3-4B-Instruct-2507/time-consumption-ocean/visual-metaphor.json",
+    "source_sha256": "7aebe3b0891748aad1b2bc311c1ced72e7070ce9ce3ac3c0d0820652b2b87009",
+    "priorities": {
+      "/visual_direction/supporting_elements/0": "required",
+      "/layout/composition": "required"
+    },
+    "priority_basis": "User-approved six-sample regression evidence in Phase 2 task"
+  }
+]
