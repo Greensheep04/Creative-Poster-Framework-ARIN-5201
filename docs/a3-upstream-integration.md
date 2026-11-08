@@ -61,3 +61,12 @@ python -m pytest -q --basetemp .scratch/u
 30 项新版链路与原授权返工测试通过。独立只读审查无重要可操作问题。`uv lock --check --offline` 通过，未更改 uv.lock。`uv build --offline --out-dir dist` 构建 wheel/sdist；冷子进程将 wheel 放在 sys.path 首位，确认 A2/A3/A4 实际从 wheel 导入且 A4 提示词可读。源码 zip 按显式清单生成，新版运行模块及资源包含在内。
 
 中英文 CLI 示例均实际执行，每次 1 次素材操作、1 次 A4 调用，状态 needs_review。证据位于 runs/team-integration/summary.json 与 runs/team-integration-en/summary.json；包验证位于 runs/team-integration/package-verification.json。runs、权重、字体二进制与 Key 不进入 Git。完整可配置真实推理验证的边界保持上一节说明。
+
+
+## 远程 A1 样例 → A2 → GPU SDXL 成图（2026-11-08）
+
+本轮直接复用远程 Qwen3-4B-Instruct-2507 的六份完整 A1 JSON，覆盖四类主题；A1 原始文件和 SHA-256 保留，不调用新 A1 模型、不人工改写文案。实际执行团队 LayoutPlannerAgent，按既有模板逐一进行真实文字测量；缺 CTA 槽位或提示词超长的样例在生成前排除，不静默删文案或截断。A3 使用本地 SDXL 30 步、seed 42、1024×1024 素材，最终海报 720×1280。未接 A4。
+
+结果在 runs/a1-a2-sdxl-20261108：六张 poster-final.png、contact-sheet.png、six-posters.zip，以及来源/逐阶段记录、preflight.json、report.json、verification.json。所有生成均使用 RTX 3080 Ti CUDA；第一张不卸载，后五张启用已有 CPU offload，但扩散推理仍在 GPU。一次显存饱和的未完成尝试被取消并保留记录；实际成功生图六次。后续精确排字重新合成没有增加生图，素材引用、正式文案和 A2 规格保持。
+
+真实成图暴露 A3 按字符断开英文单词的问题。renderer 0.1.1 复用 A2 的单词/CJK 换行规则，传入同时考虑字宽与墨迹边缘的测量器；保留 CRLF 规范化、原始文案记录、字形与溢出校验。两项回归均先失败后通过。独立审查指出的墨迹边缘问题已修复并复核；最终全量 391 passed、1 Windows 符号链接权限 skip。成图不构成创意语义或视觉审核通过；A2 仍只消费其既有字段。

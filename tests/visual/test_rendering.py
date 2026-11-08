@@ -74,7 +74,8 @@ def test_english_wrap_preserves_characters(spec_data):
     title["box"].update(width=280, height=152)
     result = render(Spec.model_validate(spec_data), {"hero_image": source()}, fonts)
     lines = result.manifest["elements"][1]["lines"]
-    assert len(lines) > 1 and "".join(lines) == "Ocean serenity and blue"
+    assert len(lines) > 1 and " ".join(lines) == "Ocean serenity and blue"
+    assert result.manifest["elements"][1]["text"] == "Ocean serenity and blue"
 
 
 @pytest.mark.parametrize(
@@ -123,3 +124,29 @@ def test_windows_line_breaks_do_not_render_control_glyphs(spec_data, newline):
     row = result.manifest["elements"][1]
     assert row["lines"] == ["Ocean", "Blue"]
     assert row["text"] == "Ocean" + newline + "Blue"
+
+
+def test_renderer_uses_a2_word_wrapping_without_splitting_fitting_words(spec_data):
+    from poster_framework.layout_fonts import wrap_text
+    from poster_visual_producer.renderer import measure_text_block
+    render, fonts, Spec, _, _, _ = render_api()
+    title = spec_data["elements"][1]
+    title.update(text="Time is not a resource. It is a tide.",font_size_px=44,line_height_px=58,max_lines=3)
+    title["box"].update(width=624,height=184)
+    element=Spec.model_validate(spec_data).elements[1]
+    font,_=fonts.resolve(element)
+    expected=list(wrap_text(element.text,font,element.box.width))
+    actual=measure_text_block(element,fonts)
+    assert actual.lines == expected
+    assert all("resour" != line.split()[-1] for line in actual.lines)
+
+
+def test_ink_overhang_rewraps_when_advance_width_alone_fits(spec_data):
+    from poster_visual_producer.renderer import measure_text_block
+    _, fonts, Spec, _, _, _ = render_api()
+    title=spec_data["elements"][1]
+    title.update(text="Take time off",font_weight=400,font_size_px=28,line_height_px=38,max_lines=3)
+    title["box"].update(width=172,height=152)
+    element=Spec.model_validate(spec_data).elements[1]
+    result=measure_text_block(element,fonts)
+    assert result.lines == ["Take time", "off"]

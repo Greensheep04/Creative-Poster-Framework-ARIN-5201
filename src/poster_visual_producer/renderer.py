@@ -1,5 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
+from types import SimpleNamespace
 from datetime import datetime, timezone
 import hashlib
 import PIL
@@ -7,8 +8,9 @@ from PIL import Image, ImageDraw
 from .contracts import PosterSpec, ImageElement, TextElement, StageError
 from .fonts import FontRegistry
 from .imaging import prepare_asset, encode_png
+from poster_framework.layout_fonts import wrap_text
 
-RENDERER_VERSION = "0.1.0"
+RENDERER_VERSION = "0.1.1"
 
 
 @dataclass
@@ -32,31 +34,12 @@ def measure_text_block(element: TextElement, fonts: FontRegistry) -> TextLayout:
         box = bounds(text)
         return max(box[2] - box[0], draw.textlength(text, font=font))
 
-    lines = []
-    # CRLF and CR are line separators, never drawable glyphs. Preserve the
-    # original official string in the manifest while normalizing layout only.
+    # Share A2's word/CJK break rules, measuring both advance and ink overhang.
     layout_text = element.text.replace("\r\n", "\n").replace("\r", "\n")
-    for paragraph in layout_text.split("\n"):
-        current = ""
-        for char in paragraph:
-            if width(current + char) > element.box.width:
-                if not current:
-                    raise StageError(
-                        "TEXT_OVERFLOW",
-                        "A glyph does not fit the specified box",
-                        affected_ids=[element.id],
-                    )
-                lines.append(current)
-                current = char
-                if width(current) > element.box.width:
-                    raise StageError(
-                        "TEXT_OVERFLOW",
-                        "A glyph does not fit",
-                        affected_ids=[element.id],
-                    )
-            else:
-                current += char
-        lines.append(current)
+    lines = list(wrap_text(layout_text, SimpleNamespace(getlength=width), element.box.width))
+    if any(width(line) > element.box.width for line in lines):
+        raise StageError("TEXT_OVERFLOW", "A glyph does not fit the specified box",
+                         affected_ids=[element.id])
     if len(lines) > element.max_lines:
         raise StageError(
             "TEXT_OVERFLOW", "Text exceeds max_lines", affected_ids=[element.id]
