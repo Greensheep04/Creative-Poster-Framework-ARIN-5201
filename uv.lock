@@ -725,6 +725,7 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "fonttools" },
+    { name = "httpx" },
     { name = "langgraph" },
     { name = "pillow" },
     { name = "pydantic" },
@@ -751,6 +752,7 @@ requires-dist = [
     { name = "accelerate", marker = "extra == 'local-gpu'", specifier = "==1.10.1" },
     { name = "diffusers", marker = "extra == 'local-gpu'", specifier = "==0.35.1" },
     { name = "fonttools", specifier = ">=4.55,<5" },
+    { name = "httpx", specifier = ">=0.28,<0.29" },
     { name = "huggingface-hub", marker = "extra == 'local-gpu'", specifier = "==0.36.0" },
     { name = "langgraph", specifier = ">=1.0,<2" },
     { name = "pillow", specifier = ">=10,<13" },
