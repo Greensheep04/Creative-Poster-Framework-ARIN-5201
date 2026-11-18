@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = "==3.11.*"
 
 [[package]]
@@ -395,6 +395,7 @@ name = "poster-framework"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "httpx" },
     { name = "langgraph" },
     { name = "pillow" },
     { name = "pydantic" },
@@ -407,6 +408,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
+    { name = "httpx", specifier = ">=0.28,<1" },
     { name = "langgraph", specifier = ">=1.0,<2" },
     { name = "pillow", specifier = ">=10,<13" },
     { name = "pydantic", specifier = ">=2,<3" },

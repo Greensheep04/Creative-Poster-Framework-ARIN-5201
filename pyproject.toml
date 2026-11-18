@@ -8,6 +8,7 @@ version = "0.1.0"
 description = "Typed agent interfaces and format adapters for poster workflows"
 requires-python = ">=3.11,<3.12"
 dependencies = [
+    "httpx>=0.28,<1",
     "langgraph>=1.0,<2",
     "pydantic>=2,<3",
     "pillow>=10,<13",
@@ -17,7 +18,10 @@ dependencies = [
 dev = ["pytest>=8,<9"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/poster_framework"]
+packages = ["src/poster_framework", "src/creative"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"examples/creative-director-samples/prompts.md" = "creative/resources/prompts.md"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
