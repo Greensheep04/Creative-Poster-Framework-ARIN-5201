@@ -20,6 +20,8 @@ docs/superpowers/plans/2026-10-09-local-gpu.md
 docs/superpowers/plans/2026-10-12-a3-portable-qc.md
 docs/superpowers/plans/2026-11-08-poster-quality.md
 docs/superpowers/specs/2026-10-12-a3-portable-qc-design.md
+docs/team-integration-verification.md
+docs/team-integration.md
 docs/visual-producer-portable-progress.md
 docs/visual-producer-portable-review.md
 docs/visual-producer-review.md
@@ -31,12 +33,14 @@ examples/creative-director-samples/Qwen3-4B-Instruct-2507/repair-community-tomor
 examples/creative-director-samples/Qwen3-4B-Instruct-2507/time-consumption-ocean/human-story.json
 examples/creative-director-samples/Qwen3-4B-Instruct-2507/time-consumption-ocean/visual-metaphor.json
 examples/creative-director-samples/Qwen3-4B-Instruct-2507/urban-loneliness-connection-windows/human-story.json
+examples/creative-director-samples/prompts.md
 examples/format_upgrade.py
 examples/four_role_walkthrough.py
 examples/revision_actions.py
 examples/sample-request.json
 examples/sample-single-role-output.json
 examples/single_role.py
+examples/team_workflow.py
 examples/tool_catalog.py
 examples/visual/acceptance_report.py
 examples/visual/backend-api.example.json
@@ -70,6 +74,12 @@ scripts/package-manifest.txt
 scripts/setup-local-gpu.ps1
 scripts/setup-visual.ps1
 scripts/verify_package.py
+src/creative/__init__.py
+src/creative/__main__.py
+src/creative/creative_director.py
+src/creative/prompt_loader.py
+src/creative/resources/sample-output.json
+src/creative/resources/sample-request.json
 src/poster_critic/__init__.py
 src/poster_critic/adapters/__init__.py
 src/poster_critic/adapters/framework_agent.py
@@ -178,6 +188,7 @@ src/poster_visual_producer/qwen_backend.py
 src/poster_visual_producer/registration.py
 src/poster_visual_producer/renderer.py
 src/poster_visual_producer/setup_cli.py
+src/poster_visual_producer/team_creative.py
 src/poster_visual_producer/team_integration.py
 src/poster_visual_producer/tools.py
 tests/layout/layout_support.py
@@ -191,6 +202,10 @@ tests/layout/test_layout_tools.py
 tests/layout/test_layout_workflow.py
 tests/layout/test_quality_layout.py
 tests/layout/test_visual_requirements.py
+tests/test_creative_brief_validation.py
+tests/test_creative_director_huggingface.py
+tests/test_creative_director_prompts.py
+tests/test_creative_director_revisions.py
 tests/test_f1_public_api.py
 tests/test_f2_runtime.py
 tests/test_f3_workflow.py
@@ -233,5 +248,7 @@ tests/visual/test_qwen_download.py
 tests/visual/test_rendering.py
 tests/visual/test_revision_sequences.py
 tests/visual/test_setup_cli.py
+tests/visual/test_team_creative.py
+tests/visual/test_team_workflow.py
 tests/visual/test_upstream_integration.py
 uv.lock

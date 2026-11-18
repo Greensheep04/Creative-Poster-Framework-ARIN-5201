@@ -21,19 +21,19 @@
 
 ## Task 1: Merge and packaging
 Files: pyproject.toml, uv.lock.
-- [ ] Resolve conflicts using the union of packages/resources and strict A4 httpx bounds.
-- [ ] Regenerate lock offline, check it and commit merge.
+- [x] Resolve conflicts using the union of packages/resources and strict A4 httpx bounds.
+- [x] Regenerate lock offline, check it and commit merge.
 
 ## Task 2: A1 interface and revisions
 Files: src/poster_visual_producer/team_creative.py, tests/visual/test_team_creative.py.
 Interface: creative_registration(offline=False, model=None), produces poster.creative-brief@0.1.0.
-- [ ] Write and run failing tests for initial/revised versioned Brief and exact original source.
-- [ ] Implement contextual wrapper and feedback routing; preserve raw v2 memory for revisions.
-- [ ] Run focused tests until passing.
+- [x] Write and run failing tests for initial/revised versioned Brief and exact original source.
+- [x] Implement contextual wrapper and feedback routing; preserve raw v2 memory for revisions.
+- [x] Run focused tests until passing.
 
 ## Task 3: Unified runner and verification
 Files: examples/team_workflow.py, docs/team-integration.md, tests/visual/test_team_workflow.py.
-- [ ] Write failing tests for offline CLI, revisions, config checks and bounded stop.
-- [ ] Implement explicit offline/live runner with no implicit service selection.
-- [ ] Run full suite in short paths, offline examples and package/resource checks.
-- [ ] Record results/prerequisites, review the branch and commit locally.
+- [x] Write failing tests for offline CLI, revisions, config checks and bounded stop.
+- [x] Implement explicit offline/live runner with no implicit service selection.
+- [x] Run full suite in short paths, offline examples and package/resource checks.
+- [x] Record results/prerequisites, review the branch and commit locally.
