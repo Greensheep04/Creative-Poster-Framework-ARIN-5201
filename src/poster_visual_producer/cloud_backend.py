@@ -3,7 +3,7 @@ import asyncio, base64, binascii, json, os
 from urllib.parse import urlsplit
 from urllib.request import Request, build_opener, HTTPRedirectHandler
 from urllib.error import HTTPError, URLError
-from pydantic import BaseModel,ConfigDict,Field,field_validator
+from pydantic import BaseModel,ConfigDict,Field,field_validator,SecretStr
 from .generators import GeneratorCapabilities,GeneratedImage,ProviderError
 from .contracts import StageError
 from .imaging import decode_image
@@ -51,8 +51,11 @@ class NoRedirect(HTTPRedirectHandler):
         return None
 
 class CloudImageGenerator:
-    def __init__(self,config):
+    def __init__(self,config,*,api_key=None):
         self.config=config
+        if api_key is not None and any(ord(c)<33 or ord(c)>126 for c in api_key):
+            raise ValueError("Invalid inline image API key; values are hidden")
+        self._api_key=SecretStr(api_key) if api_key is not None else None
         self.capabilities=GeneratorCapabilities(provider=config.provider,model=config.model,sizes=config.sizes,
             generation_parameters=(('protocol','images-json-v1'),('endpoint',config.endpoint),*sorted(config.parameters.items())))
         self._opener=build_opener(NoRedirect())
@@ -67,7 +70,7 @@ class CloudImageGenerator:
         return data
 
     def _generate(self,request):
-        key=os.environ.get(self.config.api_key_env)
+        key=self._api_key.get_secret_value() if self._api_key is not None else os.environ.get(self.config.api_key_env)
         if not key:
             raise StageError('MISSING_CREDENTIAL','API Key environment variable is missing')
         if request.size not in self.capabilities.sizes or request.seed is not None or request.negative_prompt is not None:

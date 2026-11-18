@@ -1,0 +1,67 @@
+# Copy to project.local.toml. Keep actual API keys only in that ignored file.
+# Relative paths are resolved from this configuration file's directory.
+schema_version = 1
+
+[runtime]
+mode = "offline"
+output_root = "../runs/unified"
+keywords = ["ocean", "plastic", "hope"]
+seed = 42
+[runtime.constraints]
+
+[budget]
+max_revision_rounds = 1
+max_image_operations = 2
+max_critic_vision_calls = 2
+max_model_calls = 6
+max_tool_calls = 100
+
+[agents.a1]
+model = "Qwen/Qwen3-4B-Instruct-2507"
+endpoint = "https://router.huggingface.co/featherless-ai/v1/chat/completions"
+api_key = ""
+max_tokens = 2048
+temperature = 0.7
+timeout_seconds = 120
+
+[agents.a2]
+font_family_key = "noto_sans_sc"
+adaptive = true
+# Optional fixed template; omit to use measured selection.
+# template_id = "split_stack_v1"
+
+[agents.a3]
+api_key = ""
+[agents.a3.backend]
+kind = "sdxl"
+model_dir = ""
+revision = "462165984030d82259a11f4367a4eed129e94a7b"
+steps = 30
+guidance_scale = 6.0
+cpu_offload = false
+# For a cloud backend, replace this table with the native Images JSON fields:
+# kind="cloud_api", provider, model, endpoint, api_key_env="POSTER_IMAGE_API_KEY",
+# sizes=[[1024,1024]], parameters={}. The actual key stays in agents.a3.api_key.
+
+[agents.a4]
+api_key = ""
+max_retries = 0
+request_timeout = 30
+total_timeout = 90
+[agents.a4.provider]
+schema_version = 1
+profile = "compatible"
+base_url = "https://YOUR-API-HOST/v1"
+model = "YOUR-VISION-MODEL-ID"
+api_key_env = "A4_API_KEY"
+response_format = "prompt_json"
+thinking_mode = "omit"
+max_output_tokens = 1600
+timeout_seconds = 30
+
+[fonts.noto_sans_sc.400]
+path = "../resources/fonts/NotoSansCJKsc-Regular.otf"
+index = 0
+[fonts.noto_sans_sc.700]
+path = "../resources/fonts/NotoSansCJKsc-Bold.otf"
+index = 0

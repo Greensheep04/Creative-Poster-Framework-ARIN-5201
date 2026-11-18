@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import re
+from pydantic import SecretStr
 
 import httpx
 
@@ -128,23 +129,24 @@ def provider_error_detail(response: httpx.Response, token: str) -> str:
 
 async def call_hugging_face(
     provider: str, model: str, request_data: dict, parameters: dict,
+    *, api_key: str | None = None, endpoint: str = HF_CHAT_URL, timeout_seconds: float = 120.0,
 ) -> str:
     """Make one request; the token stays outside the framework's logged data."""
-    token = os.environ.get("HF_TOKEN", "").strip()
+    token = (api_key if api_key is not None else os.environ.get("HF_TOKEN", "")).strip()
     if not token:
         raise RuntimeError(
             "HF_TOKEN is not set. Add it to your PyCharm run configuration's "
             "environment variables before running the creative director."
         )
     try:
-        async with httpx.AsyncClient(timeout=120.0) as client:
+        async with httpx.AsyncClient(timeout=timeout_seconds) as client:
             response = await client.post(
-                HF_CHAT_URL,
+                endpoint,
                 headers={"Authorization": f"Bearer {token}"},
                 json={"model": model, **request_data, **parameters},
             )
     except httpx.TimeoutException:
-        raise RuntimeError("Hugging Face request timed out after 120 seconds.") from None
+        raise RuntimeError(f"Hugging Face request timed out after {timeout_seconds:g} seconds.") from None
     except httpx.RequestError:
         raise RuntimeError("Could not reach Hugging Face. Check your network connection.") from None
 
@@ -215,8 +217,13 @@ def _revision_data(context: AgentContext) -> dict[str, object]:
 
 
 class CreativeDirectorAgent(Agent):
-    def __init__(self, model: str | None = None):
+    def __init__(self, model: str | None = None, *, api_key: str | None = None,
+                 endpoint: str = HF_CHAT_URL, timeout_seconds: float = 120.0,
+                 max_tokens: int = 2048, temperature: float = 0.7):
         self.model = model or os.environ.get("HF_MODEL", "").strip() or DEFAULT_HF_MODEL
+        self._api_key = SecretStr(api_key) if api_key is not None else None
+        self.endpoint, self.timeout_seconds = endpoint, timeout_seconds
+        self.max_tokens, self.temperature = max_tokens, temperature
 
     async def run(self, inputs: AgentInput, context: AgentContext) -> AgentOutput:
         if inputs.content_format != WORKFLOW_REQUEST_FORMAT:
@@ -237,6 +244,12 @@ class CreativeDirectorAgent(Agent):
             if isinstance(request_content, str)
             else json.dumps(request_content, ensure_ascii=False, indent=2)
         )
+        invoke = call_hugging_face
+        if self._api_key is not None or self.endpoint != HF_CHAT_URL or self.timeout_seconds != 120:
+            async def invoke(provider, model, request_data, parameters):
+                return await call_hugging_face(provider, model, request_data, parameters,
+                    api_key=self._api_key.get_secret_value() if self._api_key is not None else None,
+                    endpoint=self.endpoint, timeout_seconds=self.timeout_seconds)
         model_text = await context.call_model(
             provider="huggingface",
             model=self.model,
@@ -245,10 +258,10 @@ class CreativeDirectorAgent(Agent):
                 {"role": "user", "content": text},
             ]},
             parameters={
-                "max_tokens": 2048,
-                "temperature": 0.7,
+                "max_tokens": self.max_tokens,
+                "temperature": self.temperature,
             },
-            invoke=call_hugging_face,
+            invoke=invoke,
         )
         try:
             content = json.loads(model_text)

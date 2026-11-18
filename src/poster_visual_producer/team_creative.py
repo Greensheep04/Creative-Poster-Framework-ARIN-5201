@@ -80,9 +80,16 @@ class TeamCreativeDirector:
         return AgentOutput(content=brief, content_format=BRIEF_FORMAT, artifacts=(*output.artifacts, source))
 
 
-def creative_registration(*, offline=False, model=None):
+def creative_registration(*, offline=False, model=None, options=None):
     original = a1_registration(offline=offline, model=model)
+    def factory(config):
+        if options is not None and not offline:
+            from creative.creative_director import CreativeDirectorAgent
+            delegate = CreativeDirectorAgent(model=config["model"], **options)
+        else:
+            delegate = original.instance_factory(config)
+        return TeamCreativeDirector(delegate)
     return AgentRegistration(role=original.role,
-        instance_factory=lambda config: TeamCreativeDirector(original.instance_factory(config)),
+        instance_factory=factory,
         input_formats=original.input_formats, output_formats=frozenset({BRIEF_FORMAT}),
         output_validator=lambda content: CreativeBrief.model_validate(content), config=original.config)

@@ -1,5 +1,6 @@
 .gitignore
 README.md
+config/project.example.toml
 docs/a3-upstream-integration.md
 docs/api.md
 docs/backend-setup.md
@@ -22,6 +23,8 @@ docs/superpowers/plans/2026-11-08-poster-quality.md
 docs/superpowers/specs/2026-10-12-a3-portable-qc-design.md
 docs/team-integration-verification.md
 docs/team-integration.md
+docs/unified-configuration-verification.md
+docs/unified-configuration.md
 docs/visual-producer-portable-progress.md
 docs/visual-producer-portable-review.md
 docs/visual-producer-review.md
@@ -154,6 +157,7 @@ src/poster_framework/layout_spec.py
 src/poster_framework/layout_templates.py
 src/poster_framework/layout_tools.py
 src/poster_framework/memory.py
+src/poster_framework/project_config.py
 src/poster_framework/quality_layout.py
 src/poster_framework/quality_planner.py
 src/poster_framework/registration.py
@@ -214,6 +218,8 @@ tests/test_f4_fake_model.py
 tests/test_f4_single_agent.py
 tests/test_f5_reference_output.py
 tests/test_f5_revision_examples.py
+tests/test_project_config.py
+tests/test_unified_credentials.py
 tests/visual/__init__.py
 tests/visual/conftest.py
 tests/visual/helpers.py
@@ -250,5 +256,6 @@ tests/visual/test_revision_sequences.py
 tests/visual/test_setup_cli.py
 tests/visual/test_team_creative.py
 tests/visual/test_team_workflow.py
+tests/visual/test_unified_workflow.py
 tests/visual/test_upstream_integration.py
 uv.lock

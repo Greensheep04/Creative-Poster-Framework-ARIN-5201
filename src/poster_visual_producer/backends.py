@@ -187,13 +187,13 @@ class LocalSDXLGenerator:
             )
 
 
-def create_generator(config: dict):
+def create_generator(config: dict, *, api_key=None):
     """Config comes from the application/user, never from model output."""
     config = dict(config)
     kind = config.pop("kind", None)
     if kind == "cloud_api":
         from .cloud_backend import CloudAPIConfig, CloudImageGenerator
-        return CloudImageGenerator(CloudAPIConfig.model_validate(config))
+        return CloudImageGenerator(CloudAPIConfig.model_validate(config), api_key=api_key)
     if kind == "qwen_image":
         from .qwen_backend import QwenImageConfig, LocalQwenImageGenerator
         raw = str(config.get("model_dir", ""))

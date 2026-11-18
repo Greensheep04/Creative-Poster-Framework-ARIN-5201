@@ -1,5 +1,7 @@
 # 本地四角色集成与运行
 
+新增：推荐使用[统一本地 TOML 配置](unified-configuration.md)，原有命令继续兼容。
+
 本分支集成完成的 A1/A2/A3/A4，统一入口为 `python -m examples.team_workflow`。当前阶段只执行离线验证；不使用真实密钥、不调用服务、不推送远程。
 
 ## 环境
