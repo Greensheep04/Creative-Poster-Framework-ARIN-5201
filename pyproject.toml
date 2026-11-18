@@ -8,6 +8,7 @@ version = "0.1.0"
 description = "Typed agent interfaces and format adapters for poster workflows"
 requires-python = ">=3.11,<3.12"
 dependencies = [
+    "httpx>=0.28,<0.29",
     "langgraph>=1.0,<2",
     "pydantic>=2,<3",
     "pillow>=10,<13",
@@ -36,7 +37,7 @@ torch = [{ index = "pytorch-cu128", marker = "sys_platform == 'win32'" }]
 dev = ["pytest>=8,<9"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/poster_framework", "src/poster_visual_producer", "src/poster_critic"]
+packages = ["src/poster_framework", "src/poster_visual_producer", "src/poster_critic", "src/creative"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -45,3 +46,5 @@ addopts = "-ra"
 [tool.hatch.build.targets.wheel.force-include]
 "resources/fonts/manifest.json" = "poster_visual_producer/resources/fonts/manifest.json"
 "resources/fonts/LICENSE" = "poster_visual_producer/resources/fonts/LICENSE"
+
+"examples/creative-director-samples/prompts.md" = "creative/resources/prompts.md"

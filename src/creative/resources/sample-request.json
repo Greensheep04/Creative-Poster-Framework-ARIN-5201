@@ -1,0 +1,7 @@
+{
+  "keywords": ["green tea", "caffeine-free"],
+  "constraints": {
+    "tone": "calm",
+    "palette": ["forest green", "cream"]
+  }
+}
