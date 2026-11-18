@@ -25,6 +25,10 @@ flowchart LR
 
 A3 支持用户自行选择 SDXL 本地、Qwen-Image 本地和云端 Images JSON API。共同链路包含素材复用、Spec 精确渲染、可审核候选、状态证据和授权局部返工。A1/A2 代码与接口保持原样；新版 QC 的 repair_hint 经过外部确认后才执行，未获授权的 fail/unknown 停在 needs_review。
 
+**百炼免费额度已实测：**见 [百炼开通、Key 配置与单张生图](docs/bailian-cloud-quickstart.md)，使用自己的账号和业务空间；无需下载 SDXL。
+
+**队友使用云端、跳过 SDXL 下载：**见 [云端配置与运行步骤](docs/backend-setup.md#云端-images-json合并后的队友操作步骤)，包含基础安装、API 配置、单张验证和正式 A2/总流程接入。
+
 首次配置见 [安装与后端指南](docs/backend-setup.md)，A4 成员接入见 [QC 交接与返工指南](docs/qc-handoff.md)。云端基础安装无需 GPU 依赖；本地模型按需安装，不自动下载全部权重。
 
 ```bash

@@ -3,6 +3,7 @@ README.md
 docs/a3-upstream-integration.md
 docs/api.md
 docs/backend-setup.md
+docs/bailian-cloud-quickstart.md
 docs/contributor-guide.md
 docs/design-baseline/2026-10-12-QC接口文档.md
 docs/local-gpu-progress.md
@@ -39,6 +40,7 @@ examples/single_role.py
 examples/tool_catalog.py
 examples/visual/acceptance_report.py
 examples/visual/backend-api.example.json
+examples/visual/backend-bailian.example.json
 examples/visual/backend-cloud.example.json
 examples/visual/backend-qwen.example.json
 examples/visual/backend-sdxl.json

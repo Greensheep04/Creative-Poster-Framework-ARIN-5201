@@ -1,0 +1,15 @@
+{
+  "kind": "cloud_api",
+  "provider": "aliyun-bailian",
+  "model": "qwen-image-2.1-turbo",
+  "endpoint": "https://YOUR_WORKSPACE_ID.cn-beijing.maas.aliyuncs.com/compatible-mode/v1/images/generations",
+  "api_key_env": "DASHSCOPE_API_KEY",
+  "sizes": [
+    [
+      1024,
+      1024
+    ]
+  ],
+  "timeout_seconds": 600,
+  "parameters": {}
+}
