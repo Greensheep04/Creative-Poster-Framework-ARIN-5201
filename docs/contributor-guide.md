@@ -2,6 +2,138 @@
 
 本指南面向负责一个海报角色或业务工具的组员。每个成员实现自己的 Agent、模型连接和业务校验器，再由工作流注册表连接角色。
 
+## Layout Planner（A2）
+
+`poster_framework.layout_planner` 把 `poster.creative-brief@0.1.0` 转成 `poster.spec@0.1.0`。字段与 `docs/schemas/PosterSpec.json`（A3 分支）一致，因此 A3 不需要为接收规格声明 `ContentAdapter`。旧的 `poster.creative-brief@1` 仍被接受。
+
+```python
+from poster_framework import AgentSet, PosterWorkflow, ToolRegistry
+from poster_framework.layout_planner import registration, register_layout_tools
+
+tools = register_layout_tools(ToolRegistry())
+registrations = [
+    creative_director_registration,
+    registration(),
+    visual_producer_registration,
+    quality_critic_registration,
+]
+workflow = PosterWorkflow(AgentSet(registrations), root="runs", tool_registry=tools)
+```
+
+### 规划的确定性步骤
+
+1. **读文案，不改文案。** `copy.title`（或 `copy.headline`）必需，`copy.subtitle` 为空时视为没有副标题；`elements[].text` 必须与 brief 文案逐字一致。
+2. **校验原始关键词。** brief 若带 `keywords` / `keyword_texts`，其文本必须与 `original_request.keywords` 相同（顺序可不同，ID 始终来自原始请求）。
+3. **选模板。** 默认 `framed_hero_v1`；可用 brief 的 `template_id`、请求约束 `template_id` 或 `LayoutPlannerAgent(template_id=...)` 固定。模板只提供受控槽位，不提供任意几何。
+4. **翻译配色。** 从 brief 的 `palette.colors` / `palette_direction` 等字段提取 `#RRGGBB`，生成 `design_tokens.palette`；浅色模板取最亮的候选，深色模板取最暗的候选，文字颜色优先使用调色板中对比度 ≥ 4.5 的颜色，否则回退黑白。
+5. **真实测量。** 每个文字槽位从模板最大字号向下试到最小字号，用 Pillow 实际渲染 ink bounds，同时检查宽、高和行数预算。放不下就抛 `TextOverflowError`，绝不截断、绝不悄悄缩到最小字号以下。
+6. **绑定关键词。** 每个原始关键词至少绑定 `hero`；关键词文本出现在标题/副标题时追加对应元素，并写入 `layout_evidence`（优先使用 brief 的 `keyword_bindings` 解释）。
+7. **自检后发布。** 依次执行 `validate_poster_spec()`、`check_layout_geometry()`、`check_planned_keyword_coverage()`；任一阻塞项都会让本阶段失败并返回明确错误码，而不是产出一个“看起来能通过”的规格。
+
+### 工具
+
+`register_layout_tools(registry)` 注册以下工具，只授予需要的角色：
+
+| 工具 | 可用角色 | 作用 |
+|---|---|---|
+| `layout.list_templates` | layout_planner | 列出模板槽位、字号范围、行数上限与有意叠放 |
+| `layout.get_font_registry` | layout_planner, visual_producer | 返回真实字体文件、字重、哈希与搜索路径 |
+| `layout.measure_text_block` | layout_planner, visual_producer | 真实测量换行、ink bounds 与是否放得下 |
+| `layout.check_geometry` | layout_planner | 越界、溢出、缺字、安全边距与未声明重叠 |
+| `layout.check_keyword_coverage` | layout_planner | 每个原始关键词是否已安排到已知元素 |
+| `layout.validate_spec` | layout_planner, visual_producer | 结构化校验，不抛异常、返回 `ok`/`error` |
+
+`layout.check_keyword_coverage` 通过 `context.original_request` 取得关键词，因此必须由 Agent 通过 `context.tools.call()` 调用，不能凭空传入别的请求。
+
+### 字体与环境
+
+默认查找 Windows（微软雅黑、黑体、宋体）、Linux（Noto CJK、文泉驿）和 macOS（PingFang）的 CJK 字体。需要固定字体时使用环境变量：
+
+- `POSTER_FONT_REGISTRY`：JSON 文件，显式映射 family key → 字重 → 字体文件：
+  ```json
+  {"families": {"noto_sans_sc": {"400": {"path": "fonts/Regular.ttf", "index": 0}, "700": "fonts/Bold.ttf"}}}
+  ```
+- `POSTER_FONT_DIR`：目录，按 `noto-sans-sc-bold.ttf` 这类“族名-字重”文件名注册。
+- `POSTER_FONT_FAMILY`：A2 默认请求的 family key（默认 `noto_sans_sc`）；也可用 `LayoutPlannerAgent(font_family_key=...)` 或 `plan_poster_spec(..., font_family_key=...)` 显式指定。
+
+字体文件或字重不存在时抛 `MissingFontError`，不会用别的字重冒充。字形覆盖使用渲染对比（与 U+10FFFD 的 `.notdef` 掩码相同即视为缺字），缺字会以 `MISSING_GLYPH` 报告；这是启发式判断，字幕/生僻字仍应人工抽查。
+
+### 返工：`revise_layout`
+
+框架把 `metadata.revision_action` 与 `revision_target` 传给 A2。A2 从运行记忆中按 `revision_target` 找回上一版 spec，然后：
+
+- **有 `brief["layout_patch"]`**：按白名单字段（`box.x/y/width/height`、`font_size_px`、`line_height_px`、`max_lines`、`align`、`color`、`z`）修改元素，拒绝改 `text`/`copy_ref`，拒绝 `old_value` 不匹配的过期补丁，重新测量受影响文字并递增 `spec_version`。
+- **没有补丁且模板未被固定**：轮换到下一个模板重新规划，文案保持不变。
+- **没有补丁但模板被固定**：直接报错，避免“同一版式原样重发却假装修好了”。
+
+```json
+{
+  "changes": [
+    {"target_type": "element", "target_id": "title", "field": "box.y", "old_value": 64, "new_value": 84}
+  ],
+  "preserve_element_ids": ["hero", "subtitle"],
+  "preserve_copy": true
+}
+```
+
+### 直接调用
+
+不经工作流时也可以使用纯函数，便于单测和离线调试：
+
+```python
+from poster_framework import OriginalRequest, plan_poster_spec
+
+request = OriginalRequest.from_keywords("demo", ["海洋", "宁静", "蓝色"])
+spec = plan_poster_spec(
+    {"copy": {"title": "静海之蓝"}, "palette": {"colors": ["#0B2A4C", "#A0D8E8"]}},
+    request=request,
+    template_id="framed_hero_v1",
+)
+```
+
+独立示例：`uv run python examples/layout_planner.py --root .scratch/layout-planner`（加 `--template`、`--title`、`--no-subtitle`）。
+
+### A2 本地测试
+
+A2 的测试集中在 `tests/layout/`，不依赖其他角色的 Fake 实现：
+
+```bash
+uv run pytest tests/layout -q
+```
+
+| 文件 | 覆盖内容 |
+|---|---|
+| `test_layout_contract.py` | 必填字段、坐标/颜色/引用校验；与 A3 的 `PosterSpec.json` 做约束级比对 |
+| `test_layout_fonts.py` | 字体解析、缺失字重报错、CJK/拉丁换行、溢出判定、缺字检测、对比度 |
+| `test_layout_templates.py` | 三模板槽位在画布与安全边距内、叠放声明合法、字号自适应、超长文案报错 |
+| `test_layout_checks.py` | 越界、真实溢出、安全边距、未声明重叠、关键词覆盖（缺失/未验证/未知 ID） |
+| `test_layout_planner.py` | Agent 端到端、模板固定、配色、关键词绑定、`revise_layout` 补丁与版本递增 |
+| `test_layout_tools.py` | 工具注册、角色权限、参数严格校验、工具与库函数结果一致 |
+| `test_layout_workflow.py` | 真实 `PosterWorkflow` 四角色串联，A4 发起 `revise_layout` 后重新规划并放行 |
+
+常用筛选：
+
+```bash
+uv run pytest tests/layout/test_layout_checks.py -q
+uv run pytest tests/layout -q -k "overflow or margin"
+uv run pytest tests/layout -q -x          # 第一个失败就停
+```
+
+与 A3 的契约比对默认在找不到共享 schema 时跳过。合并前可指定 A3 分支的文件：
+
+```powershell
+New-Item -ItemType Directory -Force .scratch | Out-Null
+git show origin/feature/visual-producer:docs/schemas/PosterSpec.json |
+  Set-Content -Encoding UTF8 .scratch/PosterSpec.json
+uv run pytest tests/layout/test_layout_contract.py -q
+# 或直接用环境变量指向已有文件（不涉及编码问题）
+$env:POSTER_SPEC_SCHEMA = "C:\path\to\PosterSpec.json"
+```
+
+> `-Encoding UTF8` 在 Windows PowerShell 5.1 与 PowerShell 7 都可用（5.1 会写 BOM）；测试按 `utf-8-sig` 读取，因此有无 BOM 都能通过。
+
+> 若在非 ASCII 路径（例如中文用户名）下出现 `ModuleNotFoundError: poster_framework`，这是 Python 3.11 以本地编码读取 editable `.pth` 的已知限制。A2 测试与示例已自带 `src` 引导；其余测试可在运行前设 `PYTHONPATH=src`。
+
 ## 1. 定义内容格式与 Agent
 
 为输入和输出声明明确格式名称及业务版本。`AgentInput` 与 `AgentOutput` 的 `content` 使用 JSON 数据；格式版本代表业务字段约定，框架会另行记录公共接口版本、文件修订号和哈希。
@@ -174,3 +306,4 @@ uv run python examples/revision_actions.py --action revise_layout --root .scratc
 ```bash
 uv run python examples/four_role_walkthrough.py --root .scratch/four-role-walkthrough
 ```
+

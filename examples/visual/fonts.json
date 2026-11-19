@@ -1,0 +1,10 @@
+{
+  "noto_sans_sc": {
+    "400": {
+      "path": "resources/fonts/NotoSansCJKsc-Regular.otf"
+    },
+    "700": {
+      "path": "resources/fonts/NotoSansCJKsc-Bold.otf"
+    }
+  }
+}

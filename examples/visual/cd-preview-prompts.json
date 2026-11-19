@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "conversion_mode": "authored_visual_prompts_from_cd",
+  "source_commit": "c1aaedefbe4d3a376990007f4fd4ad913793d4ed",
+  "source_fields": ["concept", "keyword_mapping", "visual_direction", "style", "must_include", "must_avoid"],
+  "cases": [
+    {
+      "id": "ocean-qwen3-4b",
+      "theme": "Ocean / Plastic / Hope",
+      "model": "Qwen3-4B-Instruct-2507",
+      "source": "ocean-plastic-hope/qwen3-4b-instruct-2507.json",
+      "source_sha256": "e3e3469e87a258353f2b25aa8a8323e6494f23a5fc8a40ba8d99338e43a1ccb7",
+      "prompt": "Watercolor illustration, subtle digital layering. A gentle ocean wave lifts one translucent plastic bottle transforming into a flying bird. Serene blue horizon, soft sunlight, upward motion, optimistic atmosphere. Sky blue, turquoise, white and pastel orange palette. Portrait composition.",
+      "negative_prompt": "text, letters, logos, brands, statistics, dark tones, chaos, destruction, fear, watermark",
+      "conversion_notes": ["Condenses concept and keyword mappings into one bottle-to-bird metaphor; headline and supporting copy remain metadata."]
+    },
+    {
+      "id": "ocean-qwen3-1_7b",
+      "theme": "Ocean / Plastic / Hope",
+      "model": "Qwen3-1.7B",
+      "source": "ocean-plastic-hope/qwen3-1.7b.json",
+      "source_sha256": "fc29ecc1767c1cfee57c3aa6e540927ed066badf289470915a11357c3ae06212",
+      "prompt": "Digital illustration. Shimmering ocean waves, sunrise on the horizon. A swirling vortex of translucent plastic bottles rises toward sunlight, a glowing heart-shaped light illuminates the water. Dynamic hopeful transformation, optimistic mood. Deep blue, emerald green, golden light. Portrait composition.",
+      "negative_prompt": "text, letters, logos, brands, statistics, watermark",
+      "conversion_notes": ["Keeps both the bottle vortex and heart-shaped light from CD; does not repair its multiple-metaphor tension.", "Interprets CD medium 'digital' as digital illustration for this preview."]
+    },
+    {
+      "id": "ocean-qwen3_5-4b",
+      "theme": "Ocean / Plastic / Hope",
+      "model": "Qwen3.5-4B",
+      "source": "ocean-plastic-hope/qwen3.5-4b.json",
+      "source_sha256": "bf1f6ede9dd9af44848ccac4d9be73e603806f82a0e65b76dc87508b44cf434e",
+      "prompt": "Digital illustration. Underwater plastic bottle and small fragments transform into a blooming coral reef, golden light rising from its center. Deep blue water, coral orange, gold, white. Optimistic, bright, clean marine restoration, natural imagery and light effects. Portrait composition.",
+      "negative_prompt": "text, letters, logos, brands, statistics, grainy textures, realistic trash, dark shadows, watermark",
+      "conversion_notes": ["Mood and medium arrays are retained in original CD metadata.", "Uses the coral metaphor in visual_direction and keyword_mapping; supporting copy's stars are not added as a second visual metaphor."]
+    },
+    {
+      "id": "tradition-qwen3-4b",
+      "theme": "Tradition / Technology / Harmony",
+      "model": "Qwen3-4B-Instruct-2507",
+      "source": "tradition-technology-harmony/qwen3-4b-instruct-2507.json",
+      "source_sha256": "c4395809e64d37a8fc4e92e21657a5d27fe8f023e410756c76832732c352113d",
+      "prompt": "Digital illustration with hand-drawn texture. One handcrafted ancient clay pot, organic hand-shaped details, glowing digital data streams follow its curved surface like flowing water. Tradition and technology blend harmoniously in a single centered object. Symmetrical portrait composition, calm, balanced. Terracotta and soft silver palette.",
+      "negative_prompt": "text, letters, logos, brands, statistics, split-screen, conflict, machinery, chaos, watermark",
+      "conversion_notes": ["Preserves the single pot and flowing-data metaphor, two-color direction, and empty supporting copy."]
+    },
+    {
+      "id": "tradition-qwen3-1_7b",
+      "theme": "Tradition / Technology / Harmony",
+      "model": "Qwen3-1.7B",
+      "source": "tradition-technology-harmony/qwen3-1.7b.json",
+      "source_sha256": "f4e7622900be1e34b3265dd534cacfe03e1f2179e4d96e6dee1971b117286005",
+      "prompt": "Digital illustration. A central bridge joins a weathered wooden arch with aged carvings and a sleek modern structure with glowing circuitry. A flowing ribbon of light connects them, harmonious serene atmosphere, unified portrait composition. Deep blue and warm amber palette.",
+      "negative_prompt": "text, letters, logos, brands, statistics, split-screen, watermark",
+      "conversion_notes": ["Missing supporting_copy stays missing in CD metadata; no invented copy.", "Retains CD's two structures while excluding split-screen as requested; this unresolved design tension is recorded.", "Interprets CD medium 'digital' as digital illustration for this preview."]
+    },
+    {
+      "id": "tradition-qwen3_5-4b",
+      "theme": "Tradition / Technology / Harmony",
+      "model": "Qwen3.5-4B",
+      "source": "tradition-technology-harmony/qwen3.5-4b.json",
+      "source_sha256": "d30d7ee5dbb066d22a569c2d31c5cbfe8ec46fb9ecfcdf87d0738800d25e190d",
+      "prompt": "Digital vector illustration. A single abstract scroll-shaped vehicle winds into a fiber-optic strand. Intricate traditional textile patterns merge with glowing circuit lines, smooth gradients dissolve into the background. Unified borderless portrait composition, serene, futuristic. Two-color palette of charcoal ink and neon blue.",
+      "negative_prompt": "text, letters, foreign text, logos, split-screen, divided composition, extra colors, watermark",
+      "conversion_notes": ["Combines the scroll-shaped vehicle in visual_direction with textile and circuit keyword mappings; keeps the source's abstract ambiguity.", "Headline word limit and supporting-copy instructions are metadata constraints, not literal visual subjects."]
+    }
+  ]
+}

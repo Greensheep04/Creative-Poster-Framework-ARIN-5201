@@ -1,0 +1,16 @@
+[
+  {
+    "code": "HELD_PROPS_FOREGROUND",
+    "source_sha256": "362245e104981d06b21911848fe304ec48096f9290b3a19e9620c6b2043341e3",
+    "source_file": "examples/creative-director-samples/Qwen3-4B-Instruct-2507/time-consumption-ocean/human-story.json",
+    "authorization_id": "user-phase2-approved-2026-11-08",
+    "basis": "Explicit independent A1 intent clarification in Phase 2 authorization; original source bytes unchanged"
+  },
+  {
+    "code": "REAL_UNBRANDED_WASTE",
+    "source_sha256": "7aebe3b0891748aad1b2bc311c1ced72e7070ce9ce3ac3c0d0820652b2b87009",
+    "source_file": "examples/creative-director-samples/Qwen3-4B-Instruct-2507/time-consumption-ocean/visual-metaphor.json",
+    "authorization_id": "user-phase2-approved-2026-11-08",
+    "basis": "Explicit independent A1 intent clarification in Phase 2 authorization; original source bytes unchanged"
+  }
+]

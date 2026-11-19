@@ -1,0 +1,98 @@
+{
+  "schema_version": "0.1.0",
+  "run_id": "run_demo_001",
+  "brief_version": 1,
+  "request_ref": "request.json",
+  "intent": {
+    "poster_type": "concept_poster",
+    "core_message": "通过平静海面和蓝色视觉表达宁静。",
+    "concept": "以低波动海面、开阔天空和留白形成安静的观看体验。",
+    "mood": [
+      "宁静",
+      "开阔"
+    ],
+    "visual_style": "简洁、摄影感、低信息密度",
+    "palette_direction": [
+      "深蓝",
+      "浅蓝",
+      "偏白中性色"
+    ]
+  },
+  "keyword_bindings": [
+    {
+      "keyword_id": "k1",
+      "interpretation": "可识别的海面与海平线",
+      "visual_evidence": [
+        "海面",
+        "海平线"
+      ],
+      "text_alone_sufficient": false
+    },
+    {
+      "keyword_id": "k2",
+      "interpretation": "低波动、低拥挤度和舒缓视觉节奏",
+      "visual_evidence": [
+        "平静海面",
+        "留白",
+        "无密集人群"
+      ],
+      "text_alone_sufficient": false
+    },
+    {
+      "keyword_id": "k3",
+      "interpretation": "以蓝色系作为主要视觉色彩",
+      "visual_evidence": [
+        "蓝色海面与天空",
+        "协调的蓝色系配色"
+      ],
+      "text_alone_sufficient": false
+    }
+  ],
+  "copy": {
+    "title": {
+      "text": "静海之蓝",
+      "origin": "generated_creative_copy",
+      "must_preserve": true
+    },
+    "subtitle": {
+      "text": "留一点宁静给自己",
+      "origin": "generated_creative_copy",
+      "must_preserve": true
+    }
+  },
+  "visual_requirements": {
+    "main_subject": "平静的海面与开阔天空",
+    "required_relations": [
+      "海面在天空下方",
+      "海平线连续自然"
+    ],
+    "avoid": [
+      "暴风雨",
+      "密集人群",
+      "未经用户提供的品牌标识",
+      "背景中的可读文字"
+    ]
+  },
+  "layout_intent": {
+    "visual_priority": [
+      "hero_image",
+      "title",
+      "subtitle"
+    ],
+    "density": "low"
+  },
+  "assumptions": [
+    {
+      "field": "intent.poster_type",
+      "value": "concept_poster",
+      "reason": "用户未指定商业活动或产品。"
+    },
+    {
+      "field": "copy",
+      "value": "允许生成创意标题与副标题",
+      "reason": "未提供固定文案；不添加事实性活动信息。"
+    }
+  ],
+  "reference_notes": [],
+  "open_issues": []
+}

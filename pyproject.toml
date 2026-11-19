@@ -8,17 +8,43 @@ version = "0.1.0"
 description = "Typed agent interfaces and format adapters for poster workflows"
 requires-python = ">=3.11,<3.12"
 dependencies = [
+    "httpx>=0.28,<0.29",
     "langgraph>=1.0,<2",
     "pydantic>=2,<3",
     "pillow>=10,<13",
+    "fonttools>=4.55,<5",
 ]
+
+[project.optional-dependencies]
+local-gpu = [
+    "torch==2.8.0",
+    "diffusers==0.35.1",
+    "transformers==4.55.4",
+    "accelerate==1.10.1",
+    "huggingface-hub==0.36.0",
+    "safetensors==0.6.2",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu128", marker = "sys_platform == 'win32'" }]
 
 [dependency-groups]
 dev = ["pytest>=8,<9"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/poster_framework"]
+packages = ["src/poster_framework", "src/poster_visual_producer", "src/poster_critic", "src/creative"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
+
+[tool.hatch.build.targets.wheel.force-include]
+"resources/fonts/manifest.json" = "poster_visual_producer/resources/fonts/manifest.json"
+"resources/fonts/LICENSE" = "poster_visual_producer/resources/fonts/LICENSE"
+
+"examples/creative-director-samples/prompts.md" = "creative/resources/prompts.md"

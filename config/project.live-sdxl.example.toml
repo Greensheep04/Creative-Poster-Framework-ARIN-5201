@@ -1,0 +1,63 @@
+# Copy to project.local.toml and enter your own keys and SDXL model path.
+schema_version = 1
+
+[runtime]
+mode = "offline"
+auto_repair = true
+output_root = "../runs/unified"
+keywords = ["深海", "鲸鱼", "孤独"]
+seed = 42
+
+[budget]
+max_revision_rounds = 1
+max_image_operations = 2
+max_critic_vision_calls = 2
+max_model_calls = 6
+max_tool_calls = 100
+
+[agents.a1]
+model = "Qwen/Qwen3-4B-Instruct-2507"
+endpoint = "https://router.huggingface.co/featherless-ai/v1/chat/completions"
+api_key = ""
+max_tokens = 2048
+temperature = 0.7
+timeout_seconds = 120
+
+[agents.a2]
+font_family_key = "noto_sans_sc"
+adaptive = true
+composition_aware = true
+
+[agents.a3]
+api_key = ""
+[agents.a3.backend]
+kind = "sdxl"
+model_dir = ""
+revision = "462165984030d82259a11f4367a4eed129e94a7b"
+steps = 30
+guidance_scale = 6.0
+cpu_offload = false
+
+[agents.a4]
+api_key = ""
+max_retries = 0
+request_timeout = 90
+total_timeout = 120
+[agents.a4.provider]
+schema_version = 1
+profile = "minimax"
+base_url = "https://api.minimax.cn/v1"
+model = "MiniMax-M3.1-Flash-Preview"
+api_key_env = "MINIMAX_API_KEY"
+response_format = "prompt_json"
+thinking_mode = "adaptive"
+reasoning_effort = "low"
+max_output_tokens = 4096
+timeout_seconds = 90
+
+[fonts.noto_sans_sc.400]
+path = "../resources/fonts/NotoSansCJKsc-Regular.otf"
+index = 0
+[fonts.noto_sans_sc.700]
+path = "../resources/fonts/NotoSansCJKsc-Bold.otf"
+index = 0

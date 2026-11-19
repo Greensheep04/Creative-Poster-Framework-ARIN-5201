@@ -14,3 +14,12 @@ build/
 .env.*
 !.env.example
 .DS_Store
+
+resources/fonts/*.otf
+resources/fonts/*.ttf
+resources/fonts/*.ttc
+.superpowers/
+creative-poster-framework.zip
+
+# Private unified runtime configuration (may contain API keys).
+/config/*.local.toml

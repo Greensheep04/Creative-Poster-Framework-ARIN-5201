@@ -23,6 +23,7 @@ from .errors import (
     FileSecurityError,
     InterfaceVersionCompatibilityError,
 )
+from .layout_errors import TextOverflowError
 from .generation import ArtifactGenerationRecord
 from .registration import AgentSet, AgentSetSnapshot, AgentRegistrationSnapshot
 from .runtime import ModelCallEvent, RunSession
@@ -45,6 +46,7 @@ from .types import (
     OriginalRequest,
     ReviewDecision,
     ReviewRecord,
+    RepairAuthorization,
     RevisionAction,
     RunBudget,
     RunUsage,
@@ -117,6 +119,7 @@ class _WorkflowState(TypedDict, total=False):
     previous_asset_generation_records: list[ArtifactGenerationRecord | None]
     revision_before_result: JSONValue
     revision_validator: RevisionBusinessValidator | None
+    repair_authorization: RepairAuthorization | None
     revision_action: RevisionAction
     revision_target: VersionDependency
     revision_rounds: int
@@ -138,6 +141,7 @@ class PosterWorkflow:
         budget: RunBudget | None = None,
         configuration: Mapping[str, object] | None = None,
         revision_validator: RevisionBusinessValidator | None = None,
+        repair_authorizer: Callable | None = None,
     ) -> None:
         if not isinstance(agent_set, AgentSet):
             raise TypeError("agent_set must be an AgentSet")
@@ -149,6 +153,9 @@ class PosterWorkflow:
             raise TypeError("configuration must be a mapping")
         if revision_validator is not None and not callable(revision_validator):
             raise TypeError("revision_validator must be callable")
+        if repair_authorizer is not None and not callable(repair_authorizer):
+            raise TypeError("repair_authorizer must be callable")
+        self._repair_authorizer = repair_authorizer
         self._agent_set = agent_set
         self._root = Path(root)
         self._tool_registry = tool_registry
@@ -278,8 +285,10 @@ class PosterWorkflow:
         )
         graph.add_conditional_edges(
             "layout_planner",
-            self._continue_after_role,
-            {"continue": "visual_producer", "end": END},
+            lambda state: ("revise" if not state.get("stop") and state.get("next_role") == "creative_director"
+                           and state.get("layout") is None
+                           else self._continue_after_role(state)),
+            {"continue": "visual_producer", "revise": "creative_director", "end": END},
         )
         graph.add_conditional_edges(
             "visual_producer",
@@ -398,6 +407,29 @@ class PosterWorkflow:
         sequence = [*state.get("call_sequence", []), role]
         try:
             agent_result = await agents.run_agent(role, inputs, context)
+        except TextOverflowError as error:
+            if role != AgentRole.layout_planner or not self._configuration.get("directed_repair"):
+                raise
+            visual_overflow = getattr(error, "code", None) == "VISUAL_PROMPT_OVERFLOW"
+            reason = ("Essential image prompt exceeds token capacity: " if visual_overflow else "Approved copy exceeds A2 text capacity: ") + str(error)
+            if state["revision_rounds"] >= session.budget.max_revision_rounds:
+                session.memory.set_unresolved_issues((reason,))
+                return {"call_sequence": sequence, "status": WorkflowStatus.needs_review,
+                        "stop_reason": reason, "stop": True}
+            ref = state["brief"].record_reference
+            target = VersionDependency(artifact_id=ref.artifact_id, revision=ref.revision)
+            details = {"stage": "layout_preflight",
+                       "task": ("Simplify visual_direction.main_subject for the image token budget; preserve approved poster copy exactly."
+                                if visual_overflow else "Shorten approved copy while preserving the concept and mandatory content."),
+                       "preserve_copy": visual_overflow, "measurement_error": str(error)}
+            context.files.write_bytes(context.files.invocation_path("layout-overflow.json"),
+                json.dumps(details).encode(), purpose=ArtifactPurpose.evidence, media_type="application/json")
+            session.memory.add_revision(revision_id="revision-" + uuid4().hex, role=role,
+                changes={"action": "revise_brief", "target": target.model_dump(mode="json"), "details": details},
+                unresolved_issues=(reason,))
+            return {"call_sequence": sequence, "revision_action": RevisionAction.revise_brief,
+                    "revision_target": target, "revision_rounds": state["revision_rounds"]+1,
+                    "next_role": AgentRole.creative_director.value, "stop": False}
         except BudgetExceededError as error:
             return {
                 "call_sequence": sequence,
@@ -476,6 +508,12 @@ class PosterWorkflow:
                     publishing_identity=identity,
                 )
                 update["review"] = output.review
+        if role == AgentRole.visual_producer and self._configuration.get("directed_repair"):
+            previous = state.get("previous_candidate")
+            if previous is not None and previous.sha256 == candidate.sha256:
+                reason = "Repair produced unchanged poster pixels; prior review retained"
+                session.memory.set_unresolved_issues((reason,))
+                update.update(status=WorkflowStatus.needs_review, stop_reason=reason, stop=True)
         self._validate_revision_business(state, update, role)
         return update
 
@@ -602,6 +640,12 @@ class PosterWorkflow:
     ) -> tuple[FileReference, ...]:
         references: list[ArtifactReference] = []
         references.extend(state.get("assets", []))
+        if role in {AgentRole.layout_planner, AgentRole.visual_producer}:
+            for key in (("brief",) if role == AgentRole.layout_planner else ("brief", "layout")):
+                stage = state.get(key)
+                if stage is not None:
+                    references.extend(r for r in stage.output.artifacts
+                                      if r.purpose == ArtifactPurpose.evidence)
         candidate = state.get("candidate")
         if (
             candidate is None
@@ -1053,6 +1097,9 @@ class PosterWorkflow:
             raise AgentIdentityMismatchError(
                 "quality review does not identify the current candidate version"
             )
+        if isinstance(review.details, dict) and review.details.get("qc_contract") == "local-manifest-v1/audit-report-v3":
+            from .coordination import judge_qc_review
+            return await judge_qc_review(self, state, review)
         expected_ids = {item.keyword_id for item in state["request"].keywords}
         actual_ids = {item.keyword_id for item in review.keyword_results}
         if len(review.keyword_results) != len(expected_ids) or actual_ids != expected_ids:
@@ -1096,7 +1143,9 @@ class PosterWorkflow:
         review = state.get("review")
         if status is not None:
             return {"next_role": "end"}
-        if review is None or review.action is None or review.target is None:
+        authorized = state.get("repair_authorization")
+        route = authorized or review
+        if route is None or route.action is None or route.target is None:
             reason = "review did not request a supported revision"
             state["session"].memory.set_unresolved_issues((reason,))
             return {
@@ -1124,10 +1173,10 @@ class PosterWorkflow:
                 "stop": True,
                 "next_role": "end",
             }
-        self._validate_revision_target(state, review.action, review.target)
+        self._validate_revision_target(state, route.action, route.target)
         self._verify_current_files(state)
-        self._record_revision(state, review)
-        return self._begin_revision(state, review, [*signatures, signature])
+        self._record_revision(state, review, authorized)
+        return self._begin_revision(state, route, [*signatures, signature])
 
     @staticmethod
     def _review_signature(review: ReviewRecord) -> str:
@@ -1139,6 +1188,9 @@ class PosterWorkflow:
             ),
             "details": review.details,
         }
+        if isinstance(review.details, dict) and review.details.get("qc_contract") == "local-manifest-v1/audit-report-v3":
+            report = review.details["report"]
+            value["details"] = {key: report[key] for key in ("issues", "uncertainties", "repair_hint")}
         encoded = json.dumps(
             value,
             ensure_ascii=False,
@@ -1196,19 +1248,25 @@ class PosterWorkflow:
             session.file_store.read(candidate)
 
     @staticmethod
-    def _record_revision(state: _WorkflowState, review: ReviewRecord) -> None:
+    def _record_revision(state: _WorkflowState, review: ReviewRecord, authorization: RepairAuthorization | None = None) -> None:
         unresolved = tuple(
             item.keyword_id
             for item in review.keyword_results
             if item.status != KeywordReviewStatus.pass_
         )
+        details = copy.deepcopy(review.details)
+        if authorization is not None:
+            details["authorization"] = authorization.model_dump(mode="json")
+            details["repair_plan"] = {"expected_versions": authorization.expected_versions,
+                "constraints": list(authorization.constraints), "preserve": list(authorization.preserve)}
+        route = authorization or review
         state["session"].memory.add_revision(
             revision_id=f"revision-{uuid4().hex}",
             role=None,
             changes={
-                "action": review.action.value if review.action is not None else None,
-                "target": review.target.model_dump(mode="json") if review.target else None,
-                "details": review.details,
+                "action": route.action.value if route.action is not None else None,
+                "target": route.target.model_dump(mode="json") if route.target else None,
+                "details": details,
                 "candidate_id": review.candidate_id,
                 "reviewer_identity": (
                     review.reviewer_identity.model_dump(mode="json")
@@ -1236,6 +1294,7 @@ class PosterWorkflow:
         updates: dict[str, object] = {
             "revision_action": action,
             "revision_target": target,
+            "repair_authorization": None,
             "previous_candidate": previous_candidate,
             "previous_assets": previous_assets,
             "previous_asset_generation_records": self._generation_records_for_assets(

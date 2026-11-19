@@ -1,0 +1,79 @@
+from __future__ import annotations
+import argparse, asyncio, importlib, json, sys
+from pathlib import Path
+from poster_framework import run_single_agent_from_upstream
+from .fonts import FontRegistry
+from .generators import FixtureImageGenerator
+from .registration import registration
+
+
+async def execute(args):
+    config = json.loads(args.fonts.read_text(encoding="utf-8-sig"))
+    fonts = FontRegistry.from_config(config, args.font_base)
+    if args.fixture:
+        # Only trusted application/user CLI configuration may provide this path.
+        data = args.fixture.read_bytes()
+        generator = FixtureImageGenerator(lambda request: data, model="file-fixture-v1")
+    elif args.backend_config:
+        from .backends import create_generator
+
+        generator = create_generator(
+            json.loads(args.backend_config.read_text(encoding="utf-8-sig"))
+        )
+    else:
+        module, name = args.generator_factory.split(":", 1)
+        generator = getattr(importlib.import_module(module), name)()
+    result = await run_single_agent_from_upstream(
+        registration(generator, fonts, seed=args.seed),
+        args.upstream_record,
+        root=args.root,
+        record_path=args.output_record,
+    )
+    content = result.output.content
+    return {
+        "status": content["status"],
+        "source_mode": content["source_mode"],
+        "poster_ref": content["poster_ref"],
+        "candidate_ref": content["candidate_ref"],
+        "record_path": str(result.record_path),
+        "usage_delta": content["usage_delta"],
+    }
+
+
+def main():
+    if len(sys.argv) > 1 and sys.argv[1] in {"setup", "doctor"}:
+        from .setup_cli import main as setup_main
+        raise SystemExit(setup_main(sys.argv[1:]))
+    parser = argparse.ArgumentParser(
+        description="Run Visual Producer from the Layout Planner export; use setup/doctor subcommands for backend configuration."
+    )
+    parser.add_argument("--upstream-record", type=Path, required=True)
+    parser.add_argument(
+        "--root", type=Path, required=True, help="Same artifact root used by upstream."
+    )
+    parser.add_argument("--output-record", type=Path, required=True)
+    parser.add_argument("--fonts", type=Path, required=True)
+    parser.add_argument("--font-base", type=Path, default=Path.cwd())
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument(
+        "--fixture",
+        type=Path,
+        help="Explicit local engineering fixture, not AI-generated.",
+    )
+    mode.add_argument(
+        "--generator-factory",
+        help="Trusted application module:function returning an SDK-backed generator.",
+    )
+    mode.add_argument(
+        "--backend-config",
+        type=Path,
+        help="Trusted local GPU or external factory JSON configuration.",
+    )
+    parser.add_argument("--seed", type=int, default=None)
+    args = parser.parse_args()
+    result = asyncio.run(execute(args))
+    print(json.dumps(result, ensure_ascii=False, allow_nan=False, indent=2))
+
+
+if __name__ == "__main__":
+    main()

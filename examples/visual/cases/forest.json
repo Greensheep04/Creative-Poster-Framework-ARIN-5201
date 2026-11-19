@@ -1,0 +1,235 @@
+{
+  "name": "forest",
+  "keywords": [
+    "森林",
+    "生命",
+    "绿色"
+  ],
+  "brief": {
+    "schema_version": "0.1.0",
+    "run_id": "run_demo_001",
+    "brief_version": 1,
+    "request_ref": "request.json",
+    "intent": {
+      "poster_type": "concept_poster",
+      "core_message": "绿色森林与新生植物",
+      "concept": "用绿色森林与新生植物表达森林、生命、绿色",
+      "mood": [
+        "宁静",
+        "开阔"
+      ],
+      "visual_style": "简洁摄影感",
+      "palette_direction": [
+        "#F6FAF3",
+        "#244832",
+        "#64875A"
+      ]
+    },
+    "keyword_bindings": [
+      {
+        "keyword_id": "k1",
+        "interpretation": "森林",
+        "visual_evidence": [
+          "森林"
+        ],
+        "text_alone_sufficient": false
+      },
+      {
+        "keyword_id": "k2",
+        "interpretation": "生命",
+        "visual_evidence": [
+          "生命"
+        ],
+        "text_alone_sufficient": false
+      },
+      {
+        "keyword_id": "k3",
+        "interpretation": "绿色",
+        "visual_evidence": [
+          "绿色"
+        ],
+        "text_alone_sufficient": false
+      }
+    ],
+    "copy": {
+      "title": {
+        "text": "向绿而生",
+        "origin": "generated_creative_copy",
+        "must_preserve": true
+      },
+      "subtitle": {
+        "text": "在林间遇见新生",
+        "origin": "generated_creative_copy",
+        "must_preserve": true
+      }
+    },
+    "visual_requirements": {
+      "main_subject": "绿色森林与新生植物",
+      "required_relations": [
+        "绿色森林与新生植物清晰可识别"
+      ],
+      "avoid": [
+        "文字",
+        "标志",
+        "主体变形"
+      ]
+    },
+    "layout_intent": {
+      "visual_priority": [
+        "hero_image",
+        "title",
+        "subtitle"
+      ],
+      "density": "low"
+    },
+    "assumptions": [
+      {
+        "field": "intent.poster_type",
+        "value": "concept_poster",
+        "reason": "用户未指定商业活动或产品。"
+      },
+      {
+        "field": "copy",
+        "value": "允许生成创意标题与副标题",
+        "reason": "未提供固定文案；不添加事实性活动信息。"
+      }
+    ],
+    "reference_notes": [],
+    "open_issues": []
+  },
+  "spec": {
+    "schema_version": "0.1.0",
+    "run_id": "run_demo_001",
+    "spec_version": 1,
+    "based_on": {
+      "brief_version": 1
+    },
+    "canvas": {
+      "width": 720,
+      "height": 1280,
+      "color_mode": "RGB"
+    },
+    "template_id": "framed_hero_v1",
+    "background": {
+      "color": "#F6FAF3"
+    },
+    "design_tokens": {
+      "palette": [
+        "#F6FAF3",
+        "#244832",
+        "#64875A"
+      ],
+      "font_family_key": "noto_sans_sc",
+      "safe_margin_px": 36
+    },
+    "asset_plan": [
+      {
+        "asset_id": "hero_image",
+        "kind": "generated_image",
+        "prompt": "Fine art photograph of a lush green forest, tall trees and delicate new fern leaves in the foreground, gentle morning sunlight filtering through the canopy, serene fresh atmosphere, natural vibrant emerald greens, uncluttered composition, clearly recognizable foliage, no people, no text, no logos.",
+        "negative_prompt": "text, letters, logo, watermark, blurry, distorted objects, duplicate structures",
+        "target_size": {
+          "width": 648,
+          "height": 850
+        },
+        "subject_safe_region_norm": [
+          0.05,
+          0.1,
+          0.9,
+          0.8
+        ],
+        "required_keyword_ids": [
+          "k1",
+          "k2",
+          "k3"
+        ]
+      }
+    ],
+    "elements": [
+      {
+        "id": "hero",
+        "type": "image",
+        "z": 1,
+        "box": {
+          "x": 36,
+          "y": 260,
+          "width": 648,
+          "height": 850
+        },
+        "asset_id": "hero_image",
+        "fit": "cover",
+        "focus_point_norm": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "z": 2,
+        "box": {
+          "x": 36,
+          "y": 64,
+          "width": 648,
+          "height": 152
+        },
+        "copy_ref": "title",
+        "text": "向绿而生",
+        "font_family_key": "noto_sans_sc",
+        "font_weight": 700,
+        "font_size_px": 72,
+        "line_height_px": 90,
+        "max_lines": 1,
+        "align": "center",
+        "color": "#244832"
+      },
+      {
+        "id": "subtitle",
+        "type": "text",
+        "z": 3,
+        "box": {
+          "x": 36,
+          "y": 1160,
+          "width": 648,
+          "height": 56
+        },
+        "copy_ref": "subtitle",
+        "text": "在林间遇见新生",
+        "font_family_key": "noto_sans_sc",
+        "font_weight": 400,
+        "font_size_px": 28,
+        "line_height_px": 38,
+        "max_lines": 1,
+        "align": "center",
+        "color": "#244832"
+      }
+    ],
+    "keyword_element_bindings": [
+      {
+        "keyword_id": "k1",
+        "element_ids": [
+          "hero"
+        ]
+      },
+      {
+        "keyword_id": "k2",
+        "element_ids": [
+          "hero"
+        ]
+      },
+      {
+        "keyword_id": "k3",
+        "element_ids": [
+          "hero",
+          "title"
+        ]
+      }
+    ],
+    "allowed_overlaps": [],
+    "render_policy": {
+      "text_overflow": "error",
+      "missing_font": "error",
+      "output_format": "PNG"
+    }
+  }
+}

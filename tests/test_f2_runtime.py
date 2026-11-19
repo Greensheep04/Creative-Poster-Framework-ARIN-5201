@@ -1121,12 +1121,17 @@ def test_run_files_reject_run_escape_external_symlink_and_foreign_run(tmp_path):
         purpose=framework.ArtifactPurpose.asset,
         media_type="image/png",
     )
-    linked.unlink()
-    linked.symlink_to(outside)
-    with pytest.raises(framework.FileSecurityError):
-        producer.files.read(linked_reference)
     with pytest.raises(framework.FileSecurityError):
         producer.files.read(reference.model_copy(update={"run_id": "another-run"}))
+    linked.unlink()
+    try:
+        linked.symlink_to(outside)
+    except OSError as error:
+        if getattr(error, "winerror", None) == 1314:
+            pytest.skip("Windows account lacks symlink creation privilege (WinError 1314)")
+        raise
+    with pytest.raises(framework.FileSecurityError):
+        producer.files.read(linked_reference)
 
 
 def test_run_record_persists_and_reloads_events_artifacts_conversions_and_result(tmp_path):

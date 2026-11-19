@@ -1,0 +1,235 @@
+{
+  "name": "city",
+  "keywords": [
+    "城市",
+    "未来",
+    "霓虹"
+  ],
+  "brief": {
+    "schema_version": "0.1.0",
+    "run_id": "run_demo_001",
+    "brief_version": 1,
+    "request_ref": "request.json",
+    "intent": {
+      "poster_type": "concept_poster",
+      "core_message": "未来城市的霓虹夜景",
+      "concept": "用未来城市的霓虹夜景表达城市、未来、霓虹",
+      "mood": [
+        "宁静",
+        "开阔"
+      ],
+      "visual_style": "简洁摄影感",
+      "palette_direction": [
+        "#F5F3FA",
+        "#29224D",
+        "#8567AD"
+      ]
+    },
+    "keyword_bindings": [
+      {
+        "keyword_id": "k1",
+        "interpretation": "城市",
+        "visual_evidence": [
+          "城市"
+        ],
+        "text_alone_sufficient": false
+      },
+      {
+        "keyword_id": "k2",
+        "interpretation": "未来",
+        "visual_evidence": [
+          "未来"
+        ],
+        "text_alone_sufficient": false
+      },
+      {
+        "keyword_id": "k3",
+        "interpretation": "霓虹",
+        "visual_evidence": [
+          "霓虹"
+        ],
+        "text_alone_sufficient": false
+      }
+    ],
+    "copy": {
+      "title": {
+        "text": "夜色向未来",
+        "origin": "generated_creative_copy",
+        "must_preserve": true
+      },
+      "subtitle": {
+        "text": "城市在光影中苏醒",
+        "origin": "generated_creative_copy",
+        "must_preserve": true
+      }
+    },
+    "visual_requirements": {
+      "main_subject": "未来城市的霓虹夜景",
+      "required_relations": [
+        "未来城市的霓虹夜景清晰可识别"
+      ],
+      "avoid": [
+        "文字",
+        "标志",
+        "主体变形"
+      ]
+    },
+    "layout_intent": {
+      "visual_priority": [
+        "hero_image",
+        "title",
+        "subtitle"
+      ],
+      "density": "low"
+    },
+    "assumptions": [
+      {
+        "field": "intent.poster_type",
+        "value": "concept_poster",
+        "reason": "用户未指定商业活动或产品。"
+      },
+      {
+        "field": "copy",
+        "value": "允许生成创意标题与副标题",
+        "reason": "未提供固定文案；不添加事实性活动信息。"
+      }
+    ],
+    "reference_notes": [],
+    "open_issues": []
+  },
+  "spec": {
+    "schema_version": "0.1.0",
+    "run_id": "run_demo_001",
+    "spec_version": 1,
+    "based_on": {
+      "brief_version": 1
+    },
+    "canvas": {
+      "width": 720,
+      "height": 1280,
+      "color_mode": "RGB"
+    },
+    "template_id": "framed_hero_v1",
+    "background": {
+      "color": "#F5F3FA"
+    },
+    "design_tokens": {
+      "palette": [
+        "#F5F3FA",
+        "#29224D",
+        "#8567AD"
+      ],
+      "font_family_key": "noto_sans_sc",
+      "safe_margin_px": 36
+    },
+    "asset_plan": [
+      {
+        "asset_id": "hero_image",
+        "kind": "generated_image",
+        "prompt": "Cinematic architectural photograph of a futuristic city at night, elegant modern skyscrapers, cyan and magenta neon lighting, wet street reflections, coherent realistic architecture, clear vertical composition, a sense of future urban life, no crowds, no text, no signs, no logos.",
+        "negative_prompt": "text, letters, logo, watermark, blurry, distorted objects, duplicate structures",
+        "target_size": {
+          "width": 648,
+          "height": 850
+        },
+        "subject_safe_region_norm": [
+          0.05,
+          0.1,
+          0.9,
+          0.8
+        ],
+        "required_keyword_ids": [
+          "k1",
+          "k2",
+          "k3"
+        ]
+      }
+    ],
+    "elements": [
+      {
+        "id": "hero",
+        "type": "image",
+        "z": 1,
+        "box": {
+          "x": 36,
+          "y": 260,
+          "width": 648,
+          "height": 850
+        },
+        "asset_id": "hero_image",
+        "fit": "cover",
+        "focus_point_norm": [
+          0.5,
+          0.5
+        ]
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "z": 2,
+        "box": {
+          "x": 36,
+          "y": 64,
+          "width": 648,
+          "height": 152
+        },
+        "copy_ref": "title",
+        "text": "夜色向未来",
+        "font_family_key": "noto_sans_sc",
+        "font_weight": 700,
+        "font_size_px": 72,
+        "line_height_px": 90,
+        "max_lines": 1,
+        "align": "center",
+        "color": "#29224D"
+      },
+      {
+        "id": "subtitle",
+        "type": "text",
+        "z": 3,
+        "box": {
+          "x": 36,
+          "y": 1160,
+          "width": 648,
+          "height": 56
+        },
+        "copy_ref": "subtitle",
+        "text": "城市在光影中苏醒",
+        "font_family_key": "noto_sans_sc",
+        "font_weight": 400,
+        "font_size_px": 28,
+        "line_height_px": 38,
+        "max_lines": 1,
+        "align": "center",
+        "color": "#29224D"
+      }
+    ],
+    "keyword_element_bindings": [
+      {
+        "keyword_id": "k1",
+        "element_ids": [
+          "hero"
+        ]
+      },
+      {
+        "keyword_id": "k2",
+        "element_ids": [
+          "hero"
+        ]
+      },
+      {
+        "keyword_id": "k3",
+        "element_ids": [
+          "hero",
+          "title"
+        ]
+      }
+    ],
+    "allowed_overlaps": [],
+    "render_policy": {
+      "text_overflow": "error",
+      "missing_font": "error",
+      "output_format": "PNG"
+    }
+  }
+}

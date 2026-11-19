@@ -1,0 +1,159 @@
+{
+  "$defs": {
+    "Copy": {
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "origin": {
+          "title": "Origin",
+          "type": "string"
+        },
+        "must_preserve": {
+          "title": "Must Preserve",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "text",
+        "origin",
+        "must_preserve"
+      ],
+      "title": "Copy",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "KeywordBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "keyword_id": {
+          "title": "Keyword Id",
+          "type": "string"
+        },
+        "interpretation": {
+          "title": "Interpretation",
+          "type": "string"
+        },
+        "visual_evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Visual Evidence",
+          "type": "array"
+        },
+        "text_alone_sufficient": {
+          "title": "Text Alone Sufficient",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "keyword_id",
+        "interpretation",
+        "visual_evidence",
+        "text_alone_sufficient"
+      ],
+      "title": "KeywordBinding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "0.1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "brief_version": {
+      "exclusiveMinimum": 0,
+      "title": "Brief Version",
+      "type": "integer"
+    },
+    "request_ref": {
+      "title": "Request Ref",
+      "type": "string"
+    },
+    "intent": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Intent",
+      "type": "object"
+    },
+    "keyword_bindings": {
+      "items": {
+        "$ref": "#/$defs/KeywordBinding"
+      },
+      "title": "Keyword Bindings",
+      "type": "array"
+    },
+    "copy": {
+      "additionalProperties": {
+        "$ref": "#/$defs/Copy"
+      },
+      "title": "Copy",
+      "type": "object"
+    },
+    "visual_requirements": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Visual Requirements",
+      "type": "object"
+    },
+    "layout_intent": {
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Layout Intent",
+      "type": "object"
+    },
+    "assumptions": {
+      "items": {
+        "additionalProperties": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "type": "object"
+      },
+      "title": "Assumptions",
+      "type": "array"
+    },
+    "reference_notes": {
+      "items": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Reference Notes",
+      "type": "array"
+    },
+    "open_issues": {
+      "items": {
+        "$ref": "#/$defs/JsonValue"
+      },
+      "title": "Open Issues",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "run_id",
+    "brief_version",
+    "request_ref",
+    "intent",
+    "keyword_bindings",
+    "copy",
+    "visual_requirements",
+    "layout_intent",
+    "assumptions",
+    "reference_notes",
+    "open_issues"
+  ],
+  "title": "CreativeBrief",
+  "type": "object"
+}

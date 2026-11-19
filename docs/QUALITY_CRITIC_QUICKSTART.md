@@ -1,5 +1,7 @@
 # A4 快速使用
 
+当前 A4 进度、后续开发顺序与接入资料清单见 [进度与交接](A4_PROGRESS_AND_NEXT_STEPS.md)。
+
 字段定义与 A1 接入约定见 [A4 输入输出接口](QUALITY_CRITIC_TEAM_CONTRACT.md)。本分支按源码运行，不依赖未上传的本地测试或评测数据。
 
 ## 1. 准备环境和输入

@@ -1,0 +1,62 @@
+{
+  "layout_source": "temporary_authored_layouts_until_A2_is_available",
+  "profiles": {
+    "ocean-qwen3-4b": {
+      "headline_lines": ["Hope Grows", "from the Tide"],
+      "supporting_copy_lines": ["Plastic meets the ocean —", "transformed into flight, not waste."],
+      "background": "#EBF4F0", "text_color": "#174F5D", "accent": "#C98E61",
+      "palette": ["#EBF4F0", "#174F5D", "#C98E61"],
+      "image_box": [35, 264, 650, 866],
+      "headline_y": 50, "headline_size": 70, "headline_step": 90, "headline_align": "left",
+      "supporting_y": 1160, "supporting_size": 24, "supporting_step": 36,
+      "decoration": "watercolor", "text_effect": "none"
+    },
+    "ocean-qwen3-1_7b": {
+      "headline_lines": ["Hope in", "the Ocean"],
+      "supporting_copy_lines": ["Every piece of plastic removed", "brings us closer to a cleaner future."],
+      "background": "#073C41", "text_color": "#F2D997", "accent": "#D3B568",
+      "palette": ["#073C41", "#57977E", "#F2D997"],
+      "image_box": [0, 254, 720, 960],
+      "headline_y": 40, "headline_size": 82, "headline_step": 100, "headline_align": "left",
+      "supporting_y": 1160, "supporting_size": 24, "supporting_step": 36,
+      "decoration": "sunlight", "text_effect": "shadow"
+    },
+    "ocean-qwen3_5-4b": {
+      "headline_lines": ["Renew the ocean,", "restore the hope."],
+      "supporting_copy_lines": ["Small debris turns to stars,", "lighting our shared path to clear seas."],
+      "background": "#06455D", "text_color": "#F7CB8D", "accent": "#F09055",
+      "palette": ["#006994", "#FF7F50", "#FFD700", "#FFFFFF"],
+      "image_box": [35, 270, 650, 866],
+      "headline_y": 60, "headline_size": 60, "headline_step": 82, "headline_align": "center",
+      "supporting_y": 1170, "supporting_size": 23, "supporting_step": 34,
+      "decoration": "coral", "text_effect": "none"
+    },
+    "tradition-qwen3-4b": {
+      "headline_lines": ["Clay Meets Code,", "Together"], "supporting_copy_lines": [],
+      "background": "#D8C2A9", "text_color": "#4D352B", "accent": "#CCC8C3",
+      "palette": ["#D8C2A9", "#CCC8C3"],
+      "image_box": [30, 340, 660, 880],
+      "headline_y": 80, "headline_size": 66, "headline_step": 94, "headline_align": "center",
+      "supporting_y": 1160, "supporting_size": 24, "supporting_step": 36,
+      "decoration": "clay", "text_effect": "none"
+    },
+    "tradition-qwen3-1_7b": {
+      "headline_lines": ["Tradition, Technology,", "and Harmony"], "supporting_copy_lines": [],
+      "background": "#0B1B2C", "text_color": "#F3C28B", "accent": "#C79257",
+      "palette": ["#0B1B2C", "#F3C28B"],
+      "image_box": [0, 276, 720, 960],
+      "headline_y": 70, "headline_size": 62, "headline_step": 94, "headline_align": "left",
+      "supporting_y": 1160, "supporting_size": 24, "supporting_step": 36,
+      "decoration": "bridge", "text_effect": "shadow"
+    },
+    "tradition-qwen3_5-4b": {
+      "headline_lines": ["Heritage Meets", "Innovation"], "supporting_copy_lines": [],
+      "background": "#051321", "text_color": "#7BE5FF", "accent": "#16BDF3",
+      "palette": ["#051321", "#16BDF3"],
+      "image_box": [0, 280, 720, 960],
+      "headline_y": 70, "headline_size": 76, "headline_step": 98, "headline_align": "left",
+      "supporting_y": 1160, "supporting_size": 24, "supporting_step": 36,
+      "decoration": "neon", "text_effect": "glow"
+    }
+  }
+}

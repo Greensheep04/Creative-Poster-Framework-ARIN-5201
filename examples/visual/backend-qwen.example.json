@@ -1,0 +1,10 @@
+{
+  "kind": "qwen_image",
+  "model_dir": "$POSTER_QWEN_MODEL_DIR",
+  "model_id": "Qwen/Qwen-Image",
+  "revision": "75e0b4be04f60ec59a75f475837eced720f823b6",
+  "steps": 30,
+  "true_cfg_scale": 4.0,
+  "dtype": "bfloat16",
+  "cpu_offload": true
+}

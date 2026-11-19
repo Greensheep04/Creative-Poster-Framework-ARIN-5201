@@ -1,0 +1,54 @@
+{
+  "content": {
+    "keywords": [
+      "green tea",
+      "caffeine-free"
+    ],
+    "interpretation": "Connect green tea, caffeine-free through one quiet everyday moment.",
+    "audience": "People seeking a quiet break in their day.",
+    "objective": "Invite the viewer to pause and consider the central theme.",
+    "core_message": "Make room for a quiet moment.",
+    "concept": {
+      "title": "A Quiet Moment",
+      "central_idea": "One familiar object becomes the focus of an uncluttered scene.",
+      "connection_to_keywords": "Use green tea as the main subject; express green tea, caffeine-free through the copy and atmosphere."
+    },
+    "copy": {
+      "headline": "Make Room for a Quiet Moment",
+      "subtitle": "green tea / caffeine-free",
+      "call_to_action": ""
+    },
+    "visual_direction": {
+      "main_subject": "A single subject representing green tea.",
+      "setting": "A plain cream background with soft natural light.",
+      "visual_relationship": "Isolate the subject in open space to suggest a pause.",
+      "supporting_elements": [],
+      "style": "Minimal editorial illustration",
+      "mood": "calm"
+    },
+    "layout": {
+      "focal_point": "The single main subject",
+      "composition": "Portrait composition with generous negative space",
+      "reading_order": "Headline, main subject, then subtitle",
+      "typography": "Clear sans-serif headline and smaller supporting text"
+    },
+    "palette": {
+      "colors": [
+        "forest green",
+        "cream"
+      ],
+      "rationale": "A restrained palette supports the quiet atmosphere."
+    },
+    "avoid": [
+      "Visual clutter",
+      "Invented statistics",
+      "Brand affiliations"
+    ]
+  },
+  "content_format": {
+    "name": "poster.creative-brief",
+    "version": "2"
+  },
+  "artifacts": [],
+  "review": null
+}

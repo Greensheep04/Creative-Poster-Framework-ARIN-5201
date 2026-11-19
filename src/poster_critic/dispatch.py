@@ -10,7 +10,7 @@ from __future__ import annotations
 from collections.abc import Awaitable, Callable
 from copy import deepcopy
 from io import BytesIO
-from typing import Annotated, Literal, Protocol, Self
+from typing import TYPE_CHECKING, Annotated, Literal, Protocol, Self
 
 from PIL import Image, UnidentifiedImageError
 from pydantic import StringConstraints, ValidationError, model_validator
@@ -20,6 +20,9 @@ from .contracts import AuditInputV1, AuditReportV3, Contract
 from .errors import InputError
 from .identity import input_fingerprint
 from .ports import Provider
+
+if TYPE_CHECKING:
+    from .delivery import DeliveryGuard
 
 
 class AuditRunner(Protocol):
@@ -164,7 +167,8 @@ def _bound_report(report: AuditReportV3, audit: AuditInputV1, *, model: str,
 
 async def audit_and_dispatch(
     audit: AuditInputV1, engine: AuditRunner, *, on_release: DispatchHandler,
-    on_feedback: DispatchHandler,
+    on_feedback: DispatchHandler, delivery: DeliveryGuard | None = None,
+    candidate_identity: str | None = None,
 ) -> DispatchResult:
     """Audit and await exactly one output handler; propagate handler failures.
 
@@ -202,5 +206,9 @@ async def audit_and_dispatch(
     )
     if route == "test_only":
         return result
-    await (on_release if route == "release" else on_feedback)(result)
+    handler = on_release if route == "release" else on_feedback
+    if delivery is None:
+        await handler(result)
+    else:
+        await delivery.deliver(result, handler, candidate_identity=candidate_identity)
     return result.model_copy(update={"handler_status": "completed"})

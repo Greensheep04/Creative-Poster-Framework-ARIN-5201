@@ -52,7 +52,7 @@ class CopyItem(Contract):
     copy_id: Text
     text: Text
     required: bool = True
-    match_policy: Literal["exact", "typographic"] = "exact"
+    match_policy: Literal["exact", "typographic", "line_wrap"] = "exact"
 
 
 class LayoutElement(Contract):

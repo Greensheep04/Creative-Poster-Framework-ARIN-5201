@@ -1,0 +1,12 @@
+{
+  "conversion_mode": "authored_compact_poster_prompts_with_exact_CD_copy",
+  "note": "Native 77-token control: exact headline/slogan retained; visual semantics and style manually condensed. Original CD remains archived. Not a literal full-field serialization.",
+  "prompts": {
+    "ocean-qwen3-4b": "Watercolor digital poster, optimistic turquoise ocean. One clear plastic bottle transforms into a bird, upward motion. Sky blue, white, pastel orange. Title \"Hope Grows from the Tide\". Slogan \"Plastic meets the ocean — transformed into flight, not waste.\" Elegant readable typography.",
+    "ocean-qwen3-1_7b": "Digital poster: optimistic blue emerald ocean sunrise, swirling plastic bottles, glowing heart. Title \"Hope in the Ocean\". Slogan \"Every piece of plastic removed brings us closer to a cleaner future.\" Golden light, dynamic composition, readable typography.",
+    "ocean-qwen3_5-4b": "Bright digital poster, blue underwater plastic bottle fragments becoming glowing coral, gold light, coral orange and white. Title \"Renew the ocean, restore the hope.\" Slogan \"Small debris turns to stars, lighting our shared path to clear seas.\" Readable typography.",
+    "tradition-qwen3-4b": "Digital poster with hand-drawn texture: one organic handcrafted clay pot, flowing glowing data streams following its curves, calm symmetrical composition, terracotta and silver. Title \"Clay Meets Code, Together\". Readable typography, no subtitle.",
+    "tradition-qwen3-1_7b": "Serene digital poster: carved wooden arch and modern circuit structure joined by a bridge and flowing light ribbon, unified composition. Deep blue and amber. Title \"Tradition, Technology, and Harmony\". Readable typography, no subtitle.",
+    "tradition-qwen3_5-4b": "Serene futuristic vector poster: textile-patterned scroll-shaped vehicle becomes fiber-optic strand, glowing circuit lines smoothly blended, charcoal ink and neon blue only. Title \"Heritage Meets Innovation\". Readable typography, no subtitle."
+  }
+}

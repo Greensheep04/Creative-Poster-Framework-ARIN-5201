@@ -1,0 +1,63 @@
+{
+  "keywords": [
+    {
+      "keyword_id": "kw-a2ee68de-63f8-5779-b486-008e067321e4",
+      "text": "ocean"
+    },
+    {
+      "keyword_id": "kw-695058c4-c739-59ce-ac1a-e93055907d4b",
+      "text": "plastic"
+    },
+    {
+      "keyword_id": "kw-7c0c298a-691e-5fde-9983-47fbab8ff3be",
+      "text": "hope"
+    }
+  ],
+  "interpretation": "The ocean, once pristine, is now choked with plastic waste, but within that pollution lies a future of restoration and collective action — a testament to human resilience and the possibility of change.",
+  "audience": "Environmentally conscious youth and global citizens concerned about climate and pollution",
+  "objective": "To inspire action by showing that pollution is not irreversible, and that hope is still possible through individual and collective responsibility.",
+  "core_message": "Even in the face of ocean plastic pollution, hope remains — and it begins with action.",
+  "concept": {
+    "title": "Hope in the Deep",
+    "central_idea": "The ocean’s plastic crisis is not the end — it is a call to action, where every small effort contributes to a cleaner, healthier future.",
+    "connection_to_keywords": "The image juxtaposes the overwhelming presence of plastic in the ocean with a subtle, hopeful element — such as a child’s hand reaching toward a plastic bottle that is transforming into a coral reef, symbolizing renewal and human potential to heal."
+  },
+  "copy": {
+    "headline": "Hope in the Deep",
+    "subtitle": "Plastic is choking the ocean — but we can still heal it.",
+    "call_to_action": "Join the cleanup. Share the story. Choose a plastic-free future."
+  },
+  "visual_direction": {
+    "main_subject": "A deep-sea scene where plastic waste floats in the water, but one large plastic bottle is morphing into a coral reef with vibrant life emerging from it",
+    "setting": "A vast, deep ocean with soft blue and green gradients, with mid-level lighting to emphasize depth and texture",
+    "visual_relationship": "The plastic waste forms a chaotic background, while the central plastic bottle is gently glowing and transforming — a visual metaphor for change and renewal",
+    "supporting_elements": [
+      "A single child’s hand reaching from the shore into the water, gently touching the transforming bottle",
+      "Tiny fish and sea creatures emerging from the plastic bottle as it becomes coral",
+      "A faint trail of sunlight breaking through the surface, symbolizing awareness and possibility"
+    ],
+    "style": "Semi-realistic, with a touch of surrealism to emphasize transformation",
+    "mood": "Tense yet hopeful — a balance between environmental urgency and human resilience"
+  },
+  "layout": {
+    "focal_point": "The transforming plastic bottle in the center of the composition, glowing softly with coral colors",
+    "composition": "The ocean stretches vertically from top to bottom, with the plastic waste scattered in the lower half and the transformation centered in the middle. The child’s hand appears slightly off-center, leading the viewer’s eye to the focal point.",
+    "reading_order": "Start with the child’s hand, move to the transforming bottle, then expand to the surrounding plastic waste and the emerging marine life",
+    "typography": "Clean, modern sans-serif font for headlines; slightly larger and bolder for the headline, smaller and lighter for the subtitle and CTA"
+  },
+  "palette": {
+    "colors": [
+      "Deep ocean blue (#0A2E5E)",
+      "Sunset orange (#FF6B35)",
+      "Vibrant coral pink (#FF6F61)",
+      "Faded white (#F5F5F5)",
+      "Grayish plastic (#808080)"
+    ],
+    "rationale": "The deep blue establishes the ocean’s vastness and depth. The plastic is shown in muted gray to emphasize pollution. The transformation into coral uses warm, vibrant tones to visually signal hope, renewal, and life returning to damaged ecosystems."
+  },
+  "avoid": [
+    "Overly dramatic or chaotic visual elements that distract from the central message",
+    "Generic images of plastic pollution without a clear transformation or hopeful resolution",
+    "Overuse of text or data points that would dilute the emotional impact"
+  ]
+}

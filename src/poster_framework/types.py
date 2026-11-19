@@ -263,6 +263,25 @@ class ReviewRecord(PublicModel):
         return self
 
 
+class RepairAuthorization(PublicModel):
+    """Trusted application authorization; never inferred from the critic's hint."""
+    authorization_id: str = Field(min_length=1)
+    based_on_candidate: VersionDependency
+    action: RevisionAction
+    target: VersionDependency
+    expected_versions: dict[str, Annotated[int, Field(strict=True, gt=0)]]
+    constraints: tuple[Annotated[str, Field(min_length=1, max_length=1000)], ...] = Field(default=(), max_length=16)
+    preserve: tuple[Annotated[str, Field(min_length=1, max_length=1000)], ...] = Field(default=(), max_length=64)
+
+    @model_validator(mode="after")
+    def validate_scope(self):
+        if set(self.expected_versions) != {"brief_version", "spec_version"}:
+            raise ValueError("Authorization must identify Brief and Spec versions")
+        if any(not value.strip() for value in (*self.constraints, *self.preserve)) or len(self.preserve) != len(set(self.preserve)):
+            raise ValueError("Authorization contains empty/duplicate scope strings")
+        return self
+
+
 class RunUsage(PublicModel):
     model_calls: int = Field(default=0, ge=0)
     image_operations: int = Field(default=0, ge=0)

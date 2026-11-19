@@ -21,7 +21,27 @@ flowchart LR
 
 默认允许最多 4 轮返工；首次候选审核不计入返工轮数，因此最多审核 5 个候选。默认图像操作和 Critic 视觉调用额度各为 5 次，覆盖初始候选及最多 4 轮返工。调用方可以通过 `RunBudget` 调整这些额度。
 
+## A3 可选后端与新版 QC
+
+A3 支持用户自行选择 SDXL 本地、Qwen-Image 本地和云端 Images JSON API。共同链路包含素材复用、Spec 精确渲染、可审核候选、状态证据和授权局部返工。A1/A2 代码与接口保持原样；新版 QC 的 repair_hint 经过外部确认后才执行，未获授权的 fail/unknown 停在 needs_review。
+
+**百炼免费额度已实测：**见 [百炼开通、Key 配置与单张生图](docs/bailian-cloud-quickstart.md)，使用自己的账号和业务空间；无需下载 SDXL。
+
+**队友使用云端、跳过 SDXL 下载：**见 [云端配置与运行步骤](docs/backend-setup.md#云端-images-json合并后的队友操作步骤)，包含基础安装、API 配置、单张验证和正式 A2/总流程接入。
+
+首次配置见 [安装与后端指南](docs/backend-setup.md)，A4 成员接入见 [QC 交接与返工指南](docs/qc-handoff.md)。云端基础安装无需 GPU 依赖；本地模型按需安装，不自动下载全部权重。
+
+```bash
+python -m poster_visual_producer setup --output .scratch/backend.json
+python -m poster_visual_producer doctor --backend-config .scratch/backend.json --fonts examples/visual/fonts.json --font-base . --output-root runs/my-poster
+python examples/visual/qc_collaboration.py --root runs/qca --scenario all
+```
+
+最后一条是工程协作演示，输出真实海报与证据，Fake A4 不会获得生产通过。原审核路由仍兼容；新版 LocalManifest v1/AuditReport v3 路由以 RepairAuthorization 为执行依据。
+
 ## 安装
+
+**队友从克隆开始跑与验收同一套 A1–A4：**见[团队复现指南](docs/unified-configuration.md#队友从克隆开始)。真实运行需自备 Hugging Face、MiniMax 凭据；本地 SDXL 权重按固定版本单独安装。只跑离线验收不需要密钥或 GPU。
 
 项目要求 Python 3.11 和 uv。安装运行依赖与开发测试依赖：
 
@@ -69,6 +89,17 @@ uv run python examples/single_role.py --root .scratch/single-role
 
 该样例使用默认真实执行模式和确定性业务 Agent，不调用外部模型服务。完整的 Fake 工作流入口单独列在前一节。
 
+## 版式规划（A2）
+
+`poster_framework.layout_planner` 提供可运行的 A2：把 `poster.creative-brief@0.1.0` 转成与 `docs/schemas/PosterSpec.json` 兼容的 `poster.spec@0.1.0`。它使用三个受控模板、Pillow 真实文字测量、几何与关键词覆盖检查，并支持 `revise_layout` 的限定字段补丁。工具通过 `register_layout_tools(ToolRegistry())` 注册。
+
+```bash
+uv run python examples/layout_planner.py --root .scratch/layout-planner
+uv run pytest tests/layout
+```
+
+细节见[组员接入指南](docs/contributor-guide.md)与[接口说明](docs/api.md#a2-layout-planner)。
+
 ## 混合 Agent 测试
 
 一次 `PosterWorkflow` 可以组合真实 Agent 与成员自编的确定性测试 Agent。`AgentSet` 为四个角色分别接收 `AgentRegistration`；相邻角色的 `output_formats` 与 `input_formats` 必须相连，内容格式不同时通过 `ContentAdapter` 转换。可参考 [`examples/revision_actions.py`](examples/revision_actions.py)：其中四个 Agent 各自注册，在 `ExecutionMode.real` 下使用 Pillow PNG 检查完整返工路由。该样例的校验器要求 `title`、`keyword_texts`、`columns` 等业务字段，并通过 `revision_validator` 保留原始关键词或已批准标题；这些规则属于样例，成员按自身业务定义校验器。
@@ -115,6 +146,7 @@ uv run python examples/format_upgrade.py --root .scratch/format-upgrade
 ## 能力范围
 
 - 框架提供四个海报 Agent 角色、单角色入口、格式转换、工具调用、版本依赖、文件安全检查、记忆、缓存、调用预算和运行记录。
+- A2 的 `poster.spec@0.1.0` 与 A3 分支的 `docs/schemas/PosterSpec.json` 一致，A3 无需额外适配器即可消费。
 - 模型服务、SDK、提示词、供应商重试策略和业务质量标准由接入方配置。
 - `real` 模式会校验真实 PNG、JPEG、WebP 候选的文件解码、媒体类型、扩展名和尺寸。
 - FakeModel 用于显式演示与测试。Fake 文本候选不会被 `real` 模式接受。
@@ -124,6 +156,16 @@ uv run python examples/format_upgrade.py --root .scratch/format-upgrade
 
 - `src/poster_framework/`：公开接口、工作流与运行组件。
 - `tests/`：接口、运行时、工作流、演示和单角色行为测试。
+- `tests/layout/`：A2 版式规划的契约、测量、模板、检查、工具与四角色集成测试（`uv run pytest tests/layout`）。
 - `examples/`：单角色、工具目录、格式升级、定向返工，以及配套请求输入和单角色输出参考。
 - `docs/api.md`：公共数据结构与调用入口。
 - `docs/contributor-guide.md`：Agent、工具、模型 SDK 和校验器接入说明。
+
+## Visual Producer 实现
+
+A3 的素材生成、准确文字渲染、缓存与指定素材返工已实现于 src/poster_visual_producer。D 盘 Conda 环境安装、离线验收样张、SDK 适配和组员接入说明见 [Visual Producer 使用与交接](docs/visual-producer.md)。
+
+
+本地 GPU 生图和人工 Brief/Spec 案例：[运行指南](docs/local-gpu.md)。
+
+新版团队 A2/A4 与 A3 的接入及离线验证见 [A3 团队集成](docs/a3-upstream-integration.md)。

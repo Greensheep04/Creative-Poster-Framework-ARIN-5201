@@ -3,17 +3,20 @@
 from asyncio import CancelledError, sleep, timeout
 from collections.abc import Awaitable, Callable
 import math
+from contextlib import nullcontext
 from time import perf_counter
 
 from .contracts import CallRecordV2
 from .errors import BudgetExceededError, ProviderError, RetryableProviderError
 from .ports import ModelResponse
+from .response_accounting import response_accounting, safe_model_identifier
 
 
 class StandaloneExecutor:
     def __init__(self, max_attempts: int = 2, *, allow_live: bool = False,
                  request_timeout: float = 30.0, total_timeout: float = 90.0,
-                 on_update: Callable[[int, tuple[CallRecordV2, ...]], None] | None = None) -> None:
+                 on_update: Callable[[int, tuple[CallRecordV2, ...]], None] | None = None,
+                 telemetry=None) -> None:
         if type(max_attempts) is not int or not 1 <= max_attempts <= 2:
             raise ValueError("max_attempts must be 1 or 2")
         for value in (request_timeout, total_timeout):
@@ -29,6 +32,14 @@ class StandaloneExecutor:
         self._records: list[CallRecordV2] = []
         self._busy = False
         self._on_update = on_update
+        if telemetry is not None:
+            from .telemetry import TelemetryRecorder
+            if not isinstance(telemetry, TelemetryRecorder):
+                raise ValueError('telemetry must be a TelemetryRecorder or null')
+        self.telemetry = telemetry
+
+    def _stage(self, name, **kwargs):
+        return self.telemetry.stage(name, **kwargs) if self.telemetry else nullcontext()
 
     @property
     def records(self) -> tuple[CallRecordV2, ...]:
@@ -65,30 +76,41 @@ class StandaloneExecutor:
 
     async def execute_once(self, invoke: Callable[[], Awaitable[ModelResponse]], *,
                            model: str, live: bool) -> ModelResponse:
-        if live and not self.allow_live:
-            raise ProviderError("live execution requires an explicitly enabled executor")
-        if self._busy:
-            raise ProviderError("an executor cannot be shared by concurrent audits")
-        if len(self._records) >= self.max_attempts:
-            raise BudgetExceededError("audit request-attempt budget exhausted")
-        now = perf_counter()
-        if self._started is None:
-            self._started = now
-        remaining = self.total_timeout - (now - self._started)
-        if remaining <= 0:
-            raise BudgetExceededError("audit elapsed-time budget exhausted")
-        self._notify(len(self._records) + 1)  # Durable intent before the external request.
+        with self._stage('budget_admission'):
+            model = safe_model_identifier(model)
+            if type(live) is not bool:
+                raise ProviderError('live execution mode must be a bool')
+            if live and not self.allow_live:
+                raise ProviderError("live execution requires an explicitly enabled executor")
+            if self._busy:
+                raise ProviderError("an executor cannot be shared by concurrent audits")
+            if len(self._records) >= self.max_attempts:
+                raise BudgetExceededError("audit request-attempt budget exhausted")
+            now = perf_counter()
+            if self._started is None:
+                self._started = now
+            remaining = self.total_timeout - (now - self._started)
+            if remaining <= 0:
+                raise BudgetExceededError("audit elapsed-time budget exhausted")
+            self._notify(len(self._records) + 1)  # Durable intent before the external request.
         self._busy = True
         started = now
         response = None
+        usage, accounting = None, {}
         status, error_type = "ok", None
         http_status, request_id = None, None
         try:
-            async with timeout(min(self.request_timeout, remaining)):
-                response = await invoke()
+            with self._stage('request', attempt=len(self._records) + 1):
+                async with timeout(min(self.request_timeout, remaining)):
+                    response = await invoke()
             if not isinstance(response, ModelResponse):
                 raise ProviderError("provider must return ModelResponse")
-            return response
+            usage, accounting, invalid = response_accounting(response)
+            if (invalid or type(response.text) is not str or type(response.refusal) is not bool
+                    or response.problem is not None and type(response.problem) is not str):
+                raise ProviderError('provider returned malformed response metadata') from None
+            return ModelResponse(text=response.text, usage=usage, problem=response.problem,
+                refusal=response.refusal, **accounting)
         except TimeoutError:
             status, error_type = "error", "TimeoutError"
             raise RetryableProviderError("request timed out; billing is unknown") from None
@@ -98,16 +120,15 @@ class StandaloneExecutor:
         except Exception as exc:
             status, error_type = "error", type(exc).__name__
             if isinstance(exc, ProviderError):
-                http_status, request_id = exc.http_status, exc.request_id
+                _, exception_fields, _ = response_accounting(ModelResponse(text='',
+                    http_status=exc.http_status, request_id=exc.request_id))
+                http_status, request_id = exception_fields['http_status'], exception_fields['request_id']
+            raise
+        except BaseException as exc:
+            status, error_type = 'error', type(exc).__name__
             raise
         finally:
             self._busy = False
-            usage = response.usage if isinstance(response, ModelResponse) else None
-            fields = {} if not isinstance(response, ModelResponse) else {
-                "request_id": response.request_id, "response_model": response.response_model,
-                "finish_reason": response.finish_reason, "http_status": response.http_status,
-                "usage_details": response.usage_details,
-            }
             self._records.append(CallRecordV2(
                 attempt=len(self._records) + 1, model=model, live=live, status=status,
                 elapsed_ms=round((perf_counter() - started) * 1000, 3),
@@ -115,6 +136,6 @@ class StandaloneExecutor:
                 transport_status="succeeded" if status == "ok" else "failed",
                 validation_status="pending" if status == "ok" else "not_run",
                 billing_status="not_applicable" if not live else "usage_reported" if usage else "unknown",
-                **({"http_status": http_status, "request_id": request_id} | fields),
+                **({"http_status": http_status, "request_id": request_id} | accounting),
             ))
             self._notify(len(self._records))

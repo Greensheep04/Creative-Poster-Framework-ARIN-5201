@@ -1,0 +1,9 @@
+{
+  "kind": "factory",
+  "factory": "your_application.image_backend:create_generator",
+  "options": {
+    "provider": "your-provider",
+    "model": "exact-model-version",
+    "api_key_env": "POSTER_IMAGE_API_KEY"
+  }
+}

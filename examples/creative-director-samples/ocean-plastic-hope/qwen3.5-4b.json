@@ -1,0 +1,45 @@
+{
+  "concept": "Transformative restoration of marine life through digital waste reshaping.",
+  "headline": "Renew the ocean, restore the hope.",
+  "supporting_copy": "Small debris turns to stars, lighting our shared path to clear seas.",
+  "keyword_mapping": [
+    {
+      "keyword": "ocean",
+      "representation": "Deep blue water background"
+    },
+    {
+      "keyword": "plastic",
+      "representation": "Fragmented debris morphing into coral"
+    },
+    {
+      "keyword": "hope",
+      "representation": "Golden light rising from the center"
+    }
+  ],
+  "visual_direction": "A single plastic bottle morphs into a blooming sunken coral reef emitting light.",
+  "style": {
+    "mood": [
+      "Optimistic",
+      "Bright",
+      "Clean"
+    ],
+    "medium": [
+      "Digital Illustration"
+    ],
+    "palette": [
+      "#006994",
+      "#FF7F50",
+      "#FFD700",
+      "#FFFFFF"
+    ]
+  },
+  "must_include": [
+    "natural imagery",
+    "light effects"
+  ],
+  "must_avoid": [
+    "grainy textures",
+    "realistic trash",
+    "dark shadows"
+  ]
+}

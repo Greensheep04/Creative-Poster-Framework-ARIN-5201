@@ -1,0 +1,340 @@
+{
+  "$defs": {
+    "ApprovedCopy": {
+      "additionalProperties": false,
+      "properties": {
+        "copy_id": {
+          "minLength": 1,
+          "title": "Copy Id",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "match_policy": {
+          "default": "exact",
+          "enum": [
+            "exact",
+            "typographic"
+          ],
+          "title": "Match Policy",
+          "type": "string"
+        }
+      },
+      "required": [
+        "copy_id",
+        "text"
+      ],
+      "title": "ApprovedCopy",
+      "type": "object"
+    },
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "asset_key": {
+          "minLength": 1,
+          "title": "Asset Key",
+          "type": "string"
+        },
+        "element_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Element Ids",
+          "type": "array"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        }
+      },
+      "required": [
+        "asset_key"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "AssetContext": {
+      "additionalProperties": false,
+      "properties": {
+        "assets": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Assets",
+          "type": "array"
+        }
+      },
+      "required": [
+        "assets"
+      ],
+      "title": "AssetContext",
+      "type": "object"
+    },
+    "Constraint": {
+      "additionalProperties": false,
+      "properties": {
+        "constraint_id": {
+          "minLength": 1,
+          "title": "Constraint Id",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/$defs/JsonValue"
+        }
+      },
+      "required": [
+        "constraint_id",
+        "name",
+        "value"
+      ],
+      "title": "Constraint",
+      "type": "object"
+    },
+    "ImagePath": {
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "title": "ImagePath",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "Keyword": {
+      "additionalProperties": false,
+      "properties": {
+        "keyword_id": {
+          "minLength": 1,
+          "title": "Keyword Id",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "keyword_id",
+        "text"
+      ],
+      "title": "Keyword",
+      "type": "object"
+    },
+    "LayoutContext": {
+      "additionalProperties": false,
+      "properties": {
+        "elements": {
+          "items": {
+            "$ref": "#/$defs/LayoutElement"
+          },
+          "title": "Elements",
+          "type": "array"
+        }
+      },
+      "required": [
+        "elements"
+      ],
+      "title": "LayoutContext",
+      "type": "object"
+    },
+    "LayoutElement": {
+      "additionalProperties": false,
+      "properties": {
+        "element_id": {
+          "minLength": 1,
+          "title": "Element Id",
+          "type": "string"
+        },
+        "bbox_xyxy": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox Xyxy",
+          "type": "array"
+        },
+        "copy_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Copy Id"
+        }
+      },
+      "required": [
+        "element_id",
+        "bbox_xyxy"
+      ],
+      "title": "LayoutElement",
+      "type": "object"
+    },
+    "RenderContext": {
+      "additionalProperties": false,
+      "properties": {
+        "messages": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Messages",
+          "type": "array"
+        }
+      },
+      "title": "RenderContext",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "sample_id": {
+      "minLength": 1,
+      "title": "Sample Id",
+      "type": "string"
+    },
+    "keywords": {
+      "items": {
+        "$ref": "#/$defs/Keyword"
+      },
+      "maxItems": 5,
+      "minItems": 2,
+      "title": "Keywords",
+      "type": "array"
+    },
+    "user_constraints": {
+      "items": {
+        "$ref": "#/$defs/Constraint"
+      },
+      "title": "User Constraints",
+      "type": "array"
+    },
+    "image": {
+      "$ref": "#/$defs/ImagePath"
+    },
+    "approved_copy": {
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/$defs/ApprovedCopy"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Approved Copy"
+    },
+    "layout_context": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/LayoutContext"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "asset_context": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/AssetContext"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "design_context": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Design Context"
+    },
+    "render_context": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RenderContext"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "required_checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Required Checks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "sample_id",
+    "keywords",
+    "user_constraints",
+    "image"
+  ],
+  "title": "LocalManifestV1",
+  "type": "object"
+}

@@ -45,7 +45,20 @@ def matching_text(text: str, item: CopyItem) -> str:
 
 
 def text_matches(observed: str, item: CopyItem) -> bool:
-    return matching_text(observed, item) == matching_text(item.text, item)
+    actual, expected = matching_text(observed, item), matching_text(item.text, item)
+    if item.match_policy != "line_wrap" or "\n" in expected or "\r" in expected:
+        return actual == expected
+    # A visual break can replace one original space or split a CJK/long word.
+    # Never discard normal spaces, punctuation, case, digits or invisible glyphs.
+    positions = {0}
+    for character in actual.replace("\r\n", "\n").replace("\r", "\n"):
+        if character == "\n":
+            positions |= {p + 1 for p in positions if p < len(expected) and expected[p] == " "}
+        else:
+            positions = {p + 1 for p in positions if p < len(expected) and expected[p] == character}
+        if not positions:
+            return False
+    return len(expected) in positions
 
 
 def parse_observation(raw: str, audit: AuditInputV1, *, blind_copy: bool = False) -> ModelObservation:
