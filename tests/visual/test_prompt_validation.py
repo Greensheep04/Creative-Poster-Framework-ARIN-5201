@@ -1,18 +1,22 @@
 from pathlib import Path
+import sys
 from types import SimpleNamespace
 import pytest
 from poster_visual_producer.prompt_validation import SDXLPromptValidator
 from poster_visual_producer.contracts import StageError
 
 def test_both_encoders_and_final_repair_additions(monkeypatch):
-    import transformers
     class Tokens:
         model_max_length=77
         def __init__(self,extra):self.extra=extra
         def __call__(self,text,truncation):
             assert truncation is False
             return {'input_ids':list(range(len(text.split())+self.extra))}
-    monkeypatch.setattr(transformers.CLIPTokenizer,'from_pretrained',lambda path,local_files_only:Tokens(2 if path.endswith('tokenizer') else 3))
+    def load_tokens(path, local_files_only):
+        assert local_files_only
+        return Tokens(2 if path.endswith("tokenizer") else 3)
+    tokenizer = SimpleNamespace(from_pretrained=load_tokens)
+    monkeypatch.setitem(sys.modules, "transformers", SimpleNamespace(CLIPTokenizer=tokenizer))
     v=SDXLPromptValidator(Path('local-only'))
     assert v.count('one two')==[4,5]
     request=SimpleNamespace(prompt='word '*74,negative_prompt='logo')

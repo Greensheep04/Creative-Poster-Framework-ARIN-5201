@@ -448,6 +448,35 @@ def wrap_text(text: str, font: ImageFont.FreeTypeFont, max_width_px: float) -> t
     return tuple(lines)
 
 
+@dataclass(frozen=True)
+class GlyphMetrics:
+    lines: tuple
+    widths: tuple
+    boxes: tuple
+    required_height: int
+    overlapping: bool
+
+
+def measure_glyphs(text, font, width, leading):
+    """Measure the same top-anchored glyphs that Pillow will paint."""
+    from types import SimpleNamespace
+
+    def bounds(line):
+        return font.getbbox(line, anchor="lt")
+
+    def extent(line):
+        left, _, right, _ = bounds(line)
+        return max(right - left, font.getlength(line))
+
+    normalized = text.replace("\r\n", "\n").replace("\r", "\n")
+    lines = wrap_text(normalized, SimpleNamespace(getlength=extent), width)
+    boxes = tuple(bounds(line) for line in lines)
+    heights = [bottom - top for _, top, _, bottom in boxes]
+    required = max(i * leading + height for i, height in enumerate(heights))
+    return GlyphMetrics(lines, tuple(extent(line) for line in lines), boxes,
+                        required, len(lines) > 1 and max(heights) > leading)
+
+
 def measure_text_block(
     text: str,
     *,
@@ -472,17 +501,13 @@ def measure_text_block(
     active_registry = registry or default_font_registry()
     face = active_registry.resolve(font_family_key, font_weight)
     font = _load_font(str(face.path), face.index, font_size_px)
-    lines = wrap_text(text, font, max_width_px)
-    widths = tuple(float(font.getlength(line)) for line in lines)
-    ink_boxes = tuple(tuple(float(value) for value in font.getbbox(line)) for line in lines)
-    tops = [box[1] for box in ink_boxes]
-    bottoms = [box[3] for box in ink_boxes]
-    span = max(bottoms) - min(tops) if lines and any(bottoms) else 0.0
-    required_height = int(round((len(lines) - 1) * line_height_px + span))
-    widest = max(widths, default=0.0)
-    fits_width = widest <= max_width_px + 0.5
+    metrics = measure_glyphs(text, font, max_width_px, line_height_px)
+    lines, widths, ink_boxes = metrics.lines, metrics.widths, metrics.boxes
+    required_height = metrics.required_height
+    widest = max(widths)
+    fits_width = widest <= max_width_px
     fits_lines = len(lines) <= max_lines
-    fits_height = box_height_px is None or required_height <= box_height_px
+    fits_height = not metrics.overlapping and (box_height_px is None or required_height <= box_height_px)
     missing = active_registry.missing_glyphs(face, text) if check_glyphs else ()
     return TextMeasurement(
         text=text,

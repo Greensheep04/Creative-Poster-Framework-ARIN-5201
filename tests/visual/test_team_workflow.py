@@ -103,3 +103,45 @@ def test_a1_design_and_explicit_template_reach_actual_a2(monkeypatch, tmp_path, 
     assert "#001122" in spec["design_tokens"]["palette"]
     assert "Woodcut illustration" in spec["asset_plan"][0]["prompt"]
     if constraints: assert spec["template_id"] == "full_bleed_v1"
+
+
+def test_actual_a1_revision_object_keywords_complete_full_bounded_loop(monkeypatch,tmp_path):
+    import creative.creative_director as cd
+    import examples.team_workflow as runner
+    from poster_critic.ports import ModelResponse
+    raw=json.loads((Path(cd.__file__).parent/"resources/sample-output.json").read_text(encoding="utf-8"))["content"]
+    raw["keywords"]=["ocean","plastic","hope"]
+    raw["copy"]={"headline":"Ocean Hope","subtitle":"Reduce Plastic","call_to_action":""}
+    requests=[]
+    async def model(provider,model,request_data,parameters):
+        request=json.loads(request_data["messages"][1]["content"]);requests.append(request)
+        value=deepcopy(raw)
+        if len(requests)==2:
+            value["keywords"]=request["keywords"]
+            value["visual_direction"]["main_subject"]="One clearly visible plastic bottle in the ocean"
+        return json.dumps(value)
+    class Observations:
+        name="controlled-offline-observation";live=False
+        def __init__(self):self.calls=0
+        async def invoke(self,audit,prompt):
+            self.calls+=1
+            return ModelResponse(text=json.dumps({
+                "keyword_checks":[{"keyword_id":k.keyword_id,"status":"fail" if self.calls==1 else "pass","evidence":"Controlled observation."} for k in audit.keywords],
+                "constraint_checks":[],
+                "text_checks":[{"copy_id":c.copy_id,"observed_text":c.text.replace(" ","\n",1),"status":"pass","readability":"pass"} for c in audit.approved_copy],
+                "visual_checks":[{"check_id":k,"status":"pass","evidence":"Controlled observation."} for k in ("text_readability","layout_quality")],
+                "issues":[],"uncertainties":[]}))
+    monkeypatch.setattr(cd,"call_hugging_face",model)
+    monkeypatch.setattr(cd.OfflineCreativeDirectorAgent,"run",cd.CreativeDirectorAgent().run)
+    monkeypatch.setattr(runner,"UnknownObservationProvider",Observations)
+    summary=asyncio.run(run_team(tmp_path,raw["keywords"],offline=True,offline_repair="revise_brief"))
+    assert summary["revision_rounds"]==1 and summary["critic_calls"]==2
+    assert summary["image_operations"]==2 and summary["model_calls"]==6
+    assert summary["call_sequence"]==["creative_director","layout_planner","visual_producer","quality_critic"]*2
+    assert requests[1]["revision"]["feedback"]["report"]["decision"]=="fail"
+    receipts=[json.loads(p.read_text(encoding="utf-8")) for p in tmp_path.rglob("validation.json")]
+    assert sorted(len(r["normalized_fields"]) for r in receipts)==[0,1]
+    reports=[json.loads(p.read_text(encoding="utf-8")) for p in tmp_path.rglob("audit-report.json")]
+    assert sorted(r["decision"] for r in reports)==["fail","pass"]
+    assert all(t["status"]=="pass" for r in reports for t in r["text_checks"])
+    assert summary["production_pass"] is False  # Controlled offline observations never release.

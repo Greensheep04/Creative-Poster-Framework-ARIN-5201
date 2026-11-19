@@ -23,6 +23,7 @@ from .errors import (
     FileSecurityError,
     InterfaceVersionCompatibilityError,
 )
+from .layout_errors import TextOverflowError
 from .generation import ArtifactGenerationRecord
 from .registration import AgentSet, AgentSetSnapshot, AgentRegistrationSnapshot
 from .runtime import ModelCallEvent, RunSession
@@ -284,8 +285,10 @@ class PosterWorkflow:
         )
         graph.add_conditional_edges(
             "layout_planner",
-            self._continue_after_role,
-            {"continue": "visual_producer", "end": END},
+            lambda state: ("revise" if not state.get("stop") and state.get("next_role") == "creative_director"
+                           and state.get("layout") is None
+                           else self._continue_after_role(state)),
+            {"continue": "visual_producer", "revise": "creative_director", "end": END},
         )
         graph.add_conditional_edges(
             "visual_producer",
@@ -404,6 +407,29 @@ class PosterWorkflow:
         sequence = [*state.get("call_sequence", []), role]
         try:
             agent_result = await agents.run_agent(role, inputs, context)
+        except TextOverflowError as error:
+            if role != AgentRole.layout_planner or not self._configuration.get("directed_repair"):
+                raise
+            visual_overflow = getattr(error, "code", None) == "VISUAL_PROMPT_OVERFLOW"
+            reason = ("Essential image prompt exceeds token capacity: " if visual_overflow else "Approved copy exceeds A2 text capacity: ") + str(error)
+            if state["revision_rounds"] >= session.budget.max_revision_rounds:
+                session.memory.set_unresolved_issues((reason,))
+                return {"call_sequence": sequence, "status": WorkflowStatus.needs_review,
+                        "stop_reason": reason, "stop": True}
+            ref = state["brief"].record_reference
+            target = VersionDependency(artifact_id=ref.artifact_id, revision=ref.revision)
+            details = {"stage": "layout_preflight",
+                       "task": ("Simplify visual_direction.main_subject for the image token budget; preserve approved poster copy exactly."
+                                if visual_overflow else "Shorten approved copy while preserving the concept and mandatory content."),
+                       "preserve_copy": visual_overflow, "measurement_error": str(error)}
+            context.files.write_bytes(context.files.invocation_path("layout-overflow.json"),
+                json.dumps(details).encode(), purpose=ArtifactPurpose.evidence, media_type="application/json")
+            session.memory.add_revision(revision_id="revision-" + uuid4().hex, role=role,
+                changes={"action": "revise_brief", "target": target.model_dump(mode="json"), "details": details},
+                unresolved_issues=(reason,))
+            return {"call_sequence": sequence, "revision_action": RevisionAction.revise_brief,
+                    "revision_target": target, "revision_rounds": state["revision_rounds"]+1,
+                    "next_role": AgentRole.creative_director.value, "stop": False}
         except BudgetExceededError as error:
             return {
                 "call_sequence": sequence,
@@ -482,6 +508,12 @@ class PosterWorkflow:
                     publishing_identity=identity,
                 )
                 update["review"] = output.review
+        if role == AgentRole.visual_producer and self._configuration.get("directed_repair"):
+            previous = state.get("previous_candidate")
+            if previous is not None and previous.sha256 == candidate.sha256:
+                reason = "Repair produced unchanged poster pixels; prior review retained"
+                session.memory.set_unresolved_issues((reason,))
+                update.update(status=WorkflowStatus.needs_review, stop_reason=reason, stop=True)
         self._validate_revision_business(state, update, role)
         return update
 

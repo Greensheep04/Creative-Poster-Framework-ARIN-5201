@@ -43,13 +43,25 @@ def live_prerequisites(*, backend_config, critic_config, critic_model=None):
     return missing
 
 
+def build_prompt_validator(generator, *, offline):
+    model = generator.capabilities.model.lower()
+    if offline or not ("sdxl" in model or "stable-diffusion-xl" in model):
+        return None
+    model_dir = getattr(getattr(generator, "config", None), "model_dir", None)
+    if model_dir is None:
+        return None  # A cloud model name does not imply local tokenizer files.
+    from poster_visual_producer.prompt_validation import SDXLPromptValidator
+    return SDXLPromptValidator(model_dir)
+
+
 async def run_team(root, keywords, *, offline, offline_repair=None, backend_config=None,
                    critic_config=None, critic_model=None, a1_model=None, constraints=None,
-                   fonts_config=None, font_base=None, max_revision_rounds=1, project=None):
+                   fonts_config=None, font_base=None, max_revision_rounds=1, project=None, auto_repair=False):
     if offline_repair is not None and (not offline or offline_repair not in REPAIRS):
         raise ValueError("offline repair requires explicit offline mode and a supported action")
     if project is not None:
         max_revision_rounds = project.budget.max_revision_rounds
+        auto_repair = project.runtime.auto_repair
         if constraints is None: constraints = project.runtime.constraints
     if not 0 <= max_revision_rounds <= 1:
         raise ValueError("This integration trial permits zero or one revision round")
@@ -78,16 +90,24 @@ async def run_team(root, keywords, *, offline, offline_repair=None, backend_conf
             generator = create_generator(json.loads(Path(backend_config).read_text(encoding="utf-8-sig")))
             provider = ChatProvider(load_config(critic_config, critic_model))
     async def authorize(feedback, context):
-        # An explicitly selected controlled test; never infer authorization from unknown.
+        # Application authorization comes from the explicit runtime option, not
+        # model-generated routing hints. Unknown/error observations stop for analysis.
+        if offline_repair is None and feedback["report"]["decision"] != "fail":
+            return None
+        from poster_visual_producer.team_repair import asset_constraints, repair_action
+        action = offline_repair or repair_action(feedback["report"])
+        if action is None:
+            return None
+        constraints = asset_constraints(feedback) if action == "regenerate_asset" and not offline_repair else []
         candidate = feedback["current_candidate"]
-        if offline_repair == "revise_brief": target = feedback["brief_dependency"]
-        elif offline_repair == "revise_layout": target = feedback["layout_dependency"]
-        elif offline_repair == "regenerate_asset": target = candidate["assets"][0]["source_ref"]
+        if action == "revise_brief": target = feedback["brief_dependency"]
+        elif action == "revise_layout": target = feedback["layout_dependency"]
+        elif action == "regenerate_asset": target = candidate["assets"][0]["source_ref"]
         else: target = candidate["candidate_ref"]
-        return RepairAuthorization(authorization_id="offline-test-" + uuid4().hex,
+        return RepairAuthorization(authorization_id=("offline-test-" if offline_repair else "configured-repair-") + uuid4().hex,
             based_on_candidate=VersionDependency(artifact_id=candidate["candidate_id"],revision=candidate["candidate_ref"]["revision"]),
-            action=RevisionAction(offline_repair), target=VersionDependency(artifact_id=target["artifact_id"],revision=target["revision"]),
-            expected_versions=candidate["based_on"], preserve=[])
+            action=RevisionAction(action), target=VersionDependency(artifact_id=target["artifact_id"],revision=target["revision"]),
+            expected_versions=candidate["based_on"], preserve=[], constraints=constraints)
     def offline_layout_patch(context):
         layout = next(i["content"] for i in context.memory.context()["artifacts"] if i["name"] == "layout")
         title = next(e for e in layout["elements"] if e["id"] == "title")
@@ -106,6 +126,12 @@ async def run_team(root, keywords, *, offline, offline_repair=None, backend_conf
         layout_options = project.agents.a2.model_dump()
         critic_options = {key:getattr(project.agents.a4,key) for key in ("max_retries","request_timeout","total_timeout")}
         visual_options = {"seed":project.runtime.seed if generator.capabilities.supports_seed else None}
+    from poster_visual_producer.generators import select_generation_size
+    layout_options["source_size_for"] = lambda target: select_generation_size(target, generator.capabilities)
+    validator = build_prompt_validator(generator, offline=offline)
+    if validator is not None:
+        visual_options["request_validator"] = validator
+        layout_options["count_tokens"] = validator.count
     agents = AgentSet([creative_registration(offline=offline, model=a1_model, options=a1_options),
         layout_registration(fonts, **layout_options, revision_patch=offline_layout_patch if offline_repair == "revise_layout" else None),
         registration(generator, fonts, **visual_options),
@@ -116,10 +142,15 @@ async def run_team(root, keywords, *, offline, offline_repair=None, backend_conf
     if effective is not None:
         effective["runtime"].update(mode="offline" if offline else "live", output_root=str(root),keywords=list(keywords), constraints=constraints, seed=visual_options.get("seed"))
     workflow = PosterWorkflow(agents,root=root/"store",budget=budget,
-        repair_authorizer=authorize if offline_repair else None,
-        configuration={"integration_mode": "offline" if offline else "live", "offline_repair":offline_repair, "project_config":effective})
-    result = await workflow.run(keywords, constraints=constraints,
-        execution_mode=ExecutionMode.fake if offline else ExecutionMode.real)
+        repair_authorizer=authorize if offline_repair or auto_repair else None,
+        configuration={"directed_repair": bool(auto_repair and not offline_repair), "integration_mode": "offline" if offline else "live", "offline_repair":offline_repair, "auto_repair":auto_repair, "project_config":effective})
+    try:
+        result = await workflow.run(keywords, constraints=constraints,
+            execution_mode=ExecutionMode.fake if offline else ExecutionMode.real)
+    finally:
+        close = getattr(generator, "close", None)
+        if close is not None:
+            close()
     # A budget may stop execution before any candidate exists.
     poster = None
     if result.visual is not None:
@@ -127,6 +158,14 @@ async def run_team(root, keywords, *, offline, offline_repair=None, backend_conf
         current = next((p for p in bundles if json.loads(p.read_text(encoding="utf-8"))["candidate_ref"] == result.visual.content["candidate_ref"]), None)
         if current is not None:
             (root/"poster.png").write_bytes((current.parent.parent/"poster.png").read_bytes())
+            poster = str(root/"poster.png")
+        elif result.candidate is not None and result.candidate.media_type == "image/png":
+            # A repaired candidate may deliberately skip duplicate review.
+            data = (root/"store"/result.run_id/result.visual.content["poster_ref"]).read_bytes()
+            import hashlib
+            if hashlib.sha256(data).hexdigest() != result.candidate.sha256:
+                raise ValueError("Candidate digest changed before export")
+            (root/"poster.png").write_bytes(data)
             poster = str(root/"poster.png")
     brief_path = None
     if result.brief is not None:

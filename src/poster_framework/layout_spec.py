@@ -146,12 +146,12 @@ class RenderPolicy(SpecModel):
 
 
 class PosterSpec(SpecModel):
-    schema_version: Literal["0.1.0"]
+    schema_version: Literal["0.1.0", "0.2.0"]
     run_id: str
     spec_version: int = Field(gt=0)
     based_on: BasedOn
     canvas: Canvas
-    template_id: Literal["framed_hero_v1", "full_bleed_v1", "split_stack_v1"]
+    template_id: Literal["framed_hero_v1", "full_bleed_v1", "split_stack_v1", "semantic_layout_v1"]
     background: Background
     design_tokens: DesignTokens
     asset_plan: list[AssetPlan] = Field(min_length=1, max_length=8)
@@ -162,6 +162,8 @@ class PosterSpec(SpecModel):
 
     @model_validator(mode="after")
     def validate_references(self) -> PosterSpec:
+        if self.template_id == "semantic_layout_v1" and self.schema_version != "0.2.0":
+            raise ValueError("Semantic layouts require PosterSpec 0.2.0")
         asset_ids = [asset.asset_id for asset in self.asset_plan]
         if len(set(asset_ids)) != len(asset_ids):
             raise ValueError("asset_plan entries require unique asset_id values")

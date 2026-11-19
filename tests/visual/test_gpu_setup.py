@@ -1,8 +1,15 @@
-import subprocess, sys
+import shutil
+import subprocess
+import sys
 from pathlib import Path
+
+import pytest
 
 
 def test_setup_rejects_corrupt_cached_wheel_before_remote_install(tmp_path):
+    shell = shutil.which("pwsh") or shutil.which("powershell")
+    if not shell:
+        pytest.skip("PowerShell is not installed")
     root = Path(__file__).resolve().parents[2]
     cache = tmp_path / "cache"
     wheels = cache / "local-wheels"
@@ -24,10 +31,8 @@ def test_setup_rejects_corrupt_cached_wheel_before_remote_install(tmp_path):
         + " -SkipModelDownload"
     )
     result = subprocess.run(
-        ["pwsh", "-NoProfile", "-Command", command],
+        [shell, "-NoProfile", "-Command", command],
         capture_output=True,
-        text=True,
-        encoding="utf-8",
     )
     assert result.returncode != 0
-    assert "wheel checksum" in (result.stdout + result.stderr).lower()
+    assert b"wheel checksum" in (result.stdout + result.stderr).lower()

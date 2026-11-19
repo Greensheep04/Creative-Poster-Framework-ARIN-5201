@@ -41,6 +41,8 @@ python examples/visual/qc_collaboration.py --root runs/qca --scenario all
 
 ## 安装
 
+**队友从克隆开始跑与验收同一套 A1–A4：**见[团队复现指南](docs/unified-configuration.md#队友从克隆开始)。真实运行需自备 Hugging Face、MiniMax 凭据；本地 SDXL 权重按固定版本单独安装。只跑离线验收不需要密钥或 GPU。
+
 项目要求 Python 3.11 和 uv。安装运行依赖与开发测试依赖：
 
 ```bash

@@ -11,9 +11,11 @@ from pydantic import SecretStr
 import httpx
 
 from creative.prompt_loader import load_prompt, load_revision_prompt
+from creative.response_evidence import redact_response_text, bind_revision_keywords, bind_matching_keyword_objects
 
 from poster_framework import (
     Agent,
+    ArtifactPurpose,
     AgentContext,
     AgentInput,
     AgentOutput,
@@ -263,15 +265,39 @@ class CreativeDirectorAgent(Agent):
             },
             invoke=invoke,
         )
+        token = (self._api_key.get_secret_value() if self._api_key is not None else os.environ.get("HF_TOKEN", "")).strip()
+        def evidence(name, value):
+            data = redact_response_text(json.dumps(value, ensure_ascii=False, indent=2), token)
+            return context.files.write_bytes(context.files.invocation_path(name), data.encode("utf-8"),
+                purpose=ArtifactPurpose.evidence, media_type="application/json")
+        # Write even malformed JSON before attempting parsing or schema validation.
+        response_ref = evidence("model-response.json", {
+            "schema_version": 1, "stage": "before_validation", "model": self.model,
+            "revision_action": action.value if action else None,
+            "raw_text": redact_response_text(model_text, token) if isinstance(model_text, str) else "[NON_TEXT_RESPONSE]",
+        })
+        normalized_fields = []
         try:
-            content = json.loads(model_text)
-        except (TypeError, json.JSONDecodeError):
-            raise ValueError("The model's creative brief must be valid JSON without Markdown fences.") from None
-        validate_brief(content)
-        expected_keywords = [item.text for item in context.original_request.keywords]
-        if content["keywords"] != expected_keywords:
-            raise ValueError("brief.keywords must preserve the original keywords in order")
-        return AgentOutput(content=content, content_format=BRIEF_FORMAT)
+            try:
+                content = json.loads(model_text)
+            except (TypeError, json.JSONDecodeError):
+                raise ValueError("The model's creative brief must be valid JSON without Markdown fences.") from None
+            expected_keywords = [item.text for item in context.original_request.keywords]
+            normalized_fields = bind_matching_keyword_objects(content, expected_keywords)
+            if action == RevisionAction.revise_brief and not normalized_fields:
+                normalized_fields = bind_revision_keywords(content, expected_keywords)
+            validate_brief(content)
+            if content["keywords"] != expected_keywords:
+                raise ValueError("brief.keywords must preserve the original keywords in order")
+            if token and token in model_text:
+                raise ValueError("The model response contains a configured credential")
+        except ValueError as error:
+            evidence("validation.json", {"status": "rejected", "error_type": type(error).__name__,
+                "message": str(error), "normalized_fields": normalized_fields})
+            raise ValueError(redact_response_text(str(error), token)) from None
+        validation_ref = evidence("validation.json", {"status": "accepted", "normalized_fields": normalized_fields,
+            "normalization_source": "original_request.keywords" if normalized_fields else None})
+        return AgentOutput(content=content, content_format=BRIEF_FORMAT, artifacts=(response_ref, validation_ref))
 
 
 class OfflineCreativeDirectorAgent(Agent):

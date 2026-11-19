@@ -1,6 +1,5 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from types import SimpleNamespace
 from datetime import datetime, timezone
 import hashlib
 import PIL
@@ -8,7 +7,7 @@ from PIL import Image, ImageDraw
 from .contracts import PosterSpec, ImageElement, TextElement, StageError
 from .fonts import FontRegistry
 from .imaging import prepare_asset, encode_png
-from poster_framework.layout_fonts import wrap_text
+from poster_framework.layout_fonts import measure_glyphs
 
 RENDERER_VERSION = "0.1.1"
 
@@ -25,19 +24,9 @@ class TextLayout:
 
 def measure_text_block(element: TextElement, fonts: FontRegistry) -> TextLayout:
     font, digest = fonts.resolve(element)
-    draw = ImageDraw.Draw(Image.new("RGB", (1, 1)))
-
-    def bounds(text):
-        return draw.textbbox((0, 0), text, font=font, anchor="lt")
-
-    def width(text):
-        box = bounds(text)
-        return max(box[2] - box[0], draw.textlength(text, font=font))
-
-    # Share A2's word/CJK break rules, measuring both advance and ink overhang.
-    layout_text = element.text.replace("\r\n", "\n").replace("\r", "\n")
-    lines = list(wrap_text(layout_text, SimpleNamespace(getlength=width), element.box.width))
-    if any(width(line) > element.box.width for line in lines):
+    metrics = measure_glyphs(element.text, font, element.box.width, element.line_height_px)
+    lines = list(metrics.lines)
+    if max(metrics.widths) > element.box.width:
         raise StageError("TEXT_OVERFLOW", "A glyph does not fit the specified box",
                          affected_ids=[element.id])
     if len(lines) > element.max_lines:
@@ -47,7 +36,7 @@ def measure_text_block(element: TextElement, fonts: FontRegistry) -> TextLayout:
     placements = []
     real = []
     for i, line in enumerate(lines):
-        l, t, r, b = bounds(line)
+        l, t, r, b = metrics.boxes[i]
         ink_w, ink_h = r - l, b - t
         if len(lines) > 1 and ink_h > element.line_height_px:
             raise StageError(

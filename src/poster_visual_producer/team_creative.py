@@ -66,6 +66,13 @@ class TeamCreativeDirector:
             delegate_context = _View(context, memory=_View(context.memory, context=memory_view))
         output = await self.delegate.run(inputs, delegate_context)
         raw = output.content
+        if context.metadata.revision_action == RevisionAction.revise_brief:
+            history = context.memory.context()["revision_history"]
+            details = history[-1].get("changes", {}).get("details", {}) if history else {}
+            if details.get("preserve_copy"):
+                _, original = _previous(context)
+                if raw.get("copy") != original.get("copy"):
+                    raise ValueError("Image-prompt repair must preserve approved poster copy")
         validate_brief(raw)
         if raw["keywords"] != [k.text for k in context.original_request.keywords]:
             raise ValueError("A1 keywords must preserve the original request in order")

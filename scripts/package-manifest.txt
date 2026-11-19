@@ -1,11 +1,13 @@
 .gitignore
 README.md
 config/project.example.toml
+config/project.live-sdxl.example.toml
 docs/a3-upstream-integration.md
 docs/api.md
 docs/backend-setup.md
 docs/bailian-cloud-quickstart.md
 docs/contributor-guide.md
+docs/design/A2-template-catalog-integration.md
 docs/design-baseline/2026-10-12-QC接口文档.md
 docs/local-gpu-progress.md
 docs/local-gpu-review.md
@@ -81,6 +83,7 @@ src/creative/__init__.py
 src/creative/__main__.py
 src/creative/creative_director.py
 src/creative/prompt_loader.py
+src/creative/response_evidence.py
 src/creative/resources/sample-output.json
 src/creative/resources/sample-request.json
 src/poster_critic/__init__.py
@@ -140,6 +143,7 @@ src/poster_critic/structured_diagnostics.py
 src/poster_critic/telemetry.py
 src/poster_framework/__init__.py
 src/poster_framework/cache.py
+src/poster_framework/composition.py
 src/poster_framework/coordination.py
 src/poster_framework/demo.py
 src/poster_framework/development.py
@@ -194,8 +198,11 @@ src/poster_visual_producer/renderer.py
 src/poster_visual_producer/setup_cli.py
 src/poster_visual_producer/team_creative.py
 src/poster_visual_producer/team_integration.py
+src/poster_visual_producer/team_repair.py
 src/poster_visual_producer/tools.py
+tests/fixtures/a1-keyword-objects.json
 tests/layout/layout_support.py
+tests/layout/test_composition.py
 tests/layout/test_intent_conflicts.py
 tests/layout/test_layout_checks.py
 tests/layout/test_layout_contract.py
@@ -218,7 +225,9 @@ tests/test_f4_fake_model.py
 tests/test_f4_single_agent.py
 tests/test_f5_reference_output.py
 tests/test_f5_revision_examples.py
+tests/test_line_wrap_copy.py
 tests/test_project_config.py
+tests/test_response_evidence.py
 tests/test_unified_credentials.py
 tests/visual/__init__.py
 tests/visual/conftest.py
@@ -231,10 +240,15 @@ tests/visual/test_cd_poster_preview.py
 tests/visual/test_cd_sdxl_preview.py
 tests/visual/test_cli_tools.py
 tests/visual/test_cloud_backend.py
+tests/visual/test_composition_resources.py
+tests/visual/test_composition_review.py
+tests/visual/test_composition_visual.py
+tests/visual/test_composition_workflow.py
 tests/visual/test_contracts.py
 tests/visual/test_generation.py
 tests/visual/test_gpu_setup.py
 tests/visual/test_integration.py
+tests/visual/test_intent_routing.py
 tests/visual/test_local_backend.py
 tests/visual/test_local_repair_probe.py
 tests/visual/test_model_download.py

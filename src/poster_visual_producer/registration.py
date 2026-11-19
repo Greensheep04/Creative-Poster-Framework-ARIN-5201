@@ -4,6 +4,13 @@ from .contracts import PosterSpec
 
 BRIEF_FORMAT = ContentFormat(name="poster.creative-brief", version="0.1.0")
 SPEC_FORMAT = ContentFormat(name="poster.spec", version="0.1.0")
+SPEC_FORMAT_V2 = ContentFormat(name="poster.spec", version="0.2.0")
+
+
+def spec_format_for(spec):
+    return SPEC_FORMAT_V2 if spec["schema_version"] == "0.2.0" else SPEC_FORMAT
+
+
 CANDIDATE_FORMAT = ContentFormat(name="poster.candidate", version="0.1.0")
 
 
@@ -32,7 +39,7 @@ def registration(generator, fonts, **options):
         instance_factory=lambda config: VisualProducerAgent(
             generator, fonts, **options
         ),
-        input_formats=frozenset({SPEC_FORMAT}),
+        input_formats=frozenset({SPEC_FORMAT, SPEC_FORMAT_V2}),
         output_formats=frozenset({CANDIDATE_FORMAT}),
         input_validator=lambda content: PosterSpec.model_validate(content),
         output_validator=validate_candidate,

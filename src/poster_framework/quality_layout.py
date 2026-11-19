@@ -1,11 +1,11 @@
 """A2-only intended-composition scoring and adjustable typography policies."""
 import copy,math,re
 from dataclasses import dataclass
-from types import SimpleNamespace
+
 from .layout_planner import _visual_prompt,_binding_evidence,_brief_bindings,_check_keywords
 from .layout_templates import resolve_palette,build_hero_element,hero_asset_plan
 from .layout_templates import get_template,background_color,slot_text_color
-from .layout_fonts import wrap_text
+from .layout_fonts import measure_glyphs
 from .layout_checks import check_layout_geometry
 from .layout_spec import validate_poster_spec
 from .layout_errors import TextOverflowError,LayoutContractError
@@ -21,16 +21,11 @@ class TypographyPolicy:
 def fit_copy(text,*,family,weight,registry,sizes,width,max_lines,leading,max_height):
     for size in sizes:
         font=registry.load(family,weight,size)
-        def bounds(t):return font.getbbox(t,anchor='lt')
-        def width_of(t):
-            b=bounds(t);return max(font.getlength(t),b[2]-b[0])
-        lines=wrap_text(text,SimpleNamespace(getlength=width_of),width)
-        line_height=math.ceil(size*leading)
-        ink_height=max((bounds(t)[3]-bounds(t)[1] for t in lines),default=0)
-        baseline_boxes=[font.getbbox(t) for t in lines]
-        legacy_span=max(b[3] for b in baseline_boxes)-min(b[1] for b in baseline_boxes)
-        height=(len(lines)-1)*line_height+max(ink_height,legacy_span)
-        if len(lines)<=max_lines and height<=max_height and all(width_of(t)<=width for t in lines):
+        line_height = math.ceil(size * leading)
+        metrics = measure_glyphs(text, font, width, line_height)
+        lines, height = metrics.lines, metrics.required_height
+        if (len(lines) <= max_lines and not metrics.overlapping and
+                max(height, line_height) <= max_height and max(metrics.widths) <= width):
             face=registry.resolve(family,weight)
             if registry.missing_glyphs(face,text):raise LayoutContractError('Approved copy contains missing font glyphs')
             return size,line_height,max(height,line_height),list(lines)
@@ -49,6 +44,13 @@ def score_templates(raw):
         add('split_stack_v1',8,'A1 needs width for spatial progression')
     if re.search(r'starts at the wall|leftmost house|diagonal line of the windows',reading):
         add('split_stack_v1',3,'A1 directs image-first reading')
+    instructions = ' '.join((reading, typography, composition))
+    if re.search(r'(headline|title).{0,15}(at the top|above the (tree|image|subject))|标题.{0,8}(顶部|上方|上部)', instructions):
+        add('framed_hero_v1', 11, 'Headline above the main artwork')
+    if re.search(r'先看|图在上|底部标题|文字.{0,6}底部|beneath the image|below the image|first (see|sees) the (ruins|fire|image)', instructions):
+        add('split_stack_v1', 7, 'Image first, with a separate copy panel')
+    if re.search(r'(overlay|叠印|叠字|叠加文字)', instructions) and re.search(r'(negative space|留白)', instructions):
+        add('full_bleed_v1', 24, 'Reserved image space for overlay')
     if len(raw['copy']['headline'])>45:
         add('split_stack_v1',2,'Long headline benefits from stacked copy area')
     if 'negative space' in composition and re.search(r'overlay|over the image',typography):
@@ -86,9 +88,12 @@ class QualityPlanningPolicy:
         self.families=role_families or {};self.series_template=series_template
         self.series_title_size=series_title_size;self.series_body_size=series_body_size
 
-    def plan(self,raw,request,registry,family):
+    def plan(self,raw,request,registry,family, *, pinned_template=None):
         scores=score_templates(raw);attempts=[]
         candidates=[self.series_template] if self.goal=='cohesive_poster_series' else [x['template_id'] for x in scores]
+        if pinned_template is not None:
+            get_template(pinned_template)
+            candidates = [pinned_template]
         typo=raw.get('layout',{}).get('typography','').lower()
         headline_direction=typo.split(';')[0]
         title_family=self.families.get('serif',family) if re.search(r'(?<!sans-)serif',headline_direction) else self.families.get('sans',family)
@@ -131,6 +136,15 @@ class QualityPlanningPolicy:
             bs,bl,bh,body_lines=fit_copy(subtitle,family=body_family,weight=400,registry=registry,sizes=bodies,width=width,max_lines=4,leading=self.type.body_leading,max_height=min(170,1244-body_y))
             texts.append(text('subtitle',subtitle,body_family,400,bs,bl,bh,body_y,4))
         bottom=max(t['box']['y']+t['box']['height'] for t in texts)
+        cta = raw['copy'].get('call_to_action')
+        if cta:
+            cta_y = bottom + 20
+            cs, cl, ch, _ = fit_copy(cta, family=body_family, weight=400, registry=registry,
+                sizes=(26, 24, 22, 20), width=width, max_lines=3, leading=1.25, max_height=1244-cta_y)
+            element = text('cta', cta, body_family, 400, cs, cl, ch, cta_y, 3)
+            element['z'] = 4
+            texts.append(element)
+            bottom = cta_y + ch
         if bottom>1244:raise TextOverflowError('Copy leaves poster safe margin')
         hero=copy.deepcopy(base['elements'][0]);hero['focus_point_norm']=[.5,.5]
         if framed:hero['box']={'x':36,'y':max(300,bottom+40),'width':648,'height':1244-max(300,bottom+40)}

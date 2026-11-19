@@ -4,6 +4,8 @@ schema_version = 1
 
 [runtime]
 mode = "offline"
+# Authorize version-bound repairs by the responsible agent, within budget.
+auto_repair = false
 output_root = "../runs/unified"
 keywords = ["ocean", "plastic", "hope"]
 seed = 42
@@ -27,6 +29,8 @@ timeout_seconds = 120
 [agents.a2]
 font_family_key = "noto_sans_sc"
 adaptive = true
+# Semantic relationships and layout-aware prompts; false restores legacy planning.
+composition_aware = true
 # Optional fixed template; omit to use measured selection.
 # template_id = "split_stack_v1"
 

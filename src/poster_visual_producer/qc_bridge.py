@@ -36,7 +36,7 @@ def build_local_manifest(request,brief,spec,candidate,*,sample_id,image_path):
         'sample_id':sample_id,'keywords':[{'keyword_id':k.keyword_id,'text':k.text} for k in request.keywords],
         'user_constraints':[{'constraint_id':'constraint-'+str(uuid5(NAMESPACE_URL,request.request_id+':'+str(i))), 'name':c.name,'value':c.value} for i,c in enumerate(request.constraints)],
         'image':{'path':image_path},
-        'approved_copy':[{'copy_id':key,'text':c.text,'required':c.must_preserve,'match_policy':'exact'} for key,c in brief.copy_blocks.items()],
+        'approved_copy':[{'copy_id':key,'text':c.text,'required':c.must_preserve,'match_policy':'line_wrap'} for key,c in brief.copy_blocks.items()],
         'layout_context':{'elements':[{'element_id':e.id,'bbox_xyxy':[e.box.x,e.box.y,e.box.x+e.box.width,e.box.y+e.box.height],'copy_id':e.copy_ref if isinstance(e,TextElement) else None} for e in spec.elements]},
         'asset_context':{'assets':[{'asset_key':p.asset_id,'element_ids':[e.id for e in spec.elements if isinstance(e,ImageElement) and e.asset_id==p.asset_id], 'description':'Design intent: '+p.prompt} for p in spec.asset_plan]},
         'design_context':str(brief.intent.get('concept','')) or None,

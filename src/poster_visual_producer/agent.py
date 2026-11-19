@@ -20,7 +20,7 @@ from .contracts import (
 from .generators import compile_request, ProviderError
 from .contract_io import load_contract
 from .renderer import preflight, render_poster
-from .registration import SPEC_FORMAT, CANDIDATE_FORMAT
+from .registration import SPEC_FORMAT, SPEC_FORMAT_V2, CANDIDATE_FORMAT, spec_format_for
 
 _NOTE = "visual-production-state-v1"
 
@@ -55,13 +55,15 @@ class VisualProducerAgent:
         )
 
     async def run(self, inputs: AgentInput, context) -> AgentOutput:
-        if inputs.content_format != SPEC_FORMAT:
+        if inputs.content_format not in {SPEC_FORMAT, SPEC_FORMAT_V2}:
             raise StageError(
                 "SCHEMA_INVALID", "Visual Producer requires poster.spec@0.1.0"
             )
         if inputs.metadata.identity != context.identity:
             raise StageError("STALE_VERSION", "Invocation identity mismatch")
         spec = PosterSpec.model_validate(inputs.content)
+        if inputs.content_format != spec_format_for(inputs.content):
+            raise StageError("SCHEMA_INVALID", "Spec content version and declared format disagree")
         memory = context.memory.context()
         upstream = {
             item["name"]: item

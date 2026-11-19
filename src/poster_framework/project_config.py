@@ -29,6 +29,7 @@ class Credentials(Section):
 
 
 class Runtime(Section):
+    auto_repair: bool = False
     mode: Literal["offline", "live"] = "offline"
     output_root: Path = Path("../runs/unified")
     keywords: list[str] = Field(default_factory=lambda:["ocean","plastic","hope"], min_length=2, max_length=5)
@@ -63,6 +64,7 @@ class A2(Section):
     template_id: Literal["framed_hero_v1","full_bleed_v1","split_stack_v1"] | None = None
     font_family_key: str = Field(default="noto_sans_sc", min_length=1)
     adaptive: bool = True
+    composition_aware: bool = True
 
 
 class A3(Credentials):

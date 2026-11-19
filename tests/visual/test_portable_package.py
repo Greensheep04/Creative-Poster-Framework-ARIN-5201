@@ -10,7 +10,10 @@ def test_portable_package_manifest_has_runtime_and_configuration_resources():
         'src/poster_visual_producer/configuration.py','docs/backend-setup.md','docs/qc-handoff.md',
         'docs/schemas/LocalManifestV1.json','scripts/fetch-qwen-image.py',
         'examples/visual/qc_collaboration.py','examples/visual/backend-qwen.example.json',
-        'examples/visual/backend-cloud.example.json'}
+        'examples/visual/backend-cloud.example.json',
+        'src/creative/response_evidence.py','src/poster_framework/composition.py',
+        'src/poster_visual_producer/team_repair.py','tests/fixtures/a1-keyword-objects.json',
+        'docs/design/A2-template-catalog-integration.md'}
     assert required<=names,required-names
     config=tomllib.loads((root/'pyproject.toml').read_text(encoding='utf-8'))
     include=config['tool']['hatch']['build']['targets']['wheel']['force-include']

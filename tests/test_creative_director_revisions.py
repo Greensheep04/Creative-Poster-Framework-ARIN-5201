@@ -283,3 +283,46 @@ def test_revised_output_still_requires_valid_schema_and_original_keywords(
 
     assert session.usage.model_calls == 1
     assert len(model_stub[0]) == 1
+
+
+@pytest.mark.parametrize("keywords", [None, [], ["", "", ""], [{"text":"green tea"}], {"unexpected":"metadata"}])
+def test_revision_recovers_malformed_immutable_keywords_and_keeps_raw_evidence(director,briefs,model_stub,revision_session,tmp_path,keywords):
+    session,target=revision_session
+    add_feedback(session,target,"Fix image semantics.")
+    revised=deepcopy(briefs[1]);revised["keywords"]=keywords
+    model_stub[1].append(revised)
+    output=asyncio.run(revision_call(director,session,target))
+    assert output.content["keywords"]==briefs[0]["keywords"]
+    assert output.content["copy"]==revised["copy"]
+    raw=json.loads(next(tmp_path.rglob("model-response.json")).read_text(encoding="utf-8"))
+    assert json.loads(raw["raw_text"])["keywords"]==keywords
+    validation=json.loads(next(tmp_path.rglob("validation.json")).read_text(encoding="utf-8"))
+    assert validation["status"]=="accepted" and validation["normalized_fields"]==["keywords"]
+    assert session.usage.model_calls==1
+
+
+@pytest.mark.parametrize("failure", ["json","schema"])
+def test_rejected_revision_logs_prevalidation_response_and_masks_secrets(director,briefs,revision_session,tmp_path,monkeypatch,failure):
+    session,target=revision_session
+    add_feedback(session,target,"Fix image semantics.")
+    secret="opaque-inline-credential-12345"
+    monkeypatch.setenv("HF_TOKEN",secret)
+    if failure=="json":
+        raw='Broken JSON with '+secret+' hf_anotherSecret987 sk-cp-otherSecret987 Authorization: Bearer bearer-secret-987'
+    else:
+        invalid=deepcopy(briefs[1]);del invalid["copy"]["headline"]
+        invalid["objective"]='Keep this diagnostic detail '+secret
+        raw=json.dumps(invalid)
+    async def respond(*args,**kwargs):return raw
+    monkeypatch.setattr(director,"call_hugging_face",respond)
+    with pytest.raises(ValueError):asyncio.run(revision_call(director,session,target))
+    logged=json.loads(next(tmp_path.rglob("model-response.json")).read_text(encoding="utf-8"))
+    assert logged["stage"]=="before_validation"
+    assert "[REDACTED]" in logged["raw_text"]
+    assert "Broken JSON" in logged["raw_text"] if failure=="json" else "Keep this diagnostic detail" in logged["raw_text"]
+    for path in tmp_path.rglob("*.json"):
+        value=path.read_text(encoding="utf-8")
+        for token in (secret,"hf_anotherSecret987","sk-cp-otherSecret987","bearer-secret-987"):assert token not in value
+    validation=json.loads(next(tmp_path.rglob("validation.json")).read_text(encoding="utf-8"))
+    assert validation["status"]=="rejected" and validation["error_type"]=="ValueError"
+    assert session.usage.model_calls==1

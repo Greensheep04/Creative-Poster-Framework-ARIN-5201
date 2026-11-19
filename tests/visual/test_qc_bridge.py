@@ -133,3 +133,12 @@ def test_upstream_change_during_audit_rejects_report(tmp_path,spec_data,brief_da
         return report_for(SimpleNamespace(manifest=m,candidate_link=link))
     with pytest.raises(ValueError,match='[Ss]tale|[Dd]ependen'):
         asyncio.run(QCBridgeAgent(audit,tmp_path/'bundles').run(SimpleNamespace(content=c),ctx))
+
+
+def test_poster_copy_uses_line_wrap_policy_through_actual_a4_loader(tmp_path,spec_data,brief_data):
+    from poster_visual_producer.qc_bridge import export_review_bundle
+    from poster_critic.adapters.local_input import load_input
+    _,candidate,_,_,quality=produced(tmp_path/"store",spec_data,brief_data)
+    bundle=export_review_bundle(quality,candidate,destination=tmp_path/"bundle")
+    audit=load_input(bundle.manifest_path)
+    assert audit.approved_copy and all(c.match_policy=="line_wrap" for c in audit.approved_copy)

@@ -86,6 +86,18 @@ class ImageGenerator(Protocol):
     async def generate(self, request: GenerationRequest) -> GeneratedImage: ...
 
 
+def select_generation_size(target_size, capabilities: GeneratorCapabilities) -> tuple[int, int]:
+    target_width, target_height = target_size
+
+    def distance(size):
+        width, height = size
+        return abs(math.log((width / height) / (target_width / target_height))) + (
+            10 if width < target_width or height < target_height else 0
+        ), width * height
+
+    return min(capabilities.sizes, key=distance)
+
+
 def compile_request(
     plan: AssetPlan | dict,
     capabilities: GeneratorCapabilities,
@@ -101,14 +113,7 @@ def compile_request(
     if negative_policy not in {"append", "error"}:
         raise ValueError("Unknown negative prompt policy")
     target = plan.target_size
-
-    def distance(size):
-        w, h = size
-        return abs(math.log((w / h) / (target.width / target.height))) + (
-            10 if w < target.width or h < target.height else 0
-        ), w * h
-
-    size = min(capabilities.sizes, key=distance)
+    size = select_generation_size((target.width, target.height), capabilities)
     prompt = plan.prompt
     negative = plan.negative_prompt or None
     adaptations = []
@@ -122,7 +127,7 @@ def compile_request(
         adaptations.append("negative_prompt_appended_to_prompt")
     constraints = tuple(repair_constraints)
     if constraints:
-        prompt += "\nApproved asset repair constraints:\n" + "\n".join(constraints)
+        prompt = "\n".join(constraints) + "\n" + prompt
     reason = (
         "specified"
         if seed is not None

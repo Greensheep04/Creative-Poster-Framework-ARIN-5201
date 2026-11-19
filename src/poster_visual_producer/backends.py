@@ -96,6 +96,15 @@ class LocalSDXLGenerator:
         self._torch = None
         self._lock = threading.RLock()
 
+    def close(self):
+        """Release this run's pipeline; never initialize CUDA during cleanup."""
+        with self._lock:
+            torch = self._torch
+            self._pipeline = None
+            self._torch = None
+            if torch is not None:
+                torch.cuda.empty_cache()
+
     def _load(self):
         verify_weights(self.config)
         try:

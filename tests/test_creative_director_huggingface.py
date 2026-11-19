@@ -323,3 +323,24 @@ def test_default_prompt_is_sent_verbatim_to_hugging_face(
     assert system_messages == [
         {"role": "system", "content": director.load_prompt()}
     ]
+
+
+@pytest.mark.parametrize("changed",[False,True])
+def test_real_captured_keyword_object_shape_is_bound_only_when_text_matches(director,mock_api,monkeypatch,tmp_path,changed):
+    monkeypatch.setenv("HF_TOKEN",TEST_TOKEN)
+    captured=json.loads((Path(__file__).parent/"fixtures/a1-keyword-objects.json").read_text(encoding="utf-8"))
+    if changed:captured["keywords"][1]["text"]="unrelated"
+    mock_api[1].append(httpx.Response(200,json=completion(json.dumps(captured))))
+    request=tmp_path/"request.json"
+    request.write_text(json.dumps({"keywords":["ocean","plastic","hope"]}),encoding="utf-8")
+    if changed:
+        with pytest.raises(ValueError):asyncio.run(director.run_creative_director(tmp_path/"run",request_path=request))
+    else:
+        result=asyncio.run(director.run_creative_director(tmp_path/"run",request_path=request))
+        assert result["output"]["content"]["keywords"]==["ocean","plastic","hope"]
+        assert result["output"]["content"]["copy"]==captured["copy"]
+        raw=json.loads(next(tmp_path.rglob("model-response.json")).read_text(encoding="utf-8"))
+        assert json.loads(raw["raw_text"])["keywords"]==captured["keywords"]
+        validation=json.loads(next(tmp_path.rglob("validation.json")).read_text(encoding="utf-8"))
+        assert validation["normalized_fields"]==["keywords"]
+    assert len(mock_api[0])==1

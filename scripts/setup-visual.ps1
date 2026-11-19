@@ -1,7 +1,8 @@
 param(
     [string]$EnvironmentPrefix = 'D:\Dev\conda-envs\creative-poster',
     [string]$CondaExecutable = 'D:\Dev\miniconda3\Scripts\conda.exe',
-    [string]$UvCache = 'D:\Dev\uv-cache'
+    [string]$UvCache = 'D:\Dev\uv-cache',
+    [string]$TestTempRoot = 'D:\Dev\pt'
 )
 $ErrorActionPreference = 'Stop'
 $taskProjectRoot = Split-Path $PSScriptRoot -Parent
@@ -21,6 +22,8 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'Dependency installation failed' }
     & $taskPython scripts/fetch-visual-fonts.py
     if ($LASTEXITCODE -ne 0) { throw 'Font download/verification failed' }
-    & $taskPython -m pytest -q
+    New-Item -ItemType Directory -Path $TestTempRoot -Force | Out-Null
+    $testTemp = Join-Path $TestTempRoot ('cp-' + [guid]::NewGuid().ToString('N').Substring(0, 8))
+    & $taskPython -m pytest -q --basetemp $testTemp
     if ($LASTEXITCODE -ne 0) { throw 'Tests failed' }
 } finally { Pop-Location }

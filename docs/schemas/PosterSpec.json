@@ -438,7 +438,10 @@
   "additionalProperties": false,
   "properties": {
     "schema_version": {
-      "const": "0.1.0",
+      "enum": [
+        "0.1.0",
+        "0.2.0"
+      ],
       "title": "Schema Version",
       "type": "string"
     },
@@ -461,7 +464,8 @@
       "enum": [
         "framed_hero_v1",
         "full_bleed_v1",
-        "split_stack_v1"
+        "split_stack_v1",
+        "semantic_layout_v1"
       ],
       "title": "Template Id",
       "type": "string"
@@ -550,5 +554,23 @@
     "render_policy"
   ],
   "title": "PosterSpec",
-  "type": "object"
+  "type": "object",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "template_id": {
+            "const": "semantic_layout_v1"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "schema_version": {
+            "const": "0.2.0"
+          }
+        }
+      }
+    }
+  ]
 }
